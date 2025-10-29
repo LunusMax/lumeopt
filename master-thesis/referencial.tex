@@ -1,0 +1,202 @@
+\chapter{REFERENCIAL TEÓRICO}
+
+\section{Aprendizado de Máquina}
+
+Aprendizado de Máquina (AM) é o estudo de algoritmos e modelos estatísticos empregados por sistemas computacionais para realizar tarefas específicas de forma autônoma. Essa abordagem permite que as máquinas aprendam a partir de dados e melhorem seu desempenho sem necessidade de reprogramação explícita \cite{Mahesh2020}. Segundo Geron (2019), AM pode ser descrito como a ciência (ou arte) de programar computadores para que aprendam com os dados.
+
+Um exemplo clássico de aplicação de AM é o filtro de \textit{spam}, que permite que o sistema identifique automaticamente emails indesejados, diferenciando-os de mensagens legítimas com base em padrões aprendidos \cite{Geron2019}. 
+
+Com a crescente disponibilidade de \textit{datasets}, o uso de Machine Learning (ML) tem apresentado um notável crescimento \cite{Mahesh2020}. Esse avanço pode ser atribuído à maior disponibilidade de dados e ao aumento da capacidade computacional. A constante conexão das pessoas a dispositivos digitais gera volumes massivos de dados, enquanto tecnologias modernas permitem o processamento eficiente dessas grandes quantidades de informação \cite{AndrewNg}.
+
+Muitas indústrias têm adotado o AM com o objetivo de extrair insights relevantes de \textit{databases}, facilitando o aprendizado a partir dos dados \cite{Mahesh2020}. Além disso, o AM tem sido amplamente aplicado em diversas áreas, incluindo reconhecimento facial, segmentação de imagens, detecção de câncer e previsão de classes e resultados, destacando-se também no contexto esportivo \cite{Almulla2023}.
+
+AM utiliza diferentes algoritmos para resolver problemas relacionados com dados. Cientistas de dados destacam que não há um único algoritmo universalmente superior para resolver todos os tipos de problemas \cite{Mahesh2020}. Esta seção apresenta uma breve descrição de alguns dos modelos mais comumente utilizados em ML para a resolução de problemas.
+
+\subsection{Árvore de Decisão (AD)}
+
+As Árvores de Decisão são algoritmos versáteis de ML que podem ser utilizados tanto para tarefas de classificação, quanto para tarefas de regressão \cite{Geron2019}. Esses algoritmos recebem um \textit{input} de dados de treinamento (conjunto de atributos independentes + atributo classe) e retorna como saída uma árvore de decisão que permite classificar uma nova instância a partir de seus atributos independentes \cite{Geron2019}.
+
+Um exemplo de AD pode ser visto na Figura~\ref{fig2_1} 
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=1.0\linewidth]{ad_01.png}
+    \caption{AD para Iris}
+    {\small Fonte: Geron, 2019}
+    \label{fig2_1}
+\end{figure}
+
+Na Figura~\ref{fig2_1}, é possível observar uma árvore de decisão utilizada para classificar flores do conjunto de dados \textit{Iris}. O nó raiz divide as amostras com base no comprimento da pétala (\textit{petal length} $\leq$ 2.45), separando a classe \textit{setosa} (pura, Gini = 0). As amostras restantes são subdivididas pelo critério de largura da pétala (\textit{petal width} $\leq$ 1.75), onde as classes \textit{versicolor} e \textit{virginica} são diferenciadas com alta precisão (Gini próximo de 0 nos nós finais). A árvore otimiza a classificação minimizando o índice de Gini em cada divisão \cite{Geron2019}. 
+
+\subsection{Random Forest (RF)}
+
+O RF consiste em uma combinação de AD, geralmente treinadas por meio do método \textit{bagging} \cite{Geron2019}. Diferente das ADs, RF utiliza uma randomização extra no crescimento das árvores. Ao invés de buscar a melhor \textit{feature} para dividir o nó, utiliza-se da melhor dentro de um \textit{subset} randômico. Nesse caso, troca-se um maior viés por uma menor variância \cite{Geron2019}.
+
+\subsection{Support Vector Machine (SVM)}
+
+O \textit{Support Vector Machine} (SVM) é um algoritmo de ML supervisionado utilizado para tarefas de classificação e regressão. O seu princípio básico é encontrar um hiperplano ótimo que separe os dados em diferentes classes, maximizando a margem entre os pontos mais próximos das classes opostas \cite{noble2006}.
+
+O hiperplano utilizado pelo SVM consiste em uma superfície de decisão que separa os pontos de dados em classes distintas. Em um espaço 2D, ele é uma linha; em 3d, um plano e, em dimensões superiores, uma hiper-superfície \cite{noble2006}
+
+Cabe ressaltar que nem sempre os dados são linearmente separáveis. Sendo assim, o SVM utiliza funções \textit{kernel} para projetar os dados em um espaço de maior dimensão, onde a separação linear se torna possível \cite{noble2006}. As principais funções \textit{kernel} são:
+
+\begin{enumerate}
+    \item \textbf{Linear}: Quando os dados já são linearmente separáveis.
+    \item \textbf{Polinomial}: Para capturar relações não lineares.
+    \item \textbf{RBF (Radial Basis Function - Gaussiana)}: Amplamente usada para capturar padrões complexos.
+    \item \textbf{Sigmoid}: Similar a redes neurais.
+\end{enumerate}
+
+\subsection{Gradient Boost (XGBoost)}
+
+O \textit{Gradient Boosting} é uma técnica amplamente utilizada em competições de ciência de dados, como as promovidas pelo Kaggle. Ele funciona adicionando preditores ao modelo de forma sequencial, em que cada novo preditor busca corrigir os erros cometidos pelo anterior (GÉRON, 2019). 
+
+O \textit{Gradient Boosting} é implementado em sua forma otimizada, na linguagem Python, a partir da biblioteca \textit{XGBoost} (\textit{Extreme Gradient Boosting}). Esse pacote foi desenvolvido de forma a mirar a velocidade e a eficiência de processamento, especialmente em competições e aplicações que lidam com grandes volumes de dados (GÉRON, 2019). 
+
+
+\subsection{Multilayer Perceptron (MLP)}
+
+O \textit{Multilayer Perceptron} (MLP) é uma função matemática parametrizada que aprende a melhor forma de transformar um vetor de entrada \( \mathbf{x} \) em uma saída \( \mathbf{y} \). Assim, o MLP pode ser entendido como uma composição de várias funções aplicadas em sequência, formando um modelo de múltiplas camadas \cite{Goodfellow2016}.
+
+A arquitetura do MLP segue uma lógica de entrada → camadas ocultas → saída, utilizando uma função de ativação \( g(\cdot) \) para introduzir não linearidade em cada camada. Essa relação é expressa por:
+\[
+h^{(l)} = g\!\left(W^{(l)}h^{(l-1)} + b^{(l)}\right),
+\]
+onde \( W^{(l)} \) e \( b^{(l)} \) representam, respectivamente, a matriz de pesos e o vetor de vieses da camada \( l \) \cite{Goodfellow2016}.
+
+A introdução da função não linear \( g(\cdot) \) é essencial, pois permite que o MLP aprenda relações complexas entre as variáveis de entrada e saída. Sem ela, o modelo se reduziria a uma simples combinação linear, incapaz de representar funções não lineares \cite{Goodfellow2016}.
+
+
+%\subsection{Naive-Bayes (NB)}
+\section{Pesquisa Operacional}
+
+Como tratado anteriormente, a área da PO consiste em um campo multidisciplinar que aplica modelos matemáticos, estatísticos e computacionais. PO vem sendo amplamente utilizada em diversas áreas organizacionais, tais como manufatura, transportes, construção civil, telecomunicações, planejamento financeiro, planos de saúde, serviço público, entre outros \cite{Hillier2001}.
+
+Entre os principais métodos da PO, destacam-se a Programação Linear, a Programação Dinâmica e os Processos de Markov.
+
+\subsection{Programação Linear (PL)}
+
+A Programação Linear (PL) é considerada um dos mais importantes avanços científicos do meio do século 20. Essa ferramenta já foi responsável por economizar milhões de dólares para companhias e negócios ao redor do mundo \cite{Hillier2001}.
+
+PL utiliza funções lineares simples para buscar o resultado ótimo \cite{Hillier2001}. Um exemplo clássico de PL apresentado por Hillier (2001) é o problema da empresa \textit{Wyndor Glass Co.}.
+
+\subsubsection{\textit{Wyndor Glass Co.}}
+
+A empresa \textit{Wyndor Glass Co.} fabrica produtos de vidro de alta qualidade, incluindo janelas e portas de vidro. Possui três fábricas: a Fábrica 1, que produz molduras de alumínio e ferragens; a Fábrica 2, que fabrica molduras de madeira; e a Fábrica 3, responsável pela produção do vidro e pela montagem dos produtos. Devido a uma reestruturação, a empresa decidiu lançar dois novos produtos: o Produto 1, uma porta de vidro de 8 pés com moldura de alumínio, e o Produto 2, uma janela dupla de madeira de 4x6 pés. Cada produto exige capacidade produtiva específica das fábricas. O Produto 1 utiliza as Fábricas 1 e 3, enquanto o Produto 2 depende das Fábricas 2 e 3. O objetivo do problema é determinar a combinação ideal de produção desses produtos para maximizar o lucro total.
+
+Definem-se as seguintes variáveis de decisão:
+\begin{itemize}
+\item $x_1$: número de lotes do Produto 1 a serem produzidos por semana.
+\item $x_2$: número de lotes do Produto 2 a serem produzidos por semana.
+\end{itemize}
+
+As restrições de capacidade produtiva devem ser respeitadas conforme os limites de produção de cada fábrica:
+
+\begin{itemize}
+\item \textbf{Fábrica 1}: Pode produzir no máximo 4 unidades do Produto 1 por semana:
+\begin{equation}
+x_1 \leq 4
+\end{equation}
+\item \textbf{Fábrica 2}: Pode produzir no máximo 6 unidades do Produto 2 por semana:
+\begin{equation}
+x_2 \leq 6
+\end{equation}
+\item \textbf{Fábrica 3}: Possui um limite semanal de 18 horas de produção:
+\begin{equation}
+3x_1 + 2x_2 \leq 18
+\end{equation}
+\end{itemize}
+
+Os dados apresentados encontram-se ilustrados na Figura~\ref{fig3_2} 
+
+\begin{figure}[h]
+\centering
+\includegraphics[width=1.0\textwidth]{DataWyndor.png}
+\caption{Dados da Wyndor Glass Co.}
+\small{Fonte: Hillier, 2001 (Adaptado)}
+\label{fig3_2}
+\end{figure}
+
+O objetivo é determinar a combinação de produção que maximize o lucro total. A equação que representa essa otimização é:
+
+\begin{equation}
+\max Z = 3.000 x_1 + 5.000 x_2
+\end{equation}
+
+onde cada lote do Produto 1 gera um lucro de \$ 3.000 e cada lote do Produto 2 gera um lucro de \$ 5.000. Além disso, deve-se garantir que os valores das variáveis de decisão sejam não negativos:
+
+\begin{equation}
+x_1 \geq 0, \quad x_2 \geq 0
+\end{equation}
+
+Uma maneira intuitiva de resolver esse problema é por meio da representação gráfica. As restrições são desenhadas no plano cartesiano, delimitando uma região viável. O ponto ótimo é encontrado na interseção das restrições ativas, onde a função objetivo atinge seu valor máximo dentro da região factível. Tal solução pode ser vista na Figura~\ref{fig3_3}.
+
+\begin{figure}[h]
+\centering
+\includegraphics[width=1.0\textwidth]{graphWyndor.png}
+\caption{Valores de $(x_1, x_2)$ que maximizam $3x_1 + 5x_2$.}
+\small{Fonte: Hillier, 2001}
+\label{fig3_3}
+\end{figure}
+
+Após essa análise, a solução ótima encontrada é:
+
+\begin{equation}
+x_1 = 2, \quad x_2 = 6
+\end{equation}
+
+O lucro máximo alcançado pela empresa ao adotar essa estratégia de produção será:
+
+\begin{equation}
+Z^* = 3.000(2) + 5.000(6) = 36.000
+\end{equation}
+
+Portanto, a Wyndor Glass Co. deve produzir 2 lotes do Produto 1 e 6 lotes do Produto 2 por semana para maximizar seus lucros.
+
+Embora a PL seja uma ferramenta poderosa para problemas de otimização linear, existem outras abordagens que lidam com problemas mais complexos. A Programação Dinâmica (PD), por exemplo, trata de decisões sequenciais, enquanto os Processos de Markov são amplamente utilizados para modelagem de processos estocásticos. Essas abordagens serão discutidas a seguir.
+
+\subsection{Programação Dinâmica (PD)}
+
+A PD é uma técnica de otimização recursiva aplicada a problemas que podem ser decompostos em subproblemas menores interdependentes \cite{Hillier2001}. Esse método foi formalizado por Richard Bellman na década de 1950, se baseando no princípio da otimalidade, o qual postula que uma solução ótima para um problema contém soluções ótimas para seus subproblemas.
+
+Bellman (1957) demonstrou que problemas de otimização sequencial podem ser resolvidos de maneira eficiente ao quebrá-los em estágios e resolver cada estágio de forma independente. A PD é amplamente utilizada em processos determinísticos e estocásticos, sendo a base para técnicas modernas como aprendizado por reforço. Além disso, essa técnica é muito utilizada na busca por soluções ótimas de problemas clássicos da computação, como o Problema da Mochila \cite{Kleinberg2006}.
+
+O desenvolvimento de um algoritmo de PD segue uma sequência de quatro etapas \cite{Cormen2009}:
+\begin{enumerate}
+    \item Caracterizar a estrutura de uma solução ótima.
+    \item Definir recursivamente o valor de uma solução ótima.
+    \item Calcular o valor de uma solução ótima, normalmente de baixo para cima.
+    \item Construir uma solução ótima com as informações calculadas.
+\end{enumerate}
+
+\subsection{Processos de Markov}
+
+A teoria dos processos de Markov é originária da década de 1950 com R. Bellman e L. Shapley. Essa teoria cresceu ao longo dos anos e encontrou aplicações em diversas áreas, como ciência da computação, engenharia, pesquisa operacional, biologia e economia \cite{Bauerle2010}.
+
+Os Processos de Decisão de Markov (MDPs) consistem em um modelo matemático para tomada de decisão sequencial sob incerteza \cite{Bauerle2010}.
+
+Formalmente, a MDP é definida por:
+
+\[
+(E, A, Q, r)
+\]
+
+onde:
+
+\begin{itemize}
+    \item \(E\) é o espaço de estados, contendo todos os possíveis estados do sistema.
+    \item \(A\) é o espaço de ações, representando todas as escolhas disponíveis ao tomador de decisão.
+    \item \(Q(x' | x, a)\) é a função de transição de probabilidade, que define a distribuição de probabilidades para o próximo estado \(x'\), dado o estado atual \(x\) e a ação tomada \(a\).
+    \item \(r(x, a)\) é a função de recompensa, que determina o valor imediato recebido ao tomar a ação \(a\) no estado \(x\).
+\end{itemize}
+
+O objetivo do MDP é encontrar uma política ótima \( \pi \), que mapeia cada estado \( x \) para uma ação \( a \), de forma a maximizar a soma esperada das recompensas futuras. A equação fundamental para esse cálculo é a Equação de Bellman:
+
+\begin{equation}
+V(x) = \max_{a \in A} \left\{ r(x, a) + \sum_{x'} Q(x' | x, a) V(x') \right\}
+\end{equation}
+
+onde \(V(x)\) representa o valor ótimo esperado de um estado \(x\).
+
+Para resolver um MDP, podem ser usados métodos como, por exemplo, PL, garantido a convergência para a política ótima sob certas condições.
+

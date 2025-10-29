@@ -1,0 +1,55 @@
+%
+\chapter{REVISÃO DE LITERATURA}
+
+\section{\textit{Aprendizado de Máquina} no contexto esportivo}
+
+Conforme abordado anteriormente, a maioria dos estudos que aplicam previsões no contexto esportivo concentra-se na predição de resultados de partidas. Essa abordagem é amplamente influenciada pelo grande apelo mercadológico das apostas esportivas \cite{Abidin2021}. 
+
+
+%%%No ano de 2006, \textit{Joseph, Fenton & Neil} utilizaram redes Bayesianas buscando prever resultados de partidas de futebol. Para tal tarefa, utilizaram resultados do \textit{Tottenham Hotspur Football Club} entre os anos de 1995 e 1997. Para a construção do modelo, a principal dificuldade consistiu na pequena quantidade de dados disponíveis, que eram resultados de jogos de duas temporadas totalizando 76 partidas e um total de 30 atributos, sendo 28 jogadores e a qualidade dos adversários. Para contornar mudanças de elenco ao longo das duas temporadas, inseriram as características "playing" ou "not-playing". Como forma de comparação, foram testados também um modelo de Nearest Neighbor (KNN) e um modelo \textit{Decision tree} MC4. Como principal conclusão, o estudo mostrou que redes Bayesianas construídas com conhecimento especializado podem superar modelos estatísticos puramente baseados em dados, especialmente quando há poucos dados disponível.
+
+No ano de 2006, \textit{Joseph, Fenton \& Neil} utilizaram redes Bayesianas para prever resultados de partidas de futebol. O estudo foi baseado em dados do \textit{Tottenham Hotspur Football Club} referentes às temporadas de 1995 a 1997. A principal dificuldade na construção do modelo foi a quantidade limitada de dados disponíveis, composta por apenas 76 partidas e um total de 30 atributos, sendo 28 jogadores, local das partidas e a qualidade dos adversários.
+
+Para lidar com mudanças no elenco ao longo das temporadas, os autores introduziram as variáveis "playing" e "not-playing", indicando a presença ou ausência dos jogadores em campo. Além das redes Bayesianas, o estudo comparou seu desempenho com um modelo baseado em \textit{K-Nearest Neighbors} (KNN) e uma árvore de decisão (\textit{Decision Tree}) MC4. 
+
+Os resultados indicaram que redes Bayesianas construídas com conhecimento especializado superam modelos puramente baseados em dados, especialmente em cenários onde a quantidade de informações disponíveis é reduzida. 
+
+Ainda no contexto da previsão de resultados esportivos, \textit{Baboota \& Kaur} (2018) investigaram a aplicação de técnicas de AM para prever resultados da EPL. Para tal tarefa, os autores também utilizaram dados de duas temporadas (2014-2015 e 2015-2016) realizando um estudo de classificação multiclasse, buscando prever vitória do time da casa, vitória do visitante e empate.
+
+As variáveis utilizadas pelos autores consistiam no desempenho recente do time, estatísticas de jogo (chutes no alvo, escanteios, posse de bola...), \textit{rating} dos times (obtido com base no FIFA Index) e fator casa/fora, buscando avaliar o impacto do mando de campo. Cabe ressaltar que, ao longo do estudo, descobriram que as \textbf{\textit{features} derivadas de desempenho recente foram mais impactantes do que estatísticas isoladas}.
+
+\textit{Baboota \& Kaur} (2018) testaram os algoritmos de RF, SVM, XGBoost e NB, obtendo um melhor desempenho na utilização do \textit{Gradient Boost}. Mesmo obtendo bons resultados, o melhor modelo não superou previsões das casas de apostas, uma vez que as mesmas utilizam variáveis ocultas como lesões e táticas de jogo.
+
+Em 2019, \cite{Herold2019} investigou como o AM pode ser aplicado no futebol profissional masculino, especialmente buscando melhorar o desempenho ofensivo. Para isso, foram utilizados dados de passes, finalizações, dribles, entre outros.
+
+Modelos supervisionados foram empregados com o objetivo de prever gols, vitórias e classificar passes como bons ou ruins. Por outro lado, modelos não supervisionados foram utilizados para identificar padrões, formações e estilos de jogo. Entre os algoritmos aplicados, destacam-se redes neurais, árvores de decisão, k-means, regressão logística e redes neurais recorrentes (LSTM). \cite{Herold2019}
+
+\textit{Herold, Memmert e Perl} (2019) concluíram que padrões de passes podem ser detectados e classificados por meio dessas técnicas. Métricas como Gols Esperados (xG) e Oportunidade de Finalização Sem Bola (Off-Ball Scoring Opportunity) demonstraram potencial para avaliar chances reais de gol. Além disso, o comportamento coletivo das equipes — como táticas e movimentações coordenadas — podem ser representadas matematicamente.
+
+Majumdar et al. (2022) discutem como o AM pode ser aplicado na compreensão e previsão de lesões no futebol, explorando variáveis relacionadas à carga de treino e competição. Para tal foram utilizadas abordagens de regressão logística, árvores de decisão e k-vizinhos mais próximos (KNN), além de métodos mais complexos, como \textit{Random Forest}, máquinas de vetor de suporte (SVM) e redes neurais artificiais. Apesar do potencial identificado, os autores destacam limitações relevantes, como o desbalanceamento das bases de dados, a falta de consenso sobre quais variáveis são mais preditivas e a predominância de estudos restritos a apenas uma temporada. O trabalho conclui que, com a inclusão de dados longitudinais, técnicas de balanceamento e o uso de abordagens de inteligência artificial explicável (\textit{Explainable AI}), o AM pode oferecer novas perspectivas para reduzir riscos de lesão e otimizar o processo de treinamento no futebol.
+
+Em termos de Aprendizado Profundo e Redes Neurais (RN), \textit{Awadallah \& Khandelwal} (2020) buscaram prever resultados de partidas de futebol (vitória do mandante, empate ou vitória do visitante) na EPL utilizando modelos de RNs profundas, comparando diferentes abordagens e analisando suas performances. Os autores partiram da ideia de que o futebol, embora seja altamente aleatório, contém padrões históricos detectáveis por meio de dados estatísticos. O estudo buscou verificar até que ponto modelos estatísticos conseguem capturar esses padrões e prever resultados de partidas.
+
+Para essa tarefa, foram analisadas 10 temporadas da EPL (2008–2019), com cerca de 4180 partidas e 78 colunas originais, reduzidas posteriormente a 24 \textit{features}, que incluíam \textit{Elo ratings}, taxas de vitórias, empates e derrotas, sequências de resultados recentes, entre outros \cite{awadallah2020}.
+
+No estudo em questão, foram comparados modelos de Regressão Logística, \textit{Random Forest}, Rede Neural Densa (DNN) e LSTM (RNN). Entre os métodos analisados, o LSTM foi o mais promissor, alcançando aproximadamente \textbf{58\% de acurácia de teste}, mas todos os modelos apresentaram vieses e limitações de generalização.
+
+
+\section{Pesquisa Operacional no contexto esportivo}
+
+Pesquisa Operacional (PO) é um conjunto de métodos analíticos que auxiliam na tomada de decisões, utilizando modelos matemáticos, estatísticos e computacionais para otimizar processos \cite{Medri2009}. A PO tem sido amplamente utilizada na resolução de problemas complexos de tomada de decisão em diversas áreas, incluindo esportes, logística, manufatura e gestão \cite{Wright2009}.
+
+Segundo Gerchak (1994), a aplicação da PO, no contexto esportivo, abrange desde problemas estratégicos, como o gerenciamento de equipes, até a análise de táticas e logística operacional.
+Entre as principais técnicas utilizadas na PO, destacam-se:
+
+\begin{enumerate}
+    \item \textbf{Programação Linear}: Utilizada para otimização de recursos e eficiência em processos \cite{Medri2009}; 
+    \item \textbf{Programação Dinâmica (PD)}: Aplicada em decisões sequenciais, como substituições de jogadores ou estratégias de jogo \cite{Clarke1998};
+    \item \textbf{Processos de Markov}: Modelagem probabilística utilizada para tomada de decisões de forma estratégica no futebol, bem como substituições e alterações táticas \cite{Hirotsu2002}.
+\end{enumerate}
+
+A PO tem sido empregada em análises de estratégias esportivas, auxiliando na tomada de decisão para melhora de perfomance e otimização de resultados. Um exemplo disso é o estudo do melhor momento para realizar substituição de jogadores em uma partida de futebol, aplicando modelos de Markov e PD na busca por maximizar o desempenho do time \cite{Hirotsu2002}.
+
+Outro exemplo consiste na técnica de \textit{"rushing behind"} do futebol australiano analisada por Clarke \& Norman (1998), na qual foi demonstrado como a PD pode ser aplicada para decidir quando é vantajoso conceder um ponto ao adversário para obter uma melhor posição em campo.
+
+O campo da PO segue em constante evolução, especialmente com o avanço da ciência de dados e de ML. A integração de \textit{Big Data} e Inteligência Artificial (IA) têm permitido uma análise mais profunda dos eventos esportivos, potencializando as tomadas de decisão orientadas a dados.
