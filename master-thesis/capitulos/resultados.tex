@@ -1,0 +1,39 @@
+\chapter{RESULTADOS E DISCUSSÕES}
+
+\section{Modelo de Aprendizado de Máquina}
+
+O melhor modelo de AM desenvolvido neste estudo apresentou acurácia máxima de aproximadamente $60\%$ na tarefa de prever a pontuação final de um time em sua liga nacional, utilizando
+como base os dados estatísticos de desempenho individual de seus jogadores na temporada anterior.
+
+Para avaliar o desempenho dos diferentes algoritmos aplicados à tarefa de previsão, foram calculadas métricas 
+amplamente utilizadas em problemas de regressão, incluindo o coeficiente de determinação (R\textsuperscript{2}), 
+o erro absoluto médio (MAE), o erro quadrático médio (MSE), a raiz do erro quadrático médio (RMSE), 
+o erro percentual absoluto médio (MAPE) e o tempo de processamento de cada modelo. A Tabela~\ref{tab:comparacao_modelos} 
+apresenta um resumo comparativo dos resultados obtidos, permitindo analisar tanto a qualidade preditiva 
+quanto o custo computacional de cada abordagem.
+
+
+\begin{table}[H]
+\centering
+\caption{Comparação de desempenho entre os modelos de Machine Learning avaliados}
+\label{tab:comparacao_modelos}
+\begin{tabular}{lcccccc}
+\hline
+\textbf{Modelo} & \textbf{R\textsuperscript{2}} & \textbf{MAE} & \textbf{MSE} & \textbf{RMSE} & \textbf{MAPE} & \textbf{Tempo (s)} \\
+\hline
+RL                & 0.41 & 11.48 & 191.78 & 13.85 & 0.2580 & 2.15 \\
+RF                & 0.28 & 12.05 & 234.05 & 15.30 & 0.2690 & 423.13 \\
+XGBoost           & 0.41 & 11.48 & 191.78 & 13.85 & 0.2580 & 2.86 \\
+MLP               & 0.48 & 11.08 & 170.42 & 13.05 & 0.2424 & 161.68 \\
+\hline
+\end{tabular}
+\begin{tablenotes}
+\small
+\item Fonte: Elaborado pelo autor.
+\end{tablenotes}
+\end{table}
+
+
+
+
+\section{Otimização de Montagem de Elenco}
