@@ -1,6 +1,6 @@
 \chapter{RESULTADOS E DISCUSSÕES}
 
-\section{Modelo de Aprendizado de Máquina}
+\section{Modelos de Aprendizado de Máquinas}
 
 O melhor modelo de AM desenvolvido neste estudo apresentou acurácia máxima de aproximadamente $60\%$ na tarefa de prever a pontuação final de um time em sua liga nacional, utilizando
 como base os dados estatísticos de desempenho individual de seus jogadores na temporada anterior.
@@ -32,6 +32,29 @@ MLP               & 0.48 & 11.08 & 170.42 & 13.05 & 0.2424 & 161.68 \\
 \item Fonte: Elaborado pelo autor.
 \end{tablenotes}
 \end{table}
+
+Os resultados apresentados na Tabela~\ref{tab:comparacao_modelos} evidenciam um comportamento consistente entre os algoritmos avaliados, com desempenho
+moderado na tarefa de previsão da pontuação final dos times. Embora a acurácia máxima tenha alcançado aproximadamente $60\%$, observa-se que todos os modelos
+enfrentam limitações inerentes à natureza imprevisível, ruidosa e não linear do problema. A pontuação de um time ao longo de uma temporada é influenciada também
+por fatores não refletidos nas estatísticas individuais de jogadores, como variações táticas, mudanças de treinador, lesões, contexto competitivo e dinâmica
+coletiva, o que naturalmente reduz o teto preditivo esperável.
+
+Entre as abordagens testadas, a Rede Neural Multicamadas (MLP) apresentou o melhor equilíbrio entre qualidade preditiva e estabilidade, alcançando o maior valor de
+R\textsuperscript{2} (0{,}48) e os menores erros MAE, MSE, RMSE e MAPE. Esse resultado sugere que a arquitetura densa foi mais capaz de capturar as relações não lineares
+presentes nos componentes principais gerados pelo PCA, aproveitando estruturas de dependência que modelos lineares ou baseados em árvores não exploram de maneira tão eficaz.
+
+O desempenho mais modesto dos modelos de \textit{Random Forest} (RF) e \textit{XGBoost} indica que, apesar de serem métodos robustos e amplamente utilizados em tarefas de
+AM, quando reduzidos por PCA, funcionaram de forma mais limitada. Além disso, o custo computacional do RF foi significativamente superior, tornando-o menos atrativo para 
+cenários de larga escala ou simulações repetidas de montagem de elenco.
+
+O modelo de Regressão Linear (RL) apresentou desempenho comparável ao \textit{XGBoost}, demonstrando que uma parte da variabilidade explicável está capturada em relações
+aproximadamente lineares entre os componentes principais do PCA e a pontuação final dos times. No entanto, o ganho obtido pela MLP reforça que há padrões não lineares relevantes
+que justificam a adoção de modelos mais complexos.
+
+\subsection{Predição do Modelo MLP}
+
+Com o intuito de compreender a predição realizada pelo melhor modelo (MLP) foi realizada uma análise visual da relação entre as pontuações reais dos clubes da Premier League
+na temporada 
 
 
 
