@@ -12,7 +12,6 @@ o erro percentual absoluto médio (MAPE) e o tempo de processamento de cada mode
 apresenta um resumo comparativo dos resultados obtidos, permitindo analisar tanto a qualidade preditiva 
 quanto o custo computacional de cada abordagem.
 
-
 \begin{table}[H]
 \centering
 \caption{Comparação de desempenho entre os modelos de Machine Learning avaliados}
@@ -48,8 +47,8 @@ AM, quando reduzidos por PCA, funcionaram de forma mais limitada. Além disso, o
 cenários de larga escala ou simulações repetidas de montagem de elenco.
 
 O modelo de Regressão Linear (RL) apresentou desempenho comparável ao \textit{XGBoost}, demonstrando que uma parte da variabilidade explicável está capturada em relações
-aproximadamente lineares entre os componentes principais do PCA e a pontuação final dos times. No entanto, o ganho obtido pela MLP reforça que há padrões não lineares relevantes
-que justificam a adoção de modelos mais complexos.
+aproximadamente lineares entre os componentes principais do PCA e a pontuação final dos times. No entanto, o ganho obtido pela MLP reforça que há padrões 
+não lineares relevantes que justificam a adoção de modelos mais complexos.
 
 \subsection{Predição do Modelo MLP}
 
@@ -65,14 +64,16 @@ A Figura~\ref{fig:pl_points} apresenta o gráfico de comparação entre as pontu
     \label{fig:mlp_real_pred}
 \end{figure}
 
-Os resultados apresentados na Figura~\ref{fig:pl_points} indicam que o modelo MLP apresenta maior precisão ao estimar as pontuações de clubes que terminaram a temporada com valores
-próximos da média da liga. Times posicionados no centro da distribuição como Fulham, Manchester United e Newcastle United tendem a ter suas pontuações previstas com menor erro, comportamento
-comum em modelos preditivos sob alta incerteza: quando os atributos disponíveis não capturam toda a variabilidade do fenômeno, as previsões convergem naturalmente para valores intermediários.
-Esse resultado alinha-se com a literatura clássica, segundo a qual modelos preditivos em ambientes de alta variabilidade, como é o caso do futebol, tendem a gerar funções de saída menos
-extremas e com menor amplitude, aproximando-se de valores centrais, devido a mecanismos de \textit{shrinkage} e ao balanço entre viéses e variância discutidos por Bishop~\cite{bishop2006}.
-Esse comportamento é análogo ao fenômeno estatístico conhecido como regressão à média.
+Os resultados apresentados na Figura~\ref{fig:pl_points} indicam que o modelo MLP apresenta maior precisão ao estimar as pontuações de clubes que terminaram a 
+temporada com valores próximos da média da liga. Times posicionados no centro da distribuição como Fulham, Manchester United e Newcastle United tendem a 
+ter suas pontuações previstas com menor erro, comportamento comum em modelos preditivos sob alta incerteza: quando os atributos disponíveis não capturam 
+toda a variabilidade do fenômeno, as previsões convergem naturalmente para valores intermediários. Esse resultado alinha-se com a literatura clássica, 
+segundo a qual modelos preditivos em ambientes de alta variabilidade, como é o caso do futebol, tendem a gerar funções de saída menos
+extremas e com menor amplitude, aproximando-se de valores centrais, devido a mecanismos de \textit{shrinkage} e ao balanço entre viéses e variância discutidos 
+por Bishop~\cite{bishop2006}. Esse comportamento é análogo ao fenômeno estatístico conhecido como regressão à média.
 
-Dessa forma, observa-se que o modelo MLP é capaz de capturar tendências gerais de desempenho dos clubes com base nas estatísticas individuais de seus jogadores, porém nota-se uma subestimação
-sistemática das equipes de desempenho elevado, como Manchester City, Arsenal e Liverpool, e uma superestimação das equipes de baixo desempenho, como Sheffield United, Burnley e Luton Town.
+Dessa forma, observa-se que o modelo MLP é capaz de capturar tendências gerais de desempenho dos clubes com base nas estatísticas individuais de seus jogadores, 
+porém nota-se uma subestimação sistemática das equipes de desempenho elevado, como Manchester City, Arsenal e Liverpool, e uma superestimação das equipes de 
+baixo desempenho, como Sheffield United, Burnley e Luton Town.
 
 \section{Otimização de Montagem de Elenco}
