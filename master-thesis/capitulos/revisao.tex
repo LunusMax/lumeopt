@@ -3,8 +3,23 @@
 
 \section{Aprendizado de Máquina no contexto esportivo}
 
-Conforme abordado anteriormente, a maioria dos estudos que aplicam previsões no contexto esportivo concentra-se na predição de resultados de partidas. 
-Essa abordagem é amplamente influenciada pelo grande apelo mercadológico das apostas esportivas \cite{Abidin2021}. 
+Em 2020, \textit{Horvat & Job} apresentaram uma revisão abrangente sobre o uso de AM para prever resultados esportivos, com foco principal em esportes coletivos, 
+especialmente o futebol. Os autores destacam que AM é particularmente adequado para essa tarefa, pois modalidades esportivas geram grandes volumes de dados estruturados 
+e não estruturados (eventos, informações de \textit{tracking}, histórico, probabilidade, entre outros) \cite{Horvat2020}.
+
+Conforme abordado anteriormente, a maioria dos estudos que empregam métodos preditivos no contexto esportivo concentra-se na predição de resultados de partidas. 
+Tal predominância é reforçada pelo forte apelo mercadológico associado ao mercado de apostas esportivas, que incentiva o desenvolvimento de modelos capazes de 
+antecipar vitórias, empates e derrotas com maior precisão \cite{Abidin2021}. Ainda assim, \textit{Horvat & Job} observam que a predominância desse tipo de estudo 
+não se explica apenas por fatores externos, mas também pela própria natureza técnica do problema, que se ajusta bem aos algoritmos mais utilizados em AM e 
+à disponibilidade de dados históricos amplamente registrados no futebol.
+
+No artigo de revisão de literatura publicado por \textit{Horvat & Job}, os autores destacam que diferentes algoritmos supervisionados têm sido empregados na 
+literatura, entre eles regressão logística, \textit{Support Vector Machine} (SVM), \textit{Random Forest} e redes neurais. Segundo \textit{Horvat & Job} (2020), 
+modelos que integram múltiplas fontes de informação — como estatísticas tradicionais, indicadores derivados e dados contextuais — tendem a alcançar resultados superiores. 
+Ainda assim, os autores ressaltam que a tarefa permanece desafiadora, em especial devido à natureza estocástica do futebol e às limitações impostas pela ausência de 
+padronização entre as bases de dados utilizadas nos diferentes estudos \cite{Horvat2020}. Apesar disso, nos últimos anos, a geração de dados aumentou significativamente 
+com a maior disponibilidade de \textit{big data} esportiva, impulsionada pela expansão de sistemas de \textit{tracking} e por bancos estruturados como \textit{Opta} 
+e \textit{StatsBomb} \cite{Horvat2020}.
 
 %%%No ano de 2006, \textit{Joseph, Fenton & Neil} utilizaram redes Bayesianas buscando prever resultados de partidas de futebol. 
 %%%Para tal tarefa, utilizaram resultados do \textit{Tottenham Hotspur Football Club} entre os anos de 1995 e 1997. Para a construção do modelo, 
