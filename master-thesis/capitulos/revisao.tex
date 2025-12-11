@@ -13,13 +13,23 @@ antecipar vitórias, empates e derrotas com maior precisão \cite{Abidin2021}. A
 não se explica apenas por fatores externos, mas também pela própria natureza técnica do problema, que se ajusta bem aos algoritmos mais utilizados em AM e 
 à disponibilidade de dados históricos amplamente registrados no futebol.
 
-No artigo de revisão de literatura publicado por \textit{Horvat & Job}, os autores destacam que diferentes algoritmos supervisionados têm sido empregados na 
-literatura, entre eles regressão logística, \textit{Support Vector Machine} (SVM), \textit{Random Forest} e redes neurais. Segundo \textit{Horvat & Job} (2020), 
+No artigo de revisão de literatura publicado por \textit{Horvat & Job}, os autores destacam que diferentes algoritmos supervisionados têm sido empregados em
+estudos anteriores, entre eles regressão logística, \textit{Support Vector Machine} (SVM), \textit{Random Forest} e redes neurais. Segundo os autores, 
 modelos que integram múltiplas fontes de informação — como estatísticas tradicionais, indicadores derivados e dados contextuais — tendem a alcançar resultados superiores. 
-Ainda assim, os autores ressaltam que a tarefa permanece desafiadora, em especial devido à natureza estocástica do futebol e às limitações impostas pela ausência de 
-padronização entre as bases de dados utilizadas nos diferentes estudos \cite{Horvat2020}. Apesar disso, nos últimos anos, a geração de dados aumentou significativamente 
+Os autores também ressaltam que a tarefa permanece desafiadora, em especial devido à natureza estocástica do futebol. Outro fator limitante é a ausência de 
+padronização entre as bases de dados utilizadas nos diferentes estudos \cite{Horvat2020}. Nos últimos anos, a geração de dados aumentou significativamente 
 com a maior disponibilidade de \textit{big data} esportiva, impulsionada pela expansão de sistemas de \textit{tracking} e por bancos estruturados como \textit{Opta} 
 e \textit{StatsBomb} \cite{Horvat2020}.
+
+De forma complementar ao panorama apresentado por \textit{Horvat & Job} (2020), o estudo sistemático conduzido por \textit{Rico-González et al.} (2023) identifica que
+AM vem sendo empregado no futebol em uma variedade crescente de tarefas, incluindo análise de desempenho físico, detecção de padrões táticos, avaliação de risco de
+lesões, classificação de ações de jogo e modelagem espacial por meio de dados de \textit{tracking}. Assim como \textit{Horvat & Job}, os autores apontam para a evolução
+recente da disponibilidade de dados, fator que tem impulsionado abordagens cada vez mais complexas, como redes neurais profundas, modelos probabilísticos e métodos baseados
+em séries temporais.
+
+A partir desse panorama fornecido pelas revisões de literatura mais recentes, diversos estudos empíricos têm explorado aplicações específicas de AM no futebol, variando 
+quanto ao tipo de dado empregado, ao período analisado e ao objetivo da modelagem. A literatura aplicada pode ser organizada em diferentes eixos temáticos, sendo um dos mais 
+tradicionais a previsão de resultados de partidas.
 
 %%%No ano de 2006, \textit{Joseph, Fenton & Neil} utilizaram redes Bayesianas buscando prever resultados de partidas de futebol. 
 %%%Para tal tarefa, utilizaram resultados do \textit{Tottenham Hotspur Football Club} entre os anos de 1995 e 1997. Para a construção do modelo, 
@@ -29,57 +39,55 @@ e \textit{StatsBomb} \cite{Horvat2020}.
 %%%Como principal conclusão, o estudo mostrou que redes Bayesianas construídas com conhecimento especializado podem superar modelos estatísticos puramente baseados em dados, 
 %%%especialmente quando há poucos dados disponível.
 
+\subsection{Previsão de resultados de partidas}
+
+Como discutido anteriormente, modelos de previsão de resultados constituem uma das áreas mais tradicionais do uso de AM no futebol. Os estudos 
+variam quanto ao tipo de dado utilizado, à complexidade dos modelos e ao período analisado, mas compartilham o objetivo de estimar probabilidades de vitória, 
+empate ou derrota.
+
 No ano de 2006, \textit{Joseph, Fenton \& Neil} utilizaram redes Bayesianas para prever resultados de partidas de futebol. 
 O estudo foi baseado em dados do \textit{Tottenham Hotspur Football Club} referentes às temporadas de 1995 a 1997. 
 A principal dificuldade na construção do modelo foi a quantidade limitada de dados disponíveis, composta por apenas 76 partidas e um total de 30 atributos, 
 sendo 28 jogadores, local das partidas e a qualidade dos adversários.
-
 Para lidar com mudanças no elenco ao longo das temporadas, os autores introduziram as variáveis "playing" e "not-playing", 
-indicando a presença ou ausência dos jogadores em campo. Além das redes Bayesianas, o estudo 
-comparou seu desempenho com um modelo baseado em \textit{K-Nearest Neighbors} (KNN) e uma árvore de decisão (\textit{Decision Tree}) MC4. 
-
+indicando a presença ou ausência dos jogadores em campo. Além das redes Bayesianas, os autores compararam seu desempenho com um modelo baseado em 
+\textit{K-Nearest Neighbors} (KNN) e uma árvore de decisão (\textit{Decision Tree}) MC4. 
 Os resultados indicaram que redes Bayesianas construídas com conhecimento especializado superam modelos puramente baseados em dados, 
 especialmente em cenários onde a quantidade de informações disponíveis é reduzida. 
 
-Ainda no contexto da previsão de resultados esportivos, \textit{Baboota \& Kaur} (2018) investigaram a aplicação de técnicas de AM para prever resultados da EPL. 
+Enquanto o estudo de \textit{Joseph et al.} explora uma abordagem baseada em conhecimento especializado para lidar com bases reduzidas, pesquisas mais recentes 
+passaram a empregar algoritmos de classificação aplicados a conjuntos de dados mais amplos e com maior variedade de atributos, como em \textit{Baboota & Kaur} (2018).
+\textit{Baboota \& Kaur} (2018) investigaram a aplicação de técnicas de AM para prever resultados da EPL. 
 Para tal tarefa, os autores também utilizaram dados de duas temporadas (2014-2015 e 2015-2016) realizando um estudo de classificação multiclasse, 
 buscando prever vitória do time da casa, vitória do visitante e empate.
-
 As variáveis utilizadas pelos autores consistiam no desempenho recente do time, estatísticas de jogo (chutes no alvo, escanteios, posse de bola...), 
 \textit{rating} dos times (obtido com base no FIFA Index) e fator casa/fora, buscando avaliar o impacto do mando de campo. 
-Cabe ressaltar que, ao longo do estudo, descobriram que as \textbf{\textit{features} derivadas de desempenho recente foram mais impactantes do que estatísticas isoladas}.
-
+Cabe ressaltar que, ao longo do estudo, observaram que os atributos derivados de desempenho recente foram mais impactantes do que estatísticas isoladas.
 \textit{Baboota \& Kaur} (2018) testaram os algoritmos de RF, SVM, XGBoost e NB, obtendo um melhor desempenho na utilização do \textit{Gradient Boost}. 
-Mesmo obtendo bons resultados, o melhor modelo não superou previsões das casas de apostas, uma vez que as mesmas utilizam variáveis ocultas como lesões e táticas de jogo.
-
-Em 2019, \cite{Herold2019} investigou como o AM pode ser aplicado no futebol profissional masculino, especialmente buscando melhorar o desempenho ofensivo. 
-Para isso, foram utilizados dados de passes, finalizações, dribles, entre outros.
-
-Modelos supervisionados foram empregados com o objetivo de prever gols, vitórias e classificar passes como bons ou ruins. Por outro lado, 
-modelos não supervisionados foram utilizados para identificar padrões, formações e estilos de jogo. Entre os algoritmos aplicados, destacam-se redes neurais, 
-árvores de decisão, k-means, regressão logística e redes neurais recorrentes (LSTM). \cite{Herold2019}
-
-\textit{Herold, Memmert e Perl} (2019) concluíram que padrões de passes podem ser detectados e classificados por meio dessas técnicas. 
-Métricas como Gols Esperados (xG) e Oportunidade de Finalização Sem Bola (Off-Ball Scoring Opportunity) demonstraram potencial para avaliar chances reais de gol. 
-Além disso, o comportamento coletivo das equipes — como táticas e movimentações coordenadas — podem ser representadas matematicamente.
-
-Majumdar et al. (2022) discutem como o AM pode ser aplicado na compreensão e previsão de lesões no futebol, explorando variáveis relacionadas à carga de treino e competição. 
-Para tal foram utilizadas abordagens de regressão logística, árvores de decisão e k-vizinhos mais próximos (KNN), além de métodos mais complexos, como \textit{Random Forest}, 
-máquinas de vetor de suporte (SVM) e redes neurais artificiais. Apesar do potencial identificado, os autores destacam limitações relevantes, 
-como o desbalanceamento das bases de dados, a falta de consenso sobre quais variáveis são mais preditivas e a predominância de estudos restritos a apenas uma temporada. 
-O trabalho conclui que, com a inclusão de dados longitudinais, técnicas de balanceamento e o uso de abordagens de inteligência artificial explicável (\textit{Explainable AI}), 
-o AM pode oferecer novas perspectivas para reduzir riscos de lesão e otimizar o processo de treinamento no futebol.
+Mesmo obtendo bons resultados, o melhor modelo não superou as previsões das casas de apostas, uma vez que estas incorporam variáveis não observadas pelos 
+modelos, como lesões e aspectos táticos.
 
 Em termos de Aprendizado Profundo e Redes Neurais (RN), \textit{Awadallah \& Khandelwal} (2020) buscaram prever resultados de partidas de futebol (vitória do mandante, 
 empate ou vitória do visitante) na EPL utilizando modelos de RNs profundas, comparando diferentes abordagens e analisando suas performances. 
 Os autores partiram da ideia de que o futebol, embora seja altamente aleatório, contém padrões históricos detectáveis por meio de dados estatísticos. 
 O estudo buscou verificar até que ponto modelos estatísticos conseguem capturar esses padrões e prever resultados de partidas.
-
 Para essa tarefa, foram analisadas 10 temporadas da EPL (2008–2019), com cerca de 4180 partidas e 78 colunas originais, reduzidas posteriormente a 24 \textit{features}, 
 que incluíam \textit{Elo ratings}, taxas de vitórias, empates e derrotas, sequências de resultados recentes, entre outros \cite{awadallah2020}.
-
 No estudo em questão, foram comparados modelos de Regressão Logística, \textit{Random Forest}, Rede Neural Densa (DNN) e LSTM (RNN). Entre os métodos analisados, 
 o LSTM foi o mais promissor, alcançando aproximadamente \textbf{58\% de acurácia de teste}, mas todos os modelos apresentaram vieses e limitações de generalização.
+
+\subsection{Análise de desempenho técnico e estatísticas derivadas}
+
+Em 2019, \cite{Herold2019} investigou como o AM pode ser aplicado no futebol profissional masculino, especialmente buscando melhorar o desempenho ofensivo. 
+Para isso, foram utilizados dados de passes, finalizações, dribles, entre outros.
+Modelos supervisionados foram empregados com o objetivo de prever gols, vitórias e classificar passes como bons ou ruins. Por outro lado, 
+modelos não supervisionados foram utilizados para identificar padrões, formações e estilos de jogo. Entre os algoritmos aplicados, destacam-se redes neurais, 
+árvores de decisão, k-means, regressão logística e redes neurais recorrentes (LSTM) \cite{Herold2019}.
+\textit{Herold, Memmert e Perl} (2019) concluíram que padrões de passes podem ser detectados e classificados por meio dessas técnicas. 
+Métricas como Gols Esperados (xG) e Oportunidade de Finalização Sem Bola (Off-Ball Scoring Opportunity) demonstraram potencial para avaliar chances reais de gol. 
+Além disso, o comportamento coletivo das equipes — como táticas e movimentações coordenadas — podem ser representadas matematicamente.
+
+\subsection{Modelagem tática e dados de tracking}
 
 Além das abordagens tradicionais baseadas em dados de eventos, estudos recentes destacam o valor do contexto espacial dos jogadores no momento de uma ação, buscando
 metrificar táticas. O livro \textit{Machine Learning and Data Mining for Sports Analytics (MLSA 2023)} enfatiza esse aspecto ao mostrar que análises mais modernas atuam
@@ -89,6 +97,26 @@ Outra contribuição relevante do livro em questão consiste na discussão sobre
 quantifica o perigo imediato após a perda da bola (\textit{turnover}). 
 Estudos apresentados no volume mostram que, utilizando modelos de \textit{XGBoost}, é possível identificar padrões que levam a contra-ataques perigosos 
 com maior precisão, reforçando o potencial do AM na modelagem de transições rápidas, um aspecto crítico no futebol moderno \cite{MLSA2023}.
+
+\subsection{Predição de lesões}
+
+Majumdar et al. (2022) discutem como o AM pode ser aplicado na compreensão e predição de lesões no futebol, explorando variáveis relacionadas à carga de treino e competição. 
+Para tal foram utilizadas abordagens de regressão logística, árvores de decisão e k-vizinhos mais próximos (KNN), além de métodos mais complexos, como \textit{Random Forest}, 
+máquinas de vetor de suporte (SVM) e redes neurais artificiais. Apesar do potencial identificado, os autores destacam limitações relevantes, 
+como o desbalanceamento das bases de dados, a falta de consenso sobre quais variáveis são mais preditivas e a predominância de estudos restritos a apenas uma temporada. 
+O trabalho conclui que, com a inclusão de dados longitudinais, técnicas de balanceamento e o uso de abordagens de inteligência artificial explicável (\textit{Explainable AI}), 
+o AM pode oferecer novas perspectivas para reduzir riscos de lesão e otimizar o processo de treinamento no futebol.
+
+
+\subsection{Panorama nacional}
+
+Essa expansão do uso de AM no futebol não se limita ao cenário internacional. Iniciativas brasileiras têm desempenhado papel 
+relevante na consolidação da área de sports analytics. Um exemplo é o Sports Analytics Lab (SALab), vinculado ao Departamento de Ciência da Computação da UFMG, que 
+desenvolve pesquisas aplicadas em ciência de dados no esporte e promove eventos de divulgação científica, como o Football Analytics Modelling & Experience (FAME). 
+Esses eventos reúnem pesquisadores, profissionais de clubes 
+e estudantes, fomentando discussões sobre métodos modernos de análise de desempenho, modelagem tática, uso de dados de \textit{tracking} e aplicações de AM no futebol. 
+A existência de iniciativas como o SALab e o FAME evidencia que o campo de análise quantitativa no esporte tem se expandido também no contexto brasileiro, acompanhando 
+a evolução global descrita nas revisões de \textit{Horvat & Job} (2020) e \textit{Rico-González et al.} (2023).
 
 
 \section{Pesquisa Operacional no contexto esportivo}
