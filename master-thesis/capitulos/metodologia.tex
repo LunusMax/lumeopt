@@ -2,21 +2,33 @@
 
 \section{Coleta dos Dados}
 
-Com o intuito de coletar os dados, foi desenvolvido um algoritmo de \textit{web scraping}, utilizando a biblioteca \textit{Beautiful Soup} da linguagem \textit{Python}. Essa biblioteca é amplamente utilizada para extração e manipulação de dados a partir de páginas HTML e XML \cite{beautifulsoup}. 
+Com o intuito de coletar os dados, foi desenvolvido um algoritmo de \textit{web scraping}, utilizando a biblioteca \textit{Beautiful Soup} da linguagem \textit{Python}. 
+Essa biblioteca é amplamente utilizada para extração e manipulação de dados a partir de páginas HTML e XML \cite{beautifulsoup}. 
 
-O site utilizado para extração foi o FBref, uma ampla \textit{database} de estatísticas de futebol que contém dados detalhados de jogadores e equipes de diferentes competições ao redor do mundo. O FBref se destaca por disponibilizar estatísticas avançadas, como \textit{Expected Goals (XG)}, pressões, passes progressivos e estatísticas defensivas, tornando-se uma fonte valiosa para análises preditivas e modelagem estatística no futebol.
+O site utilizado para extração foi o FBref, uma ampla \textit{database} de estatísticas de futebol que contém dados detalhados de jogadores e equipes de diferentes 
+competições ao redor do mundo. O FBref se destaca por disponibilizar estatísticas avançadas, como \textit{Expected Goals (XG)}, pressões, passes progressivos e 
+estatísticas defensivas, tornando-se uma fonte valiosa para análises preditivas e modelagem estatística no futebol.
 
-Com o intuito de utilizar mais dados que \textit{Baboota \& Kaur} (2018) e \textit{Joseph, Fenton \& Neil} (2006) e evitar \textit{overfitting}, para este estudo foram requisitados os dados de todos os jogadores da \textit{Serie A} italiana e \textit{Premier League} que atuaram ao longo de cinco temporadas (2019-2020, 2020-2021, 2021-2022, 2022-2023, 2023-2024), além da tabela de resultados de todos os jogos disputados nesse mesmo período. Os dados obtidos foram armazenados no formato csv, sendo organizados em arquivos distintos para cada time e temporada. Dessa forma, cada arquivo contém as estatísticas individuais dos jogadores de um determinado clube em uma temporada específica.
+Com o intuito de utilizar mais dados que \textit{Baboota \& Kaur} (2018) e \textit{Joseph, Fenton \& Neil} (2006) e evitar \textit{overfitting}, para este estudo foram 
+requisitados os dados de todos os jogadores da \textit{Serie A} italiana e \textit{Premier League} que atuaram ao longo de cinco 
+temporadas (2019-2020, 2020-2021, 2021-2022, 2022-2023, 2023-2024), além da tabela de resultados de todos os jogos disputados nesse mesmo período. 
+Os dados obtidos foram armazenados no formato csv, sendo organizados em arquivos distintos para cada time e temporada. Dessa forma, cada arquivo contém as 
+estatísticas individuais dos jogadores de um determinado clube em uma temporada específica.
 
 \section{Pré-processamento dos Dados}
 
 \subsection{Base de Dados dos Jogadores}
 
-As tabelas extraídas do site FBref para todos os times e temporadas foram estruturadas de forma idêntica, contendo 47 atributos relacionados a idade, posição, minutos jogados, bem como estatísticas ofensivas (gols, assistências, passes decisivos etc.) e defensivas (bloqueios, desarmes, erros graves etc.) de cada jogador. Esses dados foram carregados em diferentes \textit{dataframes}, um para cada liga considerada, e posteriormente organizados por jogador, incluindo time, temporada e respectivos indicadores. Ressalta-se que um mesmo atleta pode aparecer em diferentes temporadas e clubes dentro da organização adotada.
+As tabelas extraídas do site FBref para todos os times e temporadas foram estruturadas de forma idêntica, contendo 47 atributos relacionados a idade, posição, 
+minutos jogados, bem como estatísticas ofensivas (gols, assistências, passes decisivos etc.) e defensivas (bloqueios, desarmes, erros graves etc.) de cada jogador. 
+Esses dados foram carregados em diferentes \textit{dataframes}, um para cada liga considerada, e posteriormente organizados por jogador, incluindo time, temporada e 
+respectivos indicadores. Ressalta-se que um mesmo atleta pode aparecer em diferentes temporadas e clubes dentro da organização adotada.
 
-Os \textit{dataframes} correspondentes a cada liga foram posteriormente concatenados em um único conjunto, englobando todos os jogadores, o qual foi armazenado para as etapas seguintes da análise.
+Os \textit{dataframes} correspondentes a cada liga foram posteriormente concatenados em um único conjunto, englobando todos os jogadores, o qual foi armazenado para as 
+etapas seguintes da análise.
 
-Com o intuito de evitar \textit{overfitting} e melhorar a eficiência computacional, foi aplicada uma técnica de redução de dimensionalidade, o Principal Component Analysis (PCA).
+Com o intuito de evitar \textit{overfitting} e melhorar a eficiência computacional, foi aplicada uma técnica de redução de dimensionalidade, 
+o Principal Component Analysis (PCA).
 
 \subsubsection{Principal Component Analysis (PCA)}
 
@@ -32,29 +44,46 @@ Para determinar o número ideal de componentes principais que serão utilizados 
 \end{figure}
 
 
-O gráfico apresenta a variância explicada acumulada em função do número de componentes principais, permitindo identificar o ponto de inflexão, ou seja, o momento em que a adição de novos componentes passa a contribuir de forma marginal para a variância total dos dados. O eixo \textit{x} representa o número de componentes principais, enquanto o eixo \textit{y} exibe a variância explicada acumulada.
+O gráfico apresenta a variância explicada acumulada em função do número de componentes principais, permitindo identificar o ponto de inflexão, ou seja, o momento em que 
+a adição de novos componentes passa a contribuir de forma marginal para a variância total dos dados. O eixo \textit{x} representa o número de componentes principais, 
+enquanto o eixo \textit{y} exibe a variância explicada acumulada.
 
-A partir da Figura~\ref{fig01}, observa-se que, acima de 20 componentes principais, o ganho de informação adicional se torna insignificante. Com base nessa análise, serão realizados testes com diferentes quantidades de componentes, garantindo que sempre serão utilizados no mínimo 20 componentes, de forma a preservar a maior quantidade possível de variância dos dados sem comprometer a eficiência do modelo.
+A partir da Figura~\ref{fig01}, observa-se que, acima de 20 componentes principais, o ganho de informação adicional se torna insignificante. 
+Com base nessa análise, serão realizados testes com diferentes quantidades de componentes, garantindo que sempre serão utilizados no mínimo 20 componentes, 
+de forma a preservar a maior quantidade possível de variância dos dados sem comprometer a eficiência do modelo.
 
 \subsection{Base de Dados dos Jogos}
 
-Os dados dos jogos realizados entre as temporadas 2019-2020 e 2023-2024, obtidos na etapa de coleta, estavam organizados em 14 colunas. No entanto, grande parte dessas informações era irrelevante para a análise (por exemplo, horário e data das partidas, público, local e árbitro). Assim, para otimizar o conjunto de dados, foram removidos os atributos considerados ruído, mantendo-se apenas três elementos essenciais: time mandante, time visitante e resultado da partida.
+Os dados dos jogos realizados entre as temporadas 2019-2020 e 2023-2024, obtidos na etapa de coleta, estavam organizados em 14 colunas. No entanto, 
+grande parte dessas informações era irrelevante para a análise (por exemplo, horário e data das partidas, público, local e árbitro). 
+Assim, para otimizar o conjunto de dados, foram removidos os atributos considerados ruído, mantendo-se apenas três elementos essenciais: time mandante, 
+time visitante e resultado da partida.
 
-A coluna de resultados foi transformada em valores numéricos por meio de um algoritmo em Python, em processo análogo a um \textit{encoder}: vitória do mandante foi codificada como '1', vitória do visitante como '2' e empate como '0'.
+A coluna de resultados foi transformada em valores numéricos por meio de um algoritmo em Python, em processo análogo a um \textit{encoder}: 
+vitória do mandante foi codificada como '1', vitória do visitante como '2' e empate como '0'.
 
-Com base nessa codificação, percorreu-se a base atribuindo três pontos a cada vitória e um ponto a cada empate. O resultado desse processamento foi uma tabela organizada por temporada, contendo cada clube e a respectiva pontuação acumulada.
+Com base nessa codificação, percorreu-se a base atribuindo três pontos a cada vitória e um ponto a cada empate. 
+O resultado desse processamento foi uma tabela organizada por temporada, contendo cada clube e a respectiva pontuação acumulada.
 
 \section{Treinamento do Modelo de AM}
 
-Os dados de pontuação dos clubes foram organizados por temporada, enquanto as estatísticas individuais dos jogadores corresponderam sempre à temporada anterior. Dessa forma, o modelo utiliza informações conhecidas de desempenho prévio para estimar a pontuação final do clube na temporada subsequente. Adicionalmente, a pontuação dos clubes na temporada anterior foi incorporada como variável explicativa, de modo a capturar o histórico de desempenho recente da equipe.
+Os dados de pontuação dos clubes foram organizados por temporada, enquanto as estatísticas individuais dos jogadores corresponderam sempre à temporada anterior. 
+Dessa forma, o modelo utiliza informações conhecidas de desempenho prévio para estimar a pontuação final do clube na temporada subsequente. 
+Adicionalmente, a pontuação dos clubes na temporada anterior foi incorporada como variável explicativa, de modo a capturar o histórico de desempenho recente da equipe.
 
-O modelo de AM foi desenvolvido para prever a pontuação dos clubes ao longo das temporadas, com base no desempenho individual de seus jogadores. Para evitar vazamento de dados entre treinamento e teste, a base da Série A italiana foi utilizada no treinamento do modelo, enquanto a base da EPL foi destinada à etapa de teste.
+O modelo de AM foi desenvolvido para prever a pontuação dos clubes ao longo das temporadas, com base no desempenho individual de seus jogadores. Para evitar 
+vazamento de dados entre treinamento e teste, a base da Série A italiana foi utilizada no treinamento do modelo, enquanto a base da EPL foi destinada à etapa de teste.
 
 \subsection{Modelo de Aprendizado de Máquina}
 
-Para a etapa de previsão da pontuação dos clubes, foi implementado o modelo de MLP utilizando a biblioteca \texttt{Keras}. O modelo foi construído no formato \textit{Sequential}, contendo três camadas densamente conectadas. A primeira camada recebe como entrada um vetor com dimensão igual ao número de atributos disponíveis, seguido por uma camada densa com 128 neurônios e função de ativação ReLU. Esta camada foi regularizada por meio de penalização L1, de forma a reduzir o risco de sobreajuste. 
+Para a etapa de previsão da pontuação dos clubes, foi implementado o modelo de MLP utilizando a biblioteca \textit{Keras}. O modelo foi construído 
+no formato \textit{Sequential}, contendo três camadas densamente conectadas. A primeira camada recebe como entrada um vetor com dimensão igual ao 
+número de atributos disponíveis, seguido por uma camada densa com 128 neurônios e função de ativação ReLU. Esta camada foi regularizada por meio de penalização L1, de 
+forma a reduzir o risco de sobreajuste. 
 
-Em seguida, aplicou-se normalização em lote (\textit{Batch Normalization}) e uma camada de \textit{Dropout} com taxa de 60\%, visando maior robustez e generalização. A segunda camada oculta é composta por 32 neurônios, também com ativação ReLU e regularização L1, seguida novamente por \textit{Batch Normalization} e \textit{Dropout} de 60\%. Por fim, a camada de saída é formada por um único neurônio linear, responsável por produzir a previsão da pontuação final do clube na temporada.
+Em seguida, aplicou-se normalização em lote (\textit{Batch Normalization}) e uma camada de \textit{Dropout} com taxa de 60\%, visando maior robustez e generalização. 
+A segunda camada oculta é composta por 32 neurônios, também com ativação ReLU e regularização L1, seguida novamente por \textit{Batch Normalization} e \textit{Dropout} 
+de 60\%. Por fim, a camada de saída é formada por um único neurônio linear, responsável por produzir a previsão da pontuação final do clube na temporada.
 
 A arquitetura do modelo pode ser resumida da seguinte forma:
 
@@ -69,9 +98,11 @@ A arquitetura do modelo pode ser resumida da seguinte forma:
     \item Camada de saída: \texttt{Dense(1)}, ativação linear.
 \end{itemize}
 
-%%Essa configuração foi escolhida por equilibrar complexidade e capacidade de generalização, evitando sobreajuste em função do tamanho relativamente limitado da base de dados.
+%%Essa configuração foi escolhida por equilibrar complexidade e capacidade de generalização, evitando sobreajuste em função do tamanho relativamente 
+%%%limitado da base de dados.
 
-O MLP foi escolhido como base para o modelo de previsão de pontuação no contexto do futebol por reunir propriedades teóricas e práticas que o tornam adequado para lidar com a natureza complexa e não linear dos dados esportivos. Entre as principais razões para essa escolha, destacam-se:
+O MLP foi escolhido como base para o modelo de previsão de pontuação no contexto do futebol por reunir propriedades teóricas e práticas que o tornam adequado para 
+lidar com a natureza complexa e não linear dos dados esportivos. Entre as principais razões para essa escolha, destacam-se:
 
 \begin{enumerate}
     \item \textbf{Capacidade de representação universal} —
@@ -80,16 +111,21 @@ O MLP foi escolhido como base para o modelo de previsão de pontuação no conte
     Assim, o MLP não depende de hipóteses rígidas sobre a forma das relações entre variáveis, sendo capaz de aprendê-las diretamente dos dados.
 
     \item \textbf{Flexibilidade para entradas de alta dimensão} —
-    De acordo com \textit{Goodfellow et. al., 2016}, cada camada de uma rede \textit{feedforward} aprende uma representação do vetor de entrada que torna mais fácil a predição da saída desejada. 
+    De acordo com \textit{Goodfellow et. al., 2016}, cada camada de uma rede \textit{feedforward} aprende uma representação do vetor de entrada que torna 
+    mais fácil a predição da saída desejada. 
     Essa característica confere ao MLP flexibilidade para lidar com conjuntos de dados de alta dimensionalidade, nos quais múltiplas variáveis interagem de forma não linear. 
-    Mesmo com a aplicação prévia da técnica de \textit{Principal Component Analysis} (PCA), que reduz a dimensionalidade de 48 para 20 componentes principais, o problema ainda envolve um espaço vetorial de considerável complexidade. 
-    Nesse contexto, o MLP é capaz de explorar as relações não lineares entre os componentes principais, aprendendo representações mais informativas que auxiliam na previsão de desempenho esportivo.
+    Mesmo com a aplicação prévia da técnica de \textit{Principal Component Analysis} (PCA), que reduz a dimensionalidade de 48 para 20 componentes principais, 
+    o problema ainda envolve um espaço vetorial de considerável complexidade. 
+    Nesse contexto, o MLP é capaz de explorar as relações não lineares entre os componentes principais, aprendendo representações 
+    mais informativas que auxiliam na previsão de desempenho esportivo.
 
     \item \textbf{Treinamento eficiente via retropropagação} — 
-    O algoritmo de \textit{backpropagation}, apresentado em \cite{Goodfellow2016}, permite o cálculo eficiente dos gradientes de erro e a atualização simultânea dos pesos da rede por meio de gradiente descendente. 
+    O algoritmo de \textit{backpropagation}, apresentado em \cite{Goodfellow2016}, permite o cálculo eficiente dos gradientes de erro e a atualização 
+    simultânea dos pesos da rede por meio de gradiente descendente. 
     Isso viabiliza o treinamento em grandes bases de dados de futebol, reduz o tempo de convergência e possibilita otimizar métricas contínuas.
 
-Além dessas vantagens teóricas, o MLP oferece um equilíbrio entre capacidade de generalização, interpretabilidade e eficiência computacional, características desejáveis em modelos aplicados ao futebol, onde os dados são heterogêneos, ruidosos e interdependentes.
+Além dessas vantagens teóricas, o MLP oferece um equilíbrio entre capacidade de generalização, interpretabilidade e eficiência computacional, características 
+desejáveis em modelos aplicados ao futebol, onde os dados são heterogêneos, ruidosos e interdependentes.
 
 
 %é particularmente adequado à modelagem de desempenho esportivo porque apresenta três propriedades essenciais descritas por \textcite{Goodfellow2016}:
@@ -99,20 +135,69 @@ Além dessas vantagens teóricas, o MLP oferece um equilíbrio entre capacidade 
 
 Com o intuito de prever o impacto de jogadores no time, o algoritmo de AM
 
-Em um primeiro momento, busca-se desenvolver um algoritmo capaz de predizer o impacto de um jogador em um time. Para essa tarefa, serão utilizadas três variáveis: \textit{team\_target}, \textit{season\_target} e \textit{player\_added}. O objetivo dessa abordagem é simular a busca de um time por um jogador antes do início da temporada, permitindo prever o impacto que ele terá ao longo da competição.
+Em um primeiro momento, busca-se desenvolver um algoritmo capaz de predizer o impacto de um jogador em um time. Para essa tarefa, serão utilizadas três variáveis: 
+\textit{team\_target}, \textit{season\_target} e \textit{player\_added}. O objetivo dessa abordagem é simular a busca de um time por um jogador antes do início da temporada, 
+permitindo prever o impacto que ele terá ao longo da competição.
 
-Conforme discutido por \textit{Baboota \& Kaur} (2018), a variável com maior influência na predição de resultados foi a forma recente do time. Seguindo esse princípio, serão aplicados pesos à forma do jogador, atribuindo maior relevância ao desempenho recente. Estatísticas mais antigas também serão consideradas, porém com um peso reduzido, garantindo que o modelo priorize informações mais atuais.
+Conforme discutido por \textit{Baboota \& Kaur} (2018), a variável com maior influência na predição de resultados foi a forma recente do time. Seguindo esse princípio, 
+serão aplicados pesos à forma do jogador, atribuindo maior relevância ao desempenho recente. Estatísticas mais antigas também serão consideradas, 
+porém com um peso reduzido, garantindo que o modelo priorize informações mais atuais.
 
-Com os dados preparados para análise, busca-se encontrar o melhor modelo de ML a partir de experimentação com diferentes algoritmos. O modelo base será selecionado a partir de métricas como o MAE (\textit{Mean Absolute Error}) e o $R^2$ \textit{score}.
+Com os dados preparados para análise, busca-se encontrar o melhor modelo de ML a partir de experimentação com diferentes algoritmos. O modelo base 
+será selecionado a partir de métricas como o MAE (\textit{Mean Absolute Error}) e o $R^2$ \textit{score}.
 \end{comment}
 
 
 
 \section{Otimização}
 
-Após a definição do melhor modelo de ML, um \textit{loop} será aplicado de forma a buscar o jogador, ou um grupo de jogadores, que terão maior impacto dentro do time naquela temporada. Esse será o primeiro exemplo de otimização a ser obtido. 
+Uma vez identificado o modelo de ML com melhor capacidade de predizer a pontuação final dos times em uma liga a partir das informações estatísticas de seus elencos, 
+inicia-se a segunda etapa do projeto, dedicada à busca de soluções capazes de otimizar esse desempenho. 
+Nessa fase, o problema passa a ser tratado como um processo de otimização sob restrições, no qual diferentes composições de elenco são avaliadas de acordo com 
+sua pontuação estimada pelo modelo de aprendizado de máquina.
 
-Além disso, serão explorados outros modelos e abordagens da Pesquisa Operacional, com o objetivo de desenvolver soluções para otimização do elenco, estratégias, táticas e escalações. Dessa forma, busca-se auxiliar os clubes na tomada de decisão, oferecendo uma abordagem baseada em estatísticas e dados.
+\subsection{Cálculo do Valor de Mercado Sintético}
+
+Para viabilizar o processo de otimização, torna-se necessário incorporar restrições financeiras que reflitam, ainda que de forma simplificada, 
+as limitações orçamentárias enfrentadas por clubes de futebol em contextos reais. 
+Nesse sentido, foi definida uma métrica sintética de valor de mercado dos jogadores, construída a partir de dois fatores principais: 
+idade e desempenho estatístico agregado.
+
+A Equação~\ref{eq:valor_mercado} apresenta formalmente o cálculo adotado para essa métrica.
+
+\begin{equation}
+\label{eq:valor_mercado}
+V_i = 1000 \cdot \left( 1000 \cdot \max(0, 30 - I_i) + 10 \cdot \sum_{j=1}^{n} x_{ij} \right)
+\end{equation}
+
+onde:
+\begin{itemize}
+    \item $V_i$ representa o valor de mercado sintético do jogador $i$;
+    \item $I_i$ corresponde à idade do jogador $i$;
+    \item $x_{ij}$ representa o valor da $j$-ésima estatística numérica associada ao jogador $i$;
+    \item $n$ é o número total de variáveis estatísticas consideradas.
+\end{itemize}
+
+O primeiro termo da equação corresponde a um fator etário, que atribui maior peso a jogadores mais jovens, considerando um limite superior de 30 anos. 
+Jogadores com idade superior a esse limiar não recebem penalização adicional, evitando a atribuição de valores negativos. 
+Essa escolha busca refletir uma característica recorrente do mercado do futebol, no qual atletas mais jovens tendem a apresentar maior potencial de valorização, 
+longevidade esportiva e retorno econômico futuro.
+
+O segundo termo da equação agrega o desempenho estatístico do jogador por meio da soma de suas variáveis numéricas, escalonada por um fator constante. 
+Essa agregação tem como objetivo capturar, de forma simplificada, o impacto global do desempenho esportivo individual, 
+sem privilegiar métricas específicas ou posições em campo.
+
+Por fim, o fator multiplicativo externo é aplicado exclusivamente para reescalonamento da variável, de modo a produzir valores em uma ordem de grandeza 
+mais próxima às estimativas observadas no mercado real. 
+Esse reescalonamento facilita tanto a interpretação dos valores obtidos quanto a utilização da métrica como restrição orçamentária 
+nos modelos de otimização empregados na etapa subsequente.
+
+Dessa forma, jogadores que combinam alto desempenho estatístico com menor idade tendem a apresentar valores de mercado sintético mais elevados, 
+enquanto atletas mais velhos ou com desempenho inferior são associados a custos reduzidos.
+
+Ressalta-se que essa métrica não tem como objetivo reproduzir valores reais de mercado, 
+mas sim fornecer uma função custo coerente e monotônica, adequada ao processo de otimização proposto.
+
 
 
 
