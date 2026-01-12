@@ -70,19 +70,35 @@ A introdução da função não linear \( g(\cdot) \) é essencial, pois permite
 %\subsection{Naive-Bayes (NB)}
 \section{Pesquisa Operacional}
 
-Como tratado anteriormente, a área da PO consiste em um campo multidisciplinar que aplica modelos matemáticos, estatísticos e computacionais. PO vem sendo amplamente utilizada em diversas áreas organizacionais, tais como manufatura, transportes, construção civil, telecomunicações, planejamento financeiro, planos de saúde, serviço público, entre outros \cite{Hillier2001}.
+Como tratado anteriormente, a área da PO consiste em um campo multidisciplinar que aplica modelos matemáticos, estatísticos e computacionais. 
+PO vem sendo amplamente utilizada em diversas áreas organizacionais, tais como manufatura, transportes, construção civil, telecomunicações, 
+planejamento financeiro, planos de saúde, serviço público, entre outros \cite{Hillier2001}.
+
+Problemas de montagem de elenco no futebol têm sido abordados na literatura sob a ótica da otimização matemática,
+incluindo formulações baseadas em programação estocástica e heurísticas \cite{pantuso2017}.  %% destrinchar isso
 
 Entre os principais métodos da PO, destacam-se a Programação Linear, a Programação Dinâmica e os Processos de Markov.
 
+\subsection{Algoritmo Guloso}
+\subsection{Algoritmo de Busca Local}
+
+
 \subsection{Programação Linear (PL)}
 
-A Programação Linear (PL) é considerada um dos mais importantes avanços científicos do meio do século 20. Essa ferramenta já foi responsável por economizar milhões de dólares para companhias e negócios ao redor do mundo \cite{Hillier2001}.
+A Programação Linear (PL) é considerada um dos mais importantes avanços científicos do meio do século 20. 
+Essa ferramenta já foi responsável por economizar milhões de dólares para companhias e negócios ao redor do mundo \cite{Hillier2001}.
 
-PL utiliza funções lineares simples para buscar o resultado ótimo \cite{Hillier2001}. Um exemplo clássico de PL apresentado por Hillier (2001) é o problema da empresa \textit{Wyndor Glass Co.}.
+PL utiliza funções lineares simples para buscar o resultado ótimo \cite{Hillier2001}. Um exemplo clássico de PL apresentado por Hillier (2001) 
+é o problema da empresa \textit{Wyndor Glass Co.}.
 
 \subsubsection{\textit{Wyndor Glass Co.}}
 
-A empresa \textit{Wyndor Glass Co.} fabrica produtos de vidro de alta qualidade, incluindo janelas e portas de vidro. Possui três fábricas: a Fábrica 1, que produz molduras de alumínio e ferragens; a Fábrica 2, que fabrica molduras de madeira; e a Fábrica 3, responsável pela produção do vidro e pela montagem dos produtos. Devido a uma reestruturação, a empresa decidiu lançar dois novos produtos: o Produto 1, uma porta de vidro de 8 pés com moldura de alumínio, e o Produto 2, uma janela dupla de madeira de 4x6 pés. Cada produto exige capacidade produtiva específica das fábricas. O Produto 1 utiliza as Fábricas 1 e 3, enquanto o Produto 2 depende das Fábricas 2 e 3. O objetivo do problema é determinar a combinação ideal de produção desses produtos para maximizar o lucro total.
+A empresa \textit{Wyndor Glass Co.} fabrica produtos de vidro de alta qualidade, incluindo janelas e portas de vidro. 
+Possui três fábricas: a Fábrica 1, que produz molduras de alumínio e ferragens; a Fábrica 2, que fabrica molduras de madeira; e a Fábrica 3, 
+responsável pela produção do vidro e pela montagem dos produtos. Devido a uma reestruturação, a empresa decidiu lançar dois novos produtos: 
+o Produto 1, uma porta de vidro de 8 pés com moldura de alumínio, e o Produto 2, uma janela dupla de madeira de 4x6 pés. 
+Cada produto exige capacidade produtiva específica das fábricas. O Produto 1 utiliza as Fábricas 1 e 3, enquanto o Produto 2 depende das Fábricas 2 e 3. 
+O objetivo do problema é determinar a combinação ideal de produção desses produtos para maximizar o lucro total.
 
 Definem-se as seguintes variáveis de decisão:
 \begin{itemize}
@@ -123,13 +139,16 @@ O objetivo é determinar a combinação de produção que maximize o lucro total
 \max Z = 3.000 x_1 + 5.000 x_2
 \end{equation}
 
-onde cada lote do Produto 1 gera um lucro de \$ 3.000 e cada lote do Produto 2 gera um lucro de \$ 5.000. Além disso, deve-se garantir que os valores das variáveis de decisão sejam não negativos:
+onde cada lote do Produto 1 gera um lucro de \$ 3.000 e cada lote do Produto 2 gera um lucro de \$ 5.000. Além disso, 
+deve-se garantir que os valores das variáveis de decisão sejam não negativos:
 
 \begin{equation}
 x_1 \geq 0, \quad x_2 \geq 0
 \end{equation}
 
-Uma maneira intuitiva de resolver esse problema é por meio da representação gráfica. As restrições são desenhadas no plano cartesiano, delimitando uma região viável. O ponto ótimo é encontrado na interseção das restrições ativas, onde a função objetivo atinge seu valor máximo dentro da região factível. Tal solução pode ser vista na Figura~\ref{fig3_3}.
+Uma maneira intuitiva de resolver esse problema é por meio da representação gráfica. As restrições são desenhadas no plano cartesiano, 
+delimitando uma região viável. O ponto ótimo é encontrado na interseção das restrições ativas, 
+onde a função objetivo atinge seu valor máximo dentro da região factível. Tal solução pode ser vista na Figura~\ref{fig3_3}.
 
 \begin{figure}[h]
 \centering
@@ -153,13 +172,20 @@ Z^* = 3.000(2) + 5.000(6) = 36.000
 
 Portanto, a Wyndor Glass Co. deve produzir 2 lotes do Produto 1 e 6 lotes do Produto 2 por semana para maximizar seus lucros.
 
-Embora a PL seja uma ferramenta poderosa para problemas de otimização linear, existem outras abordagens que lidam com problemas mais complexos. A Programação Dinâmica (PD), por exemplo, trata de decisões sequenciais, enquanto os Processos de Markov são amplamente utilizados para modelagem de processos estocásticos. Essas abordagens serão discutidas a seguir.
+Embora a PL seja uma ferramenta poderosa para problemas de otimização linear, existem outras abordagens que lidam com problemas mais complexos. 
+A Programação Dinâmica (PD), por exemplo, trata de decisões sequenciais, enquanto os Processos de Markov 
+são amplamente utilizados para modelagem de processos estocásticos. Essas abordagens serão discutidas a seguir.
 
 \subsection{Programação Dinâmica (PD)}
 
-A PD é uma técnica de otimização recursiva aplicada a problemas que podem ser decompostos em subproblemas menores interdependentes \cite{Hillier2001}. Esse método foi formalizado por Richard Bellman na década de 1950, se baseando no princípio da otimalidade, o qual postula que uma solução ótima para um problema contém soluções ótimas para seus subproblemas.
+A PD é uma técnica de otimização recursiva aplicada a problemas que podem ser decompostos em subproblemas menores interdependentes \cite{Hillier2001}. 
+Esse método foi formalizado por Richard Bellman na década de 1950, se baseando no princípio da otimalidade, o qual postula que uma solução ótima para 
+um problema contém soluções ótimas para seus subproblemas.
 
-Bellman (1957) demonstrou que problemas de otimização sequencial podem ser resolvidos de maneira eficiente ao quebrá-los em estágios e resolver cada estágio de forma independente. A PD é amplamente utilizada em processos determinísticos e estocásticos, sendo a base para técnicas modernas como aprendizado por reforço. Além disso, essa técnica é muito utilizada na busca por soluções ótimas de problemas clássicos da computação, como o Problema da Mochila \cite{Kleinberg2006}.
+Bellman (1957) demonstrou que problemas de otimização sequencial podem ser resolvidos de maneira eficiente ao quebrá-los em estágios e resolver 
+cada estágio de forma independente. A PD é amplamente utilizada em processos determinísticos e estocásticos, sendo a base para técnicas modernas 
+como aprendizado por reforço. Além disso, essa técnica é muito utilizada na busca por soluções ótimas de problemas clássicos da computação, 
+como o Problema da Mochila \cite{Kleinberg2006}.
 
 O desenvolvimento de um algoritmo de PD segue uma sequência de quatro etapas \cite{Cormen2009}:
 \begin{enumerate}
@@ -171,7 +197,9 @@ O desenvolvimento de um algoritmo de PD segue uma sequência de quatro etapas \c
 
 \subsection{Processos de Markov}
 
-A teoria dos processos de Markov é originária da década de 1950 com R. Bellman e L. Shapley. Essa teoria cresceu ao longo dos anos e encontrou aplicações em diversas áreas, como ciência da computação, engenharia, pesquisa operacional, biologia e economia \cite{Bauerle2010}.
+A teoria dos processos de Markov é originária da década de 1950 com R. Bellman e L. Shapley. 
+Essa teoria cresceu ao longo dos anos e encontrou aplicações em diversas áreas, como ciência da computação, 
+engenharia, pesquisa operacional, biologia e economia \cite{Bauerle2010}.
 
 Os Processos de Decisão de Markov (MDPs) consistem em um modelo matemático para tomada de decisão sequencial sob incerteza \cite{Bauerle2010}.
 
@@ -186,11 +214,13 @@ onde:
 \begin{itemize}
     \item \(E\) é o espaço de estados, contendo todos os possíveis estados do sistema.
     \item \(A\) é o espaço de ações, representando todas as escolhas disponíveis ao tomador de decisão.
-    \item \(Q(x' | x, a)\) é a função de transição de probabilidade, que define a distribuição de probabilidades para o próximo estado \(x'\), dado o estado atual \(x\) e a ação tomada \(a\).
+    \item \(Q(x' | x, a)\) é a função de transição de probabilidade, que define a distribuição de probabilidades para o próximo estado \(x'\), 
+    dado o estado atual \(x\) e a ação tomada \(a\).
     \item \(r(x, a)\) é a função de recompensa, que determina o valor imediato recebido ao tomar a ação \(a\) no estado \(x\).
 \end{itemize}
 
-O objetivo do MDP é encontrar uma política ótima \( \pi \), que mapeia cada estado \( x \) para uma ação \( a \), de forma a maximizar a soma esperada das recompensas futuras. A equação fundamental para esse cálculo é a Equação de Bellman:
+O objetivo do MDP é encontrar uma política ótima \( \pi \), que mapeia cada estado \( x \) para uma ação \( a \), de forma 
+a maximizar a soma esperada das recompensas futuras. A equação fundamental para esse cálculo é a Equação de Bellman:
 
 \begin{equation}
 V(x) = \max_{a \in A} \left\{ r(x, a) + \sum_{x'} Q(x' | x, a) V(x') \right\}
