@@ -49,9 +49,12 @@ Cabe ressaltar que nem sempre os dados são linearmente separáveis. Sendo assim
 
 \subsection{Gradient Boost (XGBoost)}
 
-O \textit{Gradient Boosting} é uma técnica amplamente utilizada em competições de ciência de dados, como as promovidas pelo Kaggle. Ele funciona adicionando preditores ao modelo de forma sequencial, em que cada novo preditor busca corrigir os erros cometidos pelo anterior (GÉRON, 2019). 
+O \textit{Gradient Boosting} é uma técnica amplamente utilizada em competições de ciência de dados, como as promovidas pelo Kaggle. 
+Ele funciona adicionando preditores ao modelo de forma sequencial, em que cada novo preditor busca corrigir os erros cometidos pelo anterior (GÉRON, 2019). 
 
-O \textit{Gradient Boosting} é implementado em sua forma otimizada, na linguagem Python, a partir da biblioteca \textit{XGBoost} (\textit{Extreme Gradient Boosting}). Esse pacote foi desenvolvido de forma a mirar a velocidade e a eficiência de processamento, especialmente em competições e aplicações que lidam com grandes volumes de dados (GÉRON, 2019). 
+O \textit{Gradient Boosting} é implementado em sua forma otimizada, na linguagem Python, a partir da biblioteca \textit{XGBoost} (\textit{Extreme Gradient Boosting}). 
+Esse pacote foi desenvolvido de forma a mirar a velocidade e a eficiência de processamento, especialmente em competições e aplicações que lidam com 
+grandes volumes de dados (GÉRON, 2019). 
 
 
 \subsection{Multilayer Perceptron (MLP)}
@@ -80,6 +83,22 @@ incluindo formulações baseadas em programação estocástica e heurísticas \c
 Entre os principais métodos da PO, destacam-se a Programação Linear, a Programação Dinâmica e os Processos de Markov.
 
 \subsection{Algoritmo Guloso}
+
+Em problemas de otimização, um algoritmo é dito guloso quando o mesmo faz uma escolha localmente ótima, na esperança de que essa escolha leve a uma solução
+globalmente ótima \cite{Cormen2009}. Diferentemente de abordagens exaustivas, algoritmos gulosos tomam decisões irrevogáveis a cada etapa, baseando-se
+apenas na informação disponível no momento da escolha. É importante destacar que, conforme ressaltado por \cite{Cormen2009}, 
+algoritmos gulosos não garantem, em geral, a obtenção de soluções globalmente ótimas.
+
+Conforme discutido por \cite{Cormen2009}, algoritmos gulosos podem ser formulados de maneira iterativa ou recursiva, sendo esta última caracterizada pela
+decomposição do problema em subproblemas menores. A cada chamada recursiva, uma escolha localmente ótima é realizada, reduzindo o espaço de busca e
+permitindo a construção incremental de uma solução inicial factível.
+
+No contexto deste trabalho, um algoritmo guloso é utilizado de forma recursiva com o objetivo de gerar uma solução inicial para o problema de otimização da
+montagem de elencos. Dado um time e um orçamento, a cada iteração, o jogador com menor minutagem do elenco é removido e substituído por candidatos
+externos. Para cada substituição possível, o modelo de AM é empregado como função objetivo, estimando a pontuação esperada do time resultante.
+A escolha gulosa consiste, portanto, em selecionar o(s) jogador(es) que cabem no orçamento do time e cuja inclusão maximiza a pontuação prevista,
+mantendo-se fixas as demais variáveis do elenco.
+
 \subsection{Algoritmo de Busca Local}
 
 
