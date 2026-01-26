@@ -101,6 +101,26 @@ mantendo-se fixas as demais variáveis do elenco.
 
 \subsection{Algoritmo de Busca Local}
 
+A busca local é uma técnica heurística amplamente utilizada em problemas de otimização combinatória, cujo objetivo é aprimorar 
+uma solução inicial factível por meio da exploração iterativa de sua vizinhança \cite{Gendreau2010}. Diferentemente de métodos exatos, a busca local 
+não realiza uma exploração global do espaço de soluções, concentrando-se na melhoria incremental da solução corrente a partir de movimentos locais.
+
+Conforme descrito por \cite{Gendreau2010}, um algoritmo de busca local é composto essencialmente por três elementos: a definição de uma vizinhança, 
+um critério de aceitação de movimentos e uma condição de parada. A vizinhança determina o conjunto de soluções que podem ser alcançadas a partir da 
+solução atual por meio de pequenas modificações estruturais, enquanto o critério de aceitação estabelece se uma solução vizinha deve ou 
+não substituir a solução corrente. O processo é repetido iterativamente até que nenhuma melhoria adicional seja encontrada ou que um critério de 
+parada seja satisfeito.
+
+No problema abordado neste trabalho, a busca local é empregada para avaliar diferentes conjuntos de jogadores candidatos a contratação, respeitando 
+uma restrição de orçamento. Cada solução é representada por um conjunto de jogadores de cardinalidade fixa, sendo a vizinhança definida por operações de 
+substituição unitária. Em cada iteração, os jogadores do conjunto atual com menor minutagem são selecionados como candidatos à remoção e substituídos por 
+jogadores externos ainda não selecionados, produzindo soluções vizinhas que preservam o tamanho do elenco. Cada solução vizinha gerada é avaliada por meio 
+de uma função objetivo, implementada como um modelo de aprendizado de máquina, responsável por estimar a pontuação esperada do time na temporada considerada.
+
+A restrição orçamentária é tratada como condição de factibilidade: soluções que excedem o orçamento estabelecido são descartadas durante o processo de busca. 
+O critério de aceitação adotado é de melhoria estrita, isto é, uma solução vizinha é aceita apenas se apresentar valor superior da função objetivo em relação 
+à solução corrente. O algoritmo é encerrado quando nenhuma substituição viável resulta em melhoria adicional, caracterizando a convergência para um ótimo local, 
+conforme descrito em \cite{Gendreau2010}.
 
 \subsection{Programação Linear (PL)}
 
