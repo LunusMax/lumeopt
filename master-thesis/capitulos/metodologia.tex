@@ -3,17 +3,27 @@
 \section{Coleta dos Dados}
 
 Com o intuito de coletar os dados, foi desenvolvido um algoritmo de \textit{web scraping}, utilizando a biblioteca \textit{Beautiful Soup} da linguagem \textit{Python}. 
-Essa biblioteca é amplamente utilizada para extração e manipulação de dados a partir de páginas HTML e XML \cite{beautifulsoup}. 
+Essa biblioteca é amplamente empregada para extração e manipulação de informações a partir de páginas HTML e XML, permitindo a coleta automatizada e estruturada de grandes 
+volumes de dados provenientes da web \cite{beautifulsoup}. O algoritmo implementado automatiza o acesso às páginas de estatísticas, realiza a extração das tabelas 
+correspondentes a cada clube e temporada e armazena os dados de forma padronizada para posterior análise.
 
-O site utilizado para extração foi o FBref, uma ampla \textit{database} de estatísticas de futebol que contém dados detalhados de jogadores e equipes de diferentes 
-competições ao redor do mundo. O FBref se destaca por disponibilizar estatísticas avançadas, como \textit{Expected Goals (XG)}, pressões, passes progressivos e 
-estatísticas defensivas, tornando-se uma fonte valiosa para análises preditivas e modelagem estatística no futebol.
+O site utilizado para a extração foi o FBref, uma ampla base de dados de estatísticas de futebol que disponibiliza dados detalhados de jogadores e equipes de diversas 
+competições ao redor do mundo. O FBref se destaca por fornecer estatísticas avançadas, como gols esperados (xG), ações de pressão, passes progressivos e 
+estatísticas defensivas, tornando-se uma fonte relevante para análises preditivas e modelagem estatística no contexto do futebol.
 
-Com o intuito de utilizar mais dados que \textit{Baboota \& Kaur} (2018) e \textit{Joseph, Fenton \& Neil} (2006) e evitar \textit{overfitting}, para este estudo foram 
-requisitados os dados de todos os jogadores da \textit{Serie A} italiana e \textit{Premier League} que atuaram ao longo de cinco 
-temporadas (2019-2020, 2020-2021, 2021-2022, 2022-2023, 2023-2024), além da tabela de resultados de todos os jogos disputados nesse mesmo período. 
-Os dados obtidos foram armazenados no formato csv, sendo organizados em arquivos distintos para cada time e temporada. Dessa forma, cada arquivo contém as 
-estatísticas individuais dos jogadores de um determinado clube em uma temporada específica.
+Com o objetivo de utilizar um volume de dados superior ao empregado por \textit{Baboota \& Kaur} (2018) e \textit{Joseph, Fenton \& Neil} (2006), bem como reduzir o 
+risco de \textit{overfitting}, foram coletados os dados de todos os jogadores da \textit{Serie A} italiana e da \textit{Premier League} que atuaram ao longo de cinco 
+temporadas (2019-2020, 2020-2021, 2021-2022, 2022-2023 e 2023-2024), além das tabelas de resultados de todos os jogos disputados nesse mesmo período.
+
+A utilização de duas ligas distintas neste estudo possui o papel metodológico deevitar a ocorrência de \textit{data leakage} entre os conjuntos de 
+treinamento, teste e validação dos modelos de aprendizado de máquina. Para isso, os dados de uma liga são utilizados exclusivamente na etapa de treinamento, enquanto os 
+dados da outra liga são reservados para teste e validação. Essa estratégia assegura que o modelo seja avaliado em um contexto completamente distinto daquele empregado no 
+aprendizado, eliminando dependências estruturais entre amostras e proporcionando uma avaliação mais realista de sua capacidade de generalização.
+
+Os dados obtidos foram armazenados no formato CSV, organizados em arquivos distintos para cada clube e temporada. Dessa forma, cada arquivo contém as estatísticas 
+individuais dos jogadores de um determinado time em uma temporada específica, facilitando a organização, o pré-processamento e as etapas subsequentes da análise.
+
+%% Continuar daqui
 
 \section{Pré-processamento dos Dados}
 
@@ -32,8 +42,7 @@ o Principal Component Analysis (PCA).
 
 \subsubsection{Principal Component Analysis (PCA)}
 
-Para determinar o número ideal de componentes principais que serão utilizados no PCA, foi gerado um \textit{Scree Plot}, conforme ilustrado na Figura~\ref{fig01}.
-
+Para determinar o número ideal de componentes principais que a serem utilizados no PCA, foi gerado um \textit{Scree Plot}, conforme ilustrado na Figura~\ref{fig01}.
 
 \begin{figure}[h]
     \centering
@@ -43,13 +52,12 @@ Para determinar o número ideal de componentes principais que serão utilizados 
     \label{fig01}
 \end{figure}
 
-
 O gráfico apresenta a variância explicada acumulada em função do número de componentes principais, permitindo identificar o ponto de inflexão, ou seja, o momento em que 
 a adição de novos componentes passa a contribuir de forma marginal para a variância total dos dados. O eixo \textit{x} representa o número de componentes principais, 
 enquanto o eixo \textit{y} exibe a variância explicada acumulada.
 
 A partir da Figura~\ref{fig01}, observa-se que, acima de 20 componentes principais, o ganho de informação adicional se torna insignificante. 
-Com base nessa análise, serão realizados testes com diferentes quantidades de componentes, garantindo que sempre serão utilizados no mínimo 20 componentes, 
+Com base nessa análise, foram realizados testes com diferentes quantidades de componentes, garantindo que sempre eram utilizados no mínimo 20 componentes, 
 de forma a preservar a maior quantidade possível de variância dos dados sem comprometer a eficiência do modelo.
 
 \subsection{Base de Dados dos Jogos}
