@@ -23,22 +23,29 @@ aprendizado, eliminando dependências estruturais entre amostras e proporcionand
 Os dados obtidos foram armazenados no formato CSV, organizados em arquivos distintos para cada clube e temporada. Dessa forma, cada arquivo contém as estatísticas 
 individuais dos jogadores de um determinado time em uma temporada específica, facilitando a organização, o pré-processamento e as etapas subsequentes da análise.
 
-%% Continuar daqui
 
 \section{Pré-processamento dos Dados}
 
 \subsection{Base de Dados dos Jogadores}
 
-As tabelas extraídas do site FBref para todos os times e temporadas foram estruturadas de forma idêntica, contendo 47 atributos relacionados a idade, posição, 
-minutos jogados, bem como estatísticas ofensivas (gols, assistências, passes decisivos etc.) e defensivas (bloqueios, desarmes, erros graves etc.) de cada jogador. 
-Esses dados foram carregados em diferentes \textit{dataframes}, um para cada liga considerada, e posteriormente organizados por jogador, incluindo time, temporada e 
-respectivos indicadores. Ressalta-se que um mesmo atleta pode aparecer em diferentes temporadas e clubes dentro da organização adotada.
+As tabelas extraídas do site FBref para todos os times e temporadas foram estruturadas de forma idêntica, contendo 47 atributos relacionados à idade, posição, minutos 
+jogados, bem como estatísticas ofensivas (gols, assistências, passes decisivos, entre outras) e defensivas (bloqueios, desarmes, erros graves, entre outras) de cada 
+jogador. Esses dados foram carregados em diferentes \textit{dataframes}, um para cada liga considerada, e posteriormente organizados por jogador, incluindo informações 
+de clube, temporada e respectivos indicadores de desempenho. Ressalta-se que um mesmo atleta pode aparecer em diferentes temporadas e clubes dentro da organização 
+adotada.
 
-Os \textit{dataframes} correspondentes a cada liga foram posteriormente concatenados em um único conjunto, englobando todos os jogadores, o qual foi armazenado para as 
-etapas seguintes da análise.
+Após a etapa de organização, os dados estruturados foram armazenados em um repositório público na plataforma GitHub, com o objetivo de garantir reprodutibilidade, 
+transparência metodológica e facilidade de acesso para futuras análises. O repositório utilizado neste estudo está disponível em 
+\url{https://github.com/LunusMax/epl-seriea-data}.
 
-Com o intuito de evitar \textit{overfitting} e melhorar a eficiência computacional, foi aplicada uma técnica de redução de dimensionalidade, 
-o Principal Component Analysis (PCA).
+Em seguida, os \textit{dataframes} correspondentes a cada liga foram concatenados em um único conjunto, englobando todos os jogadores considerados no estudo, o qual foi 
+utilizado nas etapas subsequentes da análise.
+
+Considerando o elevado número de atributos e a possível correlação entre variáveis, foi aplicada uma técnica de redução de dimensionalidade com o objetivo de mitigar 
+\textit{overfitting} e melhorar a eficiência computacional dos modelos de AM. Para isso, utilizou-se o Principal Component Analysis (PCA), conforme 
+descrito na subseção a seguir.
+
+%% continuar daqui
 
 \subsubsection{Principal Component Analysis (PCA)}
 
