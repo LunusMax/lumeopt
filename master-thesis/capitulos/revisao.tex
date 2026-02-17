@@ -107,7 +107,6 @@ como o desbalanceamento das bases de dados, a falta de consenso sobre quais vari
 O trabalho conclui que, com a inclusão de dados longitudinais, técnicas de balanceamento e o uso de abordagens de inteligência artificial explicável (\textit{Explainable AI}), 
 o AM pode oferecer novas perspectivas para reduzir riscos de lesão e otimizar o processo de treinamento no futebol.
 
-
 \subsection{Panorama nacional}
 
 Essa expansão do uso de AM no futebol não se limita ao cenário internacional. Iniciativas brasileiras têm desempenhado papel 
@@ -117,7 +116,6 @@ Esses eventos reúnem pesquisadores, profissionais de clubes
 e estudantes, fomentando discussões sobre métodos modernos de análise de desempenho, modelagem tática, uso de dados de \textit{tracking} e aplicações de AM no futebol. 
 A existência de iniciativas como o SALab e o FAME evidencia que o campo de análise quantitativa no esporte tem se expandido também no contexto brasileiro, acompanhando 
 a evolução global descrita nas revisões de \textit{Horvat & Job} (2020) e \textit{Rico-González et al.} (2023).
-
 
 \section{Pesquisa Operacional no contexto esportivo}
 
@@ -144,12 +142,35 @@ Outro exemplo consiste na técnica de \textit{"rushing behind"} do futebol austr
 na qual foi demonstrado como a PD pode ser aplicada para decidir quando é vantajoso conceder um ponto ao adversário para obter uma melhor posição em campo.
 
 O campo da PO segue em constante evolução, especialmente com o avanço da ciência de dados e de ML. A integração de \textit{Big Data} e 
-Inteligência Artificial (IA) têm permitido uma análise mais profunda dos eventos esportivos, potencializando as tomadas de decisão orientadas a dados.
+Inteligência Artificial (IA) tem permitido uma análise mais profunda dos eventos esportivos, potencializando as tomadas de decisão orientadas a dados.
 
-A crescente adoção de Inteligência Artificial e Aprendizado de Máquina no contexto esportivo reforça a proximidade conceitual entre essas técnicas e a Pesquisa Operacional. 
+A crescente adoção de IA e AM no contexto esportivo reforça a proximidade conceitual entre essas técnicas e a Pesquisa Operacional. 
 Segundo \cite{Chmait2021}, métodos de IA têm sido empregados não apenas para predição, mas também para apoiar tomadas de decisão complexas, como planejamento tático, 
 avaliação da eficácia de formações, escolha de ações sequenciais e otimização de estratégias. Abordagens como aprendizado por reforço, que busca maximizar recompensas 
 acumuladas ao longo de uma sequência de decisões, e algoritmos evolutivos, que realizam busca e aprimoramento iterativo de soluções, aproximam-se diretamente de problemas 
 tradicionalmente tratados pela PO, como alocação ótima de recursos, seleção estratégica de ações e resolução de problemas combinatórios. Dessa forma, a literatura recente 
 evidencia que IA e ML têm atuado de maneira complementar à PO, expandindo a capacidade analítica e automatizando processos de otimização aplicados ao desempenho esportivo.
 
+Além das abordagens clássicas apresentadas, a Pesquisa Operacional também contempla técnicas heurísticas e metaheurísticas voltadas à resolução de problemas combinatórios 
+de grande porte, especialmente quando métodos exatos se tornam computacionalmente inviáveis. Essa perspectiva será explorada na seção seguinte.
+
+
+\section{Otimização Prescritiva e Problemas Combinatórios no Esporte}
+
+O avanço recente da ciência de dados tem ampliado o papel dos modelos preditivos no suporte à tomada de decisão. Entretanto, previsões isoladas não são 
+suficientes para orientar escolhas estratégicas. Segundo \cite{Bertsimas2019}, a transição de \textit{predictive analytics} 
+para \textit{prescriptive analytics} consiste na integração entre modelos preditivos e problemas de otimização, permitindo que estimativas estatísticas 
+sejam incorporadas diretamente na definição de políticas ótimas de decisão. Nesse paradigma, modelos de AM deixam de atuar apenas como 
+ferramentas de previsão e passam a compor a função objetivo de problemas decisórios, aproximando análise estatística e otimização operacional.
+
+No contexto esportivo, diversas decisões estratégicas — como montagem de elenco, definição de escalações e planejamento competitivo — podem ser formalizadas 
+como problemas de otimização sob restrições orçamentárias e estruturais. Tais problemas frequentemente apresentam natureza combinatória 
+e elevada complexidade computacional. Conforme evidenciado por \cite{Kendall2010}, problemas esportivos de escalonamento e organização competitiva 
+são, em muitos casos, classificados como NP-difíceis, tornando inviável a aplicação de métodos exatos em instâncias de grande porte.
+
+Diante desse cenário, a literatura de Pesquisa Operacional recorre amplamente ao uso de heurísticas e metaheurísticas, como busca local, 
+simulated annealing e tabu search, para obtenção de soluções aproximadas de alta qualidade em tempo computacional razoável \cite{Kendall2010}. 
+Essas abordagens tornam-se particularmente adequadas quando a função objetivo é não linear ou depende de modelos complexos, como aqueles baseados em AM.
+
+O presente estudo insere-se nessa interseção entre AM e PO, ao utilizar um modelo preditivo para estimar o desempenho esperado de jogadores e, 
+posteriormente, empregar uma heurística de busca local para resolver o problema de montagem de elenco sob restrição orçamentária.
