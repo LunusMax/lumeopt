@@ -2,19 +2,31 @@
 
 \section{Aprendizado de Máquina}
 
-Aprendizado de Máquina (AM) é o estudo de algoritmos e modelos estatísticos empregados por sistemas computacionais para realizar tarefas específicas de forma autônoma. Essa abordagem permite que as máquinas aprendam a partir de dados e melhorem seu desempenho sem necessidade de reprogramação explícita \cite{Mahesh2020}. Segundo Geron (2019), AM pode ser descrito como a ciência (ou arte) de programar computadores para que aprendam com os dados.
+Aprendizado de Máquina (AM) é o estudo de algoritmos e modelos estatísticos empregados por sistemas computacionais para realizar tarefas específicas de forma autônoma. 
+Essa abordagem permite que as máquinas aprendam a partir de dados e melhorem seu desempenho sem necessidade de reprogramação explícita \cite{Mahesh2020}. 
+Segundo Geron (2019), AM pode ser descrito como a ciência (ou arte) de programar computadores para que aprendam com os dados.
 
-Um exemplo clássico de aplicação de AM é o filtro de \textit{spam}, que permite que o sistema identifique automaticamente emails indesejados, diferenciando-os de mensagens legítimas com base em padrões aprendidos \cite{Geron2019}. 
+Um exemplo clássico de aplicação de AM é o filtro de \textit{spam}, que permite que o sistema identifique automaticamente emails indesejados, 
+diferenciando-os de mensagens legítimas com base em padrões aprendidos \cite{Geron2019}. 
 
-Com a crescente disponibilidade de \textit{datasets}, o uso de Machine Learning (ML) tem apresentado um notável crescimento \cite{Mahesh2020}. Esse avanço pode ser atribuído à maior disponibilidade de dados e ao aumento da capacidade computacional. A constante conexão das pessoas a dispositivos digitais gera volumes massivos de dados, enquanto tecnologias modernas permitem o processamento eficiente dessas grandes quantidades de informação \cite{AndrewNg}.
+Com a crescente disponibilidade de \textit{datasets}, o uso de AM tem apresentado um notável crescimento \cite{Mahesh2020}. 
+Esse avanço pode ser atribuído à maior disponibilidade de dados e ao aumento da capacidade computacional. 
+A constante conexão das pessoas a dispositivos digitais gera volumes massivos de dados, enquanto tecnologias modernas permitem o 
+processamento eficiente dessas grandes quantidades de informação \cite{AndrewNg}.
 
-Muitas indústrias têm adotado o AM com o objetivo de extrair insights relevantes de \textit{databases}, facilitando o aprendizado a partir dos dados \cite{Mahesh2020}. Além disso, o AM tem sido amplamente aplicado em diversas áreas, incluindo reconhecimento facial, segmentação de imagens, detecção de câncer e previsão de classes e resultados, destacando-se também no contexto esportivo \cite{Almulla2023}.
+Muitas indústrias têm adotado o AM com o objetivo de extrair insights relevantes de \textit{databases}, facilitando o aprendizado a partir dos dados \cite{Mahesh2020}. 
+Além disso, o AM tem sido amplamente aplicado em diversas áreas, incluindo reconhecimento facial, segmentação de imagens, detecção de câncer e previsão de classes 
+e resultados, destacando-se também no contexto esportivo \cite{Almulla2023}.
 
-AM utiliza diferentes algoritmos para resolver problemas relacionados com dados. Cientistas de dados destacam que não há um único algoritmo universalmente superior para resolver todos os tipos de problemas \cite{Mahesh2020}. Esta seção apresenta uma breve descrição de alguns dos modelos mais comumente utilizados em ML para a resolução de problemas.
+AM utiliza diferentes algoritmos para resolver problemas relacionados com dados. 
+Cientistas de dados destacam que não há um único algoritmo universalmente superior para resolver todos os tipos de problemas \cite{Mahesh2020}. 
+Esta seção apresenta uma breve descrição de alguns dos modelos mais comumente utilizados em AM para a resolução de problemas.
 
 \subsection{Árvore de Decisão (AD)}
 
-As Árvores de Decisão são algoritmos versáteis de ML que podem ser utilizados tanto para tarefas de classificação, quanto para tarefas de regressão \cite{Geron2019}. Esses algoritmos recebem um \textit{input} de dados de treinamento (conjunto de atributos independentes + atributo classe) e retorna como saída uma árvore de decisão que permite classificar uma nova instância a partir de seus atributos independentes \cite{Geron2019}.
+As Árvores de Decisão são algoritmos versáteis de AM que podem ser utilizados tanto para tarefas de classificação, quanto para tarefas de regressão \cite{Geron2019}. 
+Esses algoritmos recebem um \textit{input} de dados de treinamento (conjunto de atributos independentes + atributo classe) e retornam como saída uma 
+árvore de decisão que permite classificar uma nova instância a partir de seus atributos independentes \cite{Geron2019}.
 
 Um exemplo de AD pode ser visto na Figura~\ref{fig2_1} 
 
@@ -26,19 +38,29 @@ Um exemplo de AD pode ser visto na Figura~\ref{fig2_1}
     \label{fig2_1}
 \end{figure}
 
-Na Figura~\ref{fig2_1}, é possível observar uma árvore de decisão utilizada para classificar flores do conjunto de dados \textit{Iris}. O nó raiz divide as amostras com base no comprimento da pétala (\textit{petal length} $\leq$ 2.45), separando a classe \textit{setosa} (pura, Gini = 0). As amostras restantes são subdivididas pelo critério de largura da pétala (\textit{petal width} $\leq$ 1.75), onde as classes \textit{versicolor} e \textit{virginica} são diferenciadas com alta precisão (Gini próximo de 0 nos nós finais). A árvore otimiza a classificação minimizando o índice de Gini em cada divisão \cite{Geron2019}. 
+Na Figura~\ref{fig2_1}, é possível observar uma árvore de decisão utilizada para classificar flores do conjunto de dados \textit{Iris}. 
+O nó raiz divide as amostras com base no comprimento da pétala (\textit{petal length} $\leq$ 2.45), separando a classe \textit{setosa} (pura, Gini = 0). 
+As amostras restantes são subdivididas pelo critério de largura da pétala (\textit{petal width} $\leq$ 1.75), onde as classes \textit{versicolor} e \textit{virginica} 
+são diferenciadas com alta precisão (Gini próximo de 0 nos nós finais). A árvore otimiza a classificação minimizando o índice de Gini em cada divisão \cite{Geron2019}. 
 
 \subsection{Random Forest (RF)}
 
-O RF consiste em uma combinação de AD, geralmente treinadas por meio do método \textit{bagging} \cite{Geron2019}. Diferente das ADs, RF utiliza uma randomização extra no crescimento das árvores. Ao invés de buscar a melhor \textit{feature} para dividir o nó, utiliza-se da melhor dentro de um \textit{subset} randômico. Nesse caso, troca-se um maior viés por uma menor variância \cite{Geron2019}.
+O RF consiste em uma combinação de AD, geralmente treinadas por meio do método \textit{bagging} \cite{Geron2019}. Diferente das ADs, RF 
+utiliza uma randomização extra no crescimento das árvores. Ao invés de buscar a melhor \textit{feature} para dividir o nó, 
+utiliza-se da melhor dentro de um \textit{subset} randômico. Nesse caso, busca-se reduzir a variância do modelo por meio da agregação de 
+múltiplas árvores, mantendo um viés relativamente baixo quando comparado a modelos excessivamente regularizados.
 
 \subsection{Support Vector Machine (SVM)}
 
-O \textit{Support Vector Machine} (SVM) é um algoritmo de ML supervisionado utilizado para tarefas de classificação e regressão. O seu princípio básico é encontrar um hiperplano ótimo que separe os dados em diferentes classes, maximizando a margem entre os pontos mais próximos das classes opostas \cite{noble2006}.
+O \textit{Support Vector Machine} (SVM) é um algoritmo de AM supervisionado utilizado para tarefas de classificação e regressão. 
+O seu princípio básico é encontrar um hiperplano ótimo que separe os dados em diferentes classes, maximizando a margem entre os pontos mais próximos 
+das classes opostas \cite{noble2006}.
 
-O hiperplano utilizado pelo SVM consiste em uma superfície de decisão que separa os pontos de dados em classes distintas. Em um espaço 2D, ele é uma linha; em 3d, um plano e, em dimensões superiores, uma hiper-superfície \cite{noble2006}
+O hiperplano utilizado pelo SVM consiste em uma superfície de decisão que separa os pontos de dados em classes distintas. Em um espaço 2D, 
+ele é uma linha; em 3D, um plano e, em dimensões superiores, uma hiper-superfície \cite{noble2006}
 
-Cabe ressaltar que nem sempre os dados são linearmente separáveis. Sendo assim, o SVM utiliza funções \textit{kernel} para projetar os dados em um espaço de maior dimensão, onde a separação linear se torna possível \cite{noble2006}. As principais funções \textit{kernel} são:
+Cabe ressaltar que nem sempre os dados são linearmente separáveis. Sendo assim, o SVM utiliza funções \textit{kernel} para projetar os 
+dados em um espaço de maior dimensão, onde a separação linear se torna possível \cite{noble2006}. As principais funções \textit{kernel} são:
 
 \begin{enumerate}
     \item \textbf{Linear}: Quando os dados já são linearmente separáveis.
@@ -47,28 +69,72 @@ Cabe ressaltar que nem sempre os dados são linearmente separáveis. Sendo assim
     \item \textbf{Sigmoid}: Similar a redes neurais.
 \end{enumerate}
 
-\subsection{Gradient Boost (XGBoost)}
+\subsection{Gradient Boosting (XGBoost)}
 
-O \textit{Gradient Boosting} é uma técnica amplamente utilizada em competições de ciência de dados, como as promovidas pelo Kaggle. 
-Ele funciona adicionando preditores ao modelo de forma sequencial, em que cada novo preditor busca corrigir os erros cometidos pelo anterior (GÉRON, 2019). 
+O \textit{Gradient Boosting} é uma técnica de aprendizado baseada na combinação sequencial de modelos fracos, geralmente árvores de decisão rasas, 
+com o objetivo de minimizar uma função de perda diferenciável \cite{Geron2019}. Diferentemente do \textit{bagging}, no qual os modelos são treinados 
+de forma independente, o \textit{boosting} constrói cada novo preditor de maneira iterativa, ajustando-o aos resíduos (erros) cometidos pelo modelo anterior. 
+Esse processo pode ser interpretado como uma otimização por gradiente no espaço funcional, na qual cada novo modelo 
+aproxima a direção de maior redução da função de custo.
 
-O \textit{Gradient Boosting} é implementado em sua forma otimizada, na linguagem Python, a partir da biblioteca \textit{XGBoost} (\textit{Extreme Gradient Boosting}). 
-Esse pacote foi desenvolvido de forma a mirar a velocidade e a eficiência de processamento, especialmente em competições e aplicações que lidam com 
-grandes volumes de dados (GÉRON, 2019). 
+Formalmente, a cada iteração \( m \), busca-se adicionar um novo modelo \( h_m(x) \) de forma que o modelo final seja dado por:
+\[
+F_m(x) = F_{m-1}(x) + \gamma_m h_m(x),
+\]
+onde \( \gamma_m \) representa o passo ótimo na direção do novo preditor.
 
+O \textit{XGBoost} (\textit{Extreme Gradient Boosting}) constitui uma implementação otimizada do \textit{Gradient Boosting}, 
+incorporando técnicas de regularização, paralelização e controle eficiente de memória \cite{Geron2019}. 
+Além disso, sua função objetivo inclui termos de penalização que auxiliam na prevenção de \textit{overfitting}, 
+tornando-o especialmente eficaz em problemas de alta dimensionalidade e grandes volumes de dados.
 
 \subsection{Multilayer Perceptron (MLP)}
 
-O \textit{Multilayer Perceptron} (MLP) é uma função matemática parametrizada que aprende a melhor forma de transformar um vetor de entrada \( \mathbf{x} \) em uma saída \( \mathbf{y} \). Assim, o MLP pode ser entendido como uma composição de várias funções aplicadas em sequência, formando um modelo de múltiplas camadas \cite{Goodfellow2016}.
+O \textit{Multilayer Perceptron} (MLP) é uma função matemática parametrizada que aprende a melhor forma de transformar um vetor de 
+entrada \( \mathbf{x} \) em uma saída \( \mathbf{y} \). Assim, o MLP pode ser entendido como uma composição de várias funções aplicadas em sequência, 
+formando um modelo de múltiplas camadas \cite{Goodfellow2016}.
 
-A arquitetura do MLP segue uma lógica de entrada → camadas ocultas → saída, utilizando uma função de ativação \( g(\cdot) \) para introduzir não linearidade em cada camada. Essa relação é expressa por:
+A arquitetura do MLP segue uma lógica de entrada → camadas ocultas → saída, utilizando uma função de ativação \( g(\cdot) \) para 
+introduzir não linearidade em cada camada. Essa relação é expressa por:
 \[
 h^{(l)} = g\!\left(W^{(l)}h^{(l-1)} + b^{(l)}\right),
 \]
 onde \( W^{(l)} \) e \( b^{(l)} \) representam, respectivamente, a matriz de pesos e o vetor de vieses da camada \( l \) \cite{Goodfellow2016}.
 
-A introdução da função não linear \( g(\cdot) \) é essencial, pois permite que o MLP aprenda relações complexas entre as variáveis de entrada e saída. Sem ela, o modelo se reduziria a uma simples combinação linear, incapaz de representar funções não lineares \cite{Goodfellow2016}.
+A introdução da função não linear \( g(\cdot) \) é essencial, pois permite que o MLP aprenda relações complexas entre as variáveis de entrada e saída. 
+Sem ela, o modelo se reduziria a uma simples combinação linear, incapaz de representar funções não lineares \cite{Goodfellow2016}.
 
+\subsection{Generalização, Viés e Variância}
+
+Um dos principais desafios em AM é garantir que o modelo apresente boa capacidade de generalização, isto é, desempenho satisfatório em dados não 
+utilizados durante o treinamento \cite{Goodfellow2016}. 
+
+Modelos excessivamente complexos podem se ajustar não apenas aos padrões relevantes, mas também ao ruído presente no conjunto de treinamento, 
+fenômeno conhecido como \textit{overfitting}. Em contrapartida, modelos demasiadamente simples podem não capturar relações importantes nos dados, 
+resultando em \textit{underfitting}.
+
+Esse comportamento está diretamente relacionado ao equilíbrio entre viés e variância. Modelos com alto viés tendem a apresentar subajuste, enquanto 
+modelos com alta variância tornam-se excessivamente sensíveis às particularidades do conjunto de treinamento. Técnicas como validação cruzada, regularização 
+e controle da complexidade do modelo são estratégias amplamente utilizadas para mitigar esses problemas \cite{Geron2019}.
+
+\subsection{Seleção de Atributos e Redução de Dimensionalidade}
+
+Em problemas com elevado número de variáveis explicativas, a presença de atributos redundantes ou irrelevantes pode impactar negativamente 
+o desempenho dos modelos preditivos. A seleção de atributos busca identificar subconjuntos de variáveis que contribuam de forma significativa para 
+a tarefa de aprendizagem \cite{Liu2010}.
+
+Os métodos de seleção podem ser classificados em três categorias principais: filtros, que utilizam medidas estatísticas independentes do modelo; 
+wrappers, que avaliam subconjuntos de atributos com base no desempenho de um algoritmo específico; e métodos embutidos, nos quais a seleção ocorre 
+durante o próprio processo de treinamento \cite{Guyon2006}.
+
+Além da seleção direta de atributos, técnicas de redução de dimensionalidade, como a Análise de Componentes Principais (PCA), 
+realizam uma transformação linear das variáveis originais em um novo conjunto de componentes ortogonais que preservam a maior parte da variância dos dados. 
+Essa abordagem pode reduzir complexidade computacional e mitigar problemas de multicolinearidade. Cabe ressaltar que a PCA não consiste em um método 
+de seleção de atributos, mas sim em uma técnica de extração de atributos, pois 
+cria novas variáveis a partir de combinações lineares das variáveis originais \cite{Guyon2006}.
+
+As técnicas apresentadas nesta seção constituem a base teórica para os modelos preditivos empregados neste trabalho, sendo posteriormente integradas 
+a métodos de otimização para apoio à tomada de decisão no contexto esportivo.
 
 %\subsection{Naive-Bayes (NB)}
 \section{Pesquisa Operacional}
