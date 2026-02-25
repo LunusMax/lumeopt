@@ -2,13 +2,94 @@
 
 \section{Aprendizado de Máquina no contexto esportivo}
 
-Em 2020, \textit{Horvat \&Job} apresentaram uma revisão abrangente sobre o uso de AM para prever resultados esportivos, 
-com foco principal em esportes coletivos, especialmente o futebol. Os autores destacam que o AM é particularmente adequado para esse contexto, 
-dada a grande disponibilidade de dados estruturados e não estruturados provenientes de eventos de jogo, sistemas de \textit{tracking} e 
-bases históricas consolidadas \cite{Horvat2020}.
+Em 2020, \textit{Horvat & Job} apresentaram uma revisão abrangente sobre o uso de Aprendizado de Máquina (AM) na predição de resultados esportivos, 
+com foco principal em esportes coletivos, especialmente o futebol. Os autores destacam que o AM é particularmente adequado a esse contexto, 
+uma vez que modalidades esportivas geram grandes volumes de dados estruturados e não estruturados, provenientes de eventos de jogo, sistemas de \textit{tracking}, 
+registros históricos, probabilidades associadas às partidas e bases históricas consolidadas \cite{Horvat2020}
 
-Conforme apontado pelos autores, a maior parte dos estudos identificados concentra-se na predição de resultados de partidas individuais, 
-especialmente na classificação de vitórias, empates e derrotas. Essa predominância pode ser explicada tanto pelo interesse mercadológico associado 
-às apostas esportivas \cite{Abidin2021}, quanto pela própria adequação técnica do problema aos algoritmos supervisionados mais difundidos. 
-Entretanto, essa ênfase na previsão de partidas isoladas implica menor atenção a problemas relacionados ao desempenho agregado ao longo de uma temporada, 
-como a modelagem da pontuação final de uma equipe a partir da composição de seu elenco.
+Conforme apontado por \textit{Horvat \& Job} (2020), a maior parte dos estudos que empregam métodos preditivos no contexto esportivo concentra-se 
+na predição de resultados de partidas individuais, especialmente na classificação de vitórias, empates e derrotas. Essa predominância pode ser explicada 
+tanto pelo interesse mercadológico associado às apostas esportivas, que incentiva o desenvolvimento de modelos voltados à antecipação de 
+resultados \cite{Abidin2021}, quanto pela própria natureza técnica do problema, que se ajusta adequadamente aos algoritmos supervisionados mais difundidos 
+e à disponibilidade de bases históricas amplamente registradas no futebol \cite{Horvat2020}. Paralelamente a essa ênfase, observa-se menor atenção a 
+problemas relacionados ao desempenho agregado ao longo de uma temporada, como a modelagem  da pontuação final de uma equipe a partir da composição de elenco.
+
+Os autores identificam o uso recorrente de algoritmos como regressão logística, \textit{Support Vector Machines} (SVM), \textit{Random Forest} e redes neurais, 
+destacando que modelos que integram múltiplas fontes de informação — incluindo estatísticas tradicionais, indicadores derivados e variáveis contextuais — 
+tendem a apresentar melhor desempenho preditivo \cite{Horvat2020}. Ainda assim, a tarefa permanece desafiadora devido à natureza estocástica do futebol e à 
+ausência de padronização entre bases de dados utilizadas em diferentes estudos.
+
+De forma complementar, \textit{Rico-González et al.} (2023) ampliam esse panorama ao demonstrar que o AM vem sendo empregado em diversas frentes no futebol, 
+como análise de desempenho físico, detecção de padrões táticos, avaliação de risco de lesões e modelagem espacial com dados de \textit{tracking} \cite{Rico2023}. 
+A crescente disponibilidade de dados tem impulsionado abordagens metodológicas cada vez mais complexas, incluindo redes neurais profundas, modelos probabilísticos 
+e métodos baseados em séries temporais.
+
+Apesar dessa expansão metodológica e temática, como citado anteriormente, observa-se que a maior parte dos estudos concentra-se na modelagem de eventos específicos ou 
+na predição de partidas isoladas. Há menor ênfase em abordagens voltadas à modelagem do desempenho agregado de equipes a nível de temporada, tendo em vista resultados
+de mais longo prazo, especialmente quando este é tratado como função da composição individual do elenco. Tal observação conduz à necessidade de examinar como a literatura tem 
+tratado o desempenho agregado de temporada sob perspectivas estatísticas e econômicas.
+
+Apesar da expansão metodológica e temática observada na literatura recente, a maior parte dos estudos ainda se concentra na modelagem de eventos específicos 
+ou na predição de partidas isoladas, conforme destacado por \textit{Horvat \& Job} (2020). Em contraste, observa-se menor atenção a abordagens voltadas à 
+modelagem do desempenho agregado das equipes ao longo de uma temporada, especialmente quando esse desempenho é tratado como função da composição individual do elenco. 
+Essa constatação evidencia a necessidade de examinar de maneira mais sistemática como a literatura tem abordado o desempenho agregado sob perspectivas 
+estatísticas e econômicas.
+
+\subsection{Desempenho agregado e determinantes de temporada}
+
+Além da predição de partidas individuais, parte da literatura tem investigado determinantes do desempenho agregado ao longo de uma temporada. 
+Lago-Ballesteros e Lago-Peñas (2010), ao analisarem todas as 380 partidas da temporada 2008--2009 da La Liga espanhola, identificaram 
+diferenças estatisticamente significativas entre equipes do topo e da parte inferior da tabela em variáveis como gols marcados, total de finalizações, 
+finalizações no alvo, assistências e posse de bola \cite{LagoBallesteros2010}. Os resultados indicam que o sucesso competitivo agregado pode ser parcialmente 
+explicado por padrões estatísticos observáveis ao longo da temporada.
+
+Em perspectiva intertemporal, Kite e Nevill (2017) investigaram preditores de sucesso entre temporadas consecutivas, demonstrando que determinados 
+indicadores de desempenho apresentam capacidade explicativa sobre a posição final das equipes \cite{Kite2017}. Esses achados reforçam a ideia de que o 
+desempenho agregado não é puramente aleatório, mas possui determinantes mensuráveis que podem ser modelados estatisticamente.
+
+Sob a ótica econômica, Carmichael, McHale e Thomas (2011) analisaram a relação entre desempenho esportivo, receitas e gastos salariais na Premier League, 
+evidenciando associação entre estrutura financeira e posição competitiva \cite{Carmichael2011}. De forma complementar, Totty e Owens (2011) discutem 
+como mecanismos institucionais, como teto salarial, influenciam o equilíbrio competitivo nas ligas profissionais \cite{TottyOwens2011}. 
+Tais estudos indicam que fatores estruturais e de alocação de recursos impactam diretamente o desempenho agregado ao longo de uma temporada.
+
+Entretanto, embora essas contribuições identifiquem determinantes técnicos e econômicos do sucesso competitivo, elas concentram-se majoritariamente 
+em análises explicativas ex post ou em relações estruturais agregadas. Não modelam explicitamente, de forma prospectiva, a pontuação esperada de uma 
+equipe como função direta da composição individual do elenco, tampouco integram tais estimativas a problemas formais de decisão.
+
+
+
+
+Pesquisa Operacional no contexto esportivo
+A Pesquisa Operacional (PO) constitui um conjunto de métodos analíticos voltados à modelagem e otimização de processos decisórios \cite{Medri2009,Wright2009}. 
+No contexto esportivo, sua aplicação abrange desde problemas estratégicos, como o gerenciamento de equipes, até decisões táticas e logísticas \cite{Gerchak1994}.
+
+Técnicas como Programação Linear, Programação Dinâmica e Processos de Markov têm sido empregadas na análise de substituições, 
+estratégias de jogo e planejamento competitivo \cite{Clarke1998,Hirotsu2002}. Em muitos casos, tais problemas apresentam natureza combinatória 
+e elevada complexidade computacional.
+
+Conforme discutido por \cite{Kendall2010}, diversos problemas esportivos são classificados como NP-difíceis, tornando inviável o uso de métodos 
+exatos em instâncias de grande porte. Diante disso, a literatura recorre amplamente a heurísticas e metaheurísticas, como busca local, 
+\textit{simulated annealing} e \textit{tabu search}, para obtenção de soluções aproximadas de alta qualidade.
+
+Contudo, observa-se que, na maior parte desses trabalhos, a função objetivo é definida por métricas simplificadas ou parâmetros fixos, não 
+incorporando modelos preditivos baseados no desempenho individual de atletas como componente central do problema decisório. Assim, 
+permanece pouco explorada a integração entre modelos preditivos de desempenho agregado e técnicas de otimização aplicadas à montagem de elenco.
+
+
+
+
+Otimização Prescritiva e Problemas Combinatórios no Esporte
+A transição de \textit{predictive analytics} para \textit{prescriptive analytics}, conforme discutido por \cite{Bertsimas2019}, 
+consiste na integração entre modelos preditivos e problemas de otimização, permitindo que estimativas estatísticas sejam incorporadas 
+diretamente na definição de políticas ótimas de decisão. Nesse paradigma, modelos de AM deixam de atuar apenas como ferramentas de previsão e 
+passam a compor a função objetivo de problemas decisórios.
+
+No contexto esportivo, decisões estratégicas como montagem de elenco e planejamento competitivo podem ser formalizadas como problemas de otimização 
+sob restrições orçamentárias e estruturais. Tais problemas apresentam natureza combinatória e elevada complexidade computacional \cite{Kendall2010}, 
+o que justifica o uso de heurísticas e metaheurísticas para obtenção de soluções viáveis.
+
+O presente estudo insere-se nessa interseção entre AM e PO ao propor um modelo capaz de estimar a pontuação esperada de uma equipe em uma temporada 
+a partir do desempenho individual de seus jogadores na temporada anterior. Diferentemente das abordagens focadas na previsão de partidas isoladas ou 
+na análise retrospectiva de determinantes agregados, o modelo desenvolvido busca capturar prospectivamente o impacto da composição do elenco 
+sobre o desempenho competitivo. Posteriormente, essa estimativa é incorporada como função objetivo em um problema combinatório de montagem de elenco 
+sob restrição orçamentária, aproximando predição estatística e decisão prescritiva no contexto do futebol profissional.
