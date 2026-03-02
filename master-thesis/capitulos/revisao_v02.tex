@@ -7,19 +7,26 @@ com foco principal em esportes coletivos, especialmente o futebol. Os autores de
 uma vez que modalidades esportivas geram grandes volumes de dados estruturados e não estruturados, provenientes de eventos de jogo, sistemas de \textit{tracking}, 
 probabilidades associadas às partidas e bases históricas consolidadas \cite{Horvat2020}.
 
-Conforme apontado por \textit{Horvat \& Job} (2020), a maior parte dos estudos que empregam métodos preditivos no contexto esportivo concentra-se 
-na predição de resultados de partidas individuais, especialmente na classificação de vitórias, empates e derrotas. Essa predominância pode ser explicada 
-tanto pelo interesse mercadológico associado às apostas esportivas, que incentiva o desenvolvimento de modelos voltados à antecipação de 
-resultados \cite{Abidin2021}, quanto pela própria natureza técnica do problema, que se ajusta adequadamente aos algoritmos supervisionados mais difundidos 
-e à disponibilidade de bases históricas amplamente registradas no futebol \cite{Horvat2020}. Nesse contexto, observa-se menor atenção a problemas relacionados 
-ao desempenho agregado ao longo de uma temporada, especialmente quando este é modelado de forma prospectiva como função da composição individual do elenco.
+Conforme apontado por \textit{Horvat & Job} (2020), a maior parte dos estudos que empregam métodos preditivos no contexto esportivo concentra-se na predição 
+de resultados de partidas individuais, especialmente na classificação de vitórias, empates e derrotas. Essa predominância pode ser explicada tanto pelo 
+interesse mercadológico associado às apostas esportivas, que incentiva o desenvolvimento de modelos voltados à antecipação de resultados \cite{Abidin2021}, 
+quanto pela própria natureza técnica do problema, que se ajusta adequadamente aos algoritmos supervisionados mais difundidos e à disponibilidade de bases 
+históricas amplamente registradas no futebol \cite{Horvat2020}. Nesse contexto, observa-se menor atenção a problemas relacionados ao desempenho agregado ao 
+longo de uma temporada, especialmente quando este é modelado de forma prospectiva como função da composição individual do elenco.
 
-Os autores identificam o uso recorrente de algoritmos como regressão logística, \textit{Support Vector Machines} (SVM), \textit{Random Forest} e redes neurais, 
-destacando que modelos que integram múltiplas fontes de informação — incluindo estatísticas tradicionais, indicadores derivados e variáveis contextuais — 
-tendem a apresentar melhor desempenho preditivo \cite{Horvat2020}. Ainda assim, a tarefa permanece desafiadora devido à natureza estocástica do futebol e à 
-ausência de padronização entre bases de dados utilizadas em diferentes estudos. Cabe ressaltar que, nos últimos anos, a geração de dados aumentou significativamente 
-com a maior disponibilidade de \textit{big data} esportiva, impulsionada pela expansão de sistemas de \textit{tracking} e por bancos estruturados como \textit{Opta} 
-e \textit{StatsBomb} \cite{Horvat2020}.
+Em contraste com essa predominância de estudos voltados à predição de partidas isoladas, a revisão conduzida por \cite{Abidin2021} identifica, ainda que em menor número, 
+trabalhos que abordam diretamente o problema de seleção e formação de equipes sob uma perspectiva multicritério e de otimização. Entre os estudos mencionados, destacam-se 
+\cite{Tavana2013}, que propõem um sistema de inferência fuzzy em duas fases para seleção de jogadores e posterior arranjo tático da equipe, e \cite{Qader2017}, que estruturam o 
+problema de escolha de atletas como uma análise multicritério baseada em múltiplas métricas de desempenho. Tais abordagens representam esforços relevantes 
+no sentido de formalizar o processo de composição de elencos, ainda que se apoiem predominantemente em modelos fuzzy ou técnicas de agregação determinística, 
+sem incorporar mecanismos de aprendizado supervisionado voltados à predição prospectiva de desempenho coletivo.
+
+Os estudos voltados à predição de resultados, por sua vez, identificam o uso recorrente de algoritmos como regressão logística, \textit{Support Vector Machines} (SVM), 
+\textit{Random Forest} e redes neurais, destacando que modelos que integram múltiplas fontes de informação — incluindo estatísticas tradicionais, indicadores derivados 
+e variáveis contextuais — tendem a apresentar melhor desempenho preditivo \cite{Horvat2020}. Ainda assim, a tarefa permanece desafiadora devido à natureza estocástica 
+do futebol e à ausência de padronização entre bases de dados utilizadas em diferentes estudos. Cabe ressaltar que, nos últimos anos, a geração de dados aumentou 
+significativamente com a maior disponibilidade de dados esportivos em larga escala, impulsionada pela expansão de sistemas de \textit{tracking} e por bancos estruturados 
+como \textit{Opta} e \textit{StatsBomb} \cite{Horvat2020}.
 
 \subsection{Previsão de resultados de partidas}
 
@@ -117,14 +124,31 @@ No contexto esportivo, sua aplicação abrange desde problemas estratégicos, co
 Técnicas como Programação Linear, Programação Dinâmica e Processos de Markov têm sido empregadas na análise de substituições, estratégias de jogo e planejamento 
 competitivo \cite{Clarke1998,Hirotsu2002}. Em muitos casos, tais problemas apresentam natureza combinatória e elevada complexidade computacional.
 
-Conforme discutido por \cite{Kendall2010}, muitos problemas de organização competitiva e escalonamento esportivo (\textit{sports scheduling}) são classificados 
-como NP-difíceis, tornando inviável a aplicação de métodos exatos em instâncias de grande porte. Diante dessa complexidade combinatória, 
-a literatura recorre amplamente a heurísticas e metaheurísticas, como busca local, \textit{simulated annealing} e \textit{tabu search}, para obtenção de soluções 
-aproximadas de alta qualidade em tempo computacional viável.
+Conforme discutido por \cite{Kendall2010}, diversos problemas de organização competitiva e escalonamento esportivo (\textit{sports scheduling}) 
+apresentam elevada complexidade combinatória, sendo muitos deles classificados como NP-difíceis ou NP-completos em suas versões formais. 
+Entre os exemplos destacados estão o Traveling Tournament Problem (TTP), que busca minimizar as distâncias percorridas pelas equipes sob restrições 
+estruturais de calendário; o problema de minimização de \textit{breaks} em torneios round-robin, cuja versão com calendário parcial é NP-difícil; 
+e variantes do problema de alocação de árbitros, cuja versão de decisão é NP-completa. Diante dessa complexidade, especialmente em instâncias 
+de grande porte e com múltiplas restrições, a literatura recorre amplamente a heurísticas e metaheurísticas, como busca local, \textit{simulated annealing}, 
+\textit{tabu search} e métodos híbridos, visando à obtenção de soluções de alta qualidade em tempo computacional viável.
 
-Contudo, observa-se que, na maior parte desses trabalhos, a função objetivo é definida por métricas simplificadas ou parâmetros fixos, não 
-incorporando modelos preditivos baseados no desempenho individual de atletas como componente central do problema decisório. Assim, 
-permanece inexplorada a integração entre modelos preditivos de desempenho agregado e técnicas de otimização aplicadas à montagem de elenco.
+Além da dificuldade computacional inerente a esses problemas, observa-se também uma limitação recorrente na modelagem adotada. 
+Na maior parte dos trabalhos, a função objetivo é definida por métricas simplificadas ou parâmetros fixos, não incorporando modelos preditivos 
+baseados no desempenho individual de atletas como componente central do problema decisório. Assim, permanece inexplorada a integração entre 
+modelos preditivos de desempenho agregado e técnicas de otimização aplicadas à montagem de elenco.
+
+Problemas de montagem de elenco também têm sido abordados sob a ótica da otimização matemática. Pantuso \cite{Pantuso2017} propõe o 
+\textit{Football Team Composition Problem} por meio de um modelo de programação estocástica multietapa, no qual a incerteza sobre o desenvolvimento 
+futuro dos atletas é incorporada explicitamente à formulação. De forma complementar, Boon e Sierksma \cite{Boon2003} modelam a formação de equipes 
+como um problema de alocação ótima jogador–posição, formulado via programação linear inteira e equivalente a um problema de \textit{matching} máximo ponderado. 
+Já Becker e Sun \cite{Becker2016} aplicam uma estrutura análoga ao problema da mochila para otimizar decisões de seleção em \textit{fantasy football} 
+sob restrições orçamentárias.
+
+Embora esses trabalhos avancem na formalização matemática da montagem de equipes, observa-se que a função objetivo permanece baseada em avaliações 
+previamente definidas, pontuações atribuídas a priori ou estimativas paramétricas fixadas antes do processo de otimização. Não há, nesses estudos, 
+a incorporação explícita de modelos preditivos de desempenho agregado aprendidos diretamente a partir de dados históricos como componente central 
+da função objetivo. Dessa forma, permanece uma lacuna na literatura quanto à integração estruturada entre modelos de AM e problemas 
+combinatórios de montagem de elenco.
 
 \subsection{Otimização Prescritiva e Problemas Combinatórios no Esporte}
 
@@ -139,8 +163,8 @@ no esporte, aproximando modelos de aprendizado e processos de otimização. Esse
 abrindo espaço para estruturas integradas nas quais modelos de AM podem ser incorporados diretamente à função objetivo de problemas combinatórios.
 
 No contexto esportivo, decisões estratégicas como montagem de elenco e planejamento competitivo podem ser formalizadas como problemas de otimização 
-sob restrições orçamentárias e estruturais. Tais problemasapresentam elevada complexidade computacional \cite{Kendall2010}, 
-o que justifica o uso de heurísticas e metaheurísticas para obtenção de soluções viáveis.
+sob restrições orçamentárias e estruturais. Tais problemas frequentemente assumem estrutura combinatória análoga àquela observada em problemas clássicos 
+de escalonamento esportivo \cite{Kendall2010}, o que justifica o uso de heurísticas e metaheurísticas para obtenção de soluções viáveis.
 
 O presente estudo insere-se explicitamente nessa interseção entre AM e PO, ao propor um modelo capaz de estimar a pontuação esperada de uma equipe em uma temporada 
 a partir do desempenho individual de seus jogadores na temporada anterior. Diferentemente das abordagens focadas na previsão de partidas isoladas ou 

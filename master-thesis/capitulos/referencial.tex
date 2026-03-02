@@ -143,50 +143,13 @@ Como tratado anteriormente, a área da PO consiste em um campo multidisciplinar 
 PO vem sendo amplamente utilizada em diversas áreas organizacionais, tais como manufatura, transportes, construção civil, telecomunicações, 
 planejamento financeiro, planos de saúde, serviço público, entre outros \cite{Hillier2001}.
 
-Problemas de montagem de elenco no futebol têm sido abordados na literatura sob a ótica da otimização matemática,
-incluindo formulações baseadas em programação estocástica e heurísticas \cite{pantuso2017}.  %% destrinchar isso
+Conforme discutido na seção anterior, problemas esportivos como montagem de elenco e planejamento competitivo 
+podem ser formalizados como problemas de otimização matemática sob restrições estruturais e orçamentárias. 
+Dependendo da natureza do problema, tais formulações assumem a forma de modelos de Programação Linear, Programação Inteira e abordagens heurísticas
+para problemas de natureza combinatória, entre outros.
 
-Entre os principais métodos da PO, destacam-se a Programação Linear, a Programação Dinâmica e os Processos de Markov.
-
-\subsection{Algoritmo Guloso}
-
-Em problemas de otimização, um algoritmo é dito guloso quando o mesmo faz uma escolha localmente ótima, na esperança de que essa escolha leve a uma solução
-globalmente ótima \cite{Cormen2009}. Diferentemente de abordagens exaustivas, algoritmos gulosos tomam decisões irrevogáveis a cada etapa, baseando-se
-apenas na informação disponível no momento da escolha. É importante destacar que, conforme ressaltado por \cite{Cormen2009}, 
-algoritmos gulosos não garantem, em geral, a obtenção de soluções globalmente ótimas.
-
-Conforme discutido por \cite{Cormen2009}, algoritmos gulosos podem ser formulados de maneira iterativa ou recursiva, sendo esta última caracterizada pela
-decomposição do problema em subproblemas menores. A cada chamada recursiva, uma escolha localmente ótima é realizada, reduzindo o espaço de busca e
-permitindo a construção incremental de uma solução inicial factível.
-
-No contexto deste trabalho, um algoritmo guloso é utilizado de forma recursiva com o objetivo de gerar uma solução inicial para o problema de otimização da
-montagem de elencos. Dado um time e um orçamento, a cada iteração, o jogador com menor minutagem do elenco é removido e substituído por candidatos
-externos. Para cada substituição possível, o modelo de AM é empregado como função objetivo, estimando a pontuação esperada do time resultante.
-A escolha gulosa consiste, portanto, em selecionar o(s) jogador(es) que cabem no orçamento do time e cuja inclusão maximiza a pontuação prevista,
-mantendo-se fixas as demais variáveis do elenco.
-
-\subsection{Algoritmo de Busca Local}
-
-A busca local é uma técnica heurística amplamente utilizada em problemas de otimização combinatória, cujo objetivo é aprimorar 
-uma solução inicial factível por meio da exploração iterativa de sua vizinhança \cite{Gendreau2010}. Diferentemente de métodos exatos, a busca local 
-não realiza uma exploração global do espaço de soluções, concentrando-se na melhoria incremental da solução corrente a partir de movimentos locais.
-
-Conforme descrito por \cite{Gendreau2010}, um algoritmo de busca local é composto essencialmente por três elementos: a definição de uma vizinhança, 
-um critério de aceitação de movimentos e uma condição de parada. A vizinhança determina o conjunto de soluções que podem ser alcançadas a partir da 
-solução atual por meio de pequenas modificações estruturais, enquanto o critério de aceitação estabelece se uma solução vizinha deve ou 
-não substituir a solução corrente. O processo é repetido iterativamente até que nenhuma melhoria adicional seja encontrada ou que um critério de 
-parada seja satisfeito.
-
-No problema abordado neste trabalho, a busca local é empregada para avaliar diferentes conjuntos de jogadores candidatos a contratação, respeitando 
-uma restrição de orçamento. Cada solução é representada por um conjunto de jogadores de cardinalidade fixa, sendo a vizinhança definida por operações de 
-substituição unitária. Em cada iteração, os jogadores do conjunto atual com menor minutagem são selecionados como candidatos à remoção e substituídos por 
-jogadores externos ainda não selecionados, produzindo soluções vizinhas que preservam o tamanho do elenco. Cada solução vizinha gerada é avaliada por meio 
-de uma função objetivo, implementada como um modelo de aprendizado de máquina, responsável por estimar a pontuação esperada do time na temporada considerada.
-
-A restrição orçamentária é tratada como condição de factibilidade: soluções que excedem o orçamento estabelecido são descartadas durante o processo de busca. 
-O critério de aceitação adotado é de melhoria estrita, isto é, uma solução vizinha é aceita apenas se apresentar valor superior da função objetivo em relação 
-à solução corrente. O algoritmo é encerrado quando nenhuma substituição viável resulta em melhoria adicional, caracterizando a convergência para um ótimo local, 
-conforme descrito em \cite{Gendreau2010}.
+Nos tópicos seguintes, são detalhados os principais métodos de otimização utilizados na modelagem de problemas combinatórios, com destaque para abordagens heurísticas 
+que fundamentam a metodologia proposta neste trabalho.
 
 \subsection{Programação Linear (PL)}
 
@@ -281,6 +244,49 @@ Embora a PL seja uma ferramenta poderosa para problemas de otimização linear, 
 A Programação Dinâmica (PD), por exemplo, trata de decisões sequenciais, enquanto os Processos de Markov 
 são amplamente utilizados para modelagem de processos estocásticos. Essas abordagens serão discutidas a seguir.
 
+\subsection{Algoritmo Guloso}
+
+Em problemas de otimização, um algoritmo é dito guloso quando o mesmo faz uma escolha localmente ótima, na esperança de que essa escolha leve a uma solução
+globalmente ótima \cite{Cormen2009}. Diferentemente de abordagens exaustivas, algoritmos gulosos tomam decisões irrevogáveis a cada etapa, baseando-se
+apenas na informação disponível no momento da escolha. É importante destacar que, conforme ressaltado por \cite{Cormen2009}, 
+algoritmos gulosos não garantem, em geral, a obtenção de soluções globalmente ótimas.
+
+Conforme discutido por \cite{Cormen2009}, algoritmos gulosos podem ser formulados de maneira iterativa ou recursiva, sendo esta última caracterizada pela
+decomposição do problema em subproblemas menores. A cada chamada recursiva, uma escolha localmente ótima é realizada, reduzindo o espaço de busca e
+permitindo a construção incremental de uma solução inicial factível.
+
+No contexto deste trabalho, um algoritmo guloso é utilizado de forma recursiva com o objetivo de gerar uma solução inicial para o problema de otimização da
+montagem de elencos. Dado um time e um orçamento, a cada iteração, o jogador com menor minutagem do elenco é removido e substituído por candidatos
+externos. Para cada substituição possível, o modelo de AM é empregado como função objetivo, estimando a pontuação esperada do time resultante.
+A escolha gulosa consiste, portanto, em selecionar o(s) jogador(es) que cabem no orçamento do time e cuja inclusão maximiza a pontuação prevista,
+mantendo-se fixas as demais variáveis do elenco.
+
+\subsection{Algoritmo de Busca Local}
+
+A busca local é uma técnica heurística amplamente utilizada em problemas de otimização combinatória, cujo objetivo é aprimorar 
+uma solução inicial factível por meio da exploração iterativa de sua vizinhança \cite{Gendreau2010}. Diferentemente de métodos exatos, a busca local 
+não realiza uma exploração global do espaço de soluções, concentrando-se na melhoria incremental da solução corrente a partir de movimentos locais.
+
+Conforme descrito por \cite{Gendreau2010}, um algoritmo de busca local é composto essencialmente por três elementos: a definição de uma vizinhança, 
+um critério de aceitação de movimentos e uma condição de parada. A vizinhança determina o conjunto de soluções que podem ser alcançadas a partir da 
+solução atual por meio de pequenas modificações estruturais, enquanto o critério de aceitação estabelece se uma solução vizinha deve ou 
+não substituir a solução corrente. O processo é repetido iterativamente até que nenhuma melhoria adicional seja encontrada ou que um critério de 
+parada seja satisfeito.
+
+No problema abordado neste trabalho, a busca local é empregada para avaliar diferentes conjuntos de jogadores candidatos a contratação, respeitando 
+uma restrição de orçamento. Cada solução é representada por um conjunto de jogadores de cardinalidade fixa, sendo a vizinhança definida por operações de 
+substituição unitária. Em cada iteração, os jogadores do conjunto atual com menor minutagem são selecionados como candidatos à remoção e substituídos por 
+jogadores externos ainda não selecionados, produzindo soluções vizinhas que preservam o tamanho do elenco. Cada solução vizinha gerada é avaliada por meio 
+de uma função objetivo, implementada como um modelo de aprendizado de máquina, responsável por estimar a pontuação esperada do time na temporada considerada.
+
+A restrição orçamentária é tratada como condição de factibilidade: soluções que excedem o orçamento estabelecido são descartadas durante o processo de busca. 
+O critério de aceitação adotado é de melhoria estrita, isto é, uma solução vizinha é aceita apenas se apresentar valor superior da função objetivo em relação 
+à solução corrente. O algoritmo é encerrado quando nenhuma substituição viável resulta em melhoria adicional, caracterizando a convergência para um ótimo local, 
+conforme descrito em \cite{Gendreau2010}.
+
+
+
+\begin{comment}
 \subsection{Programação Dinâmica (PD)}
 
 A PD é uma técnica de otimização recursiva aplicada a problemas que podem ser decompostos em subproblemas menores interdependentes \cite{Hillier2001}. 
@@ -299,6 +305,7 @@ O desenvolvimento de um algoritmo de PD segue uma sequência de quatro etapas \c
     \item Calcular o valor de uma solução ótima, normalmente de baixo para cima.
     \item Construir uma solução ótima com as informações calculadas.
 \end{enumerate}
+
 
 \subsection{Processos de Markov}
 
@@ -335,3 +342,4 @@ onde \(V(x)\) representa o valor ótimo esperado de um estado \(x\).
 
 Para resolver um MDP, podem ser usados métodos como, por exemplo, PL, garantido a convergência para a política ótima sob certas condições.
 
+\end{comment}
