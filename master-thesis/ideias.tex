@@ -57,3 +57,8 @@ Posso inclusive:
 reorganizar tudo em tópicos temáticos
 manter cada citação
 tornar seu texto muito mais elegante e sólido
+
+
+Para reduzir o custo computacional da busca local, implementou-se uma poda antecipada baseada no orçamento do elenco. 
+Como o custo de cada jogador é conhecido (Valor_Mercado), combinações que excedem o orçamento são descartadas antes da avaliação pelo modelo preditivo, 
+evitando chamadas desnecessárias ao MLP.
