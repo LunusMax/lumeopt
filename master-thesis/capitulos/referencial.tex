@@ -249,17 +249,77 @@ são amplamente utilizados para modelagem de processos estocásticos. Essas abor
 Em problemas de otimização, um algoritmo é dito guloso quando o mesmo faz uma escolha localmente ótima, na esperança de que essa escolha leve a uma solução
 globalmente ótima \cite{Cormen2009}. Diferentemente de abordagens exaustivas, algoritmos gulosos tomam decisões irrevogáveis a cada etapa, baseando-se
 apenas na informação disponível no momento da escolha. É importante destacar que, conforme ressaltado por \cite{Cormen2009}, 
-algoritmos gulosos não garantem, em geral, a obtenção de soluções globalmente ótimas.
+algoritmos gulosos não garantem, em geral, a obtenção de soluções globalmente ótimas, sendo necessários argumentos específicos de corretude para justificar
+quando a estratégia gulosa é válida.
 
-Conforme discutido por \cite{Cormen2009}, algoritmos gulosos podem ser formulados de maneira iterativa ou recursiva, sendo esta última caracterizada pela
-decomposição do problema em subproblemas menores. A cada chamada recursiva, uma escolha localmente ótima é realizada, reduzindo o espaço de busca e
-permitindo a construção incremental de uma solução inicial factível.
+Conforme discutido por \cite{Cormen2009}, algoritmos gulosos podem ser formulados de maneira iterativa ou recursiva. Na forma recursiva, o método costuma
+seguir um padrão \textit{top-down}: realiza-se uma escolha gulosa, reduz-se o problema a um subproblema estritamente menor e repete-se o processo até a
+construção completa de uma solução. A justificativa de corretude, quando possível, normalmente se apoia em dois ingredientes: (i) a \textit{propriedade da
+escolha gulosa}, isto é, a existência de uma solução ótima que contém a decisão local tomada; e (ii) a \textit{subestrutura ótima}, segundo a qual, após
+fixar a decisão gulosa, o restante do problema preserva a mesma estrutura do original, de modo que uma solução ótima do subproblema completa uma solução
+ótima do problema inicial.
+
+Como exemplo didático, \cite{Cormen2009} apresenta o \textit{activity-selection problem}, no qual há um conjunto de atividades
+$S=\{a_1,\dots,a_n\}$, cada uma definida por um tempo de início $s_i$ e um tempo de término $f_i$, e deseja-se selecionar um subconjunto máximo de atividades
+mutuamente compatíveis, isto é, que não se sobreponham no tempo. Intuitivamente, a escolha gulosa consiste em selecionar, dentre as atividades ainda
+viáveis, aquela que termina primeiro. A motivação é que, ao finalizar mais cedo, essa atividade tende a liberar o recurso para acomodar o maior número
+possível de atividades futuras, reduzindo o risco de bloquear intervalos de tempo extensos.
+
+A corretude dessa estratégia pode ser compreendida por meio de um argumento de \textit{troca} (\textit{exchange argument}), descrito em
+\cite{Cormen2009}. Seja $a_m$ a atividade com menor tempo de término dentre as disponíveis no início do problema. Considere uma solução ótima qualquer
+$A^\star$ e seja $a_k$ a primeira atividade de $A^\star$ a ocorrer (aquela com menor término dentro de $A^\star$). Como $f_m \le f_k$, substituir $a_k$
+por $a_m$ não torna a solução inviável: qualquer atividade compatível com $a_k$ após o término $f_k$ também permanece compatível após $f_m$, já que $a_m$
+termina no máximo no mesmo instante. Logo, existe uma solução ótima que contém $a_m$, o que estabelece a \textit{propriedade da escolha gulosa}.
+Em seguida, ao fixar $a_m$, o problema remanescente consiste em escolher o máximo de atividades que começam após $f_m$, isto é, um subproblema da mesma
+natureza. Assim, uma solução ótima para esse subproblema, combinada com $a_m$, produz uma solução ótima para o problema original, caracterizando a
+\textit{subestrutura ótima}. Assumindo as atividades previamente ordenadas por tempo de término (isto é, $f_1 \le f_2 \le \dots \le f_n$), o algoritmo
+guloso iterativo apresentado por \cite{Cormen2009} é mostrado no Algoritmo~\ref{alg:greedy_activity_selector}.
+
+\begin{algorithm}[H]
+\caption{Algoritmo guloso para seleção de atividades (\textit{GREEDY-ACTIVITY-SELECTOR})}
+\label{alg:greedy_activity_selector}
+\KwIn{Vetores $s[1..n]$ e $f[1..n]$ (início e término), com atividades ordenadas por $f$ crescente}
+\KwOut{Conjunto $A$ de atividades compatíveis de cardinalidade máxima}
+$A \leftarrow \{a_1\}$\;
+$k \leftarrow 1$\;
+\For{$m \leftarrow 2$ \KwTo $n$}{
+    \If{$s[m] \ge f[k]$}{
+        $A \leftarrow A \cup \{a_m\}$\;
+        $k \leftarrow m$\;
+    }
+}
+\Return{$A$}\;
+\end{algorithm}
+
+\begin{comment}
+Como exemplo ilustrativo, \cite{Cormen2009} discutem o problema de agrupamento conhecido como \textit{k-means clustering}. Nesse problema, dado um conjunto
+$S$ de $n$ pontos em um espaço métrico e um número fixo $k$ de centros, deseja-se determinar a posição desses centros de modo a minimizar a soma das
+distâncias quadráticas entre cada ponto e o centro mais próximo. Formalmente, busca-se minimizar
+
+\[
+f(S,C)=\sum_{x\in S}\min_{1\le j\le k} d(x,c_j)^2,
+\]
+
+onde $C=\{c_1,\dots,c_k\}$ representa o conjunto de centros e $d(\cdot)$ denota a distância entre pontos.
+
+Esse problema é conhecido por ser computacionalmente difícil, não havendo algoritmo polinomial conhecido que garanta a obtenção da solução ótima global.
+Diante disso, \cite{Cormen2009} apresentam o procedimento proposto por Lloyd, que utiliza uma estratégia iterativa baseada em decisões locais simples.
+Inicialmente, escolhem-se $k$ centros iniciais. Em seguida, cada ponto é atribuído ao centro mais próximo, formando $k$ grupos. Posteriormente, cada centro
+é atualizado para a média dos pontos pertencentes ao respectivo grupo. Esse processo é repetido até que não haja alteração nas atribuições dos pontos.
+
+Embora o procedimento de Lloyd seja geralmente classificado como um método de busca local, sua lógica fundamental ilustra o princípio guloso: a cada
+iteração, o algoritmo realiza escolhas localmente ótimas ao associar cada ponto ao centro mais próximo e atualizar os centros de modo a minimizar o erro
+quadrático dentro de cada grupo. Essas decisões locais conduzem a uma solução que corresponde a um mínimo local da função objetivo.
+\end{comment}
 
 No contexto deste trabalho, um algoritmo guloso é utilizado de forma recursiva com o objetivo de gerar uma solução inicial para o problema de otimização da
-montagem de elencos. Dado um time e um orçamento, a cada iteração, o jogador com menor minutagem do elenco é removido e substituído por candidatos
-externos. Para cada substituição possível, o modelo de AM é empregado como função objetivo, estimando a pontuação esperada do time resultante.
-A escolha gulosa consiste, portanto, em selecionar o(s) jogador(es) que cabem no orçamento do time e cuja inclusão maximiza a pontuação prevista,
-mantendo-se fixas as demais variáveis do elenco.
+montagem de elencos. Dado um time e um orçamento, a cada iteração, o jogador com menor minutagem do elenco é removido e substituído por candidatos externos.
+Para cada substituição possível, o modelo de AM é empregado como função objetivo, estimando a pontuação esperada do time resultante. A escolha gulosa
+consiste, portanto, em selecionar o(s) jogador(es) que cabem no orçamento do time e cuja inclusão maximiza a pontuação prevista, mantendo-se fixas as
+demais variáveis do elenco. Assim como no exemplo discutido anteriormente, a solução é construída incrementalmente por decisões locais irrevogáveis,
+produzindo rapidamente uma solução factível que servirá como ponto de partida para os procedimentos de refinamento descritos na próxima seção. 
+Nesse processo, o modelo de AM atua como função objetivo, avaliando o desempenho esperado das diferentes composições de elenco geradas pelo algoritmo
+de otimização.
 
 \subsection{Algoritmo de Busca Local}
 
@@ -267,24 +327,38 @@ A busca local é uma técnica heurística amplamente utilizada em problemas de o
 uma solução inicial factível por meio da exploração iterativa de sua vizinhança \cite{Gendreau2010}. Diferentemente de métodos exatos, a busca local 
 não realiza uma exploração global do espaço de soluções, concentrando-se na melhoria incremental da solução corrente a partir de movimentos locais.
 
-Conforme descrito por \cite{Gendreau2010}, um algoritmo de busca local é composto essencialmente por três elementos: a definição de uma vizinhança, 
-um critério de aceitação de movimentos e uma condição de parada. A vizinhança determina o conjunto de soluções que podem ser alcançadas a partir da 
-solução atual por meio de pequenas modificações estruturais, enquanto o critério de aceitação estabelece se uma solução vizinha deve ou 
-não substituir a solução corrente. O processo é repetido iterativamente até que nenhuma melhoria adicional seja encontrada ou que um critério de 
-parada seja satisfeito.
+Conforme descrito por \cite{Gendreau2010}, um algoritmo de busca local é composto essencialmente por quatro elementos: uma solução inicial, 
+a definição de uma vizinhança, um critério de aceitação de movimentos e uma condição de parada. A vizinhança determina o conjunto de soluções que 
+podem ser alcançadas a partir da solução atual por meio de pequenas modificações estruturais, enquanto o critério de aceitação estabelece 
+se uma solução vizinha deve ou não substituir a solução corrente. O processo é repetido iterativamente até que nenhuma melhoria adicional 
+seja encontrada ou que um critério de parada seja satisfeito.
+
+Em contraste com algoritmos gulosos, métodos de busca local partem de uma solução inicial e buscam iterativamente soluções vizinhas que melhorem o valor da 
+função objetivo. O processo continua enquanto existirem melhorias locais, terminando quando se atinge um ponto no qual nenhuma modificação local 
+resulta em melhora adicional.
+
+Um exemplo clássico apresentado por \cite{Cormen2009} surge no problema de agrupamento (\textit{k-means clustering}). Dado um conjunto de pontos e 
+um número fixo de centros $k$, deseja-se encontrar uma configuração de centros que minimize a soma das distâncias quadráticas entre cada ponto e o centro mais próximo. 
+Como esse problema é NP-difícil, não se conhece um algoritmo polinomial que garanta a obtenção do ótimo global.
+
+Nesse contexto, Lloyd propôs um procedimento iterativo simples que encontra um mínimo local da função objetivo. O método inicia com uma escolha inicial 
+de centros e repete duas etapas: (i) atribuir cada ponto ao centro mais próximo; e (ii) recalcular cada centro como a média dos pontos atribuídos ao 
+respectivo cluster. O processo é repetido até que nenhuma alteração reduza o valor da função objetivo, caracterizando a convergência para um mínimo local.
+
+Esse procedimento ilustra claramente o princípio da busca local: a partir de uma solução inicial, o algoritmo explora soluções vizinhas 
+obtidas por pequenas modificações estruturais, aceitando apenas mudanças que melhoram a função objetivo.
 
 No problema abordado neste trabalho, a busca local é empregada para avaliar diferentes conjuntos de jogadores candidatos a contratação, respeitando 
 uma restrição de orçamento. Cada solução é representada por um conjunto de jogadores de cardinalidade fixa, sendo a vizinhança definida por operações de 
-substituição unitária. Em cada iteração, os jogadores do conjunto atual com menor minutagem são selecionados como candidatos à remoção e substituídos por 
-jogadores externos ainda não selecionados, produzindo soluções vizinhas que preservam o tamanho do elenco. Cada solução vizinha gerada é avaliada por meio 
-de uma função objetivo, implementada como um modelo de aprendizado de máquina, responsável por estimar a pontuação esperada do time na temporada considerada.
+substituição unitária (\textit{swap neighborhood}). Em cada iteração, os jogadores do conjunto atual com menor minutagem são selecionados como candidatos 
+à remoção e substituídos por jogadores externos ainda não selecionados, produzindo soluções vizinhas que preservam o tamanho do elenco. 
+Cada solução vizinha gerada é avaliada por meio de uma função objetivo, implementada como um modelo de aprendizado de máquina, responsável por 
+estimar a pontuação esperada do time na temporada considerada.
 
 A restrição orçamentária é tratada como condição de factibilidade: soluções que excedem o orçamento estabelecido são descartadas durante o processo de busca. 
 O critério de aceitação adotado é de melhoria estrita, isto é, uma solução vizinha é aceita apenas se apresentar valor superior da função objetivo em relação 
 à solução corrente. O algoritmo é encerrado quando nenhuma substituição viável resulta em melhoria adicional, caracterizando a convergência para um ótimo local, 
 conforme descrito em \cite{Gendreau2010}.
-
-
 
 \begin{comment}
 \subsection{Programação Dinâmica (PD)}
