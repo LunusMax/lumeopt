@@ -1,0 +1,89 @@
+\begingroup
+\footnotesize
+\renewcommand{\arraystretch}{1.15}
+
+\begin{longtable}{>{\raggedright\arraybackslash}p{3.3cm} >{\raggedright\arraybackslash}p{10.7cm}}
+\caption{Descrição das variáveis utilizadas no modelo}\label{tab:features}\\
+\hline
+\textbf{Variável} & \textbf{Descrição} \\
+\hline
+\endfirsthead
+
+\hline
+\textbf{Variável} & \textbf{Descrição} \\
+\hline
+\endhead
+
+\multicolumn{2}{l}{\textbf{Identificação e contexto}}\\
+Player & Nome do jogador. \\
+Season & Temporada à qual os dados se referem. \\
+Team & Clube pelo qual o jogador atuou na temporada. \\
+Pos. & Posição principal do jogador em campo. \\
+Idade & Idade do jogador durante a temporada. \\
+
+\multicolumn{2}{l}{\textbf{Participação e minutagem}}\\
+MP & Número de partidas disputadas. \\
+Inícios & Número de partidas iniciadas como titular. \\
+Min. & Total de minutos jogados. \\
+90s & Minutos jogados convertidos em equivalentes de partidas completas (90 minutos). \\
+
+\multicolumn{2}{l}{\textbf{Produção ofensiva (totais)}}\\
+Gols & Número total de gols marcados. \\
+Assis. & Número total de assistências realizadas. \\
+G+A & Soma de gols e assistências. \\
+G-PB & Gols marcados excluindo penalidades. \\
+PB & Número de pênaltis convertidos. \\
+PT & Número de pênaltis cobrados. \\
+
+\multicolumn{2}{l}{\textbf{Disciplina}}\\
+CrtsA & Cartões amarelos recebidos. \\
+CrtV & Cartões vermelhos recebidos. \\
+
+\multicolumn{2}{l}{\textbf{Métricas avançadas (totais)}}\\
+xG & \textit{Expected Goals} (gols esperados), métrica que estima a probabilidade de finalizações resultarem em gol. \\
+npxG & \textit{Expected Goals} excluindo penalidades. \\
+xAG & \textit{Expected Assists} (assistências esperadas). \\
+npxG+xAG & Soma de gols esperados sem pênaltis e assistências esperadas. \\
+
+\multicolumn{2}{l}{\textbf{Progressão}}\\
+PrgC & Corridas progressivas com a bola. \\
+PrgP & Passes progressivos realizados. \\
+PrgR & Recebimentos progressivos de passe. \\
+
+\multicolumn{2}{l}{\textbf{Produção ofensiva (por 90 minutos)\textsuperscript{a}}}\\
+Gols.1 & Gols por 90 minutos\textsuperscript{a}. \\
+Assis..1 & Assistências por 90 minutos\textsuperscript{a}. \\
+G+A.1 & Gols mais assistências por 90 minutos\textsuperscript{a}. \\
+G-PB.1 & Gols sem pênaltis por 90 minutos\textsuperscript{a}. \\
+G+A-PB & Gols mais assistências excluindo pênaltis por 90 minutos\textsuperscript{a}. \\
+xG.1 & \textit{Expected Goals} por 90 minutos\textsuperscript{a}. \\
+xAG.1 & \textit{Expected Assists} por 90 minutos\textsuperscript{a}. \\
+xG+xAG & Soma de xG e xAG por 90 minutos\textsuperscript{a}. \\
+npxG.1 & \textit{Expected Goals} sem pênaltis por 90 minutos\textsuperscript{a}. \\
+npxG+xAG.1 & Soma de npxG e xAG por 90 minutos\textsuperscript{a}. \\
+
+\multicolumn{2}{l}{\textbf{Ações defensivas}}\\
+Div & Desarmes (\textit{tackles}) realizados. \\
+TklW & Desarmes vencidos. \\
+Terço Def & Desarmes realizados no terço defensivo do campo. \\
+Terço Central & Desarmes realizados no terço central do campo. \\
+Terço de Ataque & Desarmes realizados no terço ofensivo. \\
+Div.1 & Tentativas de desarme. \\
+Tent & Tentativas totais de desarme contra adversários. \\
+Tkl\% & Percentual de sucesso nos desarmes. \\
+Perdido & Número de vezes em que o jogador foi driblado. \\
+
+\multicolumn{2}{l}{\textbf{Bloqueios e interceptações}}\\
+Bloqueios & Número de ações de bloqueio (chutes ou passes bloqueados). \\
+TC & Chutes bloqueados. \\
+Passe & Passes bloqueados. \\
+Crts & Interceptações realizadas. \\
+Tkl+Int & Soma de desarmes e interceptações. \\
+Def & Ações defensivas realizadas na área defensiva. \\
+Erros & Erros que resultaram em finalizações adversárias. \\
+
+\hline
+\multicolumn{2}{l}{\footnotesize \textsuperscript{a} Variáveis normalizadas por 90 minutos (equivalente a uma partida completa).}\\
+\multicolumn{2}{l}{\footnotesize Fonte: FBref (2026), adaptado pelo autor.}\\
+\end{longtable}
+\endgroup

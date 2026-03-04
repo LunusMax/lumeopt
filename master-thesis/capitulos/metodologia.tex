@@ -21,18 +21,24 @@ dados da outra liga são reservados para teste e validação. Essa estratégia a
 aprendizado, eliminando dependências estruturais entre amostras e proporcionando uma avaliação mais realista de sua capacidade de generalização.
 
 Os dados obtidos foram armazenados no formato CSV, organizados em arquivos distintos para cada clube e temporada. Dessa forma, cada arquivo contém as estatísticas 
-individuais dos jogadores de um determinado time em uma temporada específica, facilitando a organização, o pré-processamento e as etapas subsequentes da análise.
-
+individuais dos jogadores de um determinado time em uma temporada específica, facilitando a organização, o pré-processamento e as etapas subsequentes da análise. 
+Ao todo, foram coletados dados de 2900 jogadores pertencentes a 30 equipes da Serie A italiana e de 2399 jogadores pertencentes a 28 equipes da 
+EPL. Assim, o conjunto de dados utilizado neste estudo totaliza 5299 registros de jogadores, distribuídos entre 58 equipes, 
+que serviram de base para o desenvolvimento dos modelos preditivos.
 
 \section{Pré-processamento dos Dados}
 
 \subsection{Base de Dados dos Jogadores}
 
-As tabelas extraídas do site FBref para todos os times e temporadas foram estruturadas de forma idêntica, contendo 47 atributos relacionados à idade, posição, minutos 
+As tabelas extraídas do site FBref \cite{fbref} para todos os times e temporadas foram estruturadas de forma idêntica, contendo 47 atributos relacionados à idade, posição, minutos 
 jogados, bem como estatísticas ofensivas (gols, assistências, passes decisivos, entre outras) e defensivas (bloqueios, desarmes, erros graves, entre outras) de cada 
 jogador. Esses dados foram carregados em diferentes \textit{dataframes}, um para cada liga considerada, e posteriormente organizados por jogador, incluindo informações 
 de clube, temporada e respectivos indicadores de desempenho. Ressalta-se que um mesmo atleta pode aparecer em diferentes temporadas e clubes dentro da organização 
 adotada.
+
+A Tabela~\ref{tab:features} apresenta a descrição completa das variáveis utilizadas no estudo.
+
+\input{capitulos/table_features}
 
 Após a etapa de organização, os dados estruturados foram armazenados em um repositório público na plataforma GitHub, com o objetivo de garantir reprodutibilidade, 
 transparência metodológica e facilidade de acesso para futuras análises. O repositório utilizado neste estudo está disponível em 
@@ -44,8 +50,6 @@ utilizado nas etapas subsequentes da análise.
 Considerando o elevado número de atributos e a possível correlação entre variáveis, foi aplicada uma técnica de redução de dimensionalidade com o objetivo de mitigar 
 \textit{overfitting} e melhorar a eficiência computacional dos modelos de AM. Para isso, utilizou-se o Principal Component Analysis (PCA), conforme 
 descrito na subseção a seguir.
-
-%% continuar daqui
 
 \subsubsection{Principal Component Analysis (PCA)}
 
@@ -218,7 +222,7 @@ mas sim fornecer uma função custo coerente e monotônica, adequada ao processo
 
 O problema de montagem de elenco abordado neste trabalho pode ser caracterizado como um problema de otimização combinatória sob restrições,
 no qual se busca selecionar um subconjunto de jogadores que maximize a função objetivo — neste caso, a pontuação do time ao final do campeonato —,
-respeitando limitações orçamentárias e estruturais, conforme formalizado por \cite{pantuso2017}.
+respeitando limitações orçamentárias e estruturais, conforme formalizado por \cite{Pantuso2017}.
 
 
 
