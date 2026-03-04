@@ -116,10 +116,8 @@ A arquitetura do modelo pode ser resumida da seguinte forma:
     \item \texttt{Dropout(0.6)}.
     \item Camada de saída: \texttt{Dense(1)}, ativação linear.
 \end{itemize}
-
 %%Essa configuração foi escolhida por equilibrar complexidade e capacidade de generalização, evitando sobreajuste em função do tamanho relativamente 
 %%%limitado da base de dados.
-
 O MLP foi escolhido como base para o modelo de previsão de pontuação no contexto do futebol por reunir propriedades teóricas e práticas que o tornam adequado para 
 lidar com a natureza complexa e não linear dos dados esportivos. Entre as principais razões para essa escolha, destacam-se:
 
@@ -147,9 +145,6 @@ lidar com a natureza complexa e não linear dos dados esportivos. Entre as princ
 Além dessas vantagens teóricas, o MLP oferece um equilíbrio entre capacidade de generalização, interpretabilidade e eficiência computacional, características 
 desejáveis em modelos aplicados ao futebol, onde os dados são heterogêneos, ruidosos e interdependentes.
 
-
-%é particularmente adequado à modelagem de desempenho esportivo porque apresenta três propriedades essenciais descritas por \textcite{Goodfellow2016}:
-
 \begin{comment}
 \section{Predição de Impacto de um Jogador}
 
@@ -166,9 +161,6 @@ porém com um peso reduzido, garantindo que o modelo priorize informações mais
 Com os dados preparados para análise, busca-se encontrar o melhor modelo de ML a partir de experimentação com diferentes algoritmos. O modelo base 
 será selecionado a partir de métricas como o MAE (\textit{Mean Absolute Error}) e o $R^2$ \textit{score}.
 \end{comment}
-
-
-
 \section{Otimização}
 
 Uma vez identificado o modelo de ML com melhor capacidade de predizer a pontuação final dos times em uma liga a partir das informações estatísticas de seus elencos, 
@@ -218,17 +210,55 @@ apontam idade e desempenho como fatores centrais na formação do valor econômi
 Ressalta-se que essa métrica não tem como objetivo reproduzir valores reais de mercado, 
 mas sim fornecer uma função custo coerente e monotônica, adequada ao processo de otimização proposto.
 
+\subsection{Algoritmo Guloso para Substituição Iterativa de Jogadores}
+
+Com o objetivo de explorar possíveis melhorias na composição do elenco, foi implementado um procedimento guloso baseado em substituições iterativas de jogadores.
+
+O método parte do elenco atual da equipe e realiza um número pré-definido de iterações. Em cada iteração, identifica-se inicialmente o jogador com menor 
+minutagem na temporada considerada dentro do elenco analisado. Esse atleta é selecionado como candidato à remoção, assumindo-se que sua saída tende a causar 
+menor impacto na estrutura do time.
+
+Em seguida, considera-se um conjunto de jogadores candidatos à contratação. Para cada candidato, constrói-se temporariamente um novo elenco no qual o 
+jogador selecionado para remoção é substituído pelo novo atleta, mantendo-se constante a cardinalidade total do grupo. Cada uma dessas configurações é então avaliada 
+por meio da função objetivo definida neste trabalho, implementada como o modelo de aprendizado de máquina responsável por estimar a pontuação esperada da equipe na temporada.
+
+Após avaliar todas as alternativas possíveis, seleciona-se o jogador cuja inclusão resulta no maior valor previsto da função objetivo. Essa substituição é então 
+aplicada de forma definitiva ao elenco, e o processo é repetido na iteração seguinte.
+
+Esse procedimento caracteriza uma estratégia gulosa, pois em cada etapa é escolhida a substituição que produz o maior ganho imediato na função objetivo, 
+sem reconsiderar decisões tomadas em iterações anteriores. O pseudocódigo do algoritmo utilizado é apresentado no Algoritmo~\ref{alg:greedy_roster}.
+
+\input{capitulos/guloso}
+
 \subsection{Busca Local para Otimização do Elenco}
 
 O problema de montagem de elenco abordado neste trabalho pode ser caracterizado como um problema de otimização combinatória sob restrições,
 no qual se busca selecionar um subconjunto de jogadores que maximize a função objetivo — neste caso, a pontuação do time ao final do campeonato —,
 respeitando limitações orçamentárias e estruturais, conforme formalizado por \cite{Pantuso2017}.
 
+Nesse contexto, foi adotado um algoritmo heurístico de busca local para explorar o espaço de possíveis combinações de jogadores candidatos à contratação.
+A estratégia parte de uma solução inicial viável e realiza modificações incrementais na composição do elenco, buscando iterativamente soluções vizinhas
+que resultem em maior valor da função objetivo.
 
+Cada solução é representada por um conjunto de jogadores de cardinalidade fixa, correspondente ao número de contratações consideradas no processo de
+otimização. A função objetivo utilizada para avaliar cada solução é dada pelo modelo de AM desenvolvido neste trabalho,
+responsável por estimar a pontuação esperada da equipe ao final da temporada a partir das características estatísticas dos jogadores selecionados.
 
+A geração da solução inicial ocorre por meio da amostragem aleatória de combinações de jogadores, sendo descartadas automaticamente aquelas que
+violam a restrição orçamentária estabelecida. Uma vez obtida uma solução inicial viável, o algoritmo passa a explorar sua vizinhança por meio de
+operações de substituição unitária (\textit{swap}), nas quais um jogador do conjunto atual é trocado por outro ainda não selecionado.
 
+A cada substituição potencial, a nova configuração de elenco é avaliada pela função objetivo. Caso a nova solução apresente valor superior ao da
+solução corrente, a substituição é aceita e o processo continua a partir da nova configuração. O critério de aceitação adotado é, portanto,
+de melhoria estrita, caracterizando uma estratégia do tipo \textit{first improvement}.
 
+Além disso, a restrição de orçamento é tratada diretamente durante a avaliação das soluções: combinações que excedem o limite estabelecido
+são automaticamente descartadas pelo algoritmo. Dessa forma, garante-se que apenas soluções factíveis sejam consideradas durante o processo
+de busca.
 
+O algoritmo é encerrado quando nenhuma substituição viável produz melhoria adicional na função objetivo, indicando a convergência para um
+ótimo local no espaço de soluções consideradas. A restrição orçamentária é tratada como condição de factibilidade durante a avaliação das
+soluções vizinhas, de modo que configurações que excedem o limite estabelecido são simplesmente descartadas durante o processo de busca.
+O pseudocódigo do procedimento de busca local implementado neste trabalho é apresentado no Algoritmo~\ref{alg:busca_local_budget}.
 
-
-% Lembrar de referenciar Baboota para tratar da forma recente
+\input{capitulos/busca_local}

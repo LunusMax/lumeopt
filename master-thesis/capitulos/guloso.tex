@@ -1,0 +1,46 @@
+\begin{algorithm}[H]
+\caption{Algoritmo guloso para substituição iterativa de jogadores}
+\label{alg:greedy_roster}
+\DontPrintSemicolon
+\SetKwInOut{Input}{Entrada}
+\SetKwInOut{Output}{Saída}
+
+\Input{Elenco inicial $R$, conjunto de candidatos $C$, número de iterações $T$, modelo preditivo $f(\cdot)$}
+\Output{Elenco final $R$}
+
+\For{$t \leftarrow 1$ \KwTo $T$}{
+
+    identificar $p \leftarrow$ jogador de $R$ com menor minutagem\;
+
+    $best\_player \leftarrow$ nulo\;
+    $best\_score \leftarrow -\infty$\;
+
+    \ForEach{$c \in C$}{
+
+        $R' \leftarrow (R \setminus \{p\}) \cup \{c\}$\;
+
+        \If{$|R'| = 20$}{
+
+            $score \leftarrow f(R')$\;
+
+            \If{$score > best\_score$}{
+
+                $best\_score \leftarrow score$\;
+                $best\_player \leftarrow c$\;
+
+            }
+        }
+    }
+
+    \If{$best\_player \neq$ nulo}{
+
+        $R \leftarrow (R \setminus \{p\}) \cup \{best\_player\}$\;
+        remover $best\_player$ de $C$\;
+
+    }
+
+}
+
+\Return{$R$}\;
+
+\end{algorithm}
