@@ -428,7 +428,7 @@
     %\pagestyle{empty}
     \centering
     
-    \includegraphics[scale=0.45]{logoufla}
+    \includegraphics[scale=0.45]{imagens/logoufla}
     
     \vspace{1cm}
     

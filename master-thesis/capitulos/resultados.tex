@@ -55,16 +55,16 @@ não lineares relevantes que justificam a adoção de modelos mais complexos.
 Com o intuito de compreender a predição realizada pelo melhor modelo (MLP) foi realizada uma análise visual da relação entre as pontuações reais dos clubes da Premier League
 na temporada e as pontuações previstas pelo modelo. 
 
-A Figura~\ref{fig:pl_points} apresenta o gráfico de comparação entre as pontuações reais e previstas pelo modelo MLP.
+A Figura~\ref{fig:imagens/pl_points} apresenta o gráfico de comparação entre as pontuações reais e previstas pelo modelo MLP.
 
 \begin{figure}[H]
     \centering
-    \includegraphics[width=0.85\textwidth]{pl_points.jpg}
+    \includegraphics[width=0.85\textwidth]{imagens/pl_points.jpg}
     \caption{Relação entre pontuações reais e previstas pelo modelo MLP na Premier League.}
     \label{fig:mlp_real_pred}
 \end{figure}
 
-Os resultados apresentados na Figura~\ref{fig:pl_points} indicam que o modelo MLP apresenta maior precisão ao estimar as pontuações de clubes que terminaram a 
+Os resultados apresentados na Figura~\ref{fig:imagens/pl_points} indicam que o modelo MLP apresenta maior precisão ao estimar as pontuações de clubes que terminaram a 
 temporada com valores próximos da média da liga. Times posicionados no centro da distribuição como Fulham, Manchester United e Newcastle United tendem a 
 ter suas pontuações previstas com menor erro, comportamento comum em modelos preditivos sob alta incerteza: quando os atributos disponíveis não capturam 
 toda a variabilidade do fenômeno, as previsões convergem naturalmente para valores intermediários. Esse resultado alinha-se com a literatura clássica, 
@@ -76,4 +76,61 @@ Dessa forma, observa-se que o modelo MLP é capaz de capturar tendências gerais
 porém nota-se uma subestimação sistemática das equipes de desempenho elevado, como Manchester City, Arsenal e Liverpool, e uma superestimação das equipes de 
 baixo desempenho, como Sheffield United, Burnley e Luton Town.
 
-\section{Otimização de Montagem de Elenco}
+\begin{comment}
+\section{Resultados da Otimização de Montagem de Elenco}
+
+Uma vez que os algoritmos de otimização utilizam o modelo de AM como função objetivo, a precisão final das soluções depende diretamente 
+das previsões produzidas por esse modelo. Dessa forma, tanto o algoritmo guloso quanto o método de busca local operam sobre a mesma função objetivo, 
+diferenciando-se apenas pela estratégia utilizada para explorar o espaço de soluções. Assim, a comparação entre os métodos concentra-se principalmente 
+na qualidade das soluções encontradas e no custo computacional necessário para alcançá-las.
+
+Para avaliar o desempenho dos algoritmos, ambos foram executados sob as mesmas condições experimentais, utilizando os mesmos limites de tempo, 
+número máximo de avaliações da função objetivo e parâmetros de busca. Cada método foi executado 15 vezes com diferentes sementes aleatórias, permitindo 
+observar o comportamento médio das soluções obtidas.
+
+A Tabela~\ref{tab:comparacao_otimizacao} apresenta os resultados agregados obtidos pelos dois algoritmos. Foram considerados como métricas de 
+comparação a pontuação prevista média obtida pelas soluções encontradas, o desvio padrão das pontuações, a melhor solução encontrada, o tempo médio 
+de execução e o número médio de avaliações da função objetivo.
+
+\begin{table}[H]
+\centering
+\caption{Comparação entre os algoritmos de otimização}
+\label{tab:comparacao_otimizacao}
+\begin{tabular}{lcccccc}
+\hline
+Algoritmo & Score médio & Desvio padrão & Melhor score & Tempo médio (s) & Avaliações médias & Desvio avaliações \\
+\hline
+Busca Local & 72.675 & 0.046 & 72.747 & 120.173 & 429.80 & 42.82 \\
+Guloso & 72.704 & 0.028 & 72.736 & 120.211 & 422.67 & 23.86 \\
+\hline
+\end{tabular}
+\fonte{Elaboração própria.}
+\end{table}
+
+A distribuição das pontuações obtidas em cada execução também pode ser observada na Figura~\ref{fig:boxplot_otimizacao}. 
+O boxplot permite visualizar a variabilidade dos resultados produzidos pelos algoritmos ao longo das diferentes execuções, 
+evidenciando a proximidade entre as distribuições das soluções encontradas.
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.7\textwidth]{imagens/boxplot_otimizacao.png}
+\caption{Distribuição das pontuações previstas obtidas pelos algoritmos de otimização}
+\label{fig:boxplot_otimizacao}
+\fonte{Elaboração própria.}
+\end{figure}
+
+A figura indica que as distribuições das pontuações obtidas pelos dois algoritmos são bastante semelhantes, apresentando pequena variabilidade entre as execuções. 
+Esse comportamento sugere que ambos os métodos apresentam desempenho estável em relação às diferentes sementes aleatórias utilizadas no experimento.
+
+De forma consistente com essa visualização, os resultados médios apresentados na Tabela~\ref{tab:comparacao_otimizacao} indicam que os dois algoritmos 
+obtiveram desempenho bastante próximo em termos de qualidade das soluções encontradas. A diferença entre as pontuações médias é pequena, indicando que 
+o algoritmo guloso é capaz de produzir soluções comparáveis às obtidas pela busca local.
+
+Em relação ao custo computacional, os dois métodos apresentaram tempos médios de execução praticamente idênticos, uma vez que ambos operam sob o mesmo 
+limite de tempo imposto durante o experimento. O número médio de avaliações da função objetivo também se mostrou semelhante entre os métodos, embora 
+o algoritmo guloso tenha realizado ligeiramente menos avaliações em média.
+
+Em conjunto, esses resultados indicam que, para o problema analisado, o algoritmo guloso é capaz de alcançar soluções de qualidade equivalente 
+àquelas obtidas pela busca local, utilizando um número similar de avaliações da função objetivo. Isso sugere que, apesar de sua simplicidade, 
+a abordagem gulosa pode representar uma alternativa eficiente para a otimização da composição de elencos no contexto proposto.
+\end{comment}

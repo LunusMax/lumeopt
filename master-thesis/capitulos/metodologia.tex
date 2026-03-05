@@ -38,7 +38,7 @@ adotada.
 
 A Tabela~\ref{tab:features} apresenta a descrição completa das variáveis utilizadas no estudo.
 
-\input{capitulos/table_features}
+\input{tabelas/table_features}
 
 Após a etapa de organização, os dados estruturados foram armazenados em um repositório público na plataforma GitHub, com o objetivo de garantir reprodutibilidade, 
 transparência metodológica e facilidade de acesso para futuras análises. O repositório utilizado neste estudo está disponível em 
@@ -57,7 +57,7 @@ Para determinar o número ideal de componentes principais que a serem utilizados
 
 \begin{figure}[h]
     \centering
-    \includegraphics[width=1.0\linewidth]{pca_01.png}
+    \includegraphics[width=1.0\linewidth]{imagens/pca_01.png}
     \caption{Escolha do Número Ideal de Componentes do PCA}
     {\small Fonte: do Autor, 2025}
     \label{fig01}
@@ -212,6 +212,13 @@ apontam idade e desempenho como fatores centrais na formação do valor econômi
 Ressalta-se que essa métrica não tem como objetivo reproduzir valores reais de mercado, 
 mas sim fornecer uma função custo coerente e monotônica, adequada ao processo de otimização proposto.
 
+A partir da definição dessa função de custo, torna-se possível formular o problema de seleção de jogadores como um problema de otimização combinatória, 
+no qual se busca identificar configurações de elenco que maximizem o desempenho previsto da equipe sob restrições orçamentárias. Nesse contexto, 
+diferentes estratégias heurísticas podem ser empregadas para explorar o espaço de soluções. Como tais métodos frequentemente apresentam componentes 
+estocásticos e podem produzir resultados distintos entre execuções, sua avaliação requer múltiplas repetições experimentais e análise estatística apropriada. 
+Nesse sentido, conforme discutido por \cite{Derrac2011}, testes estatísticos não paramétricos são amplamente recomendados na comparação de algoritmos heurísticos, 
+pois não pressupõem normalidade na distribuição dos resultados obtidos. A seguir, descreve-se os métodos de otimização utilizados neste trabalho.
+
 \subsection{Algoritmo Guloso para Substituição Iterativa de Jogadores}
 
 Com o objetivo de explorar possíveis melhorias na composição do elenco, foi implementado um procedimento guloso baseado em substituições iterativas de jogadores.
@@ -231,7 +238,7 @@ Esse procedimento caracteriza uma estratégia gulosa, pois em cada etapa é esco
 sem reconsiderar decisões tomadas em iterações anteriores. O pseudocódigo do algoritmo utilizado é apresentado no Algoritmo~\ref{alg:greedy_roster}.
 
 
-\input{capitulos/guloso}
+\input{algoritmos/guloso}
 
 \subsection{Busca Local para Otimização do Elenco}
 
@@ -264,4 +271,4 @@ O algoritmo é encerrado quando nenhuma substituição viável produz melhoria a
 soluções vizinhas, de modo que configurações que excedem o limite estabelecido são simplesmente descartadas durante o processo de busca.
 O pseudocódigo do procedimento de busca local implementado neste trabalho é apresentado no Algoritmo~\ref{alg:busca_local_budget}.
 
-\input{capitulos/busca_local}
+\input{algoritmos/busca_local}

@@ -1,3 +1,27 @@
-\chapter{Conclusão}
+\section{Conclusões}
 
-Teste
+Este trabalho apresentou uma abordagem integrada de AM e PO para apoiar o processo de montagem de elencos no futebol profissional. 
+Inicialmente, foi desenvolvido um modelo preditivo capaz de estimar o desempenho esperado de equipes a partir das características individuais dos jogadores. 
+Os resultados obtidos indicam que o modelo proposto alcança desempenho aproximadamente 55\% superior ao baseline adotado, evidenciando sua capacidade de capturar 
+padrões relevantes nos dados e produzir estimativas mais precisas de desempenho coletivo.
+
+A partir dessas previsões, o modelo foi utilizado como função objetivo em um problema de otimização voltado à seleção de jogadores sob restrições orçamentárias. 
+Para explorar o espaço de soluções, foram implementadas duas heurísticas: um algoritmo guloso baseado em substituições iterativas e um método de busca local.
+\begin{comment}
+Os experimentos realizados indicaram que ambos os algoritmos são capazes de produzir soluções de alta qualidade, com diferenças muito pequenas nas pontuações 
+previstas obtidas. Embora a busca local explore o espaço de soluções de forma mais abrangente, os resultados mostram que a heurística gulosa é capaz de alcançar 
+soluções comparáveis em termos de desempenho previsto. Além disso, o algoritmo guloso apresentou comportamento ligeiramente mais estável entre execuções e 
+realizou, em média, um número semelhante ou menor de avaliações da função objetivo. Esses resultados sugerem que, para o problema analisado, o espaço de soluções 
+apresenta uma estrutura relativamente suave, na qual heurísticas simples já são capazes de identificar soluções próximas às obtidas por métodos de busca mais 
+elaborados.  
+\end{comment}
+\textit{Inserir resultados dos algoritmos de PO}
+
+Do ponto de vista prático, os resultados obtidos indicam que a abordagem proposta pode contribuir para tornar o processo de tomada de decisão na montagem de 
+elencos mais estruturado e orientado por dados. No contexto do futebol brasileiro, onde decisões de contratação frequentemente são influenciadas por fatores 
+subjetivos ou avaliações intuitivas, ferramentas baseadas em análise quantitativa podem oferecer suporte adicional à identificação de jogadores que se encaixem 
+de forma mais eficiente em determinadas estruturas de equipe, respeitando restrições financeiras.
+
+Assim, este trabalho demonstra que a integração entre técnicas de AM e métodos de otimização representa um caminho promissor para apoiar 
+processos de recrutamento e planejamento esportivo. Ao transformar dados de desempenho em estimativas de impacto coletivo e utilizá-las em modelos de decisão, 
+torna-se possível reduzir a dependência exclusiva da intuição na escolha de atletas e avançar em direção a abordagens mais analíticas na gestão do futebol.
