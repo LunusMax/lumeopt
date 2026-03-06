@@ -1,17 +1,16 @@
-\begin{algorithm}[H]
-\caption{Busca Local First-Improvement para Seleção de Jogadores}
+\begin{breakablealgorithm}[Busca Local First-Improvement para Seleção de Jogadores]
+\label{alg:busca_local_first}
 \begin{algorithmic}[1]
 
 \Function{BuscaLocalFirst}{$team, season, player\_attributes, player\_attributes\_PCA, points, size, budget$}
 
-\State \textbf{Função} $\textsc{PreviousSeason}(s)$
-\State \hspace{0.5cm} separar $s$ em $y_1$ e $y_2$
-\State \hspace{0.5cm} \Return $(y_1 - 1)-(y_2 - 1)$
+\Statex \textbf{Função auxiliar} $\textsc{PreviousSeason}(s)$:
+\State separar $s$ em $y_1$ e $y_2$
+\State \Return $(y_1 - 1)-(y_2 - 1)$
 
 \State $prev\_season \gets \textsc{PreviousSeason}(season)$
 
-\State $current\_team\_df \gets$ registros de $player\_attributes$ tais que
-\State \hspace{0.5cm} $Team = team$ e $Season = season$
+\State $current\_team\_df \gets$ registros de $player\_attributes$ tais que $Team = team$ e $Season = season$
 
 \State $current\_team\_players \gets$ conjunto de jogadores únicos em $current\_team\_df$
 
@@ -21,12 +20,12 @@
 
 \State $lowest\_minutes\_players \gets$ jogadores de $current\_team\_df$ ordenados por minutagem crescente
 
-\State \textbf{Função} $\textsc{Preve}(new\_players)$
-\State \hspace{0.5cm} $n\_remove \gets |new\_players|$
-\State \hspace{0.5cm} $removed\_players \gets$ primeiros $n\_remove$ jogadores de $lowest\_minutes\_players$
-\State \hspace{0.5cm} $simulated\_roster \gets$ jogadores de $current\_team\_roster$ que não pertencem a $removed\_players$, unidos a $new\_players$
-\State \hspace{0.5cm} \Return $\textsc{preve\_pontos}(team, season, simulated\_roster,$
-\State \hspace{1.7cm} $player\_attributes, player\_attributes\_PCA, points)$
+\Statex \textbf{Função auxiliar} $\textsc{Preve}(new\_players)$:
+\State $n\_remove \gets |new\_players|$
+\State $removed\_players \gets$ primeiros $n\_remove$ jogadores de $lowest\_minutes\_players$
+\State $simulated\_roster \gets$ jogadores de $current\_team\_roster$ que não pertencem a $removed\_players$, unidos a $new\_players$
+\State \Return $\textsc{preve\_pontos}(team, season, simulated\_roster, player\_attributes,$
+\Statex \hspace{\algorithmicindent} $player\_attributes\_PCA, points)$
 
 \State $base\_players \gets$ jogadores únicos em $player\_attributes$ com $Season = prev\_season$
 
@@ -34,8 +33,7 @@
 
 \State $price\_map \gets$ dicionário que associa cada jogador de $prev\_season$ ao seu $Valor\_Mercado$
 
-\State $feasible\_pool \gets$ jogadores em $player\_names$ tais que:
-\State \hspace{0.5cm} não pertencem a $current\_team\_players$ e existem em $price\_map$
+\State $feasible\_pool \gets$ jogadores em $player\_names$ tais que não pertencem a $current\_team\_players$ e existem em $price\_map$
 
 \State embaralhar $feasible\_pool$
 
@@ -44,7 +42,7 @@
 
 \For{cada jogador $p$ em $feasible\_pool$}
     \If{$|current\_new\_players| \geq size$}
-        \State \textbf{break}
+        \State \textbf{interromper o laço}
     \EndIf
 
     \State $p\_price \gets price\_map[p]$
@@ -68,23 +66,23 @@
         \For{cada jogador $p$ em $player\_names$}
 
             \If{$p \in current\_new\_players$}
-                \State \textbf{continue}
+                \State passar ao próximo jogador
             \EndIf
 
             \If{$p \in current\_team\_players$}
-                \State \textbf{continue}
+                \State passar ao próximo jogador
             \EndIf
 
             \If{$p \notin price\_map$}
-                \State \textbf{continue}
+                \State passar ao próximo jogador
             \EndIf
 
             \State $p\_price \gets price\_map[p]$
             \State $old\_player \gets current\_new\_players[i]$
-            \State $old\_price \gets price\_map[old\_player]$ \textbf{ou} $0$ se ausente
+            \State $old\_price \gets price\_map[old\_player]$ ou $0$ se ausente
 
             \If{$p\_price > remaining\_budget + old\_price$}
-                \State \textbf{continue}
+                \State passar ao próximo jogador
             \EndIf
 
             \State substituir o jogador da posição $i$ em $new\_players$ por $p$
@@ -95,13 +93,13 @@
                 \State $current\_new\_players \gets new\_players$
                 \State $remaining\_budget \gets remaining\_budget + old\_price - p\_price$
                 \State $improvement \gets$ verdadeiro
-                \State \textbf{break}
+                \State \textbf{interromper o laço}
             \EndIf
 
         \EndFor
 
         \If{$improvement =$ verdadeiro}
-            \State \textbf{break}
+            \State \textbf{interromper o laço}
         \EndIf
 
     \EndFor
@@ -112,4 +110,4 @@
 \EndFunction
 
 \end{algorithmic}
-\end{algorithm}
+\end{breakablealgorithm}

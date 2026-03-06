@@ -13,14 +13,38 @@
 \usepackage{fancyvrb}            % para inserção de saídas de comandos
 \usepackage{comment}
 \usepackage{eurosym}
-\usepackage[ruled,vlined]{algorithm2e}
-\SetKwProg{Fn}{Função}{:}{}
-\SetKw{KwBreak}{pare}
+%\usepackage{algorithm}
+%\usepackage{algpseudocode}
+%\floatname{algorithm}{Algoritmo}
+%\SetKwProg{Fn}{Função}{:}{}
+%\SetKw{KwBreak}{pare}
 %\usepackage{enumerate}           % para personalizar lista enumeradas 
 											%(incluso na classe)
 \usepackage{longtable}           % para tambelas muito grandes NOVO!!!!
 \usepackage{array}
+%-------------------------------------------------------------------------------------------------------
+\usepackage{algpseudocode}
+\usepackage{caption}
 
+\newcounter{algoritmo}
+\renewcommand{\thealgoritmo}{\arabic{algoritmo}}
+
+\newenvironment{breakablealgorithm}[1][]
+  {
+   \refstepcounter{algoritmo}
+   \par\medskip
+   \noindent\textbf{Algoritmo \thealgoritmo}
+   \if\relax\detokenize{#1}\relax
+   \else\ -- #1
+   \fi
+   \par\nopagebreak
+   \medskip
+  }
+  {
+   \par\medskip
+  }
+
+%-------------------------------------------------------------------------------------------------------
 \usepackage{colortbl} % cores em tabelas
 \newcolumntype{Z}{|>{\columncolor[gray]{0.9}}l|} %cor cinza em células
 %\usepackage{array} % já incluso na classe

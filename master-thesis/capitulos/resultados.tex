@@ -103,9 +103,10 @@ Busca Local & 72.675 & 0.046 & 72.747 & 120.173 & 429.80 & 42.82 \\
 Guloso & 72.704 & 0.028 & 72.736 & 120.211 & 422.67 & 23.86 \\
 \hline
 \end{tabular}
-\fonte{Elaboração própria.}
+{\footnotesize Fonte: Elaboração própria.}
 \end{table}
 
+\begin{comment}
 A distribuição das pontuações obtidas em cada execução também pode ser observada na Figura~\ref{fig:boxplot_otimizacao}. 
 O boxplot permite visualizar a variabilidade dos resultados produzidos pelos algoritmos ao longo das diferentes execuções, 
 evidenciando a proximidade entre as distribuições das soluções encontradas.
@@ -115,7 +116,7 @@ evidenciando a proximidade entre as distribuições das soluções encontradas.
 \includegraphics[width=0.7\textwidth]{imagens/boxplot_otimizacao.png}
 \caption{Distribuição das pontuações previstas obtidas pelos algoritmos de otimização}
 \label{fig:boxplot_otimizacao}
-\fonte{Elaboração própria.}
+{\footnotesize Fonte: Elaboração própria.}
 \end{figure}
 
 A figura indica que as distribuições das pontuações obtidas pelos dois algoritmos são bastante semelhantes, apresentando pequena variabilidade entre as execuções. 
@@ -124,6 +125,7 @@ Esse comportamento sugere que ambos os métodos apresentam desempenho estável e
 De forma consistente com essa visualização, os resultados médios apresentados na Tabela~\ref{tab:comparacao_otimizacao} indicam que os dois algoritmos 
 obtiveram desempenho bastante próximo em termos de qualidade das soluções encontradas. A diferença entre as pontuações médias é pequena, indicando que 
 o algoritmo guloso é capaz de produzir soluções comparáveis às obtidas pela busca local.
+\end{comment}
 
 Em relação ao custo computacional, os dois métodos apresentaram tempos médios de execução praticamente idênticos, uma vez que ambos operam sob o mesmo 
 limite de tempo imposto durante o experimento. O número médio de avaliações da função objetivo também se mostrou semelhante entre os métodos, embora 
@@ -132,4 +134,3 @@ o algoritmo guloso tenha realizado ligeiramente menos avaliações em média.
 Em conjunto, esses resultados indicam que, para o problema analisado, o algoritmo guloso é capaz de alcançar soluções de qualidade equivalente 
 àquelas obtidas pela busca local, utilizando um número similar de avaliações da função objetivo. Isso sugere que, apesar de sua simplicidade, 
 a abordagem gulosa pode representar uma alternativa eficiente para a otimização da composição de elencos no contexto proposto.
-\end{comment}
