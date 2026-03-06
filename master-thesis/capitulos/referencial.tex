@@ -18,6 +18,34 @@ Muitas indústrias têm adotado o AM com o objetivo de extrair insights relevant
 Além disso, o AM tem sido amplamente aplicado em diversas áreas, incluindo reconhecimento facial, segmentação de imagens, detecção de câncer e previsão de classes 
 e resultados, destacando-se também no contexto esportivo \cite{Almulla2023}.
 
+No desenvolvimento de sistemas de AM, a construção de modelos geralmente ocorre dentro de um pipeline composto por múltiplas etapas de processamento de dados. 
+Em um projeto típico de AM, os dados passam inicialmente por fases de coleta e preparação, seguidas por etapas de exploração e preparação dos dados, 
+engenharia de atributos, seleção e treinamento de modelos, além de procedimentos de avaliação e ajuste de hiperparâmetros \cite{Geron2019}. 
+Essas etapas são frequentemente organizadas em forma de pipeline, no qual cada componente executa uma transformação específica sobre os dados 
+e produz uma saída que será utilizada pela etapa subsequente do processo \cite{Geron2019}. 
+Essa estrutura modular permite organizar o fluxo de processamento e facilita a reprodução e manutenção dos modelos desenvolvidos. 
+Um exemplo de organização dessas etapas no ciclo de vida de um projeto de análise de dados é apresentado na Figura \ref{fig:crispdm_pipeline}, 
+baseada no processo CRISP-DM, amplamente utilizado em projetos de mineração de dados e AM \cite{Kelleher2015}.
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.7\textwidth]{imagens/ml-pipeline.png}
+\caption{Ciclo de vida de um projeto de análise preditiva baseado no processo CRISP-DM}
+\label{fig:crispdm_pipeline}
+\fonte{Adaptado de \cite{Kelleher2015}.}
+\end{figure}
+
+Dentro desse pipeline, a preparação e transformação dos dados desempenham papel fundamental, 
+uma vez que os algoritmos de aprendizado frequentemente exigem representações específicas dos atributos para funcionar adequadamente. 
+Em particular, alguns métodos operam apenas com atributos nominais ou podem se beneficiar de representações discretizadas dos dados. 
+Nesse contexto, atributos numéricos podem ser transformados em intervalos discretos antes da etapa de aprendizado, 
+processo conhecido como discretização \cite{Witten2016}.
+
+Diferentes abordagens podem ser empregadas para realizar essa transformação. Métodos não supervisionados podem dividir o domínio dos atributos em intervalos 
+pré-definidos, como na discretização por intervalos de mesma largura ou mesma frequência. Já métodos supervisionados utilizam informações das classes presentes 
+nos dados para determinar os pontos de divisão mais apropriados, frequentemente empregando critérios baseados em entropia e ganho de informação 
+\cite{Witten2016}. Dessa forma, a transformação dos dados constitui uma etapa importante do pipeline de aprendizado de máquina, pois permite adaptar 
+a representação dos atributos às características dos algoritmos utilizados e pode influenciar diretamente a qualidade do modelo gerado.
 AM utiliza diferentes algoritmos para resolver problemas relacionados com dados. 
 Cientistas de dados destacam que não há um único algoritmo universalmente superior para resolver todos os tipos de problemas \cite{Mahesh2020}. 
 Esta seção apresenta uma breve descrição de alguns dos modelos mais comumente utilizados em AM para a resolução de problemas.
@@ -136,7 +164,6 @@ cria novas variáveis a partir de combinações lineares das variáveis originai
 As técnicas apresentadas nesta seção constituem a base teórica para os modelos preditivos empregados neste trabalho, sendo posteriormente integradas 
 a métodos de otimização para apoio à tomada de decisão no contexto esportivo.
 
-%\subsection{Naive-Bayes (NB)}
 \section{Pesquisa Operacional}
 
 Como tratado anteriormente, a área da PO consiste em um campo multidisciplinar que aplica modelos matemáticos, estatísticos e computacionais. 
@@ -145,12 +172,13 @@ planejamento financeiro, planos de saúde, serviço público, entre outros \cite
 
 Conforme discutido na seção anterior, problemas esportivos como montagem de elenco e planejamento competitivo 
 podem ser formalizados como problemas de otimização matemática sob restrições estruturais e orçamentárias. 
-Dependendo da natureza do problema, tais formulações assumem a forma de modelos de Programação Linear, Programação Inteira e abordagens heurísticas
-para problemas de natureza combinatória, entre outros.
+Dependendo da natureza do problema, tais formulações podem recorrer a abordagens heurísticas voltadas à resolução 
+de problemas de otimização combinatória, nos quais o espaço de soluções possíveis cresce exponencialmente com o número de variáveis de decisão.
 
 Nos tópicos seguintes, são detalhados os principais métodos de otimização utilizados na modelagem de problemas combinatórios, com destaque para abordagens heurísticas 
 que fundamentam a metodologia proposta neste trabalho.
 
+\begin{comment}
 \subsection{Programação Linear (PL)}
 
 A Programação Linear (PL) é considerada um dos mais importantes avanços científicos do meio do século 20. 
@@ -243,7 +271,7 @@ Portanto, a Wyndor Glass Co. deve produzir 2 lotes do Produto 1 e 6 lotes do Pro
 Embora a PL seja uma ferramenta poderosa para problemas de otimização linear, existem outras abordagens que lidam com problemas mais complexos. 
 A Programação Dinâmica (PD), por exemplo, trata de decisões sequenciais, enquanto os Processos de Markov 
 são amplamente utilizados para modelagem de processos estocásticos. Essas abordagens serão discutidas a seguir.
-
+\end{comment}
 \subsection{Algoritmo Guloso}
 
 Em problemas de otimização, um algoritmo é dito guloso quando o mesmo faz uma escolha localmente ótima, na esperança de que essa escolha leve a uma solução
@@ -259,6 +287,21 @@ escolha gulosa}, isto é, a existência de uma solução ótima que contém a de
 fixar a decisão gulosa, o restante do problema preserva a mesma estrutura do original, de modo que uma solução ótima do subproblema completa uma solução
 ótima do problema inicial.
 
+Para ilustrar o funcionamento dessa estratégia, considere o problema do \textit{Traveling Salesman Problem} (TSP), no qual se deseja encontrar um circuito
+Hamiltoniano de custo mínimo que visite exatamente uma vez cada cidade de um conjunto dado e retorne ao ponto inicial. Nesse contexto, uma heurística gulosa
+construtiva bastante conhecida é o método do \textit{vizinho mais próximo} (\textit{nearest neighbor}). O algoritmo inicia em uma cidade arbitrária e,
+a cada etapa, seleciona a cidade ainda não visitada que possui a menor distância em relação à cidade atual, repetindo o processo até que todas as
+cidades tenham sido visitadas e o ciclo seja fechado retornando à cidade inicial \cite{Gendreau2010}.
+
+Esse procedimento exemplifica claramente a lógica gulosa: em cada passo é realizada a escolha localmente mais vantajosa — visitar a cidade mais próxima —
+sem reconsiderar decisões anteriores. Embora tal estratégia permita construir rapidamente uma solução viável para o problema, não há garantia de que o
+circuito obtido seja globalmente ótimo, uma vez que decisões tomadas nas primeiras etapas podem restringir significativamente as escolhas disponíveis
+nas etapas subsequentes \cite{Gendreau20102010}.
+
+O Algoritmo~\ref{alg:tsp_greedy} apresenta o pseudocódigo dessa heurística gulosa aplicada ao TSP.
+
+\input{algoritmos/guloso_first}
+\begin{comment}
 Como exemplo didático, \cite{Cormen2009} apresenta o \textit{activity-selection problem}, no qual há um conjunto de atividades
 $S=\{a_1,\dots,a_n\}$, cada uma definida por um tempo de início $s_i$ e um tempo de término $f_i$, e deseja-se selecionar um subconjunto máximo de atividades
 mutuamente compatíveis, isto é, que não se sobreponham no tempo. Intuitivamente, a escolha gulosa consiste em selecionar, dentre as atividades ainda
@@ -292,7 +335,7 @@ $k \leftarrow 1$\;
 \Return{$A$}\;
 \end{algorithm}
 
-\begin{comment}
+
 Como exemplo ilustrativo, \cite{Cormen2009} discutem o problema de agrupamento conhecido como \textit{k-means clustering}. Nesse problema, dado um conjunto
 $S$ de $n$ pontos em um espaço métrico e um número fixo $k$ de centros, deseja-se determinar a posição desses centros de modo a minimizar a soma das
 distâncias quadráticas entre cada ponto e o centro mais próximo. Formalmente, busca-se minimizar
@@ -312,6 +355,7 @@ Embora o procedimento de Lloyd seja geralmente classificado como um método de b
 iteração, o algoritmo realiza escolhas localmente ótimas ao associar cada ponto ao centro mais próximo e atualizar os centros de modo a minimizar o erro
 quadrático dentro de cada grupo. Essas decisões locais conduzem a uma solução que corresponde a um mínimo local da função objetivo.
 \end{comment}
+
 No contexto deste trabalho, um algoritmo guloso é utilizado de forma recursiva com o objetivo de gerar uma solução inicial para o problema de otimização da
 montagem de elencos. Dado um time e um orçamento, a cada iteração, o jogador com menor minutagem do elenco é removido e substituído por candidatos externos.
 Para cada substituição possível, o modelo de AM é empregado como função objetivo, estimando a pontuação esperada do time resultante. A escolha gulosa
@@ -352,7 +396,7 @@ No problema abordado neste trabalho, a busca local é empregada para avaliar dif
 uma restrição de orçamento. Cada solução é representada por um conjunto de jogadores de cardinalidade fixa, sendo a vizinhança definida por operações de 
 substituição unitária (\textit{swap neighborhood}). Em cada iteração, os jogadores do conjunto atual com menor minutagem são selecionados como candidatos 
 à remoção e substituídos por jogadores externos ainda não selecionados, produzindo soluções vizinhas que preservam o tamanho do elenco. 
-Cada solução vizinha gerada é avaliada por meio de uma função objetivo, implementada como um modelo de aprendizado de máquina, responsável por 
+Cada solução vizinha gerada é avaliada por meio de uma função objetivo, implementada como um modelo de AM, responsável por 
 estimar a pontuação esperada do time na temporada considerada.
 
 A restrição orçamentária é tratada como condição de factibilidade: soluções que excedem o orçamento estabelecido são descartadas durante o processo de busca. 
