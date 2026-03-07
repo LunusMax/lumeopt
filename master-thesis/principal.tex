@@ -14,6 +14,10 @@
 \usepackage{comment}
 \usepackage{eurosym}
 \usepackage{algorithm}
+\floatname{algorithm}{Algoritmo}
+\usepackage{float}
+\usepackage{placeins}
+\raggedbottom
 %\usepackage{algpseudocode}
 %\floatname{algorithm}{Algoritmo}
 %\SetKwProg{Fn}{Função}{:}{}
@@ -25,10 +29,9 @@
 %-------------------------------------------------------------------------------------------------------
 \usepackage{algpseudocode}
 \usepackage{caption}
-
+\begin{comment}
 \newcounter{algoritmo}
 \renewcommand{\thealgoritmo}{\arabic{algoritmo}}
-
 \newenvironment{breakablealgorithm}[1][]
   {
    \refstepcounter{algoritmo}
@@ -43,7 +46,8 @@
   {
    \par\medskip
   }
-
+  
+\end{comment}
 %-------------------------------------------------------------------------------------------------------
 \usepackage{colortbl} % cores em tabelas
 \newcolumntype{Z}{|>{\columncolor[gray]{0.9}}l|} %cor cinza em células
@@ -306,7 +310,7 @@ contributing to a more strategic, evidence-based decision-making framework withi
 %==============================================================================
 % Incluindo anexos num1erados com letras maiusculas.
 %\apendices
-\include{apendice1}
+%\include{apendice1}
 
 
 %==============================================================================

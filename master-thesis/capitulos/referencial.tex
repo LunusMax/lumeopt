@@ -296,11 +296,11 @@ cidades tenham sido visitadas e o ciclo seja fechado retornando à cidade inicia
 Esse procedimento exemplifica claramente a lógica gulosa: em cada passo é realizada a escolha localmente mais vantajosa — visitar a cidade mais próxima —
 sem reconsiderar decisões anteriores. Embora tal estratégia permita construir rapidamente uma solução viável para o problema, não há garantia de que o
 circuito obtido seja globalmente ótimo, uma vez que decisões tomadas nas primeiras etapas podem restringir significativamente as escolhas disponíveis
-nas etapas subsequentes \cite{Gendreau20102010}.
+nas etapas subsequentes \cite{Gendreau2010}.
 
 O Algoritmo~\ref{alg:tsp_greedy} apresenta o pseudocódigo dessa heurística gulosa aplicada ao TSP.
 
-\input{algoritmos/guloso_first}
+\input{algoritmos/tsp_greedy.tex}
 \begin{comment}
 Como exemplo didático, \cite{Cormen2009} apresenta o \textit{activity-selection problem}, no qual há um conjunto de atividades
 $S=\{a_1,\dots,a_n\}$, cada uma definida por um tempo de início $s_i$ e um tempo de término $f_i$, e deseja-se selecionar um subconjunto máximo de atividades

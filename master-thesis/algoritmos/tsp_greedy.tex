@@ -1,27 +1,24 @@
-\begin{breakablealgorithm}[Heurística Gulosa para o TSP (Vizinho Mais Próximo)]
+\begin{algorithm}[H]
+\caption{Heurística Gulosa para o TSP (Vizinho Mais Próximo)}
 \label{alg:tsp_greedy}
 \begin{algorithmic}
 
 \Require Conjunto de cidades $V$, matriz de distâncias $d(i,j)$
 \Ensure Ciclo Hamiltoniano $T$
 
-\State escolher cidade inicial $v_0$
+\State Escolher cidade inicial $v_0$
+\State Inicializar $T$ com $v_0$
+\State Inicializar conjunto de cidades não visitadas $U \gets V \setminus \{v_0\}$
+\State Definir cidade atual $v \gets v_0$
 
-\State $T \gets [v_0]$
-
-\State $U \gets V \setminus \{v_0\}$ \Comment{cidades ainda não visitadas}
-
-\State $v \gets v_0$
-
-\While{$U \neq \emptyset$}
-    \State escolher $u \in U$ que minimize $d(v,u)$
-    \State adicionar $u$ ao final de $T$
-    \State $U \gets U \setminus \{u\}$
-    \State $v \gets u$
+\While{existirem cidades não visitadas}
+    \State Escolher $u \in U$ que minimize $d(v,u)$
+    \State Adicionar $u$ ao final de $T$
+    \State Remover $u$ de $U$
+    \State Atualizar cidade atual $v \gets u$
 \EndWhile
 
-\State adicionar $v_0$ ao final de $T$ \Comment{retorna à cidade inicial}
-
+\State Adicionar $v_0$ ao final de $T$ \Comment{retorno à cidade inicial}
 \State \Return $T$
 
 \end{algorithmic}

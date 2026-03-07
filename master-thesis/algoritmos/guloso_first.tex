@@ -1,40 +1,35 @@
-\begin{algorithm}
+\begin{algorithm}[H]
 \caption{Algoritmo Guloso com estratégia First Improvement}
 \begin{algorithmic}
 
-\State Obter lista de jogadores candidatos da temporada anterior
-\State Obter elenco atual do time alvo
-\State Ordenar jogadores do elenco atual por menor minutagem
+\State Obter lista de jogadores candidatos
+\State Inicializar conjunto de contratações como vazio
+\State Calcular pontuação atual com conjunto vazio
+\State Inicializar custo atual igual a zero
 
-\State $S \gets \emptyset$ \Comment{novas contratações}
-\State calcular pontuação atual
+\While{verdadeiro}
+    \State Definir variável de melhora como falsa
 
-\For{$i = 1$ até $size$}
     \For{cada jogador candidato $p$}
-    
-        \If{$p$ não pertence ao elenco atual e cabe no orçamento}
-        
-            \State Simular substituição do jogador de menor minutagem por $p$
-            \State Calcular nova pontuação prevista
-            
-            \If{pontuação melhora}
-                \State adicionar $p$ em $S$
-                \State atualizar orçamento
-                \State atualizar pontuação
+        \If{$p$ ainda não foi selecionado e cabe no orçamento}
+            \State Calcular a nova pontuação prevista ao adicionar $p$
+
+            \If{a nova pontuação for maior que a pontuação atual}
+                \State Adicionar $p$ ao conjunto de contratações
+                \State Atualizar a pontuação atual
+                \State Atualizar o custo atual
+                \State Definir variável de melhora como verdadeira
                 \State \textbf{break} \Comment{first improvement}
             \EndIf
-            
         \EndIf
-        
     \EndFor
-    
-    \If{nenhuma melhora encontrada}
+
+    \If{nenhuma melhora for encontrada}
         \State \textbf{break}
     \EndIf
-    
-\EndFor
+\EndWhile
 
-\State \Return conjunto de contratações e pontuação prevista
+\State \Return conjunto de contratações, custo atual e pontuação prevista
 
 \end{algorithmic}
 \end{algorithm}

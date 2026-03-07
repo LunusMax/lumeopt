@@ -1,45 +1,37 @@
-\begin{algorithm}
+\begin{algorithm}[H]
 \caption{Algoritmo Guloso com estratégia Best Improvement}
 \begin{algorithmic}
 
-\State Obter jogadores candidatos da temporada anterior
-\State Obter elenco atual do time alvo
-\State Ordenar jogadores do elenco atual por menor minutagem
+\State Obter lista de jogadores candidatos
+\State Inicializar conjunto de contratações como vazio
+\State Calcular pontuação atual com conjunto vazio
+\State Inicializar custo atual igual a zero
 
-\State $S \gets \emptyset$ \Comment{conjunto de contratações}
-\State calcular pontuação inicial
-
-\For{$i = 1$ até $size$}
-
-    \State $best\_player \gets \emptyset$
-    \State $best\_score \gets$ pontuação atual
+\While{verdadeiro}
+    \State Inicializar melhor jogador como vazio
+    \State Inicializar melhor pontuação como vazia
 
     \For{cada jogador candidato $p$}
-    
-        \If{$p$ não pertence ao elenco atual e cabe no orçamento}
-        
-            \State Simular substituição do jogador de menor minutagem por $p$
-            \State Calcular pontuação prevista
-            
-            \If{pontuação $>$ $best\_score$}
-                \State atualizar $best\_player$ e $best\_score$
+        \If{$p$ ainda não foi selecionado e cabe no orçamento}
+            \State Calcular a nova pontuação prevista ao adicionar $p$
+
+            \If{não existir melhor jogador ou a nova pontuação for maior que a melhor pontuação}
+                \State Armazenar $p$ como melhor jogador da iteração
+                \State Armazenar a nova pontuação como melhor pontuação da iteração
             \EndIf
-            
         \EndIf
-        
     \EndFor
 
-    \If{$best\_player \neq \emptyset$}
-        \State adicionar $best\_player$ ao conjunto de contratações
-        \State atualizar orçamento
-        \State atualizar pontuação
+    \If{existe melhor jogador e a melhor pontuação for maior que a pontuação atual}
+        \State Adicionar o melhor jogador ao conjunto de contratações
+        \State Atualizar a pontuação atual
+        \State Atualizar o custo atual
     \Else
         \State \textbf{break}
     \EndIf
+\EndWhile
 
-\EndFor
-
-\State \Return contratações e pontuação prevista
+\State \Return conjunto de contratações, custo atual e pontuação prevista
 
 \end{algorithmic}
 \end{algorithm}

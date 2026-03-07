@@ -55,16 +55,18 @@ não lineares relevantes que justificam a adoção de modelos mais complexos.
 Com o intuito de compreender a predição realizada pelo melhor modelo (MLP) foi realizada uma análise visual da relação entre as pontuações reais dos clubes da Premier League
 na temporada e as pontuações previstas pelo modelo. 
 
-A Figura~\ref{fig:imagens/pl_points} apresenta o gráfico de comparação entre as pontuações reais e previstas pelo modelo MLP.
+A Figura~\ref{fig:pl_points} apresenta o gráfico de comparação entre as pontuações reais e previstas pelo modelo MLP.
 
 \begin{figure}[H]
     \centering
-    \includegraphics[width=0.85\textwidth]{imagens/pl_points.jpg}
+    \makebox[\textwidth][c]{%
+        \includegraphics[width=1.3\textwidth]{imagens/pl_points.jpg}
+    }
     \caption{Relação entre pontuações reais e previstas pelo modelo MLP na Premier League.}
-    \label{fig:mlp_real_pred}
+    \label{fig:pl_points}
 \end{figure}
 
-Os resultados apresentados na Figura~\ref{fig:imagens/pl_points} indicam que o modelo MLP apresenta maior precisão ao estimar as pontuações de clubes que terminaram a 
+Os resultados apresentados na Figura~\ref{fig:pl_points} indicam que o modelo MLP apresenta maior precisão ao estimar as pontuações de clubes que terminaram a 
 temporada com valores próximos da média da liga. Times posicionados no centro da distribuição como Fulham, Manchester United e Newcastle United tendem a 
 ter suas pontuações previstas com menor erro, comportamento comum em modelos preditivos sob alta incerteza: quando os atributos disponíveis não capturam 
 toda a variabilidade do fenômeno, as previsões convergem naturalmente para valores intermediários. Esse resultado alinha-se com a literatura clássica, 
