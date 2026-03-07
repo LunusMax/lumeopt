@@ -1,0 +1,132 @@
+\chapter{Resultados da Otimização da Composição de Elencos}
+
+Uma vez identificado o modelo de ML com melhor capacidade de predizer a pontuação final dos times em uma liga a partir das informações estatísticas de seus elencos, 
+inicia-se a segunda etapa do projeto, dedicada à busca de soluções capazes de otimizar esse desempenho. 
+Nessa fase, o problema passa a ser tratado como um processo de otimização sob restrições, no qual diferentes composições de elenco são avaliadas de acordo com 
+sua pontuação estimada pelo modelo de AM.
+
+\section{Cálculo do Valor de Mercado Sintético}
+
+Para viabilizar o processo de otimização, torna-se necessário incorporar restrições financeiras que reflitam, ainda que de forma simplificada, 
+as limitações orçamentárias enfrentadas por clubes de futebol em contextos reais. 
+Nesse sentido, foi definida uma métrica sintética de valor de mercado dos jogadores, construída a partir de dois fatores principais: 
+idade e desempenho estatístico agregado.
+
+A Equação~\ref{eq:valor_mercado} apresenta formalmente o cálculo adotado para essa métrica.
+
+\begin{equation}
+\label{eq:valor_mercado}
+V_i = 1000 \cdot \left( 1000 \cdot \max(0, 30 - I_i) + 10 \cdot \sum_{j=1}^{n} x_{ij} \right)
+\end{equation}
+
+onde:
+\begin{itemize}
+    \item $V_i$ representa o valor de mercado sintético do jogador $i$;
+    \item $I_i$ corresponde à idade do jogador $i$;
+    \item $x_{ij}$ representa o valor da $j$-ésima estatística numérica associada ao jogador $i$;
+    \item $n$ é o número total de variáveis estatísticas consideradas.
+\end{itemize}
+
+O primeiro termo da equação corresponde a um fator etário, que atribui maior peso a jogadores mais jovens, considerando um limite superior de 30 anos. 
+Jogadores com idade superior a esse limiar não recebem penalização adicional, evitando a atribuição de valores negativos. 
+Essa escolha busca refletir uma característica recorrente do mercado do futebol, no qual atletas mais jovens tendem a apresentar maior potencial de valorização, 
+longevidade esportiva e retorno econômico futuro.
+
+O segundo termo da equação agrega o desempenho estatístico do jogador por meio da soma de suas variáveis numéricas, escalonada por um fator constante. 
+Essa agregação tem como objetivo capturar, de forma simplificada, o impacto global do desempenho esportivo individual, 
+sem privilegiar métricas específicas ou posições em campo.
+
+Por fim, o fator multiplicativo externo é aplicado exclusivamente para reescalonamento da variável, de modo a produzir valores em uma ordem de grandeza 
+mais próxima às estimativas observadas no mercado real. 
+Esse reescalonamento facilita tanto a interpretação dos valores obtidos quanto a utilização da métrica como restrição orçamentária 
+nos modelos de otimização empregados na etapa subsequente.
+
+Dessa forma, jogadores que combinam alto desempenho estatístico com menor idade tendem a apresentar valores de mercado sintético mais elevados, 
+enquanto atletas mais velhos ou com desempenho inferior são associados a custos reduzidos, em consonância com evidências empíricas da literatura que 
+apontam idade e desempenho como fatores centrais na formação do valor econômico de jogadores profissionais. \cite{frick2007,muller2017}
+Ressalta-se que essa métrica não tem como objetivo reproduzir valores reais de mercado, 
+mas sim fornecer uma função custo coerente e monotônica, adequada ao processo de otimização proposto.
+
+A partir da definição dessa função de custo, torna-se possível formular o problema de seleção de jogadores como um problema de otimização combinatória, 
+no qual se busca identificar configurações de elenco que maximizem o desempenho previsto da equipe sob restrições orçamentárias. Nesse contexto, 
+diferentes estratégias heurísticas podem ser empregadas para explorar o espaço de soluções. Como tais métodos frequentemente apresentam componentes 
+estocásticos e podem produzir resultados distintos entre execuções, sua avaliação requer múltiplas repetições experimentais e análise estatística apropriada. 
+Nesse sentido, conforme discutido por \cite{Derrac2011}, testes estatísticos não paramétricos são amplamente recomendados na comparação de algoritmos heurísticos, 
+pois não pressupõem normalidade na distribuição dos resultados obtidos. A seguir, descreve-se os métodos de otimização utilizados neste trabalho.
+
+\section{Algoritmos Gulosos para Seleção Iterativa de Jogadores}
+
+Com o objetivo de explorar possíveis melhorias na composição do elenco, foram implementados algoritmos gulosos responsáveis por selecionar iterativamente 
+jogadores a serem contratados.
+
+O método parte do elenco atual da equipe e constrói gradualmente um conjunto de reforços. Em cada iteração, o algoritmo percorre a base de dados 
+de jogadores e considera aqueles que atuaram na temporada imediatamente anterior à temporada analisada. Durante essa varredura, são desconsiderados 
+jogadores que já pertencem ao elenco atual da equipe ou que já foram previamente selecionados em iterações anteriores do próprio algoritmo.
+
+Além disso, cada possível contratação é submetida à restrição orçamentária. O valor de mercado do atleta, registrado na temporada anterior, é utilizado 
+para verificar se a contratação pode ser realizada dentro do orçamento disponível. Apenas jogadores que respeitam essa restrição são avaliados.
+
+A qualidade de cada possível contratação é avaliada por meio da função objetivo definida neste trabalho, implementada como o modelo de AM responsável 
+por estimar a pontuação esperada da equipe na temporada considerada. Para manter constante o tamanho do elenco avaliado, a inclusão de novos jogadores 
+é simulada removendo-se, da formação original, a mesma quantidade de atletas com menor minutagem na temporada analisada.
+
+O processo é repetido até que seja atingido um número máximo de contratações, definido por um parâmetro \(k\), ou até que não existam mais jogadores 
+viáveis dentro da restrição orçamentária. Sempre que uma contratação é aceita, o valor de mercado do jogador selecionado é subtraído do orçamento disponível, 
+atualizando a restrição orçamentária para as iterações seguintes. Como característica fundamental da estratégia gulosa, as decisões tomadas em cada 
+iteração são definitivas: uma vez que um jogador é selecionado e adicionado ao conjunto de reforços, essa escolha não é revista nas iterações subsequentes.
+
+Foram implementadas duas variações desse algoritmo. Ambas possuem exatamente a mesma estrutura e seguem o mesmo procedimento descrito anteriormente, 
+diferindo apenas na forma como a melhoria da função objetivo é aceita em cada iteração. Na versão \textit{first-improvement}, os jogadores são avaliados 
+sequencialmente durante a varredura da base e a primeira contratação que resulta em melhoria da função objetivo é imediatamente aceita. 
+Já na versão \textit{best-improvement}, todos os jogadores viáveis são avaliados em cada iteração e seleciona-se aquele cuja inclusão 
+produz o maior aumento na função objetivo.
+
+Os pseudocódigos dos algoritmos gulosos utilizados são apresentados a seguir.
+
+\input{algoritmos/guloso_first}
+\input{algoritmos/guloso_best}
+\FloatBarrier
+
+\section{Algoritmos de Busca Local para Otimização do Elenco}
+
+Além das heurísticas gulosas descritas na subseção anterior, foram implementados algoritmos baseados em busca local com o objetivo de explorar de 
+forma mais ampla o espaço de soluções possíveis para o problema de montagem de elenco.
+
+Enquanto os algoritmos gulosos constroem o conjunto de contratações de forma incremental, selecionando jogadores individualmente a cada iteração, 
+a estratégia de busca local parte de uma solução inicial completa e passa a realizar modificações estruturais nessa solução ao longo do processo de otimização.
+
+Cada solução é representada por um conjunto de jogadores candidatos à contratação cuja cardinalidade é limitada por um parâmetro \(k\), que define 
+o número máximo de contratações consideradas. A avaliação de cada solução é realizada por meio da mesma função objetivo utilizada nos algoritmos gulosos, 
+isto é, o modelo de AM desenvolvido neste para estimar a pontuação esperada da equipe ao final da temporada.
+
+Assim como na abordagem gulosa, a inclusão de jogadores no elenco é simulada mantendo constante o tamanho da formação avaliada. Para isso, 
+sempre que um conjunto de contratações é considerado, remove-se da formação original a mesma quantidade de atletas com menor minutagem na temporada analisada.
+
+A solução inicial é construída selecionando aleatoriamente jogadores da temporada imediatamente anterior à temporada analisada e respeitando a restrição 
+orçamentária estabelecida. Durante essa etapa, são desconsiderados jogadores que já pertencem ao elenco atual da equipe. O processo de seleção inicial 
+continua até que seja atingido o limite máximo de contratações definido pelo parâmetro \(k\) ou até que o orçamento disponível não permita novas adições.
+
+Uma vez obtida a solução inicial viável, o algoritmo passa a explorar sua vizinhança por meio de operações de substituição unitária (\textit{swap}). 
+Em cada vizinho gerado, um jogador do conjunto atual de contratações é substituído por outro jogador elegível ainda não selecionado. A substituição 
+somente é considerada factível quando o valor de mercado do novo jogador, descontado o valor do atleta removido, respeita a restrição orçamentária estabelecida.
+
+Uma vantagem importante da abordagem de busca local em relação às heurísticas gulosas é que a avaliação da função objetivo passa a considerar diretamente 
+o conjunto completo de contratações selecionadas. Enquanto os algoritmos gulosos analisam o impacto marginal da adição de um único jogador por vez, 
+a busca local avalia modificações em uma solução já formada, permitindo que possíveis interações entre os jogadores selecionados sejam levadas em 
+conta pelo modelo de avaliação. Dessa forma, correlações positivas ou negativas entre atletas — capturadas implicitamente pelo modelo de AM 
+utilizado como função objetivo — podem influenciar a escolha das substituições realizadas durante o processo de otimização.
+
+De maneira análoga ao caso dos algoritmos gulosos, duas variações da busca local foram implementadas, diferenciando-se exclusivamente pelo 
+critério de aceitação das melhorias encontradas. Na versão \textit{first-improvement}, as substituições são avaliadas sequencialmente e a primeira 
+troca que produz melhoria na função objetivo é imediatamente aceita, reiniciando-se a exploração da vizinhança a partir da nova solução. 
+Já na versão \textit{best-improvement}, todas as substituições possíveis na vizinhança são avaliadas antes da atualização da solução corrente, 
+sendo então aplicada a troca que produz o maior aumento na função objetivo.
+
+O processo iterativo é encerrado quando nenhuma substituição viável resulta em melhoria adicional na função objetivo, caracterizando a 
+convergência para um ótimo local no espaço de soluções explorado.
+
+Os pseudocódigos dos algoritmos de busca local utilizados são apresentados a seguir.
+
+\input{algoritmos/busca_local_first}
+\input{algoritmos/busca_local_best}
+\FloatBarrier
