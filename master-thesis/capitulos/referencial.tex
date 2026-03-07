@@ -24,7 +24,7 @@ engenharia de atributos, seleção e treinamento de modelos, além de procedimen
 Essas etapas são frequentemente organizadas em forma de pipeline, no qual cada componente executa uma transformação específica sobre os dados 
 e produz uma saída que será utilizada pela etapa subsequente do processo \cite{Geron2019}. 
 Essa estrutura modular permite organizar o fluxo de processamento e facilita a reprodução e manutenção dos modelos desenvolvidos. 
-Um exemplo de organização dessas etapas no ciclo de vida de um projeto de análise de dados é apresentado na Figura \ref{fig:imagens/ml-pipeline}, 
+Um exemplo de organização dessas etapas no ciclo de vida de um projeto de análise de dados é apresentado na Figura \ref{fig:crispdm_pipeline}, 
 baseada no processo CRISP-DM, amplamente utilizado em projetos de mineração de dados e AM \cite{Kelleher2015}.
 
 \begin{figure}[H]
@@ -35,6 +35,7 @@ baseada no processo CRISP-DM, amplamente utilizado em projetos de mineração de
 {\footnotesize Fonte: Adaptado de \cite{Kelleher2015}.}
 \end{figure}
 
+\begin{comment}
 Dentro desse pipeline, a preparação e transformação dos dados desempenham papel fundamental, 
 uma vez que os algoritmos de aprendizado frequentemente exigem representações específicas dos atributos para funcionar adequadamente. 
 Em particular, alguns métodos operam apenas com atributos nominais ou podem se beneficiar de representações discretizadas dos dados. 
@@ -49,6 +50,60 @@ a representação dos atributos às características dos algoritmos utilizados e
 AM utiliza diferentes algoritmos para resolver problemas relacionados com dados. 
 Cientistas de dados destacam que não há um único algoritmo universalmente superior para resolver todos os tipos de problemas \cite{Mahesh2020}. 
 Esta seção apresenta uma breve descrição de alguns dos modelos mais comumente utilizados em AM para a resolução de problemas.
+\end{comment}
+Dentro desse pipeline, a preparação e transformação dos dados desempenham papel fundamental, 
+uma vez que os algoritmos de aprendizado frequentemente exigem representações específicas dos atributos para funcionar adequadamente.
+
+\subsection{Generalização, Viés e Variância}
+
+Um dos principais desafios em AM é garantir que o modelo apresente boa capacidade de generalização, isto é, desempenho satisfatório em dados não 
+utilizados durante o treinamento \cite{Goodfellow2016}. 
+
+Modelos excessivamente complexos podem se ajustar não apenas aos padrões relevantes, mas também ao ruído presente no conjunto de treinamento, 
+fenômeno conhecido como \textit{overfitting}. Em contrapartida, modelos demasiadamente simples podem não capturar relações importantes nos dados, 
+resultando em \textit{underfitting}.
+
+Esse comportamento está diretamente relacionado ao equilíbrio entre viés e variância. Modelos com alto viés tendem a apresentar subajuste, enquanto 
+modelos com alta variância tornam-se excessivamente sensíveis às particularidades do conjunto de treinamento. Técnicas como validação cruzada, regularização 
+e controle da complexidade do modelo são estratégias amplamente utilizadas para mitigar esses problemas \cite{Geron2019}.
+
+\subsection{Seleção de Atributos e Redução de Dimensionalidade}
+
+Em problemas com elevado número de variáveis explicativas, a presença de atributos redundantes ou irrelevantes pode impactar negativamente 
+o desempenho dos modelos preditivos. A seleção de atributos busca identificar subconjuntos de variáveis que contribuam de forma significativa para 
+a tarefa de aprendizagem \cite{Liu2010}.
+
+Os métodos de seleção podem ser classificados em três categorias principais: filtros, que utilizam medidas estatísticas independentes do modelo; 
+wrappers, que avaliam subconjuntos de atributos com base no desempenho de um algoritmo específico; e métodos embutidos, nos quais a seleção ocorre 
+durante o próprio processo de treinamento \cite{Guyon2006}.
+
+Além da seleção direta de atributos, técnicas de redução de dimensionalidade, como a Análise de Componentes Principais (PCA), 
+realizam uma transformação linear das variáveis originais em um novo conjunto de componentes ortogonais que preservam a maior parte da variância dos dados. 
+Essa abordagem pode reduzir complexidade computacional e mitigar problemas de multicolinearidade. Cabe ressaltar que a PCA não consiste em um método 
+de seleção de atributos, mas sim em uma técnica de extração de atributos, pois cria novas variáveis a partir de combinações lineares das variáveis originais \cite{Guyon2006}.
+
+Em AM, os algoritmos podem ser classificados em diferentes categorias de acordo com a forma como aprendem a partir dos dados. 
+Uma das distinções mais comuns ocorre entre aprendizado supervisionado e não supervisionado. 
+No aprendizado supervisionado, o modelo é treinado a partir de um conjunto de dados rotulados, no qual cada instância possui uma variável alvo associada. 
+O objetivo do algoritmo é aprender uma função que relacione os atributos de entrada com essa variável alvo, permitindo realizar previsões para novas instâncias \cite{Geron2019}. 
+Por outro lado, no aprendizado não supervisionado os dados não possuem rótulos explícitos, e o objetivo do algoritmo consiste em identificar padrões, estruturas ou agrupamentos 
+presentes nos dados \cite{Geron2019}. Técnicas como \textit{clustering} e redução de dimensionalidade, incluindo a Análise de Componentes Principais (PCA), 
+são exemplos de métodos amplamente utilizados nesse contexto.
+
+Em problemas de aprendizado supervisionado, as tarefas podem ser geralmente divididas em classificação e regressão. Na classificação, o objetivo é atribuir 
+cada instância a uma classe discreta previamente definida, como por exemplo identificar se um e-mail é \textit{spam} ou não \cite{Geron2019}. 
+Já na regressão, busca-se prever valores numéricos 
+contínuos a partir de um conjunto de variáveis explicativas, como a previsão de preços, temperaturas ou outras 
+quantidades mensuráveis \cite{Geron2019}. No contexto deste trabalho, o problema é formulado como uma tarefa de regressão, 
+uma vez que o objetivo consiste em estimar a pontuação final de equipes em um campeonato a partir das características 
+individuais dos jogadores que compõem o elenco.
+
+Após as etapas de preparação, transformação e possível redução de dimensionalidade dos dados, diferentes algoritmos de AM podem ser 
+empregados para construir modelos preditivos. A seguir, são apresentados alguns dos algoritmos mais comumente utilizados para a resolução de problemas de 
+regressão, abordagem adotada no modelo proposto neste trabalho.
+
+Entre os diversos algoritmos disponíveis na literatura, foram selecionados neste trabalho métodos amplamente utilizados em aprendizado supervisionado, 
+incluindo modelos baseados em árvores, máquinas de vetores de suporte e redes neurais artificiais.
 
 \subsection{Árvore de Decisão (AD)}
 
@@ -56,7 +111,26 @@ As Árvores de Decisão são algoritmos versáteis de AM que podem ser utilizado
 Esses algoritmos recebem um \textit{input} de dados de treinamento (conjunto de atributos independentes + atributo classe) e retornam como saída uma 
 árvore de decisão que permite classificar uma nova instância a partir de seus atributos independentes \cite{Geron2019}.
 
-Um exemplo de AD pode ser visto na Figura~\ref{fig2_1} 
+A construção de uma árvore de decisão ocorre por meio de um processo recursivo de particionamento do espaço de atributos. Em cada nó interno da árvore, 
+o algoritmo seleciona um atributo e um ponto de divisão que melhor separam os dados de acordo com um critério de impureza. Entre os critérios 
+mais utilizados estão o índice de Gini e a entropia, que medem o grau de heterogeneidade das classes em cada subconjunto de dados \cite{Geron2019}. 
+O objetivo do processo de treinamento consiste em gerar divisões que produzam subconjuntos cada vez mais homogêneos, até que um 
+critério de parada seja atingido, resultando em nós terminais, também chamados de folhas, que representam a decisão final do modelo.
+
+Além do processo de divisão recursiva, a geração de uma árvore de decisão envolve a escolha sucessiva dos melhores atributos e pontos de corte 
+que maximizam a redução da impureza nos subconjuntos gerados. Durante o treinamento, o algoritmo avalia diferentes possíveis divisões nos atributos disponíveis 
+e seleciona aquela que produz o maior ganho de informação ou a maior redução do índice de Gini, dependendo do critério adotado. Esse procedimento é repetido de 
+forma recursiva até que uma condição de parada seja satisfeita, como a profundidade máxima da árvore, o número mínimo de amostras em um nó ou a ausência de melhoria 
+significativa na pureza dos subconjuntos \cite{Geron2019}.
+
+Em comparação com outras técnicas de aprendizado supervisionado, as árvores de decisão apresentam algumas características importantes. 
+Uma de suas principais vantagens é a interpretabilidade, uma vez que a estrutura da árvore permite interpretar de forma transparente como as decisões são tomadas a partir 
+dos atributos de entrada. Além disso, esses modelos requerem pouca preparação dos dados, pois não exigem normalização ou padronização das variáveis. Por outro lado, 
+árvores de decisão individuais tendem a apresentar alta variância, sendo sensíveis a pequenas variações nos dados de treinamento. Essa característica pode levar 
+ao fenômeno de \textit{overfitting}, motivo pelo qual métodos baseados em conjuntos de árvores, como o Random Forest, são frequentemente utilizados para 
+melhorar a capacidade de generalização do modelo \cite{Geron2019}.
+
+Um exemplo de AD pode ser visto na Figura~\ref{fig2_1}. 
 
 \begin{figure}[h]
     \centering
@@ -78,14 +152,29 @@ utiliza uma randomização extra no crescimento das árvores. Ao invés de busca
 utiliza-se da melhor dentro de um \textit{subset} randômico. Nesse caso, busca-se reduzir a variância do modelo por meio da agregação de 
 múltiplas árvores, mantendo um viés relativamente baixo quando comparado a modelos excessivamente regularizados.
 
+A motivação para essa estratégia está relacionada à redução da variância do modelo. ADs individuais são modelos de alta variância, 
+ou seja, pequenas variações no conjunto de treinamento podem resultar em estruturas de árvore significativamente diferentes. Ao treinar múltiplas 
+árvores em subconjuntos distintos dos dados e introduzir aleatoriedade na seleção de atributos, o RF reduz a correlação entre os modelos 
+individuais. Como consequência, ao combinar as previsões das árvores, os erros individuais tendem a se compensar, produzindo um modelo mais estável 
+e com melhor capacidade de generalização quando comparado a uma única AD \cite{Geron2019}.
+
+Além da seleção aleatória de subconjuntos de atributos em cada divisão, o RF também utiliza amostragem com reposição (\textit{bootstrap sampling}) para 
+gerar diferentes subconjuntos de dados de treinamento para cada árvore. Esse procedimento, conhecido como \textit{bootstrap aggregating} 
+ou \textit{bagging}, contribui para aumentar a diversidade entre os modelos individuais da floresta \cite{Geron2019}. 
+
+Durante a fase de predição, as saídas das árvores são agregadas para produzir o resultado final do modelo. Em tarefas de classificação, 
+essa agregação ocorre por meio de votação majoritária entre as árvores, enquanto em problemas de regressão o resultado é geralmente obtido pela 
+média das previsões individuais \cite{Geron2019}. Essa estratégia reduz a variância do modelo e tende a melhorar a capacidade de generalização quando comparada 
+ao uso de uma única AD.
+
 \subsection{Support Vector Machine (SVM)}
 
 O \textit{Support Vector Machine} (SVM) é um algoritmo de AM supervisionado utilizado para tarefas de classificação e regressão. 
-O seu princípio básico é encontrar um hiperplano ótimo que separe os dados em diferentes classes, maximizando a margem entre os pontos mais próximos 
-das classes opostas \cite{noble2006}.
+Em sua formulação clássica de classificação, o objetivo consiste em encontrar um hiperplano ótimo que separe os dados em diferentes classes, 
+maximizando a margem entre os pontos mais próximos das classes opostas \cite{noble2006}.
 
 O hiperplano utilizado pelo SVM consiste em uma superfície de decisão que separa os pontos de dados em classes distintas. Em um espaço 2D, 
-ele é uma linha; em 3D, um plano e, em dimensões superiores, uma hiper-superfície \cite{noble2006}
+ele é uma linha; em 3D, um plano e, em dimensões superiores, uma hiper-superfície \cite{noble2006}.
 
 Cabe ressaltar que nem sempre os dados são linearmente separáveis. Sendo assim, o SVM utiliza funções \textit{kernel} para projetar os 
 dados em um espaço de maior dimensão, onde a separação linear se torna possível \cite{noble2006}. As principais funções \textit{kernel} são:
@@ -96,6 +185,11 @@ dados em um espaço de maior dimensão, onde a separação linear se torna poss�
     \item \textbf{RBF (Radial Basis Function - Gaussiana)}: Amplamente usada para capturar padrões complexos.
     \item \textbf{Sigmoid}: Similar a redes neurais.
 \end{enumerate}
+
+Além de tarefas de classificação, o SVM também pode ser aplicado a problemas de regressão, formulação conhecida como \textit{Support Vector Regression} (SVR). 
+Nesse caso, o objetivo não consiste em separar classes, mas em encontrar uma função que aproxime os dados de treinamento com erro máximo limitado 
+por um parâmetro de tolerância, geralmente representado por $\epsilon$. O modelo busca ajustar uma função que permaneça dentro de uma região de erro aceitável, 
+ao mesmo tempo em que maximiza a margem em torno dessa função, preservando as propriedades de regularização do método \cite{Geron2019}.
 
 \subsection{Gradient Boosting (XGBoost)}
 
@@ -132,37 +226,28 @@ onde \( W^{(l)} \) e \( b^{(l)} \) representam, respectivamente, a matriz de pes
 A introdução da função não linear \( g(\cdot) \) é essencial, pois permite que o MLP aprenda relações complexas entre as variáveis de entrada e saída. 
 Sem ela, o modelo se reduziria a uma simples combinação linear, incapaz de representar funções não lineares \cite{Goodfellow2016}.
 
-\subsection{Generalização, Viés e Variância}
+De forma geral, um MLP é composto por uma camada de entrada, uma ou mais camadas ocultas e uma camada de saída, com conexões totalmente conectadas entre camadas consecutivas. 
+Nesse tipo de rede, o fluxo de informação ocorre em apenas uma direção, da entrada para a saída, caracterizando uma arquitetura do tipo \textit{feedforward} \cite{Geron2019}. 
+Cada neurônio de uma camada recebe como entrada uma combinação linear das ativações da camada anterior, adiciona um termo de viés e aplica uma função de ativação não linear, 
+produzindo uma nova representação intermediária dos dados.
 
-Um dos principais desafios em AM é garantir que o modelo apresente boa capacidade de generalização, isto é, desempenho satisfatório em dados não 
-utilizados durante o treinamento \cite{Goodfellow2016}. 
+A presença de múltiplas camadas ocultas permite que o modelo aprenda representações internas cada vez mais abstratas dos dados de entrada. 
+Esse processo de transformação sucessiva possibilita que redes neurais representem funções altamente complexas, o que torna os MLPs capazes de resolver 
+problemas que modelos lineares não conseguem modelar adequadamente \cite{Goodfellow2016,Geron2019}.
 
-Modelos excessivamente complexos podem se ajustar não apenas aos padrões relevantes, mas também ao ruído presente no conjunto de treinamento, 
-fenômeno conhecido como \textit{overfitting}. Em contrapartida, modelos demasiadamente simples podem não capturar relações importantes nos dados, 
-resultando em \textit{underfitting}.
+O treinamento de um MLP é realizado por meio do algoritmo de retropropagação do erro (\textit{backpropagation}), que calcula o gradiente da função de perda 
+em relação aos parâmetros da rede. Esse gradiente é utilizado por métodos de otimização baseados em descida do gradiente para atualizar iterativamente os pesos 
+e vieses da rede, minimizando o erro entre as previsões do modelo e os valores observados \cite{Goodfellow2016}. 
+De acordo com \cite{Geron2019}, o processo de treinamento envolve a propagação direta dos dados pela rede (\textit{forward pass}), seguida do cálculo do erro 
+e da propagação desse erro no sentido inverso para ajustar os parâmetros do modelo.
 
-Esse comportamento está diretamente relacionado ao equilíbrio entre viés e variância. Modelos com alto viés tendem a apresentar subajuste, enquanto 
-modelos com alta variância tornam-se excessivamente sensíveis às particularidades do conjunto de treinamento. Técnicas como validação cruzada, regularização 
-e controle da complexidade do modelo são estratégias amplamente utilizadas para mitigar esses problemas \cite{Geron2019}.
+Os MLPs podem ser utilizados tanto em tarefas de regressão quanto de classificação. Em problemas de regressão, a camada de saída geralmente possui um único neurônio 
+com ativação linear, enquanto em tarefas de classificação podem ser utilizadas funções de ativação como a logística ou \textit{softmax}, dependendo da natureza do problema 
+\cite{Geron2019}. Essa flexibilidade faz com que o MLP seja uma das arquiteturas mais amplamente utilizadas no contexto de aprendizado profundo.
 
-\subsection{Seleção de Atributos e Redução de Dimensionalidade}
-
-Em problemas com elevado número de variáveis explicativas, a presença de atributos redundantes ou irrelevantes pode impactar negativamente 
-o desempenho dos modelos preditivos. A seleção de atributos busca identificar subconjuntos de variáveis que contribuam de forma significativa para 
-a tarefa de aprendizagem \cite{Liu2010}.
-
-Os métodos de seleção podem ser classificados em três categorias principais: filtros, que utilizam medidas estatísticas independentes do modelo; 
-wrappers, que avaliam subconjuntos de atributos com base no desempenho de um algoritmo específico; e métodos embutidos, nos quais a seleção ocorre 
-durante o próprio processo de treinamento \cite{Guyon2006}.
-
-Além da seleção direta de atributos, técnicas de redução de dimensionalidade, como a Análise de Componentes Principais (PCA), 
-realizam uma transformação linear das variáveis originais em um novo conjunto de componentes ortogonais que preservam a maior parte da variância dos dados. 
-Essa abordagem pode reduzir complexidade computacional e mitigar problemas de multicolinearidade. Cabe ressaltar que a PCA não consiste em um método 
-de seleção de atributos, mas sim em uma técnica de extração de atributos, pois 
-cria novas variáveis a partir de combinações lineares das variáveis originais \cite{Guyon2006}.
-
-As técnicas apresentadas nesta seção constituem a base teórica para os modelos preditivos empregados neste trabalho, sendo posteriormente integradas 
-a métodos de otimização para apoio à tomada de decisão no contexto esportivo.
+Além disso, o desempenho do modelo depende fortemente da escolha de hiperparâmetros como o número de camadas ocultas, o número de neurônios por camada, a função de ativação 
+e a taxa de aprendizado. A definição adequada desses parâmetros é fundamental para garantir a capacidade de generalização do modelo e evitar problemas como 
+\textit{overfitting} ou \textit{underfitting} \cite{Geron2019}.
 
 \section{Pesquisa Operacional}
 
@@ -381,6 +466,24 @@ Em contraste com algoritmos gulosos, métodos de busca local partem de uma solu�
 função objetivo. O processo continua enquanto existirem melhorias locais, terminando quando se atinge um ponto no qual nenhuma modificação local 
 resulta em melhora adicional.
 
+Um exemplo clássico da aplicação de busca local ocorre no Problema do Caixeiro Viajante (\textit{Traveling Salesman Problem} -- TSP). 
+Croes \cite{Croes1958} propôs um método de melhoria que parte de uma solução inicial e aplica transformações denominadas 
+\textit{inversions}, nas quais a ordem de uma subsequência de cidades do tour é invertida sempre que essa operação reduz o comprimento total do percurso. 
+Essas transformações geram soluções vizinhas a partir da solução corrente e são aceitas apenas quando produzem melhoria na função objetivo. 
+Esse procedimento caracteriza uma estratégia típica de busca local, na qual soluções vizinhas são exploradas iterativamente até que 
+nenhuma melhoria adicional possa ser obtida.
+
+No contexto do TSP, uma operação de inversão consiste em selecionar duas posições do tour e inverter a ordem das cidades contidas no 
+segmento compreendido entre essas posições. Essa modificação gera uma nova rota candidata que pode apresentar menor comprimento total 
+quando comparada à solução original. Caso a nova solução produza melhoria na função objetivo, ela passa a substituir a solução corrente, 
+e o processo de exploração da vizinhança continua até que nenhuma inversão adicional resulte em redução do custo do percurso.
+
+Um pseudocódigo simplificado desse procedimento de busca local baseado em inversões é apresentado no 
+Algoritmo~\ref{alg:one_opt_tsp}.
+
+\input{algoritmos/one_opt_tsp.tex}
+
+\begin{comment}
 Um exemplo clássico apresentado por \cite{Cormen2009} surge no problema de agrupamento (\textit{k-means clustering}). Dado um conjunto de pontos e 
 um número fixo de centros $k$, deseja-se encontrar uma configuração de centros que minimize a soma das distâncias quadráticas entre cada ponto e o centro mais próximo. 
 Como esse problema é NP-difícil, não se conhece um algoritmo polinomial que garanta a obtenção do ótimo global.
@@ -391,6 +494,7 @@ respectivo cluster. O processo é repetido até que nenhuma alteração reduza o
 
 Esse procedimento ilustra claramente o princípio da busca local: a partir de uma solução inicial, o algoritmo explora soluções vizinhas 
 obtidas por pequenas modificações estruturais, aceitando apenas mudanças que melhoram a função objetivo.
+\end{comment}
 
 No problema abordado neste trabalho, a busca local é empregada para avaliar diferentes conjuntos de jogadores candidatos a contratação, respeitando 
 uma restrição de orçamento. Cada solução é representada por um conjunto de jogadores de cardinalidade fixa, sendo a vizinhança definida por operações de 
@@ -403,7 +507,6 @@ A restrição orçamentária é tratada como condição de factibilidade: soluç
 O critério de aceitação adotado é de melhoria estrita, isto é, uma solução vizinha é aceita apenas se apresentar valor superior da função objetivo em relação 
 à solução corrente. O algoritmo é encerrado quando nenhuma substituição viável resulta em melhoria adicional, caracterizando a convergência para um ótimo local, 
 conforme descrito em \cite{Gendreau2010}.
-
 \begin{comment}
 \subsection{Programação Dinâmica (PD)}
 
@@ -459,5 +562,4 @@ V(x) = \max_{a \in A} \left\{ r(x, a) + \sum_{x'} Q(x' | x, a) V(x') \right\}
 onde \(V(x)\) representa o valor ótimo esperado de um estado \(x\).
 
 Para resolver um MDP, podem ser usados métodos como, por exemplo, PL, garantido a convergência para a política ótima sob certas condições.
-
 \end{comment}
