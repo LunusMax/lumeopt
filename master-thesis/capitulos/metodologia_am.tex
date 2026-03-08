@@ -1,4 +1,4 @@
-\chapter{Modelagem Preditiva por Aprendizado de Máquina}
+\chapter{Modelagem Preditiva por Aprendizado de Máquina (AM)}
 
 \section{Coleta dos Dados}
 
@@ -86,7 +86,7 @@ vitória do mandante foi codificada como '1', vitória do visitante como '2' e e
 Com base nessa codificação, percorreu-se a base atribuindo três pontos a cada vitória e um ponto a cada empate. 
 O resultado desse processamento foi uma tabela organizada por temporada, contendo cada clube e a respectiva pontuação acumulada.
 
-\section{Treinamento do Modelo de AM}
+\section{Treinamento do Modelo de Aprendizado de Máquina (AM)}
 
 Os dados de pontuação dos clubes foram organizados por temporada, enquanto as estatísticas individuais dos jogadores corresponderam sempre à temporada anterior. 
 Dessa forma, o modelo utiliza informações conhecidas de desempenho prévio para estimar a pontuação final do clube na temporada subsequente. 
@@ -95,7 +95,7 @@ Adicionalmente, a pontuação dos clubes na temporada anterior foi incorporada c
 O modelo de AM foi desenvolvido para prever a pontuação dos clubes ao longo das temporadas, com base no desempenho individual de seus jogadores. Para evitar 
 vazamento de dados entre treinamento e teste, a base da Série A italiana foi utilizada no treinamento do modelo, enquanto a base da EPL foi destinada à etapa de teste.
 
-\subsection{Modelo de Aprendizado de Máquina}
+\subsection{Multilayer Perceptron (MLP)}
 
 Para a etapa de previsão da pontuação dos clubes, foi implementado o modelo de MLP utilizando a biblioteca \textit{Keras}. O modelo foi construído 
 no formato \textit{Sequential}, contendo três camadas densamente conectadas. A primeira camada recebe como entrada um vetor com dimensão igual ao 
