@@ -1,0 +1,212 @@
+\chapter{Resultados da Otimização de Montagem de Elenco (PO)}
+
+Esta seção apresenta os resultados experimentais obtidos com a aplicação das heurísticas propostas para o problema de otimização da composição de elencos. 
+Conforme discutido na seção anterior, o objetivo do problema consiste em identificar combinações de jogadores que maximizem o desempenho esperado de uma equipe 
+ao longo da temporada.
+
+Uma vez que os algoritmos de otimização utilizam o modelo de AM como função objetivo, a qualidade final das soluções depende diretamente 
+das previsões produzidas por esse modelo. Dessa forma, tanto o algoritmo guloso quanto o método de busca local operam sobre a mesma função objetivo, 
+diferenciando-se apenas pela estratégia utilizada para explorar o espaço de soluções. Assim, a comparação entre os métodos concentra-se principalmente 
+na qualidade das soluções encontradas e no custo computacional necessário para alcançá-las.
+
+A qualidade de cada solução gerada pelos algoritmos é medida pela pontuação prevista do time resultante, estimada pelo modelo de AM desenvolvido anteriormente neste trabalho. 
+Esse modelo recebe como entrada as características agregadas do elenco e retorna a quantidade esperada de pontos que a equipe obteria na competição. 
+Dessa forma, quanto maior a pontuação prevista, melhor é considerada a solução encontrada pelo algoritmo.
+
+Como os elencos gerados pelos métodos de otimização representam cenários hipotéticos de contratação, não existe um resultado real observado para essas configurações. 
+Assim, a avaliação da qualidade das soluções é realizada por meio da função objetivo definida pelo modelo preditivo, que estima o desempenho esperado da equipe 
+para cada configuração de elenco simulada.
+
+Antes da análise estatística dos experimentos, foi realizado um \textit{benchmark} inicial com uma única execução de cada algoritmo. Esse experimento preliminar tem como 
+objetivo ilustrar o comportamento dos métodos e destacar diferenças iniciais entre as estratégias de exploração do espaço de soluções.
+
+Nesse \textit{benchmark} inicial foram registrados o tempo de execução, o número de iterações, o número de avaliações da função objetivo e a pontuação final obtida 
+pela solução encontrada. Esses resultados permitem uma primeira comparação entre os algoritmos, especialmente em relação ao custo computacional 
+necessário para alcançar soluções de alta qualidade.
+
+\section{Experimento Preliminar (\textit{Benchmark} inicial)}
+
+Para ilustrar o comportamento dos algoritmos de otimização, foi realizado inicialmente um experimento preliminar (\textit{benchmark}) com uma única execução de cada método. 
+Como cenário de teste, foi utilizado o elenco do Napoli na temporada 2021--2022, considerando um orçamento disponível de \EUR{120.000.000} para contratações.
+
+Antes da aplicação dos algoritmos de otimização, a pontuação prevista base do Napoli para essa temporada, estimada pelo modelo de aprendizado de máquina, foi de 71,83 pontos. 
+O objetivo dos algoritmos consiste em selecionar jogadores adicionais que maximizem essa pontuação prevista dentro da restrição orçamentária estabelecida.
+
+A Tabela~\ref{tab:benchmark_inicial} apresenta os resultados obtidos após uma única execução de cada algoritmo, incluindo o tempo de execução, 
+o número de iterações realizadas, o número de avaliações da função objetivo e a pontuação final prevista para o elenco resultante.
+
+\begin{table}[H]
+\centering
+\caption{Resultados do experimento preliminar (\textit{benchmark})}
+\label{tab:benchmark_inicial}
+\begin{tabular}{lccccc}
+\hline
+Algoritmo & Tempo (s) & Iterações & Avaliações & Melhoras & Score final \\
+\hline
+Guloso First-Improvement & 1.85 & 4 & 10 & -- & 75.48 \\
+Guloso Best-Improvement & 488.74 & 4 & 2493 & -- & 78.04 \\
+Busca Local First-Improvement & 228.98 & 9 & 1076 & 8 & 77.24 \\
+Busca Local Best-Improvement & 114.34 & 3 & 584 & 2 & 77.66 \\
+\hline
+\end{tabular}
+\end{table}
+
+Observa-se que todos os algoritmos foram capazes de melhorar a pontuação prevista da equipe em relação ao valor base de 71,83 pontos. 
+Entre os métodos analisados, o algoritmo Guloso Best-Improvement apresentou a maior pontuação final, alcançando 78,04 pontos previstos. 
+No entanto, esse desempenho foi obtido ao custo de um tempo de execução significativamente superior aos demais métodos, decorrente do grande número de avaliações 
+da função objetivo realizadas durante o processo de busca.
+
+Em contraste, o algoritmo Guloso First-Improvement apresentou o menor tempo de execução, porém produziu uma solução de menor qualidade quando comparado às demais abordagens. 
+Já os métodos baseados em busca local produziram soluções intermediárias em termos de pontuação, com destaque para o algoritmo Busca Local Best-Improvement, 
+que apresentou menor tempo de execução e menor número de avaliações da função objetivo em comparação à variante Busca Local First-Improvement.
+
+A solução com maior pontuação prevista foi obtida pelo algoritmo Guloso Best-Improvement, que sugeriu a contratação dos jogadores Luis Muriel, Romelu Lukaku 
+e Zlatan Ibrahimović.
+
+A Tabela~\ref{tab:jogadores_sugeridos} apresenta algumas estatísticas ofensivas desses jogadores, obtidas a partir dos dados utilizados neste trabalho. 
+Observa-se que todos apresentam forte produção ofensiva, com destaque para o elevado número de gols, assistências e valores de \textit{expected goals} (xG).
+
+\begin{table}[H]
+\centering
+\caption{Estatísticas ofensivas dos jogadores sugeridos pelo algoritmo Guloso Best-Improvement}
+\label{tab:jogadores_sugeridos}
+\begin{tabular}{lcccccc}
+\hline
+Jogador & Idade & Gols & Assistências & G+A & xG & xAG \\
+\hline
+Luis Muriel & 29 & 22 & 7 & 29 & 15.5 & 4.5 \\
+Romelu Lukaku & 27 & 24 & 11 & 35 & 23.0 & 7.0 \\
+Zlatan Ibrahimović & 38 & 15 & 2 & 17 & 16.2 & 1.8 \\
+\hline
+\end{tabular}
+\end{table}
+
+Observa-se que os três jogadores sugeridos pelo algoritmo atuam predominantemente em posições ofensivas. Esse resultado pode estar relacionado à própria função 
+objetivo utilizada no processo de otimização, uma vez que o modelo de AM pode atribuir maior peso a métricas associadas à produção ofensiva na previsão da pontuação 
+final das equipes. Dessa forma, o algoritmo tende a priorizar jogadores com forte impacto em ações de ataque.
+
+Esse comportamento ilustra como a natureza da função objetivo influencia diretamente as soluções encontradas pelos algoritmos de otimização. Assim, melhorias futuras 
+poderiam considerar a inclusão de restrições adicionais relacionadas à estrutura posicional do elenco ou a incorporação de métricas defensivas mais detalhadas 
+no modelo preditivo.
+
+Embora esse experimento inicial permita observar diferenças claras no comportamento dos algoritmos, a presença de componentes aleatórias no processo de busca 
+pode influenciar os resultados obtidos em uma única execução. Por esse motivo, na próxima seção são apresentados os resultados de múltiplas execuções 
+independentes de cada algoritmo, permitindo uma análise estatística mais robusta do desempenho dos métodos.
+
+\section{Avaliação Experimental com Múltiplas Execuções}
+
+Com o objetivo de obter uma análise mais robusta do desempenho dos algoritmos, foram realizadas dez execuções independentes para cada método considerado. 
+Em cada execução, foram registradas métricas relacionadas à qualidade da solução e ao custo computacional do processo de busca, incluindo tempo de execução, 
+número de iterações, número de avaliações da função objetivo e pontuação final da solução obtida.
+
+A Tabela~\ref{tab:benchmark_multiplas_execucoes} apresenta um resumo estatístico dos resultados, incluindo média, desvio padrão, valor mínimo e 
+valor máximo das métricas analisadas para cada algoritmo.
+
+\begin{table}[H]
+\centering
+\caption{Resumo estatístico dos resultados após 10 execuções}
+\label{tab:benchmark_multiplas_execucoes}
+\begin{tabular}{lcccccc}
+\hline
+Algoritmo & Tempo médio (s) & $\sigma_{tempo}$ & Iterações médias & Avaliações médias & Score médio & $\sigma_{score}$ \\
+\hline
+Guloso First-Improvement & 1.823   & 0.240  & 4.0 & 10.0   & 75.480 & 0.000 \\
+Guloso Best-Improvement & 482.422 & 32.540 & 4.0 & 2493.0 & 78.038 & 0.000 \\
+Busca Local First-Improvement & 157.191 & 24.710 & 5.8 & 828.1  & 77.191 & 0.282 \\
+Busca Local Best-Improvement & 121.671 & 14.732 & 3.5 & 649.0  & 77.051 & 0.419 \\
+\hline
+\end{tabular}
+\end{table}
+
+Na comparação entre as heurísticas gulosas, observa-se um \textit{trade-off} bastante claro entre qualidade da solução e custo computacional. 
+O algoritmo Guloso Best-Improvement apresentou a maior pontuação média entre todos os métodos avaliados, com 78,038 pontos previstos, superando o Guloso First-Improvement, 
+cuja média foi de 75,480 pontos. No entanto, essa melhoria na qualidade da solução foi obtida a um custo computacional substancialmente superior.
+
+Enquanto o Guloso First-Improvement apresentou tempo médio de execução de apenas 1,823 segundos e média de 10 avaliações da função objetivo, o Guloso Best-Improvement demandou, 
+em média, 482,422 segundos e 2493 avaliações. Como ambos apresentaram média de 4 iterações, a diferença de desempenho computacional está diretamente 
+associada à estratégia de exploração adotada. No caso do método Best-Improvement, a busca exaustiva pela melhor alternativa local em cada etapa elevou 
+significativamente o número de avaliações realizadas.
+
+Observa-se ainda que as heurísticas gulosas apresentaram desvio padrão nulo na pontuação final, indicando comportamento determinístico nas execuções realizadas. 
+Isso ocorre porque, dado o mesmo conjunto de candidatos e a mesma função objetivo, o processo de construção da solução tende a conduzir sempre ao mesmo resultado 
+no cenário experimental considerado. Por outro lado, os algoritmos de busca local apresentaram pequena variabilidade entre as execuções. 
+Esse comportamento é esperado, uma vez que esses métodos dependem da solução inicial e da trajetória percorrida durante a exploração da vizinhança, 
+o que introduz elementos de aleatoriedade no processo de busca.
+
+No caso dos algoritmos de busca local, observa-se comportamento distinto em relação às heurísticas gulosas. O método Busca Local Best-Improvement apresentou menor tempo 
+médio de execução (121,7 s) quando comparado ao Busca Local First-Improvement (157,2 s), além de exigir menor número médio de avaliações da função objetivo 
+(649 contra 828).
+
+Esse resultado sugere que a estratégia Best-Improvement foi capaz de identificar movimentos de melhoria mais eficazes em cada etapa da busca,
+reduzindo o número total de iterações necessárias até a convergência. Em termos de qualidade da solução, ambos os métodos apresentaram desempenho semelhante, 
+com pontuações médias de 77,051 pontos para o Busca Local Best-Improvement e 77,191 pontos para o Busca Local First-Improvement.
+
+De forma geral, os resultados indicam que o impacto da estratégia de exploração (first-improvement ou best-improvement) depende do tipo de heurística em que ela 
+é empregada. Nas heurísticas gulosas, a estratégia Best-Improvement proporcionou soluções de maior qualidade, porém com custo computacional significativamente 
+superior. Já na busca local, a mesma estratégia apresentou maior eficiência computacional, reduzindo o número de iterações e avaliações da função objetivo, 
+sem diferenças substanciais na qualidade das soluções obtidas.
+
+Embora os experimentos apresentados tenham permitido comparar o desempenho dos algoritmos no cenário considerado, o comportamento das heurísticas também pode 
+ser influenciado pela restrição orçamentária disponível para contratações. Em problemas de otimização aplicados ao contexto esportivo, o orçamento representa 
+uma das principais limitações práticas enfrentadas pelos clubes, afetando diretamente o conjunto de jogadores candidatos e, consequentemente, o espaço de soluções 
+explorado pelos algoritmos. Dessa forma, torna-se relevante investigar como diferentes níveis de orçamento impactam tanto a qualidade das soluções encontradas quanto 
+o desempenho computacional dos métodos propostos. Na próxima seção, é realizada uma análise de sensibilidade em relação à restrição orçamentária, avaliando o 
+comportamento dos algoritmos sob diferentes limites financeiros disponíveis para montagem do elenco.
+
+\section{Análise de Sensibilidade à Restrição Orçamentária}
+
+Para analisar o impacto da restrição orçamentária no comportamento dos algoritmos, foi realizado um experimento adicional considerando um cenário com orçamento 
+significativamente menor. Nesse caso, utilizou-se o elenco do Cagliari na mesma temporada analisada anteriormente, considerando um orçamento disponível de 
+\EUR{60.000.000} para contratações.
+
+Esse cenário representa uma situação mais restritiva do ponto de vista financeiro, típica de clubes com menor capacidade de investimento. 
+Dessa forma, o conjunto de jogadores candidatos torna-se mais limitado, o que pode alterar a dinâmica de exploração do espaço de soluções pelos algoritmos.
+
+Antes da aplicação dos algoritmos de otimização, a pontuação prevista base do Cagliari para essa temporada, estimada pelo modelo de AM, foi de 42,56 pontos. 
+O objetivo dos algoritmos, nesse contexto, consiste em selecionar jogadores adicionais que maximizem essa pontuação prevista dentro da restrição orçamentária estabelecida.
+
+A Tabela~\ref{tab:cagliari_orcamento} apresenta os resultados obtidos após uma execução de cada algoritmo nesse cenário.
+
+\begin{table}[H]
+\centering
+\caption{Resultados dos algoritmos para o Cagliari com orçamento de \EUR{60.000.000}}
+\label{tab:cagliari_orcamento}
+\begin{tabular}{lccccc}
+\hline
+Algoritmo & Tempo (s) & Iterações & Avaliações & Melhoras & Score final \\
+\hline
+Guloso First-Improvement & 3.93 & 5 & 21 & -- & 42.74 \\
+Guloso Best-Improvement & 553.14 & 5 & 2702 & -- & 43.04 \\
+Busca Local First-Improvement & 90.23 & 12 & 424 & 11 & 43.69 \\
+Busca Local Best-Improvement & 76.16 & 5 & 363 & 4 & 43.36 \\
+\hline
+\end{tabular}
+\end{table}
+
+Observa-se que todos os algoritmos foram capazes de melhorar a pontuação prevista da equipe em relação ao valor base de 42,56 pontos. 
+Nesse cenário mais restritivo, os algoritmos de busca local apresentaram melhor desempenho em termos de qualidade da solução. 
+O método Busca Local First-Improvement obteve a maior pontuação final, alcançando 43,69 pontos previstos.
+
+Esse resultado corresponde a um ganho aproximado de 1,13 ponto em relação à configuração original do elenco, indicando que, mesmo sob restrições financeiras 
+mais severas, a otimização ainda é capaz de identificar combinações de jogadores capazes de melhorar o desempenho esperado da equipe.
+
+Esse resultado contrasta com o experimento anterior realizado com o Napoli, no qual o algoritmo Guloso Best-Improvement apresentou o melhor desempenho. 
+Uma possível explicação para essa diferença está relacionada ao tamanho e à estrutura do espaço de soluções. Em cenários com maior disponibilidade financeira 
+e maior número de jogadores candidatos, heurísticas construtivas podem ser suficientes para identificar soluções de alta qualidade. 
+Entretanto, quando o orçamento é mais restrito, a exploração iterativa do espaço de soluções realizada pelos métodos de busca local pode se tornar mais eficaz 
+para identificar combinações vantajosas de jogadores dentro das limitações impostas.
+
+A melhor solução encontrada nesse cenário foi obtida pelo algoritmo Busca Local First-Improvement, que sugeriu a contratação dos jogadores Sergio Agüero, 
+Moussa Djenepo, Riccardo Bocalon e Angelo da Costa Junior.
+
+Observa-se que, diferentemente do experimento realizado com o Napoli, a solução encontrada neste cenário inclui um goleiro entre os jogadores sugeridos. 
+Esse resultado indica que, sob restrições orçamentárias mais severas, o modelo preditivo pode identificar ganhos de desempenho associados a melhorias em diferentes 
+setores do elenco, e não apenas em posições ofensivas.
+
+Esse comportamento sugere que, quando o orçamento disponível é limitado, a otimização tende a buscar combinações de jogadores que ofereçam melhor 
+relação entre custo e impacto esperado no desempenho da equipe, podendo incluir reforços em posições defensivas ou de menor visibilidade ofensiva.
+
+Esses resultados reforçam que a estrutura das soluções encontradas pelos algoritmos depende diretamente das restrições impostas ao problema, especialmente 
+da disponibilidade orçamentária, que altera o conjunto de jogadores viáveis e a dinâmica de exploração do espaço de soluções. 
+Dessa forma, observa-se que a interação entre o modelo preditivo e os métodos de otimização permite identificar configurações de elenco potencialmente mais 
+eficientes mesmo em cenários financeiros restritivos.
