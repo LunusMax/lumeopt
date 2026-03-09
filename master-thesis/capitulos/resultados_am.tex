@@ -1,5 +1,10 @@
 \chapter{Avaliação dos Modelos de Aprendizado de Máquina (AM)}
 
+Este capítulo apresenta os resultados obtidos a partir da aplicação dos modelos de Aprendizado de Máquina desenvolvidos neste trabalho. 
+Inicialmente, são discutidas as métricas de desempenho alcançadas pelos modelos na tarefa de predição da pontuação final das equipes. 
+Em seguida, é realizada uma análise do comportamento das previsões, buscando avaliar a capacidade dos modelos em capturar padrões relevantes a partir das estatísticas 
+individuais dos jogadores.
+
 \section{Modelos de Aprendizado de Máquina (AM)}
 
 O melhor modelo de AM desenvolvido neste estudo apresentou acurácia máxima de aproximadamente $55\%$ na tarefa de prever a pontuação final de um time em sua liga nacional, utilizando
@@ -77,3 +82,8 @@ por Bishop~\cite{bishop2006}. Esse comportamento é análogo ao fenômeno estat�
 Dessa forma, observa-se que o modelo MLP é capaz de capturar tendências gerais de desempenho dos clubes com base nas estatísticas individuais de seus jogadores, 
 porém nota-se uma subestimação sistemática das equipes de desempenho elevado, como Manchester City, Arsenal e Liverpool, e uma superestimação das equipes de 
 baixo desempenho, como Sheffield United, Burnley e Luton Town.
+
+Com base nos resultados apresentados neste capítulo, foi possível identificar o modelo de AM que apresentou o melhor desempenho na tarefa de predição da pontuação 
+final das equipes. A partir dessa definição, o modelo selecionado (MLP) passa a ser utilizado como função objetivo na etapa de otimização da composição de elencos. 
+Dessa forma, no próximo capítulo são apresentados os procedimentos de PO empregados para simular contratações e avaliar configurações de elenco capazes de 
+maximizar o desempenho previsto das equipes.

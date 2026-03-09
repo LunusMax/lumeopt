@@ -40,14 +40,14 @@ o número de iterações realizadas, o número de avaliações da função objet
 \caption{Resultados do experimento preliminar (\textit{benchmark})}
 \label{tab:benchmark_inicial}
 \begin{tabular}{lccccc}
-\hline
+\toprule
 Algoritmo & Tempo (s) & Iterações & Avaliações & Melhoras & Score final \\
-\hline
+\midrule
 Guloso First-Improvement & 1.85 & 4 & 10 & -- & 75.48 \\
 Guloso Best-Improvement & 488.74 & 4 & 2493 & -- & 78.04 \\
 Busca Local First-Improvement & 228.98 & 9 & 1076 & 8 & 77.24 \\
 Busca Local Best-Improvement & 114.34 & 3 & 584 & 2 & 77.66 \\
-\hline
+\bottomrule
 \end{tabular}
 \end{table}
 
@@ -71,13 +71,13 @@ Observa-se que todos apresentam forte produção ofensiva, com destaque para o e
 \caption{Estatísticas ofensivas dos jogadores sugeridos pelo algoritmo Guloso Best-Improvement}
 \label{tab:jogadores_sugeridos}
 \begin{tabular}{lcccccc}
-\hline
+\toprule
 Jogador & Idade & Gols & Assistências & G+A & xG & xAG \\
-\hline
+\midrule
 Luis Muriel & 29 & 22 & 7 & 29 & 15.5 & 4.5 \\
 Romelu Lukaku & 27 & 24 & 11 & 35 & 23.0 & 7.0 \\
 Zlatan Ibrahimović & 38 & 15 & 2 & 17 & 16.2 & 1.8 \\
-\hline
+\bottomrule
 \end{tabular}
 \end{table}
 
@@ -107,14 +107,14 @@ valor máximo das métricas analisadas para cada algoritmo.
 \caption{Resumo estatístico dos resultados após 10 execuções}
 \label{tab:benchmark_multiplas_execucoes}
 \begin{tabular}{lcccccc}
-\hline
-Algoritmo & Tempo médio (s) & $\sigma_{tempo}$ & Iterações médias & Avaliações médias & Score médio & $\sigma_{score}$ \\
-\hline
-Guloso First-Improvement & 1.823   & 0.240  & 4.0 & 10.0   & 75.480 & 0.000 \\
+\toprule
+Algoritmo & Tempo (s) & $\sigma_T$ & Iterações & Avaliações & Score & $\sigma_S$ \\
+\midrule
+Guloso First-Improvement & 1.823 & 0.240 & 4.0 & 10.0 & 75.480 & 0.000 \\
 Guloso Best-Improvement & 482.422 & 32.540 & 4.0 & 2493.0 & 78.038 & 0.000 \\
-Busca Local First-Improvement & 157.191 & 24.710 & 5.8 & 828.1  & 77.191 & 0.282 \\
-Busca Local Best-Improvement & 121.671 & 14.732 & 3.5 & 649.0  & 77.051 & 0.419 \\
-\hline
+Busca Local First-Improvement & 157.191 & 24.710 & 5.8 & 828.1 & 77.191 & 0.282 \\
+Busca Local Best-Improvement & 121.671 & 14.732 & 3.5 & 649.0 & 77.051 & 0.419 \\
+\bottomrule
 \end{tabular}
 \end{table}
 
@@ -172,14 +172,14 @@ A Tabela~\ref{tab:cagliari_orcamento} apresenta os resultados obtidos após uma 
 \caption{Resultados dos algoritmos para o Cagliari com orçamento de \EUR{60.000.000}}
 \label{tab:cagliari_orcamento}
 \begin{tabular}{lccccc}
-\hline
+\toprule
 Algoritmo & Tempo (s) & Iterações & Avaliações & Melhoras & Score final \\
-\hline
+\midrule
 Guloso First-Improvement & 3.93 & 5 & 21 & -- & 42.74 \\
 Guloso Best-Improvement & 553.14 & 5 & 2702 & -- & 43.04 \\
 Busca Local First-Improvement & 90.23 & 12 & 424 & 11 & 43.69 \\
 Busca Local Best-Improvement & 76.16 & 5 & 363 & 4 & 43.36 \\
-\hline
+\bottomrule
 \end{tabular}
 \end{table}
 
@@ -210,3 +210,7 @@ Esses resultados reforçam que a estrutura das soluções encontradas pelos algo
 da disponibilidade orçamentária, que altera o conjunto de jogadores viáveis e a dinâmica de exploração do espaço de soluções. 
 Dessa forma, observa-se que a interação entre o modelo preditivo e os métodos de otimização permite identificar configurações de elenco potencialmente mais 
 eficientes mesmo em cenários financeiros restritivos.
+
+Os resultados apresentados neste capítulo demonstram o potencial da abordagem proposta para a otimização da composição de elencos a partir das previsões obtidas 
+por modelos de AM. A análise realizada permitiu avaliar o comportamento dos algoritmos de otimização e os ganhos potenciais associados às contratações sugeridas. 
+No capítulo seguinte, são apresentadas as conclusões deste trabalho, bem como possíveis direções para pesquisas futuras.
