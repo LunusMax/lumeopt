@@ -30,11 +30,23 @@ que serviram de base para o desenvolvimento dos modelos preditivos.
 
 \subsection{Base de Dados dos Jogadores}
 
-As tabelas extraídas do site FBref \cite{fbref} para todos os times e temporadas foram estruturadas de forma idêntica, contendo 47 atributos relacionados à idade, posição, minutos 
-jogados, bem como estatísticas ofensivas (gols, assistências, passes decisivos, entre outras) e defensivas (bloqueios, desarmes, erros graves, entre outras) de cada 
-jogador. Esses dados foram carregados em diferentes \textit{dataframes}, um para cada liga considerada, e posteriormente organizados por jogador, incluindo informações 
-de clube, temporada e respectivos indicadores de desempenho. Ressalta-se que um mesmo atleta pode aparecer em diferentes temporadas e clubes dentro da organização 
-adotada.
+As estatísticas dos jogadores foram extraídas do site FBref \cite{fbref} para todos os times e temporadas consideradas no estudo. No entanto, 
+o FBref disponibiliza separadamente as estatísticas ofensivas e defensivas dos jogadores em tabelas distintas. Dessa forma, foi necessário realizar uma etapa 
+de organização e integração dessas informações para construir uma base única de atributos por jogador.
+
+Inicialmente, foram removidos atributos que não possuem influência direta no desempenho esportivo, como variáveis meramente descritivas (por exemplo, nacionalidade). 
+Em seguida, as tabelas contendo estatísticas ofensivas e defensivas foram concatenadas, permitindo que cada jogador passasse a possuir, em um único registro, todas 
+as métricas de desempenho consideradas no estudo. Durante esse processo, eventuais colunas duplicadas geradas pela concatenação foram identificadas e removidas. 
+Por fim, os dados consolidados foram armazenados em arquivos CSV individuais para cada clube e temporada, seguindo o padrão \textit{data\_time\_temporada.csv} 
+(por exemplo, \textit{data\_napoli\_2021-2022.csv}). A Figura~\ref{fig:data_processing} apresenta o fluxo de organização dos dados a partir das tabelas originais do FBref.
+
+\input{fluxogramas/data_processing}
+
+As tabelas resultantes desse processo possuem 47 atributos relacionados à idade, posição, minutos jogados, bem como estatísticas ofensivas 
+(gols, assistências, passes decisivos, entre outras) e defensivas (bloqueios, desarmes, erros graves, entre outras) de cada jogador. 
+Esses dados foram carregados em diferentes \textit{dataframes}, um para cada liga considerada, e posteriormente organizados por jogador, 
+incluindo informações de clube, temporada e respectivos indicadores de desempenho. Ressalta-se que um mesmo atleta pode aparecer em diferentes temporadas e clubes 
+dentro da organização adotada.
 
 A Tabela~\ref{tab:features} apresenta a descrição completa das variáveis utilizadas no estudo.
 
@@ -44,8 +56,11 @@ Após a etapa de organização, os dados estruturados foram armazenados em um re
 transparência metodológica e facilidade de acesso para futuras análises. O repositório utilizado neste estudo está disponível em 
 \url{https://github.com/LunusMax/epl-seriea-data}.
 
-Em seguida, os \textit{dataframes} correspondentes a cada liga foram concatenados em um único conjunto, englobando todos os jogadores considerados no estudo, o qual foi 
-utilizado nas etapas subsequentes da análise.
+Em seguida, os arquivos CSV disponibilizados no repositório GitHub foram carregados no ambiente de execução do Google Colab. A partir desses arquivos, 
+os dados dos jogadores foram lidos e organizados em \textit{dataframes}, sendo realizada a concatenação dos registros pertencentes a cada liga. 
+Cada registro da base de dados representa o conjunto de estatísticas produzidas por um jogador atuando por um determinado clube em uma temporada específica. 
+Como resultado, foram construídos dois conjuntos de dados distintos, um correspondente à Premier League e outro à Serie A italiana, cada um contendo 
+todos os jogadores das respectivas ligas ao longo das temporadas consideradas no estudo. Esses conjuntos foram utilizados nas etapas subsequentes da análise.
 
 Considerando o elevado número de atributos e a possível correlação entre variáveis, foi aplicada uma técnica de redução de dimensionalidade com o objetivo de mitigar 
 \textit{overfitting} e melhorar a eficiência computacional dos modelos de AM. Para isso, utilizou-se o Principal Component Analysis (PCA), conforme 
@@ -73,6 +88,31 @@ de forma a preservar a maior quantidade possível de variância dos dados sem co
 20 componentes principais, uma vez que esse valor já era suficiente para explicar 97,66\% da variância total dos dados, indicando que praticamente 
 toda a informação relevante do conjunto original estava preservada nessa representação reduzida.
 
+\subsubsection{Data Augmentation}
+
+Embora o conjunto de dados utilizado neste estudo contemple múltiplas temporadas e duas ligas distintas, 
+o número total de observações ainda pode ser considerado relativamente limitado para o treinamento de 
+modelos de AM. Em cenários desse tipo, técnicas de \textit{data augmentation} podem 
+ser empregadas para ampliar artificialmente o conjunto de treinamento, contribuindo para reduzir o risco 
+de \textit{overfitting} e melhorar a capacidade de generalização dos modelos.
+
+Neste trabalho, foi adotada uma estratégia de aumento de dados baseada na geração de cópias embaralhadas 
+do conjunto original. Inicialmente, cada observação recebeu um identificador auxiliar (\textit{copy}) com 
+valor igual a zero. Em seguida, foram geradas múltiplas cópias da base de dados contendo os componentes 
+principais obtidos por meio do PCA. Para cada cópia gerada, as linhas do \textit{dataframe} foram 
+embaralhadas aleatoriamente utilizando diferentes sementes de aleatoriedade, preservando-se os valores 
+originais das variáveis, mas alterando a ordenação das observações.
+
+Após esse processo, as cópias geradas foram concatenadas ao conjunto inicial, formando um novo conjunto 
+de treinamento ampliado. Neste estudo, foram geradas $k = 200$ cópias adicionais da base original, de 
+modo que cada equipe e temporada passou a possuir múltiplas representações equivalentes no conjunto de 
+dados, diferenciadas apenas pela ordenação dos jogadores.
+
+Essa abordagem permite aumentar a diversidade das amostras apresentadas ao modelo durante o treinamento, 
+sem introduzir informação artificial nos atributos, preservando a distribuição estatística original dos 
+dados. Dessa forma, busca-se tornar o processo de aprendizado mais robusto e menos sensível a variações 
+específicas do conjunto inicial de observações.
+
 \subsection{Base de Dados dos Jogos}
 
 Os dados dos jogos realizados entre as temporadas 2019-2020 e 2023-2024, obtidos na etapa de coleta, estavam organizados em 14 colunas. No entanto, 
@@ -86,14 +126,26 @@ vitória do mandante foi codificada como '1', vitória do visitante como '2' e e
 Com base nessa codificação, percorreu-se a base atribuindo três pontos a cada vitória e um ponto a cada empate. 
 O resultado desse processamento foi uma tabela organizada por temporada, contendo cada clube e a respectiva pontuação acumulada.
 
-\section{Treinamento do Modelo de Aprendizado de Máquina (AM)}
+\section{Treinamento dos Modelos de Aprendizado de Máquina (AM)}
 
 Os dados de pontuação dos clubes foram organizados por temporada, enquanto as estatísticas individuais dos jogadores corresponderam sempre à temporada anterior. 
-Dessa forma, o modelo utiliza informações conhecidas de desempenho prévio para estimar a pontuação final do clube na temporada subsequente. 
-Adicionalmente, a pontuação dos clubes na temporada anterior foi incorporada como variável explicativa, de modo a capturar o histórico de desempenho recente da equipe.
+Assim, para cada equipe e temporada considerada, os modelos utilizam informações de desempenho individual observadas na temporada $t-1$ para estimar a pontuação 
+final do clube na temporada subsequente $t$. Essa estratégia garante que todas as variáveis utilizadas como entrada estejam disponíveis antes do período que se 
+pretende prever, evitando a utilização de informações futuras no processo de modelagem.
 
-O modelo de AM foi desenvolvido para prever a pontuação dos clubes ao longo das temporadas, com base no desempenho individual de seus jogadores. Para evitar 
-vazamento de dados entre treinamento e teste, a base da Série A italiana foi utilizada no treinamento do modelo, enquanto a base da EPL foi destinada à etapa de teste.
+Além das estatísticas individuais dos jogadores, a pontuação do clube na temporada anterior também foi incorporada como variável explicativa, permitindo capturar 
+o histórico recente de desempenho da equipe. A inclusão dessa variável busca representar fatores estruturais do clube, como estabilidade tática, qualidade do elenco 
+e consistência competitiva ao longo do tempo.
+
+Diferentes modelos de Aprendizado de Máquina foram treinados com o objetivo de prever a pontuação final dos clubes ao longo das temporadas, utilizando como base o 
+desempenho individual de seus jogadores. Para evitar a ocorrência de \textit{data leakage} entre as etapas de treinamento e avaliação, adotou-se uma estratégia de 
+separação entre ligas. Nesse contexto, os dados de uma das ligas foram utilizados exclusivamente para o treinamento dos modelos e para o ajuste das transformações 
+aplicadas aos dados, incluindo a redução de dimensionalidade por meio do PCA.
+
+Posteriormente, os modelos treinados foram aplicados aos dados da outra liga, que foram utilizados apenas para a etapa de teste e validação das previsões. Dessa forma, 
+garante-se que o treinamento e a avaliação ocorram sempre em competições distintas, independentemente de qual liga seja utilizada em cada etapa. Essa estratégia 
+assegura que os modelos sejam avaliados em um conjunto de dados completamente diferente daquele utilizado durante o processo de aprendizado, proporcionando uma 
+avaliação mais realista de sua capacidade de generalização.
 
 \subsection{Multilayer Perceptron (MLP)}
 
@@ -146,20 +198,3 @@ lidar com a natureza complexa e não linear dos dados esportivos. Entre as princ
 
 Além dessas vantagens teóricas, o MLP oferece um equilíbrio entre capacidade de generalização, interpretabilidade e eficiência computacional, características 
 desejáveis em modelos aplicados ao futebol, onde os dados são heterogêneos, ruidosos e interdependentes.
-
-\begin{comment}
-\section{Predição de Impacto de um Jogador}
-
-Com o intuito de prever o impacto de jogadores no time, o algoritmo de AM
-
-Em um primeiro momento, busca-se desenvolver um algoritmo capaz de predizer o impacto de um jogador em um time. Para essa tarefa, serão utilizadas três variáveis: 
-\textit{team\_target}, \textit{season\_target} e \textit{player\_added}. O objetivo dessa abordagem é simular a busca de um time por um jogador antes do início da temporada, 
-permitindo prever o impacto que ele terá ao longo da competição.
-
-Conforme discutido por \textit{Baboota \& Kaur} (2018), a variável com maior influência na predição de resultados foi a forma recente do time. Seguindo esse princípio, 
-serão aplicados pesos à forma do jogador, atribuindo maior relevância ao desempenho recente. Estatísticas mais antigas também serão consideradas, 
-porém com um peso reduzido, garantindo que o modelo priorize informações mais atuais.
-
-Com os dados preparados para análise, busca-se encontrar o melhor modelo de ML a partir de experimentação com diferentes algoritmos. O modelo base 
-será selecionado a partir de métricas como o MAE (\textit{Mean Absolute Error}) e o $R^2$ \textit{score}.
-\end{comment}

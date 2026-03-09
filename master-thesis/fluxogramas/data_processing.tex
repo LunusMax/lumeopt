@@ -1,0 +1,43 @@
+\begin{figure}[H]
+\centering
+\begin{tikzpicture}[
+    node distance=1.6cm and 1.8cm,
+    box/.style={
+        rectangle,
+        draw,
+        rounded corners,
+        align=center,
+        minimum width=4.6cm,
+        minimum height=1.1cm
+    },
+    arrow/.style={
+        -{Latex[length=3mm]},
+        thick
+    }
+]
+
+% Blocos iniciais
+\node (off) [box] {Tabelas de estatísticas\\ofensivas (FBref)};
+\node (def) [box, right=of off] {Tabelas de estatísticas\\defensivas (FBref)};
+
+% Bloco central
+\node (concat) [box, below=of $(off)!0.5!(def)$] {Concatenação das tabelas};
+
+% Demais etapas
+\node (dup) [box, below=of concat] {Remoção de colunas duplicadas};
+\node (irr) [box, below=of dup] {Remoção de atributos irrelevantes\\(ex.: Nation)};
+\node (final) [box, below=of irr] {Base consolidada por jogador};
+\node (csv) [box, below=of final] {Armazenamento em arquivos CSV por time e temporada\\(ex.: \textit{data\_napoli\_2021-2022.csv})};
+
+% Setas
+\draw [arrow] (off.south) -- (concat.north west);
+\draw [arrow] (def.south) -- (concat.north east);
+\draw [arrow] (concat) -- (dup);
+\draw [arrow] (dup) -- (irr);
+\draw [arrow] (irr) -- (final);
+\draw [arrow] (final) -- (csv);
+
+\end{tikzpicture}
+\caption{Fluxo de organização das tabelas ofensivas e defensivas extraídas do FBref para a construção da base final de atributos dos jogadores.}
+\label{fig:data_processing}
+\end{figure}
