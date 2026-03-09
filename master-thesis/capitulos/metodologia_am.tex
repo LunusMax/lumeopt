@@ -153,26 +153,29 @@ avaliação mais realista de sua capacidade de generalização.
 
 \subsection{Regressão Linear (RL)}
 
-A regressão linear é uma técnica estatística amplamente utilizada para investigar e modelar a relação entre variáveis, sendo aplicada em diversas áreas da ciência, 
-engenharia e ciências sociais \cite{Montgomery2012}. Nesse método, assume-se que a variável dependente pode ser expressa como uma combinação 
-linear das variáveis explicativas.
+Neste trabalho, a Regressão Linear (RL) foi implementada utilizando a biblioteca \textit{Scikit-learn}, com configuração padrão. 
+O modelo foi incluído como uma abordagem de referência (\textit{baseline}), permitindo comparar o desempenho de métodos mais complexos 
+com uma técnica simples, amplamente utilizada em problemas de regressão.
 
-Formalmente, o modelo pode ser representado por:
-
-\begin{equation}
-y = \beta_0 + \beta_1 x_1 + \beta_2 x_2 + \dots + \beta_p x_p + \epsilon
-\end{equation}
-
-em que $y$ representa a variável resposta, $x_i$ correspondem às variáveis explicativas, $\beta_i$ são os coeficientes estimados e $\epsilon$ representa o termo de erro. 
-Esse modelo descreve um hiperplano no espaço das variáveis explicativas, sendo amplamente utilizado como uma aproximação empírica para relações funcionais 
-desconhecidas entre variáveis \cite{Montgomery2012}.
-
-Neste trabalho, a regressão linear foi implementada utilizando a biblioteca \textit{Scikit-learn}, com configuração padrão. 
-O modelo foi incluído como uma abordagem de referência (\textit{baseline}), permitindo comparar o desempenho de modelos mais complexos 
-com um método simples e amplamente utilizado na literatura.
+A predição da pontuação final dos clubes foi realizada a partir das variáveis explicativas obtidas após as etapas de preparação e transformação dos dados. 
+Os coeficientes do modelo foram ajustados por mínimos quadrados ordinários, conforme a implementação padrão da biblioteca utilizada.
 
 \subsection{Random Forest (RF)}
 
+O modelo de \textit{Random Forest} (RF) foi implementado utilizando a biblioteca \textit{Scikit-learn}. 
+No presente trabalho, foram adotados os seguintes hiperparâmetros principais:
+
+\begin{itemize}
+    \item Número de árvores: \texttt{n\_estimators = 500}
+    \item Profundidade máxima: \texttt{max\_depth = 12}
+    \item Número mínimo de amostras para divisão: \texttt{min\_samples\_split = 5}
+    \item Número mínimo de amostras por folha: \texttt{min\_samples\_leaf = 2}
+    \item Seleção aleatória de atributos: \texttt{max\_features = sqrt}
+\end{itemize}
+
+A utilização de múltiplas árvores permitiu avaliar a capacidade do modelo em capturar relações não lineares entre as variáveis explicativas e a pontuação final dos clubes. 
+O RF foi incluído entre os modelos testados por sua robustez e ampla utilização em tarefas de regressão com dados estruturados.
+\begin{comment}
 O modelo de \textit{Random Forest (RF)} consiste em um método de aprendizado baseado em conjuntos de árvores de decisão, construídas a partir de diferentes 
 amostras dos dados por meio do procedimento de \textit{bagging}. Nesse processo, múltiplas árvores são treinadas sobre conjuntos de dados gerados por 
 \textit{bootstrap} e suas previsões são posteriormente combinadas para produzir um modelo final mais estável \cite{James2013}.
@@ -192,10 +195,27 @@ No presente trabalho, o modelo foi implementado utilizando a biblioteca \textit{
 
 A utilização de múltiplas árvores permite capturar relações não lineares entre as variáveis, tornando o RF um modelo robusto e amplamente 
 utilizado em tarefas de regressão e previsão em diferentes domínios.
+\end{comment}
 
 \subsection{Gradient Boosting (XGBoost)}
 
-O \textit{gradient boosting} é uma técnica de aprendizado baseada em \textit{ensemble}, na qual múltiplos modelos são treinados de forma sequencial, 
+Neste estudo, foi utilizada a implementação do algoritmo \textit{Extreme Gradient Boosting} (XGBoost), por meio da biblioteca \textit{XGBoost}. 
+O modelo foi avaliado como uma alternativa baseada em \textit{boosting} para a tarefa de predição da pontuação final dos clubes.
+
+Foram adotados os seguintes hiperparâmetros principais:
+
+\begin{itemize}
+    \item Número de árvores: \texttt{n\_estimators = 500}
+    \item Profundidade máxima das árvores: \texttt{max\_depth = 6}
+    \item Taxa de aprendizado: \texttt{learning\_rate = 0.05}
+    \item Subamostragem das observações: \texttt{subsample = 0.8}
+    \item Subamostragem das variáveis: \texttt{colsample\_bytree = 0.8}
+\end{itemize}
+
+A escolha desse modelo se deve à sua capacidade de lidar com padrões complexos em dados estruturados, além de seu desempenho recorrente em problemas 
+supervisionados de regressão.
+\begin{comment}
+ O \textit{gradient boosting} é uma técnica de aprendizado baseada em \textit{ensemble}, na qual múltiplos modelos são treinados de forma sequencial, 
 sendo que cada novo modelo busca corrigir os erros cometidos pelos modelos anteriores \cite{Geron2019}. Diferentemente de métodos baseados em 
 \textit{bagging}, nos quais os modelos são treinados de forma independente, o \textit{boosting} constrói os modelos de maneira incremental, 
 ajustando sucessivamente os erros residuais produzidos pelas previsões anteriores.
@@ -218,7 +238,8 @@ O modelo foi implementado utilizando a biblioteca \textit{XGBoost}, com os segui
 \end{itemize}
 
 Devido à sua eficiência computacional e elevada capacidade preditiva, o XGBoost tem sido amplamente utilizado em problemas de regressão e 
-classificação envolvendo conjuntos de dados estruturados.
+classificação envolvendo conjuntos de dados estruturados.   
+\end{comment}
 
 \subsection{Multilayer Perceptron (MLP)}
 
