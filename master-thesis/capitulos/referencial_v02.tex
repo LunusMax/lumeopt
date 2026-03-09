@@ -2,8 +2,8 @@
 
 Este capítulo apresenta os principais conceitos teóricos que fundamentam o desenvolvimento desta pesquisa. 
 Inicialmente, são introduzidos os fundamentos de AM, destacando suas principais características e aplicações no contexto da modelagem preditiva. 
-Em seguida, são discutidos conceitos relacionados à otimização e a métodos heurísticos empregados em problemas de natureza combinatória, os quais constituem 
-a base para a abordagem de otimização da composição de elencos proposta neste trabalho.
+Na sequência, são abordados conceitos de PO, com ênfase em problemas de otimização combinatória e em métodos heurísticos que servem de base à 
+abordagem de otimização da composição de elencos proposta neste trabalho.
 
 \section{Aprendizado de Máquina (AM)}
 
@@ -40,22 +40,6 @@ baseada no processo CRISP-DM, amplamente utilizado em projetos de mineração de
 {\footnotesize Fonte: Adaptado de \cite{Kelleher2015}.}
 \end{figure}
 
-\begin{comment}
-Dentro desse pipeline, a preparação e transformação dos dados desempenham papel fundamental, 
-uma vez que os algoritmos de aprendizado frequentemente exigem representações específicas dos atributos para funcionar adequadamente. 
-Em particular, alguns métodos operam apenas com atributos nominais ou podem se beneficiar de representações discretizadas dos dados. 
-Nesse contexto, atributos numéricos podem ser transformados em intervalos discretos antes da etapa de aprendizado, 
-processo conhecido como discretização \cite{Witten2016}.
-
-Diferentes abordagens podem ser empregadas para realizar essa transformação. Métodos não supervisionados podem dividir o domínio dos atributos em intervalos 
-pré-definidos, como na discretização por intervalos de mesma largura ou mesma frequência. Já métodos supervisionados utilizam informações das classes presentes 
-nos dados para determinar os pontos de divisão mais apropriados, frequentemente empregando critérios baseados em entropia e ganho de informação 
-\cite{Witten2016}. Dessa forma, a transformação dos dados constitui uma etapa importante do pipeline de aprendizado de máquina, pois permite adaptar 
-a representação dos atributos às características dos algoritmos utilizados e pode influenciar diretamente a qualidade do modelo gerado.
-AM utiliza diferentes algoritmos para resolver problemas relacionados com dados. 
-Cientistas de dados destacam que não há um único algoritmo universalmente superior para resolver todos os tipos de problemas \cite{Mahesh2020}. 
-Esta seção apresenta uma breve descrição de alguns dos modelos mais comumente utilizados em AM para a resolução de problemas.
-\end{comment}
 Dentro desse pipeline, a preparação e transformação dos dados desempenham papel fundamental, 
 uma vez que os algoritmos de aprendizado frequentemente exigem representações específicas dos atributos para funcionar adequadamente.
 
@@ -87,8 +71,9 @@ realizam uma transformação linear das variáveis originais em um novo conjunto
 Essa abordagem pode reduzir complexidade computacional e mitigar problemas de multicolinearidade. Cabe ressaltar que a PCA não consiste em um método 
 de seleção de atributos, mas sim em uma técnica de extração de atributos, pois cria novas variáveis a partir de combinações lineares das variáveis originais \cite{Guyon2006}.
 
-Em AM, os algoritmos podem ser classificados em diferentes categorias de acordo com a forma como aprendem a partir dos dados. 
-Uma das distinções mais comuns ocorre entre aprendizado supervisionado e não supervisionado. 
+Além dos aspectos relacionados à preparação e transformação dos dados, também é importante distinguir os principais paradigmas de 
+aprendizagem utilizados na construção de modelos preditivos. Em AM, os algoritmos podem ser classificados em diferentes categorias de acordo com a forma 
+como aprendem a partir dos dados. Uma das distinções mais comuns ocorre entre aprendizado supervisionado e não supervisionado. 
 No aprendizado supervisionado, o modelo é treinado a partir de um conjunto de dados rotulados, no qual cada instância possui uma variável alvo associada. 
 O objetivo do algoritmo é aprender uma função que relacione os atributos de entrada com essa variável alvo, permitindo realizar previsões para novas instâncias \cite{Geron2019}. 
 Por outro lado, no aprendizado não supervisionado os dados não possuem rótulos explícitos, e o objetivo do algoritmo consiste em identificar padrões, estruturas ou agrupamentos 
@@ -107,26 +92,52 @@ Após as etapas de preparação, transformação e possível redução de dimens
 empregados para construir modelos preditivos. A seguir, são apresentados alguns dos algoritmos mais comumente utilizados para a resolução de problemas de 
 regressão, abordagem adotada no modelo proposto neste trabalho.
 
-Entre os diversos algoritmos disponíveis na literatura, foram selecionados neste trabalho métodos amplamente utilizados em aprendizado supervisionado, 
-incluindo modelos baseados em árvores, máquinas de vetores de suporte e redes neurais artificiais.
+Entre os diversos algoritmos disponíveis na literatura, foram selecionados neste trabalho métodos amplamente utilizados em aprendizado supervisionado 
+para tarefas de regressão, incluindo modelos lineares, métodos baseados em árvores, métodos de \textit{boosting} e redes neurais artificiais.
+
+\subsection{Regressão Linear (RL)}
+
+A Regressão Linear (RL) é um dos métodos mais tradicionais e amplamente utilizados em aprendizado supervisionado para tarefas de regressão \cite{Geron2019}. 
+Seu objetivo consiste em modelar a relação entre um conjunto de variáveis explicativas e uma variável alvo contínua por meio de uma função linear.
+
+Na forma mais geral, a RL pode ser expressa como:
+
+\begin{equation}
+\hat{y} = \beta_0 + \beta_1 x_1 + \beta_2 x_2 + \dots + \beta_p x_p
+\end{equation}
+
+em que $\hat{y}$ representa o valor previsto da variável resposta, $\beta_0$ é o intercepto do modelo, $\beta_1, \beta_2, \dots, \beta_p$ são os coeficientes 
+associados às variáveis explicativas e $x_1, x_2, \dots, x_p$ representam os atributos de entrada.
+
+O processo de treinamento da RL consiste em estimar os coeficientes do modelo de forma a minimizar o erro entre os valores previstos e os valores observados no 
+conjunto de treinamento. Uma abordagem amplamente utilizada para esse ajuste é o método dos mínimos quadrados ordinários, que busca minimizar a soma 
+dos quadrados dos resíduos \cite{Geron2019}. Dessa forma, o modelo encontra a combinação linear dos atributos que melhor se ajusta aos dados segundo esse critério.
+
+A RL apresenta como principais vantagens a simplicidade, a interpretabilidade e o baixo custo computacional. Por se tratar de um modelo linear, seus 
+coeficientes podem ser interpretados como a contribuição de cada variável explicativa para a previsão da variável alvo, mantidas constantes as demais variáveis. 
+Além disso, a RL costuma servir como modelo de referência (\textit{baseline}) em tarefas preditivas, permitindo comparar o 
+desempenho de modelos mais complexos \cite{Geron2019}.
+
+Entretanto, a RL possui limitações importantes, especialmente quando a relação entre as variáveis explicativas e a variável resposta não pode ser adequadamente 
+representada por uma função linear. Nesses casos, o modelo tende a apresentar desempenho inferior ao de métodos capazes de capturar padrões não lineares mais complexos. 
+Ainda assim, sua utilização permanece relevante tanto pela simplicidade quanto pelo seu papel como ponto de comparação em estudos de modelagem preditiva \cite{Geron2019}.
 
 \subsection{Árvore de Decisão (AD)}
 
 As Árvores de Decisão são algoritmos versáteis de AM que podem ser utilizados tanto para tarefas de classificação, quanto para tarefas de regressão \cite{Geron2019}. 
-Esses algoritmos recebem um \textit{input} de dados de treinamento (conjunto de atributos independentes + atributo classe) e retornam como saída uma 
-árvore de decisão que permite classificar uma nova instância a partir de seus atributos independentes \cite{Geron2019}.
+Esses algoritmos recebem dados de treinamento e retornam como saída uma estrutura em árvore capaz de realizar previsões para novas instâncias 
+com base nos atributos de entrada \cite{Geron2019}.
 
 A construção de uma árvore de decisão ocorre por meio de um processo recursivo de particionamento do espaço de atributos. Em cada nó interno da árvore, 
-o algoritmo seleciona um atributo e um ponto de divisão que melhor separam os dados de acordo com um critério de impureza. Entre os critérios 
-mais utilizados estão o índice de Gini e a entropia, que medem o grau de heterogeneidade das classes em cada subconjunto de dados \cite{Geron2019}. 
-O objetivo do processo de treinamento consiste em gerar divisões que produzam subconjuntos cada vez mais homogêneos, até que um 
-critério de parada seja atingido, resultando em nós terminais, também chamados de folhas, que representam a decisão final do modelo.
+o algoritmo seleciona um atributo e um ponto de divisão que melhor separam os dados de acordo com um critério de qualidade da partição. 
+Em tarefas de classificação, critérios como índice de Gini e entropia são amplamente utilizados, enquanto em problemas de regressão são comuns medidas 
+baseadas na redução da variância ou do erro quadrático \cite{Geron2019}.
 
 Além do processo de divisão recursiva, a geração de uma árvore de decisão envolve a escolha sucessiva dos melhores atributos e pontos de corte 
-que maximizam a redução da impureza nos subconjuntos gerados. Durante o treinamento, o algoritmo avalia diferentes possíveis divisões nos atributos disponíveis 
-e seleciona aquela que produz o maior ganho de informação ou a maior redução do índice de Gini, dependendo do critério adotado. Esse procedimento é repetido de 
-forma recursiva até que uma condição de parada seja satisfeita, como a profundidade máxima da árvore, o número mínimo de amostras em um nó ou a ausência de melhoria 
-significativa na pureza dos subconjuntos \cite{Geron2019}.
+que maximizam a qualidade das partições geradas. Durante o treinamento, o algoritmo avalia diferentes possíveis divisões nos atributos disponíveis 
+e seleciona aquela que produz o maior ganho de informação, a maior redução do índice de Gini ou a maior redução da variância/erro quadrático, 
+dependendo da natureza do problema e do critério adotado. Esse procedimento é repetido de forma recursiva até que uma condição de parada seja satisfeita, 
+como a profundidade máxima da árvore, o número mínimo de amostras em um nó ou a ausência de melhoria significativa na qualidade dos subconjuntos \cite{Geron2019}.
 
 Em comparação com outras técnicas de aprendizado supervisionado, as árvores de decisão apresentam algumas características importantes. 
 Uma de suas principais vantagens é a interpretabilidade, uma vez que a estrutura da árvore permite interpretar de forma transparente como as decisões são tomadas a partir 
@@ -172,6 +183,7 @@ essa agregação ocorre por meio de votação majoritária entre as árvores, en
 média das previsões individuais \cite{Geron2019}. Essa estratégia reduz a variância do modelo e tende a melhorar a capacidade de generalização quando comparada 
 ao uso de uma única AD.
 
+\begin{comment}
 \subsection{Support Vector Machine (SVM)}
 
 O \textit{Support Vector Machine} (SVM) é um algoritmo de AM supervisionado utilizado para tarefas de classificação e regressão. 
@@ -195,7 +207,7 @@ Além de tarefas de classificação, o SVM também pode ser aplicado a problemas
 Nesse caso, o objetivo não consiste em separar classes, mas em encontrar uma função que aproxime os dados de treinamento com erro máximo limitado 
 por um parâmetro de tolerância, geralmente representado por $\epsilon$. O modelo busca ajustar uma função que permaneça dentro de uma região de erro aceitável, 
 ao mesmo tempo em que maximiza a margem em torno dessa função, preservando as propriedades de regularização do método \cite{Geron2019}.
-
+\end{comment}
 \subsection{Gradient Boosting (XGBoost)}
 
 O \textit{Gradient Boosting} é uma técnica de aprendizado baseada na combinação sequencial de modelos fracos, geralmente árvores de decisão rasas, 
@@ -256,116 +268,78 @@ e a taxa de aprendizado. A definição adequada desses parâmetros é fundamenta
 
 \section{Pesquisa Operacional (PO)}
 
-Como tratado anteriormente, a área da PO consiste em um campo multidisciplinar que aplica modelos matemáticos, estatísticos e computacionais. 
-PO vem sendo amplamente utilizada em diversas áreas organizacionais, tais como manufatura, transportes, construção civil, telecomunicações, 
-planejamento financeiro, planos de saúde, serviço público, entre outros \cite{Hillier2001}.
+A Pesquisa Operacional (PO) constitui um campo multidisciplinar dedicado ao desenvolvimento e aplicação de modelos matemáticos, estatísticos e computacionais com o 
+objetivo de apoiar processos de tomada de decisão. De forma geral, a PO busca representar problemas reais por meio de formulações matemáticas, 
+permitindo a identificação de soluções que maximizem ou minimizem determinados objetivos sob um conjunto de restrições \cite{Hillier2001}.
 
-Conforme discutido na seção anterior, problemas esportivos como montagem de elenco e planejamento competitivo 
-podem ser formalizados como problemas de otimização matemática sob restrições estruturais e orçamentárias. 
-Dependendo da natureza do problema, tais formulações podem recorrer a abordagens heurísticas voltadas à resolução 
-de problemas de otimização combinatória, nos quais o espaço de soluções possíveis cresce exponencialmente com o número de variáveis de decisão.
+Historicamente, técnicas de PO têm sido aplicadas em uma ampla variedade de contextos organizacionais, incluindo manufatura, transportes, construção civil, 
+telecomunicações, planejamento financeiro, sistemas de saúde e gestão pública \cite{Hillier2001}. Em muitos desses cenários, os problemas de decisão 
+envolvem a seleção de recursos limitados ou a alocação eficiente de elementos dentro de determinadas restrições estruturais.
 
-Nos tópicos seguintes, são detalhados os principais métodos de otimização utilizados na modelagem de problemas combinatórios, com destaque para abordagens heurísticas 
-que fundamentam a metodologia proposta neste trabalho.
+No contexto esportivo, problemas como a montagem de elencos e o planejamento competitivo podem ser formalizados como problemas de otimização matemática sob 
+restrições estruturais e orçamentárias. Em tais situações, busca-se selecionar ou alocar recursos — como jogadores — de forma a maximizar algum critério de 
+desempenho coletivo, respeitando limitações impostas por fatores como orçamento, composição do elenco ou regras da competição.
 
-\begin{comment}
-\subsection{Programação Linear (PL)}
+Dependendo da natureza do problema, tais formulações podem recorrer a abordagens heurísticas voltadas à resolução de problemas de otimização combinatória, 
+nos quais o espaço de soluções possíveis cresce exponencialmente com o número de variáveis de decisão. Nesses casos, métodos heurísticos tornam-se particularmente 
+úteis para explorar o espaço de soluções e identificar configurações de boa qualidade em tempo computacional viável.
 
-A Programação Linear (PL) é considerada um dos mais importantes avanços científicos do meio do século 20. 
-Essa ferramenta já foi responsável por economizar milhões de dólares para companhias e negócios ao redor do mundo \cite{Hillier2001}.
+Entre os problemas clássicos da otimização combinatória destacam-se modelos que envolvem decisões de seleção sob restrições de capacidade ou orçamento. 
+Um dos exemplos mais conhecidos dessa classe de problemas é o Problema da Mochila, apresentado a seguir.
 
-PL utiliza funções lineares simples para buscar o resultado ótimo \cite{Hillier2001}. Um exemplo clássico de PL apresentado por Hillier (2001) 
-é o problema da empresa \textit{Wyndor Glass Co.}.
+\subsection{Problema da Mochila}
 
-\subsubsection{\textit{Wyndor Glass Co.}}
+Um dos problemas clássicos da otimização combinatória é o Problema da Mochila (\textit{Knapsack Problem}), amplamente utilizado como modelo
+abstrato para representar situações de seleção de recursos sob restrições limitadas \cite{Cormen2009}. Nesse problema, considera-se um conjunto
+de $n$ itens, no qual cada item $i$ possui um valor associado $v_i$ e um peso $w_i$. O objetivo consiste em selecionar um subconjunto desses itens
+de modo a maximizar o valor total transportado sem que o peso total ultrapasse a capacidade máxima $W$ da mochila.
 
-A empresa \textit{Wyndor Glass Co.} fabrica produtos de vidro de alta qualidade, incluindo janelas e portas de vidro. 
-Possui três fábricas: a Fábrica 1, que produz molduras de alumínio e ferragens; a Fábrica 2, que fabrica molduras de madeira; e a Fábrica 3, 
-responsável pela produção do vidro e pela montagem dos produtos. Devido a uma reestruturação, a empresa decidiu lançar dois novos produtos: 
-o Produto 1, uma porta de vidro de 8 pés com moldura de alumínio, e o Produto 2, uma janela dupla de madeira de 4x6 pés. 
-Cada produto exige capacidade produtiva específica das fábricas. O Produto 1 utiliza as Fábricas 1 e 3, enquanto o Produto 2 depende das Fábricas 2 e 3. 
-O objetivo do problema é determinar a combinação ideal de produção desses produtos para maximizar o lucro total.
-
-Definem-se as seguintes variáveis de decisão:
-\begin{itemize}
-\item $x_1$: número de lotes do Produto 1 a serem produzidos por semana.
-\item $x_2$: número de lotes do Produto 2 a serem produzidos por semana.
-\end{itemize}
-
-As restrições de capacidade produtiva devem ser respeitadas conforme os limites de produção de cada fábrica:
-
-\begin{itemize}
-\item \textbf{Fábrica 1}: Pode produzir no máximo 4 unidades do Produto 1 por semana:
-\begin{equation}
-x_1 \leq 4
-\end{equation}
-\item \textbf{Fábrica 2}: Pode produzir no máximo 6 unidades do Produto 2 por semana:
-\begin{equation}
-x_2 \leq 6
-\end{equation}
-\item \textbf{Fábrica 3}: Possui um limite semanal de 18 horas de produção:
-\begin{equation}
-3x_1 + 2x_2 \leq 18
-\end{equation}
-\end{itemize}
-
-Os dados apresentados encontram-se ilustrados na Figura~\ref{fig3_2} 
-
-\begin{figure}[h]
-\centering
-\includegraphics[width=1.0\textwidth]{imagens/DataWyndor.png}
-\caption{Dados da Wyndor Glass Co.}
-\small{Fonte: Hillier, 2001 (Adaptado)}
-\label{fig3_2}
-\end{figure}
-
-O objetivo é determinar a combinação de produção que maximize o lucro total. A equação que representa essa otimização é:
+Na formulação conhecida como \textit{0-1 Knapsack Problem}, cada item pode ser selecionado integralmente ou não selecionado, caracterizando
+uma decisão binária para cada elemento do conjunto. Dessa forma, o problema pode ser formulado matematicamente como:
 
 \begin{equation}
-\max Z = 3.000 x_1 + 5.000 x_2
+\max \sum_{i=1}^{n} v_i x_i
 \end{equation}
 
-onde cada lote do Produto 1 gera um lucro de \$ 3.000 e cada lote do Produto 2 gera um lucro de \$ 5.000. Além disso, 
-deve-se garantir que os valores das variáveis de decisão sejam não negativos:
+sujeito a
 
 \begin{equation}
-x_1 \geq 0, \quad x_2 \geq 0
+\sum_{i=1}^{n} w_i x_i \leq W
 \end{equation}
-
-Uma maneira intuitiva de resolver esse problema é por meio da representação gráfica. As restrições são desenhadas no plano cartesiano, 
-delimitando uma região viável. O ponto ótimo é encontrado na interseção das restrições ativas, 
-onde a função objetivo atinge seu valor máximo dentro da região factível. Tal solução pode ser vista na Figura~\ref{fig3_3}.
-
-\begin{figure}[h]
-\centering
-\includegraphics[width=1.0\textwidth]{imagens/graphWyndor.png}
-\caption{Valores de $(x_1, x_2)$ que maximizam $3x_1 + 5x_2$.}
-\small{Fonte: Hillier, 2001}
-\label{fig3_3}
-\end{figure}
-
-Após essa análise, a solução ótima encontrada é:
 
 \begin{equation}
-x_1 = 2, \quad x_2 = 6
+x_i \in \{0,1\}, \quad i = 1,2,\dots,n
 \end{equation}
 
-O lucro máximo alcançado pela empresa ao adotar essa estratégia de produção será:
+onde $x_i$ representa a decisão de selecionar ($x_i = 1$) ou não ($x_i = 0$) o item $i$.
 
-\begin{equation}
-Z^* = 3.000(2) + 5.000(6) = 36.000
-\end{equation}
+De acordo com \cite{Cormen2009}, o problema da mochila apresenta a propriedade de subestrutura ótima, característica comum em diversos problemas
+de otimização combinatória. No entanto, diferentemente da variante fracionária do problema, na qual é permitido selecionar frações de itens,
+a versão 0-1 não admite, em geral, soluções ótimas por meio de estratégias puramente gulosas. Nesse caso, a decisão de incluir ou excluir um
+determinado item depende da comparação entre diferentes combinações possíveis de itens, o que torna o problema computacionalmente mais desafiador.
 
-Portanto, a Wyndor Glass Co. deve produzir 2 lotes do Produto 1 e 6 lotes do Produto 2 por semana para maximizar seus lucros.
+Problemas de seleção sob restrições orçamentárias frequentemente apresentam estrutura semelhante à do Problema da Mochila. No contexto deste
+trabalho, a tarefa de definir quais jogadores devem compor um elenco sob um limite financeiro pode ser interpretada como um problema de seleção
+de elementos cujo custo total não deve exceder um orçamento disponível. De maneira análoga ao problema clássico, cada jogador pode ser associado
+a um custo de contratação e a um valor estimado de contribuição para o desempenho da equipe, avaliado por meio do modelo de AM
+desenvolvido neste estudo. Sob essa perspectiva, o problema de montagem de elencos pode ser interpretado como uma variação do Problema da Mochila, 
+no qual se busca selecionar um conjunto de jogadores capaz de maximizar o desempenho previsto do time sem ultrapassar o orçamento disponível.
 
-Embora a PL seja uma ferramenta poderosa para problemas de otimização linear, existem outras abordagens que lidam com problemas mais complexos. 
-A Programação Dinâmica (PD), por exemplo, trata de decisões sequenciais, enquanto os Processos de Markov 
-são amplamente utilizados para modelagem de processos estocásticos. Essas abordagens serão discutidas a seguir.
-\end{comment}
+Entretanto, diferentemente da formulação clássica do problema, a seleção de jogadores envolve também restrições estruturais adicionais. Em um elenco 
+de futebol, por exemplo, o número total de jogadores é limitado e a composição da equipe deve respeitar determinadas necessidades posicionais e funcionais. 
+Essas características aproximam o problema de variantes mais gerais do Problema da Mochila, nas quais múltiplas restrições ou categorias de seleção são consideradas.
+
+Dessa forma, embora o problema abordado neste trabalho não corresponda exatamente à formulação clássica do Problema da Mochila, sua estrutura 
+de decisão apresenta forte analogia com esse modelo. Essa relação fornece uma base conceitual importante para compreender a natureza combinatória da montagem de 
+elencos e justifica a adoção de heurísticas de otimização para a obtenção de soluções de boa qualidade em tempo computacional viável.
+
+A partir dessa fundamentação, apresentam-se a seguir dois métodos heurísticos amplamente utilizados em problemas de otimização combinatória: 
+os algoritmos gulosos e a busca local.
+
 \subsection{Algoritmo Guloso}
 
-Em problemas de otimização, um algoritmo é dito guloso quando o mesmo faz uma escolha localmente ótima, na esperança de que essa escolha leve a uma solução
-globalmente ótima \cite{Cormen2009}. Diferentemente de abordagens exaustivas, algoritmos gulosos tomam decisões irrevogáveis a cada etapa, baseando-se
+Em problemas de otimização, um algoritmo é dito guloso quando realiza uma escolha localmente ótima, na esperança de que essa decisão conduza a 
+uma solução globalmente ótima \cite{Cormen2009}. Diferentemente de abordagens exaustivas, algoritmos gulosos tomam decisões irrevogáveis a cada etapa, baseando-se
 apenas na informação disponível no momento da escolha. É importante destacar que, conforme ressaltado por \cite{Cormen2009}, 
 algoritmos gulosos não garantem, em geral, a obtenção de soluções globalmente ótimas, sendo necessários argumentos específicos de corretude para justificar
 quando a estratégia gulosa é válida.
@@ -391,85 +365,27 @@ nas etapas subsequentes \cite{Gendreau2010}.
 O Algoritmo~\ref{alg:tsp_greedy} apresenta o pseudocódigo dessa heurística gulosa aplicada ao TSP.
 
 \input{algoritmos/tsp_greedy.tex}
-\begin{comment}
-Como exemplo didático, \cite{Cormen2009} apresenta o \textit{activity-selection problem}, no qual há um conjunto de atividades
-$S=\{a_1,\dots,a_n\}$, cada uma definida por um tempo de início $s_i$ e um tempo de término $f_i$, e deseja-se selecionar um subconjunto máximo de atividades
-mutuamente compatíveis, isto é, que não se sobreponham no tempo. Intuitivamente, a escolha gulosa consiste em selecionar, dentre as atividades ainda
-viáveis, aquela que termina primeiro. A motivação é que, ao finalizar mais cedo, essa atividade tende a liberar o recurso para acomodar o maior número
-possível de atividades futuras, reduzindo o risco de bloquear intervalos de tempo extensos.
-
-A corretude dessa estratégia pode ser compreendida por meio de um argumento de \textit{troca} (\textit{exchange argument}), descrito em
-\cite{Cormen2009}. Seja $a_m$ a atividade com menor tempo de término dentre as disponíveis no início do problema. Considere uma solução ótima qualquer
-$A^\star$ e seja $a_k$ a primeira atividade de $A^\star$ a ocorrer (aquela com menor término dentro de $A^\star$). Como $f_m \le f_k$, substituir $a_k$
-por $a_m$ não torna a solução inviável: qualquer atividade compatível com $a_k$ após o término $f_k$ também permanece compatível após $f_m$, já que $a_m$
-termina no máximo no mesmo instante. Logo, existe uma solução ótima que contém $a_m$, o que estabelece a \textit{propriedade da escolha gulosa}.
-Em seguida, ao fixar $a_m$, o problema remanescente consiste em escolher o máximo de atividades que começam após $f_m$, isto é, um subproblema da mesma
-natureza. Assim, uma solução ótima para esse subproblema, combinada com $a_m$, produz uma solução ótima para o problema original, caracterizando a
-\textit{subestrutura ótima}. Assumindo as atividades previamente ordenadas por tempo de término (isto é, $f_1 \le f_2 \le \dots \le f_n$), o algoritmo
-guloso iterativo apresentado por \cite{Cormen2009} é mostrado no Algoritmo~\ref{alg:greedy_activity_selector}.
-
-\clearpage
-\begin{algorithm}[H]
-\caption{Algoritmo guloso para seleção de atividades (\textit{GREEDY-ACTIVITY-SELECTOR})}
-\label{alg:greedy_activity_selector}
-\KwIn{Vetores $s[1..n]$ e $f[1..n]$ (início e término), com atividades ordenadas por $f$ crescente}
-\KwOut{Conjunto $A$ de atividades compatíveis de cardinalidade máxima}
-$A \leftarrow \{a_1\}$\;
-$k \leftarrow 1$\;
-\For{$m \leftarrow 2$ \KwTo $n$}{
-    \If{$s[m] \ge f[k]$}{
-        $A \leftarrow A \cup \{a_m\}$\;
-        $k \leftarrow m$\;
-    }
-}
-\Return{$A$}\;
-\end{algorithm}
-
-
-Como exemplo ilustrativo, \cite{Cormen2009} discutem o problema de agrupamento conhecido como \textit{k-means clustering}. Nesse problema, dado um conjunto
-$S$ de $n$ pontos em um espaço métrico e um número fixo $k$ de centros, deseja-se determinar a posição desses centros de modo a minimizar a soma das
-distâncias quadráticas entre cada ponto e o centro mais próximo. Formalmente, busca-se minimizar
-
-\[
-f(S,C)=\sum_{x\in S}\min_{1\le j\le k} d(x,c_j)^2,
-\]
-
-onde $C=\{c_1,\dots,c_k\}$ representa o conjunto de centros e $d(\cdot)$ denota a distância entre pontos.
-
-Esse problema é conhecido por ser computacionalmente difícil, não havendo algoritmo polinomial conhecido que garanta a obtenção da solução ótima global.
-Diante disso, \cite{Cormen2009} apresentam o procedimento proposto por Lloyd, que utiliza uma estratégia iterativa baseada em decisões locais simples.
-Inicialmente, escolhem-se $k$ centros iniciais. Em seguida, cada ponto é atribuído ao centro mais próximo, formando $k$ grupos. Posteriormente, cada centro
-é atualizado para a média dos pontos pertencentes ao respectivo grupo. Esse processo é repetido até que não haja alteração nas atribuições dos pontos.
-
-Embora o procedimento de Lloyd seja geralmente classificado como um método de busca local, sua lógica fundamental ilustra o princípio guloso: a cada
-iteração, o algoritmo realiza escolhas localmente ótimas ao associar cada ponto ao centro mais próximo e atualizar os centros de modo a minimizar o erro
-quadrático dentro de cada grupo. Essas decisões locais conduzem a uma solução que corresponde a um mínimo local da função objetivo.
-\end{comment}
 
 No contexto deste trabalho, um algoritmo guloso é utilizado de forma recursiva com o objetivo de gerar uma solução inicial para o problema de otimização da
 montagem de elencos. Dado um time e um orçamento, a cada iteração, o jogador com menor minutagem do elenco é removido e substituído por candidatos externos.
 Para cada substituição possível, o modelo de AM é empregado como função objetivo, estimando a pontuação esperada do time resultante. A escolha gulosa
 consiste, portanto, em selecionar o(s) jogador(es) que cabem no orçamento do time e cuja inclusão maximiza a pontuação prevista, mantendo-se fixas as
 demais variáveis do elenco. Assim como no exemplo discutido anteriormente, a solução é construída incrementalmente por decisões locais irrevogáveis,
-produzindo rapidamente uma solução factível que servirá como ponto de partida para os procedimentos de refinamento descritos na próxima seção. 
-Nesse processo, o modelo de AM atua como função objetivo, avaliando o desempenho esperado das diferentes composições de elenco geradas pelo algoritmo
-de otimização.
+produzindo rapidamente uma solução factível que servirá como ponto de partida para os procedimentos de refinamento realizados por busca local.
 
 \subsection{Algoritmo de Busca Local}
 
-A busca local é uma técnica heurística amplamente utilizada em problemas de otimização combinatória, cujo objetivo é aprimorar 
-uma solução inicial factível por meio da exploração iterativa de sua vizinhança \cite{Gendreau2010}. Diferentemente de métodos exatos, a busca local 
-não realiza uma exploração global do espaço de soluções, concentrando-se na melhoria incremental da solução corrente a partir de movimentos locais.
+Enquanto algoritmos gulosos constroem soluções de forma incremental a partir de decisões locais, métodos de busca local partem de uma solução inicial 
+já factível e buscam refiná-la por meio da exploração iterativa de sua vizinhança. A busca local é uma técnica heurística amplamente utilizada em problemas 
+de otimização combinatória, cujo objetivo é aprimorar uma solução inicial factível por meio da exploração iterativa de soluções vizinhas \cite{Gendreau2010}. 
+Diferentemente de métodos exatos, a busca local não realiza uma exploração global do espaço de soluções, concentrando-se na melhoria incremental da 
+solução corrente a partir de movimentos locais.
 
 Conforme descrito por \cite{Gendreau2010}, um algoritmo de busca local é composto essencialmente por quatro elementos: uma solução inicial, 
 a definição de uma vizinhança, um critério de aceitação de movimentos e uma condição de parada. A vizinhança determina o conjunto de soluções que 
 podem ser alcançadas a partir da solução atual por meio de pequenas modificações estruturais, enquanto o critério de aceitação estabelece 
 se uma solução vizinha deve ou não substituir a solução corrente. O processo é repetido iterativamente até que nenhuma melhoria adicional 
 seja encontrada ou que um critério de parada seja satisfeito.
-
-Em contraste com algoritmos gulosos, métodos de busca local partem de uma solução inicial e buscam iterativamente soluções vizinhas que melhorem o valor da 
-função objetivo. O processo continua enquanto existirem melhorias locais, terminando quando se atinge um ponto no qual nenhuma modificação local 
-resulta em melhora adicional.
 
 Um exemplo clássico da aplicação de busca local ocorre no Problema do Caixeiro Viajante (\textit{Traveling Salesman Problem} -- TSP). 
 Croes \cite{Croes1958} propôs um método de melhoria que parte de uma solução inicial e aplica transformações denominadas 
@@ -488,83 +404,13 @@ Algoritmo~\ref{alg:one_opt_tsp}.
 
 \input{algoritmos/one_opt_tsp.tex}
 
-\begin{comment}
-Um exemplo clássico apresentado por \cite{Cormen2009} surge no problema de agrupamento (\textit{k-means clustering}). Dado um conjunto de pontos e 
-um número fixo de centros $k$, deseja-se encontrar uma configuração de centros que minimize a soma das distâncias quadráticas entre cada ponto e o centro mais próximo. 
-Como esse problema é NP-difícil, não se conhece um algoritmo polinomial que garanta a obtenção do ótimo global.
-
-Nesse contexto, Lloyd propôs um procedimento iterativo simples que encontra um mínimo local da função objetivo. O método inicia com uma escolha inicial 
-de centros e repete duas etapas: (i) atribuir cada ponto ao centro mais próximo; e (ii) recalcular cada centro como a média dos pontos atribuídos ao 
-respectivo cluster. O processo é repetido até que nenhuma alteração reduza o valor da função objetivo, caracterizando a convergência para um mínimo local.
-
-Esse procedimento ilustra claramente o princípio da busca local: a partir de uma solução inicial, o algoritmo explora soluções vizinhas 
-obtidas por pequenas modificações estruturais, aceitando apenas mudanças que melhoram a função objetivo.
-\end{comment}
-
 No problema abordado neste trabalho, a busca local é empregada para avaliar diferentes conjuntos de jogadores candidatos a contratação, respeitando 
 uma restrição de orçamento. Cada solução é representada por um conjunto de jogadores de cardinalidade fixa, sendo a vizinhança definida por operações de 
-substituição unitária (\textit{swap neighborhood}). Em cada iteração, os jogadores do conjunto atual com menor minutagem são selecionados como candidatos 
-à remoção e substituídos por jogadores externos ainda não selecionados, produzindo soluções vizinhas que preservam o tamanho do elenco. 
-Cada solução vizinha gerada é avaliada por meio de uma função objetivo, implementada como um modelo de AM, responsável por 
-estimar a pontuação esperada do time na temporada considerada.
+substituição unitária (\textit{swap neighborhood}). Em cada iteração, jogadores do conjunto atual são considerados candidatos à remoção e substituídos 
+por jogadores externos ainda não selecionados, produzindo soluções vizinhas que preservam o tamanho do elenco. Cada solução vizinha gerada é avaliada por 
+meio de uma função objetivo implementada a partir do modelo de AM, responsável por estimar a pontuação esperada do time na temporada considerada.
 
 A restrição orçamentária é tratada como condição de factibilidade: soluções que excedem o orçamento estabelecido são descartadas durante o processo de busca. 
 O critério de aceitação adotado é de melhoria estrita, isto é, uma solução vizinha é aceita apenas se apresentar valor superior da função objetivo em relação 
 à solução corrente. O algoritmo é encerrado quando nenhuma substituição viável resulta em melhoria adicional, caracterizando a convergência para um ótimo local, 
 conforme descrito em \cite{Gendreau2010}.
-\begin{comment}
-\subsection{Programação Dinâmica (PD)}
-
-A PD é uma técnica de otimização recursiva aplicada a problemas que podem ser decompostos em subproblemas menores interdependentes \cite{Hillier2001}. 
-Esse método foi formalizado por Richard Bellman na década de 1950, se baseando no princípio da otimalidade, o qual postula que uma solução ótima para 
-um problema contém soluções ótimas para seus subproblemas.
-
-Bellman (1957) demonstrou que problemas de otimização sequencial podem ser resolvidos de maneira eficiente ao quebrá-los em estágios e resolver 
-cada estágio de forma independente. A PD é amplamente utilizada em processos determinísticos e estocásticos, sendo a base para técnicas modernas 
-como aprendizado por reforço. Além disso, essa técnica é muito utilizada na busca por soluções ótimas de problemas clássicos da computação, 
-como o Problema da Mochila \cite{Kleinberg2006}.
-
-O desenvolvimento de um algoritmo de PD segue uma sequência de quatro etapas \cite{Cormen2009}:
-\begin{enumerate}
-    \item Caracterizar a estrutura de uma solução ótima.
-    \item Definir recursivamente o valor de uma solução ótima.
-    \item Calcular o valor de uma solução ótima, normalmente de baixo para cima.
-    \item Construir uma solução ótima com as informações calculadas.
-\end{enumerate}
-
-
-\subsection{Processos de Markov}
-
-A teoria dos processos de Markov é originária da década de 1950 com R. Bellman e L. Shapley. 
-Essa teoria cresceu ao longo dos anos e encontrou aplicações em diversas áreas, como ciência da computação, 
-engenharia, pesquisa operacional, biologia e economia \cite{Bauerle2010}.
-
-Os Processos de Decisão de Markov (MDPs) consistem em um modelo matemático para tomada de decisão sequencial sob incerteza \cite{Bauerle2010}.
-
-Formalmente, a MDP é definida por:
-
-\[
-(E, A, Q, r)
-\]
-
-onde:
-
-\begin{itemize}
-    \item \(E\) é o espaço de estados, contendo todos os possíveis estados do sistema.
-    \item \(A\) é o espaço de ações, representando todas as escolhas disponíveis ao tomador de decisão.
-    \item \(Q(x' | x, a)\) é a função de transição de probabilidade, que define a distribuição de probabilidades para o próximo estado \(x'\), 
-    dado o estado atual \(x\) e a ação tomada \(a\).
-    \item \(r(x, a)\) é a função de recompensa, que determina o valor imediato recebido ao tomar a ação \(a\) no estado \(x\).
-\end{itemize}
-
-O objetivo do MDP é encontrar uma política ótima \( \pi \), que mapeia cada estado \( x \) para uma ação \( a \), de forma 
-a maximizar a soma esperada das recompensas futuras. A equação fundamental para esse cálculo é a Equação de Bellman:
-
-\begin{equation}
-V(x) = \max_{a \in A} \left\{ r(x, a) + \sum_{x'} Q(x' | x, a) V(x') \right\}
-\end{equation}
-
-onde \(V(x)\) representa o valor ótimo esperado de um estado \(x\).
-
-Para resolver um MDP, podem ser usados métodos como, por exemplo, PL, garantido a convergência para a política ótima sob certas condições.
-\end{comment}
