@@ -1,5 +1,8 @@
-\contentsline {figure}{\numberline {3.1~\textendash ~}{\ignorespaces Pipeline CRISP-DM}}{19}{figure.3.1}%
-\contentsline {figure}{\numberline {3.2~\textendash ~}{\ignorespaces AD para Iris}}{24}{figure.3.2}%
-\contentsline {figure}{\numberline {5.1~\textendash ~}{\ignorespaces Fluxo de organização das tabelas ofensivas e defensivas extraídas do FBref para a construção da base final de atributos dos jogadores.}}{48}{figure.5.1}%
-\contentsline {figure}{\numberline {5.2~\textendash ~}{\ignorespaces Escolha do Número Ideal de Componentes do PCA}}{52}{figure.5.2}%
-\contentsline {figure}{\numberline {6.1~\textendash ~}{\ignorespaces Relação entre pontuações reais e previstas pelo modelo MLP na Premier League.}}{61}{figure.6.1}%
+\contentsline {figure}{\numberline {3.1~\textendash ~}{\ignorespaces Pipeline CRISP-DM}}{27}{figure.3.1}%
+\contentsline {figure}{\numberline {3.2~\textendash ~}{\ignorespaces AD para Iris}}{32}{figure.3.2}%
+\contentsline {figure}{\numberline {5.1~\textendash ~}{\ignorespaces Fluxo de organização das tabelas ofensivas e defensivas extraídas do FBref para a construção da base final de atributos dos jogadores.}}{56}{figure.5.1}%
+\contentsline {figure}{\numberline {5.2~\textendash ~}{\ignorespaces Escolha do Número Ideal de Componentes do PCA}}{60}{figure.5.2}%
+\contentsline {figure}{\numberline {6.1~\textendash ~}{\ignorespaces Evolução do erro absoluto médio (MAE) ao longo das épocas de treinamento da rede MLP para os conjuntos de treinamento e validação.}}{73}{figure.6.1}%
+\contentsline {figure}{\numberline {6.2~\textendash ~}{\ignorespaces Relação entre pontuações reais e previstas pelo modelo MLP na Premier League.}}{74}{figure.6.2}%
+\contentsline {figure}{\numberline {6.3~\textendash ~}{\ignorespaces Comparação entre pontuação real e prevista do Arsenal ao longo das temporadas.}}{76}{figure.6.3}%
+\contentsline {figure}{\numberline {6.4~\textendash ~}{\ignorespaces Comparação entre pontuação real e prevista do Southampton ao longo das temporadas.}}{76}{figure.6.4}%

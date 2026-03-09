@@ -25,10 +25,10 @@ quanto o custo computacional de cada abordagem.
 \hline
 \textbf{Modelo} & \textbf{R\textsuperscript{2}} & \textbf{MAE} & \textbf{MSE} & \textbf{RMSE} & \textbf{MAPE} & \textbf{Tempo (s)} \\
 \hline
-RL      & 0.41 & 11.48 & 191.78 & 13.85 & 0.2580 & 2.15 \\
-RF      & 0.28 & 12.05 & 234.05 & 15.30 & 0.2690 & 423.13 \\
-XGBoost & 0.41 & 11.48 & 191.78 & 13.85 & 0.2580 & 2.86 \\
-MLP     & 0.55 & 11.08 & 170.42 & 13.05 & 0.2424 & 161.68 \\
+RL      & 0,41 & 11,48 & 191,78 & 13,85 & 0,2580 & 1,72 \\
+RF      & 0,46 & 10,52 & 174,98 & 13,23 & 0,2390 & 118,66 \\
+XGBoost & 0,41 & 11,23 & 191,23 & 13,83 & 0,2512 & 99,08 \\
+MLP     & 0,55 & 11,08 & 170,42 & 13,05 & 0,2424 & 161,68 \\
 \hline
 \end{tabular}
 
@@ -37,25 +37,47 @@ MLP     & 0.55 & 11.08 & 170.42 & 13.05 & 0.2424 & 161.68 \\
 
 \end{table}
 
-Os resultados apresentados na Tabela~\ref{tab:comparacao_modelos} evidenciam um comportamento consistente entre os algoritmos avaliados, com desempenho
-moderado na tarefa de previsão da pontuação final dos times. Embora a acurácia máxima tenha alcançado aproximadamente $55\%$, observa-se que todos os modelos
-enfrentam limitações inerentes à natureza imprevisível, ruidosa e não linear do problema. A pontuação de um time ao longo de uma temporada é influenciada também
-por fatores não refletidos nas estatísticas individuais de jogadores, como variações táticas, mudanças de treinador, lesões, contexto competitivo e dinâmica
-coletiva, o que naturalmente reduz o teto preditivo esperável.
+Os resultados apresentados na Tabela~\ref{tab:comparacao_modelos} evidenciam um desempenho moderado dos algoritmos avaliados na tarefa de previsão da 
+pontuação final dos clubes. O melhor modelo alcançou um valor de $R^2$ de aproximadamente $0{,}55$, indicando que parte significativa da variabilidade 
+da pontuação pode ser explicada pelas variáveis consideradas, embora ainda exista um grau relevante de incerteza inerente ao problema. A pontuação de um time 
+ao longo de uma temporada é influenciada por diversos fatores não diretamente capturados pelas estatísticas individuais dos jogadores, como aspectos táticos, 
+mudanças de treinador, lesões, dinâmica coletiva e variações contextuais ao longo do campeonato, o que naturalmente impõe um limite ao desempenho preditivo dos modelos.
 
-Entre as abordagens testadas, a Rede Neural Multicamadas (MLP) apresentou o melhor equilíbrio entre qualidade preditiva e estabilidade, alcançando o maior valor de
-R\textsuperscript{2} (0{,}55) e os menores erros MAE, MSE, RMSE e MAPE. Esse resultado sugere que a arquitetura densa foi mais capaz de capturar as relações não lineares
-presentes nos componentes principais gerados pelo PCA, aproveitando estruturas de dependência que modelos lineares ou baseados em árvores não exploram de maneira tão eficaz.
+Entre os métodos avaliados, a Rede Neural Multicamadas (MLP) apresentou o melhor desempenho geral. O modelo obteve o maior valor de $R^2$ (0{,}55), além dos 
+menores valores de MSE e RMSE, indicando maior capacidade de capturar a variabilidade presente nos dados. Esses resultados sugerem que a arquitetura neural foi 
+mais eficaz em explorar relações não lineares existentes entre os componentes principais gerados pelo PCA e a pontuação final das equipes.
 
-O desempenho mais modesto do modelo de \textit{Random Forest} (RF) indica que, apesar de ser um método robusto e amplamente utilizado em tarefas de
-AM, quando reduzido por PCA, funcionou de forma mais limitada. Além disso, o custo computacional do RF foi significativamente superior, tornando-o menos atrativo para 
-cenários de larga escala ou simulações repetidas de montagem de elenco.
+O modelo de \textit{Random Forest} apresentou o segundo melhor desempenho, alcançando $R^2$ de 0{,}46 e os menores valores de MAE e MAPE entre os 
+modelos avaliados. Esse resultado indica que o método baseado em árvores também foi capaz de capturar padrões relevantes nos dados, embora com menor 
+capacidade explicativa global em comparação à MLP. Ainda assim, o custo computacional do RF foi significativamente inferior ao da rede neural, o que pode 
+torná-lo uma alternativa interessante em cenários em que o tempo de treinamento seja um fator crítico.
 
-O modelo de Regressão Linear (RL) apresentou desempenho comparável ao \textit{XGBoost}, demonstrando que uma parte da variabilidade explicável está capturada em relações
-aproximadamente lineares entre os componentes principais do PCA e a pontuação final dos times. No entanto, o ganho obtido pela MLP reforça que há padrões 
-não lineares relevantes que justificam a adoção de modelos mais complexos.
+Por outro lado, os modelos de Regressão Linear (RL) e \textit{XGBoost} apresentaram desempenhos bastante semelhantes entre si, ambos com $R^2$ em torno de 0{,}41 
+e erros superiores aos observados nos demais métodos. Esse comportamento sugere que, embora parte da variabilidade da pontuação possa ser explicada por relações 
+aproximadamente lineares entre os componentes principais e a variável alvo, a presença de padrões não lineares limita a capacidade desses modelos de alcançar 
+desempenhos superiores nesse contexto.
+
+De maneira geral, os resultados indicam que modelos capazes de capturar relações não lineares mais complexas tendem a apresentar melhor desempenho na tarefa 
+considerada. Dessa forma, o MLP foi selecionado como modelo preditivo para as etapas subsequentes do estudo.
 
 \subsection{Predição do Modelo Multilayer Perceptron (MLP)}
+
+Antes de analisar as previsões realizadas pelo modelo, foi avaliado o comportamento do processo de treinamento da rede neural ao longo das épocas. 
+A Figura~\ref{fig:mlp_mae} apresenta a evolução do erro absoluto médio (MAE) durante o treinamento da rede MLP, considerando tanto o conjunto de 
+treinamento quanto o conjunto de validação.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.9\textwidth]{imagens/mlp_mae.png}
+    \caption{Evolução do erro absoluto médio (MAE) ao longo das épocas de treinamento da rede MLP para os conjuntos de treinamento e validação.}
+    \label{fig:mlp_mae}
+\end{figure}
+
+Observa-se uma redução acentuada do erro nas primeiras épocas de treinamento, indicando que o modelo rapidamente aprende padrões relevantes presentes nos dados. 
+Após essa fase inicial, o erro tende a estabilizar, apresentando pequenas oscilações ao longo das épocas subsequentes.
+
+Nota-se também que as curvas de treinamento e validação permanecem relativamente próximas durante todo o processo de treinamento, sugerindo ausência de 
+sobreajuste significativo (\textit{overfitting}). Esse comportamento indica que o modelo manteve boa capacidade de generalização ao longo do treinamento.
 
 Com o intuito de compreender a predição realizada pelo melhor modelo (MLP) foi realizada uma análise visual da relação entre as pontuações reais dos clubes da Premier League
 na temporada e as pontuações previstas pelo modelo. 
@@ -80,10 +102,33 @@ extremas e com menor amplitude, aproximando-se de valores centrais, devido a mec
 por Bishop~\cite{bishop2006}. Esse comportamento é análogo ao fenômeno estatístico conhecido como regressão à média.
 
 Dessa forma, observa-se que o modelo MLP é capaz de capturar tendências gerais de desempenho dos clubes com base nas estatísticas individuais de seus jogadores, 
-porém nota-se uma subestimação sistemática das equipes de desempenho elevado, como Manchester City, Arsenal e Liverpool, e uma superestimação das equipes de 
-baixo desempenho, como Sheffield United, Burnley e Luton Town.
+porém nota-se uma subestimação sistemática das equipes de desempenho elevado, como Manchester City, Arsenal e Liverpool, e uma superestimação das equipes de baixo 
+desempenho, como Sheffield United, Burnley e Luton Town.
 
-Com base nos resultados apresentados neste capítulo, foi possível identificar o modelo de AM que apresentou o melhor desempenho na tarefa de predição da pontuação 
-final das equipes. A partir dessa definição, o modelo selecionado (MLP) passa a ser utilizado como função objetivo na etapa de otimização da composição de elencos. 
-Dessa forma, no próximo capítulo são apresentados os procedimentos de PO empregados para simular contratações e avaliar configurações de elenco capazes de 
-maximizar o desempenho previsto das equipes.
+Para ilustrar esse comportamento de forma mais detalhada, as Figuras~\ref{fig:arsenal_pred} e~\ref{fig:southampton_pred} apresentam 
+a comparação entre as pontuações reais e previstas pelo modelo MLP para dois clubes com desempenhos contrastantes na liga.
+
+A Figura~\ref{fig:arsenal_pred} apresenta o caso do Arsenal, uma equipe de alto desempenho ao longo das temporadas analisadas. Observa-se que o 
+modelo é capaz de capturar a tendência geral de crescimento da pontuação do clube, embora apresente uma leve subestimação nas temporadas mais recentes.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.9\textwidth]{imagens/arsenal.png}
+    \caption{Comparação entre pontuação real e prevista do Arsenal ao longo das temporadas.}
+    \label{fig:arsenal_pred}
+\end{figure}
+
+A Figura~\ref{fig:southampton_pred} apresenta o caso do Southampton, equipe que apresentou queda de desempenho ao longo das temporadas analisadas. 
+Nesse caso, observa-se uma tendência de superestimação das pontuações pelo modelo, comportamento consistente com o fenômeno de regressão à média discutido anteriormente.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.9\textwidth]{imagens/southampton.png}
+    \caption{Comparação entre pontuação real e prevista do Southampton ao longo das temporadas.}
+    \label{fig:southampton_pred}
+\end{figure}
+
+Com base nos resultados apresentados neste capítulo, foi possível identificar o modelo de AM que apresentou o melhor desempenho na tarefa de predição da 
+pontuação final das equipes. A partir dessa definição, o modelo selecionado (MLP) passa a ser utilizado como função objetivo na etapa de otimização da 
+composição de elencos. Dessa forma, no próximo capítulo são apresentados os procedimentos de PO empregados para simular contratações e avaliar 
+configurações de elenco capazes de maximizar o desempenho previsto das equipes.
