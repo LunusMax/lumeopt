@@ -7,7 +7,14 @@ individuais dos jogadores.
 
 \section{Modelos de Aprendizado de Máquina (AM)}
 
-O melhor modelo de AM desenvolvido neste estudo apresentou acurácia máxima de aproximadamente $55\%$ na tarefa de prever a pontuação final de um time em sua liga nacional, utilizando
+Como referência para interpretação dos resultados, considera-se o modelo de baseline implícito associado
+ao coeficiente de determinação. Em problemas de regressão, um valor de $R^2 = 0$ corresponde a um modelo
+que simplesmente prevê a média da variável alvo para todas as observações, isto é, a pontuação média
+dos clubes na liga. Dessa forma, valores positivos de $R^2$ indicam que o modelo consegue explicar parte
+da variabilidade observada nos dados, superando a estratégia trivial de prever sempre a média das pontuações.
+
+O melhor modelo de AM desenvolvido neste estudo apresentou um coeficiente de determinação máximo de
+aproximadamente $0{,}55$ na tarefa de prever a pontuação final de um time em sua liga nacional, utilizando
 como base os dados estatísticos de desempenho individual de seus jogadores na temporada anterior.
 
 Para avaliar o desempenho dos diferentes algoritmos aplicados à tarefa de previsão, foram calculadas métricas 
@@ -79,27 +86,56 @@ Após essa fase inicial, o erro tende a estabilizar, apresentando pequenas oscil
 Nota-se também que as curvas de treinamento e validação permanecem relativamente próximas durante todo o processo de treinamento, sugerindo ausência de 
 sobreajuste significativo (\textit{overfitting}). Esse comportamento indica que o modelo manteve boa capacidade de generalização ao longo do treinamento.
 
-Com o intuito de compreender a predição realizada pelo melhor modelo (MLP) foi realizada uma análise visual da relação entre as pontuações reais dos clubes da Premier League
-na temporada e as pontuações previstas pelo modelo. 
+Com o intuito de compreender a predição realizada pelo melhor modelo (MLP), foi realizada uma análise visual da relação entre as pontuações reais dos 
+clubes da Premier League e as pontuações previstas pelo modelo ao longo das temporadas analisadas.
 
-A Figura~\ref{fig:pl_points} apresenta o gráfico de comparação entre as pontuações reais e previstas pelo modelo MLP.
+As Figuras~\ref{fig:pl_20_21}--\ref{fig:pl_23_24} apresentam os gráficos de comparação entre as pontuações reais e previstas pelo modelo MLP para 
+as temporadas de 2020--2021 a 2023--2024 da Premier League.
 
-\begin{figure}[H]
+\begin{figure}[htbp]
     \centering
     \makebox[\textwidth][c]{%
-        \includegraphics[width=1.3\textwidth]{imagens/pl_points.jpg}
+        \includegraphics[width=1.3\textwidth]{imagens/pl_20-21.png}
     }
-    \caption{Relação entre pontuações reais e previstas pelo modelo MLP na Premier League.}
-    \label{fig:pl_points}
+    \caption{Comparação entre pontuações reais e previstas pelo modelo MLP na temporada 2020--2021 da Premier League.}
+    \label{fig:pl_20_21}
 \end{figure}
 
-Os resultados apresentados na Figura~\ref{fig:pl_points} indicam que o modelo MLP apresenta maior precisão ao estimar as pontuações de clubes que terminaram a 
-temporada com valores próximos da média da liga. Times posicionados no centro da distribuição como Fulham, Manchester United e Newcastle United tendem a 
-ter suas pontuações previstas com menor erro, comportamento comum em modelos preditivos sob alta incerteza: quando os atributos disponíveis não capturam 
-toda a variabilidade do fenômeno, as previsões convergem naturalmente para valores intermediários. Esse resultado alinha-se com a literatura clássica, 
-segundo a qual modelos preditivos em ambientes de alta variabilidade, como é o caso do futebol, tendem a gerar funções de saída menos
-extremas e com menor amplitude, aproximando-se de valores centrais, devido a mecanismos de \textit{shrinkage} e ao balanço entre viéses e variância discutidos 
-por Bishop~\cite{bishop2006}. Esse comportamento é análogo ao fenômeno estatístico conhecido como regressão à média.
+\begin{figure}[htbp]
+    \centering
+    \makebox[\textwidth][c]{%
+        \includegraphics[width=1.3\textwidth]{imagens/pl_21-22.png}
+    }
+    \caption{Comparação entre pontuações reais e previstas pelo modelo MLP na temporada 2021--2022 da Premier League.}
+    \label{fig:pl_21_22}
+\end{figure}
+
+\begin{figure}[htbp]
+    \centering
+    \makebox[\textwidth][c]{%
+        \includegraphics[width=1.3\textwidth]{imagens/pl_22-23.png}
+    }
+    \caption{Comparação entre pontuações reais e previstas pelo modelo MLP na temporada 2022--2023 da Premier League.}
+    \label{fig:pl_22_23}
+\end{figure}
+
+\begin{figure}[htbp]
+    \centering
+    \makebox[\textwidth][c]{%
+        \includegraphics[width=1.3\textwidth]{imagens/pl_23-24.png}
+    }
+    \caption{Comparação entre pontuações reais e previstas pelo modelo MLP na temporada 2023--2024 da Premier League.}
+    \label{fig:pl_23_24}
+\end{figure}
+
+Os resultados apresentados nas Figuras~\ref{fig:pl_20_21}--\ref{fig:pl_23_24} indicam que o modelo MLP apresenta maior precisão ao estimar as pontuações de 
+clubes que terminaram as temporadas com valores próximos da média da liga. Clubes posicionados próximos à região central da tabela, tendem a ter suas pontuações 
+previstas com menor erro. Esse comportamento é comum em modelos preditivos sob alta incerteza: quando os atributos disponíveis não capturam toda 
+a variabilidade do fenômeno, as previsões convergem naturalmente para valores intermediários.
+
+Esse resultado alinha-se com a literatura clássica, segundo a qual modelos preditivos em ambientes de alta variabilidade, como é o caso do futebol, tendem 
+a gerar funções de saída menos extremas e com menor amplitude, aproximando-se de valores centrais, devido a mecanismos de \textit{shrinkage} e ao balanço 
+entre viés e variância discutidos por Bishop~\cite{bishop2006}. Esse comportamento é análogo ao fenômeno estatístico conhecido como regressão à média.
 
 Dessa forma, observa-se que o modelo MLP é capaz de capturar tendências gerais de desempenho dos clubes com base nas estatísticas individuais de seus jogadores, 
 porém nota-se uma subestimação sistemática das equipes de desempenho elevado, como Manchester City, Arsenal e Liverpool, e uma superestimação das equipes de baixo 

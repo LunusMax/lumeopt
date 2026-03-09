@@ -92,7 +92,47 @@ de forma a preservar a maior quantidade possível de variância dos dados sem co
 20 componentes principais, uma vez que esse valor já era suficiente para explicar 97,66\% da variância total dos dados, indicando que praticamente 
 toda a informação relevante do conjunto original estava preservada nessa representação reduzida.
 
-\subsubsection{Data Augmentation}
+Originalmente, cada jogador era descrito por 47 atributos estatísticos. Após a aplicação do PCA, esse conjunto foi reduzido para 20 atributos por jogador. 
+Além disso, para padronizar a representação das equipes, cada elenco foi truncado para conter apenas os 20 jogadores com maior minutagem na temporada, 
+removendo aqueles que tiveram menor participação.
+
+Dessa forma, cada equipe passou a ser representada por 20 jogadores, cada um descrito por 20 atributos derivados do PCA, resultando em um total de 
+400 atributos relacionados ao desempenho individual dos jogadores. Adicionalmente, foi incorporada como variável explicativa a pontuação obtida pelo clube 
+na temporada anterior. Assim, cada equipe passou a ser descrita por um vetor de 401 atributos.
+
+A Tabela~\ref{tab:estrutura_dados} apresenta uma representação simplificada da estrutura
+dos dados utilizados como entrada do modelo. Cada equipe é representada por 20 jogadores,
+cada um descrito por 20 componentes principais, além da pontuação obtida pelo clube na
+temporada anterior.
+
+\begin{table}[H]
+\centering
+\caption{Representação simplificada da estrutura dos dados de entrada do modelo}
+\label{tab:estrutura_dados}
+\begin{tabular}{cccccc}
+\toprule
+Jogador & PC1 & PC2 & $\dots$ & PC20 & Pontuação $t-1$ \\
+\midrule
+$J_1$  & $x_{1,1}$ & $x_{1,2}$ & $\dots$ & $x_{1,20}$ & $p_t$ \\
+$J_2$  & $x_{2,1}$ & $x_{2,2}$ & $\dots$ & $x_{2,20}$ & $p_t$ \\
+$J_3$  & $x_{3,1}$ & $x_{3,2}$ & $\dots$ & $x_{3,20}$ & $p_t$ \\
+$\vdots$ & $\vdots$ & $\vdots$ & $\ddots$ & $\vdots$ & $\vdots$ \\
+$J_{20}$ & $x_{20,1}$ & $x_{20,2}$ & $\dots$ & $x_{20,20}$ & $p_t$ \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+Observa-se que, nessa representação, cada equipe é descrita pelo conjunto de jogadores que
+compõem seu elenco, sendo cada atleta caracterizado por seus componentes principais. Como
+a ordem em que os jogadores aparecem na estrutura de dados não possui significado intrínseco
+para o problema estudado, diferentes ordenações do mesmo elenco representam essencialmente
+a mesma equipe. Além disso, considerando que o número de observações disponíveis ainda é
+relativamente limitado para o treinamento de modelos de AM, optou-se pela utilização de uma
+estratégia de \textit{data augmentation}, descrita a seguir, com o objetivo de gerar múltiplas
+representações equivalentes dos elencos, ampliando o conjunto de treinamento e contribuindo
+para reduzir o risco de \textit{overfitting}.
+
+\subsection{Data Augmentation}
 
 Embora o conjunto de dados utilizado neste estudo contemple múltiplas temporadas e duas ligas distintas, 
 o número total de observações ainda pode ser considerado relativamente limitado para o treinamento de 
@@ -100,22 +140,29 @@ modelos de AM. Em cenários desse tipo, técnicas de \textit{data augmentation} 
 ser empregadas para ampliar artificialmente o conjunto de treinamento, contribuindo para reduzir o risco 
 de \textit{overfitting} e melhorar a capacidade de generalização dos modelos.
 
-Neste trabalho, foi adotada uma estratégia de aumento de dados baseada na geração de cópias embaralhadas 
-do conjunto original. Inicialmente, cada observação recebeu um identificador auxiliar (\textit{copy}) com 
-valor igual a zero. Em seguida, foram geradas múltiplas cópias da base de dados contendo os componentes 
-principais obtidos por meio do PCA. Para cada cópia gerada, as linhas do \textit{dataframe} foram 
-embaralhadas aleatoriamente utilizando diferentes sementes de aleatoriedade, preservando-se os valores 
-originais das variáveis, mas alterando a ordenação das observações.
+No presente trabalho, foi adotada uma estratégia de aumento de dados baseada na geração de múltiplas 
+representações equivalentes de cada equipe em uma determinada temporada. Inicialmente, cada observação 
+recebeu um identificador auxiliar (\textit{copy}) com valor igual a zero, representando a base original. 
+Em seguida, foram geradas $k$ cópias adicionais do conjunto de dados contendo os componentes principais 
+obtidos por meio do PCA.
 
-Após esse processo, as cópias geradas foram concatenadas ao conjunto inicial, formando um novo conjunto 
-de treinamento ampliado. Neste estudo, foram geradas $k = 200$ cópias adicionais da base original, de 
-modo que cada equipe e temporada passou a possuir múltiplas representações equivalentes no conjunto de 
-dados, diferenciadas apenas pela ordenação dos jogadores.
+Para cada cópia gerada, as linhas do \textit{dataframe} foram embaralhadas aleatoriamente utilizando 
+diferentes sementes de aleatoriedade. Esse procedimento não altera os valores das variáveis associadas 
+a cada jogador, mas modifica a ordem em que os jogadores aparecem no conjunto de dados. Como o processo 
+de construção das variáveis de entrada posteriormente reorganiza os dados por meio de uma operação de 
+\textit{pivot}, na qual os jogadores de cada equipe passam a ocupar posições indexadas no vetor de 
+atributos, diferentes ordenações produzem diferentes representações vetoriais de um mesmo elenco.
 
-Essa abordagem permite aumentar a diversidade das amostras apresentadas ao modelo durante o treinamento, 
-sem introduzir informação artificial nos atributos, preservando a distribuição estatística original dos 
-dados. Dessa forma, busca-se tornar o processo de aprendizado mais robusto e menos sensível a variações 
-específicas do conjunto inicial de observações.
+Após o embaralhamento, as cópias geradas foram concatenadas ao conjunto original, formando um novo 
+conjunto de treinamento ampliado. Neste estudo, foram geradas $k = 200$ cópias adicionais da base, de 
+modo que cada equipe e temporada passou a possuir múltiplas representações no conjunto de dados, 
+diferenciadas apenas pela ordenação dos jogadores no vetor de atributos.
+
+Essa estratégia permite expor o modelo a diversas permutações equivalentes de um mesmo elenco durante o 
+treinamento, reduzindo a dependência da predição em relação à ordem arbitrária dos jogadores no vetor de 
+entrada. Como não há modificação nos valores das variáveis originais, a distribuição estatística dos dados 
+é preservada, ao mesmo tempo em que se aumenta a diversidade das amostras utilizadas no processo de 
+aprendizado.
 
 \subsection{Base de Dados dos Jogos}
 
