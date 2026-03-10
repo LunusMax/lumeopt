@@ -1,4 +1,4 @@
-\chapter{Resultados da Otimização da Composição de Elencos}
+\chapter{Otimização da Composição de Elencos}
 
 Uma vez identificado o modelo de AM com melhor capacidade de predizer a pontuação final dos times em uma liga a partir das informações estatísticas de seus elencos, 
 inicia-se a segunda etapa do projeto, dedicada à busca de soluções capazes de otimizar esse desempenho. 
@@ -70,10 +70,10 @@ A qualidade de cada possível contratação é avaliada por meio da função obj
 por estimar a pontuação esperada da equipe na temporada considerada. Para manter constante o tamanho do elenco avaliado, a inclusão de novos jogadores 
 é simulada removendo-se, da formação original, a mesma quantidade de atletas com menor minutagem na temporada analisada.
 
-O processo é repetido até que seja atingido um número máximo de contratações, definido por um parâmetro \(k\), ou até que não existam mais jogadores 
-viáveis dentro da restrição orçamentária. Sempre que uma contratação é aceita, o valor de mercado do jogador selecionado é subtraído do orçamento disponível, 
-atualizando a restrição orçamentária para as iterações seguintes. Como característica fundamental da estratégia gulosa, as decisões tomadas em cada 
-iteração são definitivas: uma vez que um jogador é selecionado e adicionado ao conjunto de reforços, essa escolha não é revista nas iterações subsequentes.
+O processo é repetido até que não existam mais jogadores viáveis dentro da restrição orçamentária. Sempre que uma contratação é aceita, o valor 
+de mercado do jogador selecionado é subtraído do orçamento disponível, atualizando a restrição orçamentária para as iterações seguintes. 
+Como característica fundamental da estratégia gulosa, as decisões tomadas em cada iteração são definitivas: uma vez que um jogador é selecionado e 
+adicionado ao conjunto de reforços, essa escolha não é revista nas iterações subsequentes.
 
 Foram implementadas duas variações desse algoritmo. Ambas possuem exatamente a mesma estrutura e seguem o mesmo procedimento descrito anteriormente, 
 diferindo apenas na forma como a melhoria da função objetivo é aceita em cada iteração. Na versão \textit{first-improvement}, os jogadores são avaliados 
@@ -95,16 +95,22 @@ forma mais ampla o espaço de soluções possíveis para o problema de montagem 
 Enquanto os algoritmos gulosos constroem o conjunto de contratações de forma incremental, selecionando jogadores individualmente a cada iteração, 
 a estratégia de busca local parte de uma solução inicial completa e passa a realizar modificações estruturais nessa solução ao longo do processo de otimização.
 
-Cada solução é representada por um conjunto de jogadores candidatos à contratação cuja cardinalidade é limitada por um parâmetro \(k\), que define 
-o número máximo de contratações consideradas. A avaliação de cada solução é realizada por meio da mesma função objetivo utilizada nos algoritmos gulosos, 
-isto é, o modelo de AM desenvolvido neste para estimar a pontuação esperada da equipe ao final da temporada.
-
+%Cada solução é representada por um conjunto de jogadores candidatos à contratação cuja cardinalidade é limitada por um parâmetro \(k\), que define 
+%o número máximo de contratações consideradas. A avaliação de cada solução é realizada por meio da mesma função objetivo utilizada nos algoritmos gulosos, 
+%isto é, o modelo de AM desenvolvido neste para estimar a pontuação esperada da equipe ao final da temporada.
 Assim como na abordagem gulosa, a inclusão de jogadores no elenco é simulada mantendo constante o tamanho da formação avaliada. Para isso, 
 sempre que um conjunto de contratações é considerado, remove-se da formação original a mesma quantidade de atletas com menor minutagem na temporada analisada.
 
 A solução inicial é construída selecionando aleatoriamente jogadores da temporada imediatamente anterior à temporada analisada e respeitando a restrição 
 orçamentária estabelecida. Durante essa etapa, são desconsiderados jogadores que já pertencem ao elenco atual da equipe. O processo de seleção inicial 
-continua até que seja atingido o limite máximo de contratações definido pelo parâmetro \(k\) ou até que o orçamento disponível não permita novas adições.
+é repetido até que o orçamento disponível não permita novas adições.
+
+Para tornar o experimento computacionalmente viável durante a execução da busca local, foi adotada uma estratégia de amostragem do espaço de candidatos. 
+Em vez de considerar todos os jogadores disponíveis na base de dados, foi definido um \textit{pool} de 100 jogadores selecionados aleatoriamente entre 
+os atletas elegíveis da temporada anterior. Esse subconjunto é utilizado como universo de candidatos para as operações de substituição ao longo do processo de 
+busca. Embora essa abordagem reduza significativamente o custo computacional do algoritmo, ela também limita o espaço de soluções explorado, podendo 
+impactar negativamente a qualidade da solução final encontrada. Esse tipo de restrição é comum em problemas de otimização combinatória de grande escala, 
+nos quais a redução controlada do espaço de busca é empregada para viabilizar a aplicação prática dos algoritmos.
 
 Uma vez obtida a solução inicial viável, o algoritmo passa a explorar sua vizinhança por meio de operações de substituição unitária (\textit{swap}). 
 Em cada vizinho gerado, um jogador do conjunto atual de contratações é substituído por outro jogador elegível ainda não selecionado. A substituição 
