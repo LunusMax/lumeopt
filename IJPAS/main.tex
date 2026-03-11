@@ -17,6 +17,9 @@
 \usepackage{geometry}
 \geometry{margin=1in}
 
+\usepackage{tikz}
+\usetikzlibrary{positioning, arrows.meta}
+
 % ------------------------------------------------
 % TITLE
 % ------------------------------------------------
@@ -41,14 +44,14 @@
 
 \begin{abstract}
 
-This study proposes a framework that combines machine learning and optimization
-to support squad planning in professional football. A multilayer perceptron model
-is trained to predict team performance based on individual player statistics from
-the previous season. These predictions are used as the objective function in a
-local search algorithm that simulates optimal player recruitment under budget
-constraints. Experiments using data from major European leagues illustrate the
-potential of the proposed approach to support decision-making in football squad
-composition.
+Football is characterized by high levels of uncertainty, which makes squad planning and player recruitment complex decision-making processes. 
+This study investigates the use of Machine Learning (ML) and Operations Research (OR) techniques as decision-support tools for football squad composition. 
+A predictive model based on a multilayer perceptron (MLP) is trained to estimate the final number of points obtained by football teams in a season using 
+individual player statistics from the previous season. 
+The predicted team performance is then used as the objective function in a local search optimization framework that simulates player recruitment 
+under budget constraints. Experiments conducted using data from major European leagues demonstrate the potential of combining predictive modeling and 
+optimization to support squad planning decisions. The proposed framework provides a structured and data-driven approach to evaluating recruitment strategies, 
+reducing subjectivity in player acquisition and contributing to more informed decision-making in professional football.
 
 \end{abstract}
 
@@ -58,64 +61,154 @@ composition.
 \section{Introduction}
 % ------------------------------------------------
 
-The increasing availability of detailed sports data has created new opportunities
-for the application of machine learning and optimization techniques in football
-analytics. One of the most important strategic decisions for professional clubs
-is the composition of their squads, which involves balancing player performance,
-team needs, and financial constraints.
+Football is the most popular sport in the world \cite{Almulla2023}. Over the past decades, the sport has undergone significant technological and 
+analytical development, accompanied by substantial economic growth in the global football industry \cite{Rodrigues2022}. Despite this evolution, 
+football remains highly unpredictable. A notable example is Leicester City's unexpected triumph in the English Premier League (EPL) in 2016, an outcome
+ that surprised analysts and fans worldwide \cite{Baboota2019}.
 
-This study proposes a decision-support framework that combines machine learning
-prediction with optimization techniques to simulate player recruitment under
-budget limitations.
+Given the economic relevance and global popularity of football, both academic researchers and industry professionals have increasingly explored 
+data-driven approaches to support decision-making in the sport \cite{Baboota2019}. The financial magnitude of football is reflected in the transfer market, 
+which moves billions of dollars annually. For instance, between June and September 2023, global player transfers reached approximately R\$36.6 billion according 
+to FIFA reports \cite{Globo2023}. These large financial investments highlight the importance of improving decision-making processes related to player 
+recruitment and squad construction.
+
+In the field of Computer Science, several studies have investigated the use of statistical analysis and Machine Learning (ML) techniques to model 
+patterns and generate predictions in complex environments. Joseph, Fenton and Neil (2006), for example, explored the use of Bayesian networks and other 
+ML techniques to predict match outcomes for Tottenham Hotspur between 1995 and 1997. In professional football practice, data-driven strategies have also been 
+adopted by clubs such as Brighton \& Hove Albion, which has implemented a recruitment model strongly supported by statistical analysis. 
+This approach has enabled the identification of undervalued players in the transfer market, generating substantial financial returns through successful transfers 
+\cite{BBC2023Caicedo, CNN2023Caicedo, ESPN2023}.
+
+In academic research, most studies applying ML to football focus primarily on predicting match outcomes, estimating win probabilities, or optimizing 
+betting strategies. However, comparatively fewer studies address the problem of squad composition and player recruitment using data-driven approaches \cite{Abidin2021}. 
+This gap is particularly relevant because selecting players for a squad requires evaluating multiple technical, physical and contextual factors simultaneously, 
+including team playing style, league characteristics and player career stage \cite{Abidin2021}. Furthermore, the inherent uncertainty of football means 
+that even seemingly optimal transfers may fail to deliver the expected performance.
+
+Transfer market inefficiencies illustrate the complexity of these decisions. According to Graham (2024), a transfer can be considered successful 
+if the player starts at least 50\% of matches during the first two seasons with the club, a concept referred to as the ``50\% rule''. Based on this criterion, 
+approximately 46\% of transfers above €10 million in the EPL between 1992 and 2021 can be classified as unsuccessful \cite{Graham2024}. 
+These outcomes are often associated with factors such as tactical incompatibility, inaccurate evaluation of player ability, positional mismatches, 
+coaching decisions or physical issues.
+
+Recent advances in ML have significantly expanded the capacity to analyze sports data, enabling the identification of patterns that were previously 
+difficult to detect in large datasets. However, predictive models do not eliminate the inherent uncertainty of football; rather, they serve as decision-support 
+tools that can help reduce risk and support strategic choices.
+
+Within this context, this study investigates the use of predictive models to estimate the final number of points obtained by football teams in a season based 
+on historical individual player performance statistics. The machine learning model converts player-level performance indicators from the previous season into 
+predictions of team-level performance in the subsequent season. Unlike approaches that focus solely on match outcome prediction or isolated player evaluation, 
+the proposed framework analyzes players as components of a collective system whose combined performance influences the final league standing. 
+The predictions generated by the model are used as the objective function in an optimization procedure that simulates player recruitment decisions 
+under budget constraints.
+
+The main contribution of this work is the integration of a machine learning model that predicts team points with an optimization framework 
+designed to simulate squad recruitment decisions under budget constraints.
 
 % ------------------------------------------------
 \section{Related Work}
 % ------------------------------------------------
 
-Research on sports analytics has increasingly explored the use of machine learning
-to predict match outcomes and team performance. Previous studies have applied
-statistical models and machine learning techniques to estimate the probability
-of victory, evaluate player contributions, and analyze tactical patterns.
+The application of machine learning (ML) in sports analytics has grown substantially over the past decades, particularly in football. 
+According to \cite{Horvat2020}, ML techniques are well suited for sports data analysis due to the large volume of structured and unstructured information 
+generated from match events, tracking systems and historical databases. Consequently, numerous studies have investigated predictive models for football performance.
 
-However, fewer studies have explored the integration of predictive models with
-optimization techniques to support squad planning decisions.
+Most of the existing literature focuses on predicting the outcome of individual matches, typically framed as a classification problem involving win, 
+draw or loss. Early work by \cite{Joseph2006} employed Bayesian networks to model match outcomes using a dataset of Tottenham Hotspur matches between 1995 and 1997. 
+More recent studies have explored a broader range of machine learning algorithms and larger datasets. For example, \cite{Baboota2019} compared multiple 
+supervised learning methods, including Random Forest, Support Vector Machines and Gradient Boosting, to predict English Premier League (EPL) match outcomes. 
+Similarly, \cite{Awadallah2020} evaluated deep learning models such as dense neural networks and Long Short-Term Memory (LSTM) networks using data from ten EPL seasons. 
+These studies demonstrate the potential of ML techniques for modeling football outcomes, but they remain primarily focused on predicting individual matches.
+
+Beyond match-level prediction, some research has investigated the determinants of team performance over an entire season. 
+Statistical analyses have shown that aggregated performance indicators such as goals scored, shots on target and possession are associated with 
+final league standings \cite{LagoBallesteros2010}. Economic studies have also examined the relationship between financial investment and team performance, 
+indicating that variables such as wage expenditure can influence competitive outcomes \cite{Carmichael2011}. While these studies contribute to 
+understanding factors associated with success in football leagues, they generally rely on retrospective analyses and do not explicitly model team 
+performance as a function of the individual composition of the squad.
+
+In parallel with predictive modeling, operations research (OR) techniques have been applied to various decision-making problems in sports. 
+These applications include scheduling competitions, optimizing tournament structures and analyzing tactical decisions \cite{Kendall2010}. 
+Many of these problems involve combinatorial optimization and high computational complexity, often requiring heuristic or metaheuristic approaches 
+to obtain feasible solutions.
+
+More directly related to team composition, several studies have investigated optimization-based approaches to player selection. \cite{Tavana2013} 
+proposed a fuzzy inference system for selecting players and determining tactical formations, while \cite{Qader2017} formulated player selection as a 
+multicriteria decision-making problem based on performance indicators. Other works have modeled squad selection using mathematical programming approaches, 
+including stochastic programming models for team composition \cite{Pantuso2017} and assignment-based formulations for player-position allocation \cite{Boon2003}. 
+Although these studies advance the formal modeling of squad selection problems, their objective functions are typically based on 
+predefined performance scores or expert-defined evaluations.
+
+Recent developments in prescriptive analytics emphasize the integration of predictive models with optimization methods to support decision-making processes 
+\cite{Bertsimas2019}. In this paradigm, machine learning models are not only used to generate predictions but also incorporated directly 
+into optimization frameworks that guide strategic decisions.
+
+Despite these advances, the integration between predictive models of team performance and optimization-based squad composition remains 
+relatively unexplored in the football analytics literature. In particular, few studies attempt to estimate season-level team performance as a function of 
+individual player statistics and subsequently incorporate these predictions into formal optimization models.
+
+This study addresses this gap by proposing a framework that combines machine learning-based prediction of team performance with an 
+optimization procedure designed to simulate player recruitment decisions under budget constraints.
 
 % ------------------------------------------------
 \section{Data}
 % ------------------------------------------------
 
-This study uses player performance statistics collected from publicly available
-football data sources. The dataset includes multiple seasons from major European
-leagues, with player statistics linked to their respective teams and seasons.
+The dataset used in this study consists of player performance statistics collected from two major European football leagues: the English Premier League
+and the Italian Serie A. These competitions were selected due to their high level of competitiveness and the availability of detailed player performance data.
 
-Player statistics correspond to season \(t-1\), while the target variable is the
-final number of points obtained by each team in season \(t\).
+The data were obtained from the FBref football statistics platform through web scraping procedures implemented in Python. The dataset covers five seasons, 
+from 2019--2020 to 2023--2024, including all teams that participated in the first division of each league during this period.
+
+Each observation corresponds to the statistical performance of a player during a specific season while representing a particular team. The dataset contains 
+47 player performance attributes describing both offensive and defensive contributions, including advanced football statistics such as goals, 
+assists, shots, passes and defensive actions.
+
+To construct the predictive framework, player statistics from season \(t-1\) were associated with the final number of points obtained by each team in
+season \(t\). This temporal alignment ensures that all explanatory variables precede the target variable, preventing the use of future information during
+model training.
+
+The two leagues were used separately during the modeling process. Specifically, the machine learning model was trained using data from one league and evaluated
+using data from the other. This cross-league strategy allows the assessment of model generalization across distinct competitive environments while avoiding
+information leakage between training and test samples.
 
 % ------------------------------------------------
 \section{Performance Prediction Model}
 % ------------------------------------------------
 
-To predict team performance, a multilayer perceptron (MLP) model was developed
-using player performance statistics as input variables. Prior to model training,
-dimensionality reduction was performed using Principal Component Analysis (PCA)
-to mitigate multicollinearity and reduce the dimensionality of the feature space.
+To predict team performance, a machine learning model was developed using individual player statistics as explanatory variables. Since the original
+dataset contains 47 performance attributes per player, dimensionality reduction was first applied using Principal Component Analysis (PCA).
+The number of principal components was determined using a scree plot analysis, resulting in the selection of 20 components, which explain
+97.66\% of the total variance of the dataset.
 
-The model was trained using data from one league and evaluated using data from
-another league, avoiding information leakage between training and test samples.
+\input{pipeline_v01}
 
-\begin{figure}[h]
-\centering
-\includegraphics[width=0.8\linewidth]{figures/prediction_plot.png}
-\caption{Relationship between predicted and actual team points.}
-\end{figure}
+\input{pipeline_v02}
+
+After dimensionality reduction, each player is represented by a vector of 20 principal components. To construct a team-level representation,
+each squad was truncated to the 20 players with the highest playing time during the season. Consequently, each team is represented by a vector
+containing the PCA components of its 20 players, resulting in 400 player-related features. Additionally, the number of points obtained by the team
+in the previous season was included as an explanatory variable, producing a final input vector with 401 attributes.
+
+Because the ordering of players within a squad does not carry intrinsic meaning, a data augmentation strategy was employed to generate multiple
+equivalent representations of each team. This procedure consisted of randomly permuting the ordering of players within the input vector,
+generating multiple training samples representing the same squad while preserving the original statistical properties of the dataset.
+
+The predictive model was implemented using a Multilayer Perceptron (MLP). The network consists of two hidden layers with 128 and 32 neurons,
+respectively, using ReLU activation functions. Batch normalization and dropout layers were applied to improve generalization and reduce the risk
+of overfitting. The output layer contains a single neuron with linear activation, producing the predicted number of points obtained by the team
+at the end of the season.
+
+The models were trained using data from one league and evaluated using data from the other league, ensuring that training and testing occur on
+distinct competitions. This strategy prevents information leakage between datasets and provides a more realistic evaluation of the model's
+generalization capability.
 
 % ------------------------------------------------
 \section{Squad Optimization}
 % ------------------------------------------------
 
-The predictions generated by the machine learning model were used as an objective
-function in a squad optimization framework. The objective is to maximize the
-expected team performance under a predefined budget constraint.
+The predictions generated by the model are used as the objective function in an optimization procedure that simulates 
+player recruitment decisions under budget constraints.
 
 A local search algorithm was implemented to explore the solution space through
 player substitution operations, generating neighboring squad configurations.
