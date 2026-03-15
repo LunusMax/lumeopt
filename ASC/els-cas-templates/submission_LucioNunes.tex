@@ -1,0 +1,272 @@
+%% 
+%% Copyright 2019-2024 Elsevier Ltd
+%% 
+%% This file is part of the 'CAS Bundle'.
+%% --------------------------------------
+%% 
+%% It may be distributed under the conditions of the LaTeX Project Public
+%% License, either version 1.3c of this license or (at your option) any
+%% later version.  The latest version of this license is in
+%%    http://www.latex-project.org/lppl.txt
+%% and version 1.3c or later is part of all distributions of LaTeX
+%% version 1999/12/01 or later.
+%% 
+%% The list of all files belonging to the 'CAS Bundle' is
+%% given in the file `manifest.txt'.
+%% 
+%% Template article for cas-sc documentclass for 
+%% double column output.
+
+\documentclass[a4paper,fleqn]{cas-sc}
+
+% If the frontmatter runs over more than one page
+% use the longmktitle option.
+
+%\documentclass[a4paper,fleqn,longmktitle]{cas-sc}
+
+%\usepackage[numbers]{natbib}
+%\usepackage[authoryear]{natbib}
+\usepackage[authoryear,longnamesfirst]{natbib}
+
+%%%Author macros
+\def\tsc#1{\csdef{#1}{\textsc{\lowercase{#1}}\xspace}}
+\tsc{WGM}
+\tsc{QE}
+%%%
+
+% Uncomment and use as if needed
+%\newtheorem{theorem}{Theorem}
+%\newtheorem{lemma}[theorem]{Lemma}
+%\newdefinition{rmk}{Remark}
+%\newproof{pf}{Proof}
+%\newproof{pot}{Proof of Theorem \ref{thm}}
+
+\begin{document}
+\let\WriteBookmarks\relax
+\def\floatpagepagefraction{1}
+\def\textpagefraction{.001}
+
+% Short title
+\shorttitle{ML-Based Football Squad Optimization}    
+
+% Short author
+\shortauthors{Nunes and Pereira}  
+
+% Main title of the paper
+\title [mode = title]{Machine Learning-Based Optimization of Football Squad Composition Under Budget Constraints}  
+
+% Title footnote mark
+% eg: \tnotemark[1]
+\tnotemark[1] 
+
+% Title footnote 1.
+% eg: \tnotetext[1]{Title footnote text}
+\tnotetext[1]{This study was financed in part by the Coordenação de Aperfeiçoamento de Pessoal de Nível Superior – Brasil (CAPES) – Finance Code 001.}
+
+% First author
+%
+% Options: Use if required
+% eg: \author[1,3]{Author Name}[type=editor,
+%       style=chinese,
+%       auid=000,
+%       bioid=1,
+%       prefix=Sir,
+%       orcid=0000-0000-0000-0000,
+%       facebook=<facebook id>,
+%       twitter=<twitter id>,
+%       linkedin=<linkedin id>,
+%       gplus=<gplus id>]
+
+\author[1]{Lucio Vargas de Albuquerque Nunes\corref{cor1}}
+
+\ead{luciovanunes@gmail.com}
+\ead[url]{https://orcid.org/0000-0001-8803-3293}
+
+\author[1]{Dilson Lucas Pereira}
+
+\ead{dilson.pereira@ufla.br}
+\ead[url]{https://orcid.org/0000-0002-6307-5152}
+
+\cortext[cor1]{Corresponding author}
+
+\affiliation[1]{
+organization={Universidade Federal de Lavras},
+city={Lavras},
+state={MG},
+country={Brazil}
+}
+
+% Here goes the abstract
+\begin{abstract}
+Football is characterized by high levels of uncertainty, which makes squad planning and player recruitment complex decision-making processes. 
+This study investigates the use of Machine Learning (ML) and Operations Research (OR) techniques as decision-support tools for football squad composition. 
+A predictive model based on a multilayer perceptron (MLP) is trained to estimate the final number of points obtained by football teams in a season using 
+individual player statistics from the previous season. 
+The predicted team performance is then used as the objective function in heuristic optimization algorithms that simulate player recruitment under budget constraints. 
+Experiments conducted using data from major European leagues demonstrate the potential of combining predictive modeling and 
+optimization to support squad planning decisions. The proposed framework provides a structured and data-driven approach to evaluating recruitment strategies, 
+reducing subjectivity in player acquisition and contributing to more informed decision-making in professional football.
+\end{abstract}
+
+% Use if graphical abstract is present
+%\begin{graphicalabstract}
+%\includegraphics{}
+%\end{graphicalabstract}
+
+% Research highlights
+\begin{highlights}
+\item Machine learning predicts team performance from player statistics ($R^2 \approx 0.55$)
+\item Greedy and local search algorithms optimize squad composition under budget constraints
+\item Framework simulates realistic football transfer scenarios
+\item Experiments conducted using Premier League and Serie A datasets
+\end{highlights}
+
+% Keywords
+% Each keyword is seperated by \sep
+\begin{keywords}
+sports analytics \sep football \sep machine learning \sep squad optimization \sep decision support
+\end{keywords}
+
+\maketitle
+
+% Main text
+\section{Introduction}
+
+Football is the most popular sport in the world \cite{Almulla2023}. Over the past decades, the sport has undergone significant technological and analytical 
+development, accompanied by substantial economic growth in the global football industry \cite{Rodrigues2022}. Despite these advances, football remains highly 
+unpredictable. A notable example is Leicester City's unexpected triumph in the Premier League (PL) in 2016, an outcome that surprised analysts 
+and fans worldwide \cite{Baboota2019}.
+
+Given the economic relevance and global popularity of football, both academic researchers and industry professionals have increasingly explored 
+data-driven approaches to support decision-making in the sport \cite{Baboota2019}. The financial magnitude of football is reflected in the transfer market, 
+which moves billions of dollars annually. For instance, between June and September 2023, global player transfers reached approximately USD 7.3 billion according 
+to FIFA reports \cite{Globo2023}. These large financial investments highlight the importance of improving decision-making processes related to player recruitment 
+and squad construction.
+
+In the field of Computer Science, several studies have investigated the use of statistical analysis and machine learning (ML) techniques to model 
+patterns and generate predictions in complex environments. Joseph, Fenton and Neil (2006), for example, investigated the use of Bayesian networks and 
+other ML techniques to predict match outcomes for Tottenham Hotspur during the 1995–1997 seasons. In professional football practice, data-driven strategies 
+have also been adopted by clubs such as Brighton \& Hove Albion, which has implemented a recruitment model strongly supported by statistical analysis. This 
+approach has enabled the identification of undervalued players in the transfer market, generating substantial financial returns through successful 
+transfers \cite{BBC2023Caicedo, CNN2023Caicedo, ESPN2023}.
+
+In academic research, most studies applying ML to football focus primarily on predicting match outcomes, estimating win probabilities, or optimizing 
+betting strategies. However, comparatively fewer studies address the problem of squad composition and player recruitment using data-driven 
+approaches \cite{Abidin2021}. To the best of our knowledge, few studies attempt to predict season-level team performance from individual player statistics 
+and incorporate these predictions into a formal squad optimization framework. This gap is particularly relevant because squad construction requires 
+evaluating multiple technical, physical and contextual factors simultaneously, including team playing style, league characteristics and player career 
+stage \cite{Abidin2021}. Furthermore, the stochastic nature of football performance means that even seemingly optimal transfers may fail to 
+deliver the expected results.
+
+Transfer market inefficiencies further illustrate the complexity of these decisions. According to Graham (2024), a transfer can be considered 
+successful if the player starts at least 50\% of matches during the first two seasons with the club, a concept referred to as the ``50\% rule''. Based on 
+this criterion, approximately 46\% of transfers above \EUR{10 million} in the EPL between 1992 and 2021 can be classified as unsuccessful \cite{Graham2024}. These 
+outcomes are often associated with factors such as tactical incompatibility, inaccurate evaluation of player ability, positional mismatches, coaching 
+decisions or physical issues.
+
+Recent advances in ML have significantly expanded the capacity to analyze sports data, enabling the identification of patterns that were previously 
+difficult to detect in large datasets. However, predictive models do not eliminate the inherent uncertainty of football; rather, they serve as decision-support 
+tools that can help reduce risk and support strategic choices.
+
+To address this challenge, this study proposes an integrated framework that combines machine learning-based performance prediction with heuristic squad optimization.
+
+The main contributions of this work are threefold. First, we develop a machine learning model capable of predicting season-level team performance 
+from individual player statistics. Second, we integrate these predictions into an optimization framework that simulates squad recruitment decisions under 
+budget constraints. Third, we demonstrate through computational experiments that the proposed approach can identify recruitment strategies capable of improving 
+predicted team performance.
+
+\section{Related Work}
+
+\section{Data and Feature Engineering}
+
+\section{Machine Learning Model}
+
+\section{Squad Optimization Framework}
+
+\section{Experimental Results}
+
+\section{Conclusion}
+
+% Numbered list
+% Use the style of numbering in square brackets.
+% If nothing is used, default style will be taken.
+%\begin{enumerate}[a)]
+%\item 
+%\item 
+%\item 
+%\end{enumerate}  
+
+% Unnumbered list
+%\begin{itemize}
+%\item 
+%\item 
+%\item 
+%\end{itemize}  
+
+% Description list
+%\begin{description}
+%\item[]
+%\item[] 
+%\item[] 
+%\end{description}  
+
+\clearpage %%Remove this from your manuscript
+
+
+% Figure
+\begin{figure}%[]
+  \centering
+%    \includegraphics{}
+    \caption{}\label{fig1}
+\end{figure}
+
+
+\begin{table}%[]
+\caption{}\label{tbl1}
+\begin{tabular*}{\tblwidth}{@{}LL@{}}
+\toprule
+  &  \\ % Table header row
+\midrule
+ & \\
+ & \\
+ & \\
+ & \\
+\bottomrule
+\end{tabular*}
+\end{table}
+
+% Uncomment and use as the case may be
+%\begin{theorem} 
+%\end{theorem}
+
+% Uncomment and use as the case may be
+%\begin{lemma} 
+%\end{lemma}
+
+%% The Appendices part is started with the command \appendix;
+%% appendix sections are then done as normal sections
+%% \appendix
+
+\section{}\label{}
+
+% To print the credit authorship contribution details
+\printcredits
+
+%% Loading bibliography style file
+%\bibliographystyle{model1-num-names}
+\bibliographystyle{cas-model2-names}
+
+% Loading bibliography database
+\bibliography{cas-refs}
+
+% Biography
+%\bio{}
+% Here goes the biography details.
+%\endbio
+
+%\bio{pic1}
+% Here goes the biography details.
+%\endbio
+
+\end{document}
+
