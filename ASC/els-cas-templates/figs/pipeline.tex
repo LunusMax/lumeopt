@@ -1,0 +1,32 @@
+\begin{tikzpicture}[
+    node distance=0.9cm,
+    box/.style={
+        rectangle,
+        draw,
+        rounded corners,
+        align=center,
+        minimum width=4.2cm,
+        minimum height=1cm
+    },
+    arrow/.style={
+        -{Latex[length=3mm]},
+        thick
+    }
+]
+
+\node[box] (stats) {Player performance statistics\\(season $t-1$)};
+\node[box, below=of stats] (pca) {Principal Component Analysis\\(47 $\rightarrow$ 20 features)};
+\node[box, below=of pca] (team) {Team representation\\(20 players, 401 attributes)};
+\node[box, below=of team] (mlp) {MLP model training};
+\node[box, below=of mlp] (pred) {Predicted team points\\(season $t$)};
+\node[box, below=of pred] (opt) {Optimization procedure};
+\node[box, below=of opt] (rec) {Recruitment simulation under\\budget constraints};
+
+\draw[arrow] (stats) -- (pca);
+\draw[arrow] (pca) -- (team);
+\draw[arrow] (team) -- (mlp);
+\draw[arrow] (mlp) -- (pred);
+\draw[arrow] (pred) -- (opt);
+\draw[arrow] (opt) -- (rec);
+
+\end{tikzpicture}
