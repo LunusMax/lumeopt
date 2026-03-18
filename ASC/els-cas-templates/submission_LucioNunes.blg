@@ -6,15 +6,15 @@ The style file: cas-model2-names.bst
 Reallocating 'name_of_file' (item size: 1) to 9 items.
 Database file #1: cas-refs.bib
 Warning--entry type for "ESPN2023" isn't style-file defined
---line 325 of file cas-refs.bib
+--line 163 of file cas-refs.bib
 Warning--entry type for "Globo2023" isn't style-file defined
---line 343 of file cas-refs.bib
+--line 172 of file cas-refs.bib
 Warning--string name "apr-jun" is undefined
---line 535 of file cas-refs.bib
+--line 268 of file cas-refs.bib
 Warning--entry type for "BBC2023Caicedo" isn't style-file defined
---line 847 of file cas-refs.bib
+--line 424 of file cas-refs.bib
 Warning--entry type for "CNN2023Caicedo" isn't style-file defined
---line 867 of file cas-refs.bib
+--line 434 of file cas-refs.bib
 Reallocating 'singl_function' (item size: 4) to 100 items.
 Warning--empty journal in Awadallah2020
 You've used 20 entries,
