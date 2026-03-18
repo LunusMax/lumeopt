@@ -1,0 +1,8 @@
+Football is characterized by high levels of uncertainty, which makes squad planning and player recruitment complex decision-making processes.
+This study investigates the use of Machine Learning (ML) and Operations Research (OR) techniques as decision-support tools for football squad composition.
+A predictive model based on a multilayer perceptron (MLP) is trained to estimate the final number of points obtained by football teams in a season using
+individual player statistics from the previous season.
+The predicted team performance is then used as the objective function in heuristic optimization algorithms that simulate player recruitment under budget constraints.
+Experiments conducted using data from major European leagues demonstrate the potential of combining predictive modeling and
+optimization to support squad planning decisions. The proposed framework provides a structured and data-driven approach to evaluating recruitment strategies,
+reducing subjectivity in player acquisition and contributing to more informed decision-making in professional football.

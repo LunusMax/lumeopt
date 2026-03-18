@@ -1,0 +1,182 @@
+\begin{thebibliography}{20}
+\expandafter\ifx\csname natexlab\endcsname\relax\def\natexlab#1{#1}\fi
+\providecommand{\url}[1]{\texttt{#1}}
+\providecommand{\href}[2]{#2}
+\providecommand{\path}[1]{#1}
+\providecommand{\DOIprefix}{doi:}
+\providecommand{\ArXivprefix}{arXiv:}
+\providecommand{\URLprefix}{URL: }
+\providecommand{\Pubmedprefix}{pmid:}
+\providecommand{\doi}[1]{\href{http://dx.doi.org/#1}{\path{#1}}}
+\providecommand{\Pubmed}[1]{\href{pmid:#1}{\path{#1}}}
+\providecommand{\bibinfo}[2]{#2}
+\ifx\xfnm\relax \def\xfnm[#1]{\unskip,\space#1}\fi
+%Type = Article
+\bibitem[{Abidin(2021)}]{Abidin2021}
+\bibinfo{author}{Abidin, D.}, \bibinfo{year}{2021}.
+\newblock \bibinfo{title}{A case study on player selection and team formation
+  in football with machine learning}.
+\newblock \bibinfo{journal}{Turkish Journal of Electrical Engineering and
+  Computer Sciences} \bibinfo{volume}{29}.
+\newblock \URLprefix
+  \url{https://journals.tubitak.gov.tr/elektrik/vol29/iss3/23},
+  \DOIprefix\doi{10.3906/elk-2005-27}.
+%Type = Article
+\bibitem[{Almulla et~al.(2023)Almulla, Islam, Al-Absi and Alam}]{Almulla2023}
+\bibinfo{author}{Almulla, J.}, \bibinfo{author}{Islam, M.T.},
+  \bibinfo{author}{Al-Absi, H.}, \bibinfo{author}{Alam, T.},
+  \bibinfo{year}{2023}.
+\newblock \bibinfo{title}{Soccernet: A gated recurrent unit-based model to
+  predict soccer match winners}.
+\newblock \bibinfo{journal}{PLoS ONE} \URLprefix
+  \url{https://doi.org/10.1371/journal. pone.0288933}.
+%Type = Article
+\bibitem[{Awadallah and Khandelwal(2020)}]{Awadallah2020}
+\bibinfo{author}{Awadallah, A.A.}, \bibinfo{author}{Khandelwal, R.},
+  \bibinfo{year}{2020}.
+\newblock \bibinfo{title}{Football match prediction using deep learning
+  (recurrent neural network)} \URLprefix
+  \url{https://github.com/raghav68/CS230DLProject}. \bibinfo{note}{cS230 Deep
+  Learning Project}.
+%Type = Article
+\bibitem[{Baboota and Kaur(2019)}]{Baboota2019}
+\bibinfo{author}{Baboota, R.}, \bibinfo{author}{Kaur, H.},
+  \bibinfo{year}{2019}.
+\newblock \bibinfo{title}{Predictive analysis and modelling football results
+  using machine learning approach for english premier league}.
+\newblock \bibinfo{journal}{International Journal of Forecasting}
+  \bibinfo{volume}{35}, \bibinfo{pages}{741--755}.
+\newblock \URLprefix \url{https://doi.org/10.1016/j.ijforecast.2018.01.003}.
+%Type = Misc
+\bibitem[{{BBC Sport}(2023)}]{BBC2023Caicedo}
+\bibinfo{author}{{BBC Sport}}, \bibinfo{year}{2023}.
+\newblock \bibinfo{title}{Moises caicedo transfer news: Chelsea agree £115m
+  deal for brighton midfielder}.
+\newblock \URLprefix \url{https://www.bbc.com/sport/football/66491106}.
+  \bibinfo{note}{accessed: 28 Jan. 2026}.
+%Type = Article
+\bibitem[{Bertsimas and Kallus(2019)}]{Bertsimas2019}
+\bibinfo{author}{Bertsimas, D.}, \bibinfo{author}{Kallus, N.},
+  \bibinfo{year}{2019}.
+\newblock \bibinfo{title}{From predictive to prescriptive analytics}.
+\newblock \bibinfo{journal}{Management Science} \bibinfo{volume}{65},
+  \bibinfo{pages}{1025--1044}.
+\newblock \DOIprefix\doi{10.1287/mnsc.2018.3253}.
+%Type = Article
+\bibitem[{Boon and Sierksma(2003)}]{Boon2003}
+\bibinfo{author}{Boon, B.H.}, \bibinfo{author}{Sierksma, G.},
+  \bibinfo{year}{2003}.
+\newblock \bibinfo{title}{Team formation: Matching quality supply and quality
+  demand}.
+\newblock \bibinfo{journal}{European Journal of Operational Research}
+  \bibinfo{volume}{148}, \bibinfo{pages}{71--82}.
+\newblock \DOIprefix\doi{10.1016/S0377-2217(02)00310-6}.
+%Type = Article
+\bibitem[{Carmichael et~al.(2011)Carmichael, McHale and
+  Thomas}]{Carmichael2011}
+\bibinfo{author}{Carmichael, F.}, \bibinfo{author}{McHale, I.},
+  \bibinfo{author}{Thomas, D.}, \bibinfo{year}{2011}.
+\newblock \bibinfo{title}{Maintaining market position: Team performance,
+  revenue and wage expenditure in the english premier league}.
+\newblock \bibinfo{journal}{Bulletin of Economic Research}
+  \bibinfo{volume}{63}.
+\newblock \DOIprefix\doi{10.1111/j.1467-8586.2009.00340.x}.
+%Type = Misc
+\bibitem[{{CNN Brasil}(2023)}]{CNN2023Caicedo}
+\bibinfo{author}{{CNN Brasil}}, \bibinfo{year}{2023}.
+\newblock \bibinfo{title}{Mois{\'e}s caicedo no chelsea: de desconhecido a
+  jogador mais caro do futebol ingl{\^e}s}.
+\newblock \URLprefix
+  \url{https://www.cnnbrasil.com.br/esportes/futebol/futebol-internacional/moises-caicedo-no-chelsea-de-desconhecido-a-jogador-mais-caro-do-futebol-ingles/}.
+  \bibinfo{note}{accessed: 28 Jan. 2026}.
+%Type = Misc
+\bibitem[{{GLOBO Esporte}(2023)}]{Globo2023}
+\bibinfo{author}{{GLOBO Esporte}}, \bibinfo{year}{2023}.
+\newblock \bibinfo{title}{Mercado de transferências bate recorde em 2023: R\$
+  36,6 bilhões}.
+\newblock \URLprefix
+  \url{https://ge.globo.com/futebol/futebol-internacional/noticia/2023/09/08/mercado-de-transferencias-bate-recorde-em-2023-r-366-bilhoes.ghtml}.
+  \bibinfo{note}{acesso em: 11 fev. 2025}.
+%Type = Book
+\bibitem[{Graham(2024)}]{Graham2024}
+\bibinfo{author}{Graham, I.}, \bibinfo{year}{2024}.
+\newblock \bibinfo{title}{How to Win the Premier League}.
+\newblock \bibinfo{publisher}{Century}.
+%Type = Article
+\bibitem[{Horvat and Job(2020)}]{Horvat2020}
+\bibinfo{author}{Horvat, T.}, \bibinfo{author}{Job, J.}, \bibinfo{year}{2020}.
+\newblock \bibinfo{title}{The use of machine learning in sport outcome
+  prediction: A review}.
+\newblock \bibinfo{journal}{WIREs Data Mining and Knowledge Discovery}
+  \bibinfo{volume}{10}, \bibinfo{pages}{e1382}.
+\newblock \DOIprefix\doi{10.1002/widm.1382}.
+%Type = Article
+\bibitem[{Joseph et~al.(2006)Joseph, Fenton and Neil}]{Joseph2006}
+\bibinfo{author}{Joseph, A.}, \bibinfo{author}{Fenton, N.E.},
+  \bibinfo{author}{Neil, M.}, \bibinfo{year}{2006}.
+\newblock \bibinfo{title}{Predicting football results using bayesian nets and
+  other machine learning techniques}.
+\newblock \bibinfo{journal}{Knowledge-Based Systems} \bibinfo{volume}{19}.
+%Type = Article
+\bibitem[{Kendall et~al.(2010)Kendall, Parkes and Spoerer}]{Kendall2010}
+\bibinfo{author}{Kendall, G.}, \bibinfo{author}{Parkes, A.},
+  \bibinfo{author}{Spoerer, K.}, \bibinfo{year}{2010}.
+\newblock \bibinfo{title}{A survey of np-complete scheduling problems}.
+\newblock \bibinfo{journal}{Journal of Scheduling} \bibinfo{volume}{13},
+  \bibinfo{pages}{257--276}.
+\newblock \DOIprefix\doi{10.1007/s10951-009-0157-6}.
+%Type = Article
+\bibitem[{Lago-Ballesteros and Lago-Peñas(2010)}]{LagoBallesteros2010}
+\bibinfo{author}{Lago-Ballesteros, J.}, \bibinfo{author}{Lago-Peñas, C.},
+  \bibinfo{year}{2010}.
+\newblock \bibinfo{title}{Performance in team sports: Identifying the keys to
+  success in soccer}.
+\newblock \bibinfo{journal}{Journal of Human Kinetics} \bibinfo{volume}{25},
+  \bibinfo{pages}{85--91}.
+\newblock \DOIprefix\doi{10.2478/v10078-010-0035-0}.
+%Type = Misc
+\bibitem[{Olley(2023)}]{ESPN2023}
+\bibinfo{author}{Olley, J.}, \bibinfo{year}{2023}.
+\newblock \bibinfo{title}{How brighton's transfer mastery broke premier league
+  profit record}.
+\newblock \URLprefix
+  \url{https://www.espn.com/soccer/story/_/id/40069726/how-brightons-transfer-mastery-broke-premier-league-profit-record}.
+  \bibinfo{note}{acesso em: 11 fev. 2025}.
+%Type = Article
+\bibitem[{Pantuso(2017)}]{Pantuso2017}
+\bibinfo{author}{Pantuso, G.}, \bibinfo{year}{2017}.
+\newblock \bibinfo{title}{The football team composition problem: A stochastic
+  programming approach}.
+\newblock \bibinfo{journal}{Journal of Quantitative Analysis in Sports}
+  \DOIprefix\doi{10.1515/jqas-2017-0030}.
+%Type = Article
+\bibitem[{Qader et~al.(2017)Qader, Ahmed, Deb and Jindal}]{Qader2017}
+\bibinfo{author}{Qader, M.A.}, \bibinfo{author}{Ahmed, F.},
+  \bibinfo{author}{Deb, K.}, \bibinfo{author}{Jindal, A.},
+  \bibinfo{year}{2017}.
+\newblock \bibinfo{title}{A methodology for football players selection problem
+  based on multi-measurements criteria analysis}.
+\newblock \bibinfo{journal}{Measurement} \bibinfo{volume}{111},
+  \bibinfo{pages}{38--50}.
+\newblock \DOIprefix\doi{10.1016/j.measurement.2017.07.024}.
+%Type = Article
+\bibitem[{Rodrigues and Pinto(2023)}]{Rodrigues2022}
+\bibinfo{author}{Rodrigues, F.}, \bibinfo{author}{Pinto, A.},
+  \bibinfo{year}{2023}.
+\newblock \bibinfo{title}{Prediction of football match results with machine
+  learning}.
+\newblock \bibinfo{journal}{Procedia Computer Science} \bibinfo{volume}{204},
+  \bibinfo{pages}{463--470}.
+\newblock \URLprefix \url{https://doi.org/10.1016/j.procs.2022.08.057}.
+%Type = Article
+\bibitem[{Tavana et~al.(2013)Tavana, Azizi, Azizi and Behzadian}]{Tavana2013}
+\bibinfo{author}{Tavana, M.}, \bibinfo{author}{Azizi, F.},
+  \bibinfo{author}{Azizi, F.}, \bibinfo{author}{Behzadian, M.},
+  \bibinfo{year}{2013}.
+\newblock \bibinfo{title}{A fuzzy inference system with application to player
+  selection and team formation in multi-player sports}.
+\newblock \bibinfo{journal}{Sport Management Review} \bibinfo{volume}{16},
+  \bibinfo{pages}{97--110}.
+\newblock \DOIprefix\doi{10.1016/j.smr.2012.06.002}.
+
+\end{thebibliography}
