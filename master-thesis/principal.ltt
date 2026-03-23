@@ -2,6 +2,6 @@
 \contentsline {table}{\numberline {5.2~\textendash ~}{\ignorespaces Representação simplificada da estrutura dos dados de entrada do modelo}}{66}{table.5.2}%
 \contentsline {table}{\numberline {6.1~\textendash ~}{\ignorespaces Comparação de desempenho entre os modelos de Machine Learning avaliados no conjunto de testes}}{76}{table.6.1}%
 \contentsline {table}{\numberline {8.1~\textendash ~}{\ignorespaces Resultados do experimento preliminar (\textit {benchmark})}}{99}{table.8.1}%
-\contentsline {table}{\numberline {8.2~\textendash ~}{\ignorespaces Estatísticas ofensivas dos jogadores sugeridos pelo algoritmo Guloso Best-Improvement}}{100}{table.8.2}%
+\contentsline {table}{\numberline {8.2~\textendash ~}{\ignorespaces Estatísticas ofensivas dos jogadores sugeridos pelos algoritmos de otimização}}{100}{table.8.2}%
 \contentsline {table}{\numberline {8.3~\textendash ~}{\ignorespaces Resumo estatístico dos resultados após 10 execuções}}{101}{table.8.3}%
 \contentsline {table}{\numberline {8.4~\textendash ~}{\ignorespaces Resultados dos algoritmos para o Cagliari com orçamento de 60.000.000\,\officialeuro }}{104}{table.8.4}%
