@@ -177,6 +177,23 @@ vitória do mandante foi codificada como '1', vitória do visitante como '2' e e
 Com base nessa codificação, percorreu-se a base atribuindo três pontos a cada vitória e um ponto a cada empate. 
 O resultado desse processamento foi uma tabela organizada por temporada, contendo cada clube e a respectiva pontuação acumulada.
 
+\section{Configuração Experimental}
+
+Os experimentos computacionais foram realizados na plataforma \textit{Google Colab}, 
+ambiente de computação em nuvem que disponibiliza recursos de hardware, 
+incluindo suporte a GPU. A implementação foi desenvolvida em Python, com uso 
+das bibliotecas \textit{Pandas}, \textit{NumPy}, \textit{Scikit-learn} 
+e \textit{TensorFlow}.
+
+A utilização desse ambiente permitiu a execução eficiente dos 
+modelos e facilitou a reprodutibilidade dos experimentos, eliminando 
+dependências de infraestrutura local.
+
+Para garantir a reprodutibilidade dos resultados, foi fixada uma semente 
+aleatória (\textit{seed} = 532) nas bibliotecas utilizadas. Essa configuração 
+reduz a variabilidade decorrente de processos estocásticos presentes tanto 
+no treinamento do modelo quanto nos algoritmos de otimização.
+
 \section{Treinamento dos Modelos de Aprendizado de Máquina (AM)}
 
 Os dados de pontuação dos clubes foram organizados por temporada, enquanto as estatísticas individuais dos jogadores corresponderam sempre à temporada anterior. 

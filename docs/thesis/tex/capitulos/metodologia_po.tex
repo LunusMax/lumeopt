@@ -70,6 +70,19 @@ A qualidade de cada possível contratação é avaliada por meio da função obj
 por estimar a pontuação esperada da equipe na temporada considerada. Para manter constante o tamanho do elenco avaliado, a inclusão de novos jogadores 
 é simulada removendo-se, da formação original, a mesma quantidade de atletas com menor minutagem na temporada analisada.
 
+Cabe destacar que, durante a execução dos algoritmos de otimização, a função objetivo 
+é avaliada de forma iterativa por meio de chamadas sucessivas ao modelo de AM 
+desenvolvido neste trabalho. 
+
+Mais especificamente, a cada candidato à contratação considerado — seja na adição 
+de um jogador nos algoritmos gulosos ou na substituição de jogadores 
+nos métodos de busca local — é construída uma nova representação do 
+elenco e submetida ao modelo preditivo, que retorna a pontuação esperada da equipe. 
+
+Dessa forma, o processo de otimização está diretamente acoplado ao modelo de AM, 
+sendo a qualidade de cada solução inteiramente determinada pelas previsões 
+geradas pelo modelo para cada configuração de elenco avaliada.
+
 O processo é repetido até que não existam mais jogadores viáveis dentro da restrição orçamentária. Sempre que uma contratação é aceita, o valor 
 de mercado do jogador selecionado é subtraído do orçamento disponível, atualizando a restrição orçamentária para as iterações seguintes. 
 Como característica fundamental da estratégia gulosa, as decisões tomadas em cada iteração são definitivas: uma vez que um jogador é selecionado e 
