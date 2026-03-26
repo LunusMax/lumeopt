@@ -1,6 +1,15 @@
-# ⚽ **LumeOpt — Otimizador de Montagem de Elenco Baseado em Machine Learning e heurística de otimização**
+## ⚽ LumeOpt
 
-> “Futebol movido por dados, não por impulsos.”
+**What if football transfers were driven by data instead of intuition?**
+
+LumeOpt is a decision-support system that simulates player transfers and predicts their impact on team performance under budget constraints.
+
+It combines:
+- Machine Learning (MLP)
+- Dimensionality reduction (PCA)
+- Optimization heuristics
+
+→ turning raw player data into actionable squad decisions.
 
 ------------------------------------------------------------------------
 
@@ -169,15 +178,30 @@ pip install -r requirements.txt
 
 ------------------------------------------------------------------------
 
-## 🔐 **Registro e Direitos**
+## 🔐 Intellectual Property & Usage
 
-Este documento descreve o **procedimento técnico protegido** do projeto **LumeOpt**, desenvolvido por  
-**Lucio Vargas de Albuquerque Nunes**, orientado por **Dilson Lucas Pereira**.  
+This repository contains a **public demonstration** of the LumeOpt system.
 
-Objeto de registro:
-> Método de processamento, modelagem e otimização de elencos futebolísticos baseado em PCA; aprendizado de máquina e heurística de otimização.
+The full implementation and core optimization logic are intentionally abstracted.
 
-Os dados utilizados foram públicos e serviram apenas para validação do método.
+### License
+This project is licensed under **Creative Commons Attribution-NonCommercial 4.0 (CC BY-NC 4.0)**.
+
+You are free to:
+- Use and study the code
+- Share with attribution
+
+You are NOT allowed to:
+- Submit this work as your own
+- Use it for commercial purposes without permission
+
+### Authorship
+
+All methods, models and system design are original work developed by:
+
+**Lucio Vargas de Albuquerque Nunes** and **Dilson Lucas Pereira**
+
+Any unauthorized academic submission or reproduction is considered misconduct.
 
 ------------------------------------------------------------------------
 
@@ -185,5 +209,5 @@ Os dados utilizados foram públicos e serviram apenas para validação do métod
 
 ```
 Algorithm : SHA256
-SHA256(LumeOpt.ipynb) = 11CB5DE19A09DCD39F4CDAC450AAFCA5B3C5EC0462939688E7799D762D963A32
+SHA256(LumeOpt.ipynb) = D2F221A1B1CB228B550A78148D8AF1250E250415BF62BBEB8B98F01F7837DD7E
 ```
