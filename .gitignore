@@ -12,4 +12,6 @@
 *.nav
 *.snm
 *.vrb
-/presentation
+presentation/
+src/
+venv/
