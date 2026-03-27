@@ -166,11 +166,26 @@ Conforme discutido por \cite{Chmait2021}, técnicas como aprendizado por reforç
 no esporte, aproximando modelos de aprendizado e processos de otimização. Esse movimento reforça a convergência entre predição estatística e decisão prescritiva, 
 abrindo espaço para estruturas integradas nas quais modelos de AM podem ser incorporados diretamente à função objetivo de problemas combinatórios.
 
+\begin{comment}
 No contexto esportivo, decisões estratégicas como montagem de elenco e planejamento competitivo podem ser formalizadas como problemas de otimização 
 sob restrições orçamentárias e estruturais. Tais problemas frequentemente assumem estrutura combinatória análoga àquela observada em problemas clássicos 
 de escalonamento esportivo \cite{Kendall2010}, o que justifica o uso de heurísticas e metaheurísticas para obtenção de soluções viáveis.
+\end{comment}
+No contexto esportivo, decisões estratégicas como montagem de elenco e planejamento competitivo podem ser formalizadas como problemas de otimização 
+sob restrições orçamentárias e estruturais. Tais problemas frequentemente assumem estrutura combinatória análoga àquela observada em problemas clássicos 
+de escalonamento esportivo \cite{Kendall2010,Kendall2010b}, os quais envolvem múltiplos agentes, restrições e objetivos, sendo tradicionalmente abordados 
+por meio de técnicas como programação inteira, programação por restrições e metaheurísticas. Tal complexidade justifica o uso de heurísticas e metaheurísticas 
+para obtenção de soluções viáveis.
 
-O presente estudo insere-se explicitamente nessa interseção entre AM e PO, ao propor um modelo capaz de estimar a pontuação esperada de uma equipe em uma temporada 
+No futebol, essa formulação tem sido investigada sob diferentes perspectivas, sendo frequentemente referida como \textit{Football Team Composition Problem} (FTCP), 
+que consiste em determinar a melhor composição de elenco considerando simultaneamente restrições financeiras, regulatórias e táticas. 
+Trabalhos recentes, como o de \cite{Dantas2025}, propõem abordagens baseadas em programação inteira para maximizar métricas de habilidade dos jogadores, 
+incorporando requisitos táticos e estruturais na modelagem do problema. Embora Dantas (2025) proponha um objetivo mais alinhado ao desempenho esportivo, 
+sua abordagem ainda se fundamenta predominantemente em métricas estáticas de desempenho individual, sem modelar explicitamente o impacto prospectivo da 
+composição do elenco sobre o desempenho competitivo coletivo da equipe. Nesse sentido, a metodologia aqui apresentada diferencia-se ao incorporar modelos 
+preditivos na definição da função objetivo, permitindo capturar de forma mais direta os efeitos futuros das decisões de montagem de elenco.
+
+Nesse contexto, o presente estudo insere-se nessa interseção entre AM e PO ao propor um modelo capaz de estimar a pontuação esperada de uma equipe em uma temporada 
 a partir do desempenho individual de seus jogadores na temporada anterior. Diferentemente das abordagens focadas na previsão de partidas isoladas ou 
 na análise retrospectiva de determinantes agregados, o modelo desenvolvido busca capturar prospectivamente o impacto da composição do elenco 
 sobre o desempenho competitivo. Posteriormente, essa estimativa é incorporada como função objetivo em um problema combinatório de montagem de elenco 
