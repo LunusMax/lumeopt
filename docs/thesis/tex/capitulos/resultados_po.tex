@@ -121,12 +121,13 @@ custo computacional do processo de busca, incluindo tempo de execução,
 número de iterações, número de avaliações da função objetivo e pontuação final da 
 solução obtida.
 
-A Tabela~\ref{tab:benchmark_multiplas_execucoes} apresenta um resumo estatístico dos resultados, incluindo média, desvio padrão, valor mínimo e 
-valor máximo das métricas analisadas para cada algoritmo.
+A Tabela~\ref{tab:benchmark_multiplas_execucoes} apresenta um resumo estatístico 
+dos resultados, incluindo média e desvio padrão das métricas analisadas 
+para cada algoritmo.
 
 \begin{table}[H]
 \centering
-\caption{Resumo estatístico dos resultados após 10 execuções}
+\caption{Resumo estatístico dos resultados após 6 execuções}
 \label{tab:benchmark_multiplas_execucoes}
 \begin{tabular}{lcccccc}
 \toprule
@@ -140,9 +141,9 @@ Algoritmo & Tempo (s) & $\sigma_T$ & Iterações & Avaliações & Score & $\sigm
 \end{tabular}
 \end{table}
 
-Na comparação entre as heurísticas gulosas, observa-se um \textit{trade-off} bastante claro
-entre qualidade da solução e custo computacional. 
-O algoritmo Guloso Best-Improvement não apresentou melhoria na pontuação média em 
+Na comparação entre as heurísticas gulosas, observa-se um \textit{trade-off} 
+bastante claro entre qualidade da solução e custo computacional. 
+O algoritmo Guloso Best-Improvement foi ligeiramente inferior na pontuação média em 
 relação ao Guloso First-Improvement, obtendo 72,53 pontos previstos, enquanto o 
 Guloso First-Improvement alcançou média de 72,55 pontos. Essa pequena 
 diferença na qualidade da solução foi acompanhada por um custo computacional 

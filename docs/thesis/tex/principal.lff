@@ -1,11 +1,11 @@
 \contentsline {figure}{\numberline {3.1~\textendash ~}{\ignorespaces Pipeline CRISP-DM}}{27}{figure.3.1}%
 \contentsline {figure}{\numberline {3.2~\textendash ~}{\ignorespaces AD para Iris}}{33}{figure.3.2}%
-\contentsline {figure}{\numberline {5.1~\textendash ~}{\ignorespaces Fluxo de organização das tabelas ofensivas e defensivas extraídas do FBref para a construção da base final de atributos dos jogadores.}}{60}{figure.5.1}%
-\contentsline {figure}{\numberline {5.2~\textendash ~}{\ignorespaces Escolha do Número Ideal de Componentes do PCA}}{64}{figure.5.2}%
-\contentsline {figure}{\numberline {6.1~\textendash ~}{\ignorespaces Evolução do erro absoluto médio (MAE) ao longo das épocas de treinamento da rede MLP para os conjuntos de treinamento e validação.}}{78}{figure.6.1}%
-\contentsline {figure}{\numberline {6.2~\textendash ~}{\ignorespaces Comparação entre pontuações reais e previstas pelo modelo MLP na temporada 2020--2021 da Premier League.}}{79}{figure.6.2}%
-\contentsline {figure}{\numberline {6.3~\textendash ~}{\ignorespaces Comparação entre pontuações reais e previstas pelo modelo MLP na temporada 2021--2022 da Premier League.}}{79}{figure.6.3}%
-\contentsline {figure}{\numberline {6.4~\textendash ~}{\ignorespaces Comparação entre pontuações reais e previstas pelo modelo MLP na temporada 2022--2023 da Premier League.}}{80}{figure.6.4}%
-\contentsline {figure}{\numberline {6.5~\textendash ~}{\ignorespaces Comparação entre pontuações reais e previstas pelo modelo MLP na temporada 2023--2024 da Premier League.}}{80}{figure.6.5}%
-\contentsline {figure}{\numberline {6.6~\textendash ~}{\ignorespaces Comparação entre pontuação real e prevista do Arsenal ao longo das temporadas.}}{82}{figure.6.6}%
-\contentsline {figure}{\numberline {6.7~\textendash ~}{\ignorespaces Comparação entre pontuação real e prevista do Southampton ao longo das temporadas.}}{83}{figure.6.7}%
+\contentsline {figure}{\numberline {5.1~\textendash ~}{\ignorespaces Fluxo de organização das tabelas ofensivas e defensivas extraídas do FBref para a construção da base final de atributos dos jogadores.}}{62}{figure.5.1}%
+\contentsline {figure}{\numberline {5.2~\textendash ~}{\ignorespaces Escolha do Número Ideal de Componentes do PCA}}{66}{figure.5.2}%
+\contentsline {figure}{\numberline {6.1~\textendash ~}{\ignorespaces Evolução do erro absoluto médio (MAE) ao longo das épocas de treinamento da rede MLP para os conjuntos de treinamento e validação.}}{80}{figure.6.1}%
+\contentsline {figure}{\numberline {6.2~\textendash ~}{\ignorespaces Comparação entre pontuações reais e previstas pelo modelo MLP na temporada 2020--2021 da Premier League.}}{81}{figure.6.2}%
+\contentsline {figure}{\numberline {6.3~\textendash ~}{\ignorespaces Comparação entre pontuações reais e previstas pelo modelo MLP na temporada 2021--2022 da Premier League.}}{81}{figure.6.3}%
+\contentsline {figure}{\numberline {6.4~\textendash ~}{\ignorespaces Comparação entre pontuações reais e previstas pelo modelo MLP na temporada 2022--2023 da Premier League.}}{82}{figure.6.4}%
+\contentsline {figure}{\numberline {6.5~\textendash ~}{\ignorespaces Comparação entre pontuações reais e previstas pelo modelo MLP na temporada 2023--2024 da Premier League.}}{82}{figure.6.5}%
+\contentsline {figure}{\numberline {6.6~\textendash ~}{\ignorespaces Comparação entre pontuação real e prevista do Arsenal ao longo das temporadas.}}{84}{figure.6.6}%
+\contentsline {figure}{\numberline {6.7~\textendash ~}{\ignorespaces Comparação entre pontuação real e prevista do Southampton ao longo das temporadas.}}{85}{figure.6.7}%

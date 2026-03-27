@@ -94,7 +94,9 @@ toda a informação relevante do conjunto original estava preservada nessa repre
 
 Originalmente, cada jogador era descrito por 47 atributos estatísticos. Após a aplicação do PCA, esse conjunto foi reduzido para 20 atributos por jogador. 
 Além disso, para padronizar a representação das equipes, cada elenco foi truncado para conter apenas os 20 jogadores com maior minutagem na temporada, 
-removendo aqueles que tiveram menor participação.
+removendo aqueles que tiveram menor participação. Essa decisão foi motivada pelo fato de que alguns times apresentavam um número elevado de jogadores com 
+baixa minutagem e, consequentemente, menor contribuição efetiva. Alternativamente, foram realizados testes preenchendo equipes com menor número de jogadores 
+por meio de valores nulos, porém essa abordagem mostrou-se inadequada por dificultar o aprendizado do modelo.
 
 Dessa forma, cada equipe passou a ser representada por 20 jogadores, cada um descrito por 20 atributos derivados do PCA, resultando em um total de 
 400 atributos relacionados ao desempenho individual dos jogadores. Adicionalmente, foi incorporada como variável explicativa a pontuação obtida pelo clube 

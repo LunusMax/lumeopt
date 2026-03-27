@@ -16,6 +16,7 @@
 \usepackage{booktabs}
 \usepackage{makecell}
 \usepackage{algorithm}
+%\usepackage{pdfpages}
 \floatname{algorithm}{Algoritmo}
 \usepackage{float}
 \usepackage{placeins}
@@ -145,7 +146,7 @@ FAE-PE Recovery TelEduc Williams UFLA}
 \engsubtitle{Machine Learning for Reducing Uncertainty in Player Recruitment}
 \edicao{Dissertação (Mestrado em Ciência da Computação)}
 \date{2026}
-\tipo{Tese apresentada à Universidade Federal de Lavras, como parte das exigências do Programa de Pós-Graduação em Ciência da Computação, para a obtenção do título de Mestre.}
+\tipo{Dissertação apresentada à Universidade Federal de Lavras, como parte das exigências do Programa de Pós-Graduação em Ciência da Computação, para a obtenção do título de Mestre.}
 % use \orientador ou \orientadora quando for o caso
 \orientador{Prof. Dr. Dilson Lucas Pereira}
 %\orientadora{}
@@ -185,6 +186,7 @@ FAE-PE Recovery TelEduc Williams UFLA}
 % preencher aqui com os dados de catalogação gerados pelo sistema
 %\fccatalogacao{1. TCC. 2. Monografia. 3. Dissertação. 4. Tese. 5. Trabalho Científico – Normas. I. Universidade Federal de Lavras. II. Título.}
 %\fcclasi{808.066}
+%\includepdf[pages=-]{ficha_catalografica.pdf}
 %##################################################
 %\antesfichacat{\noindent Para citar este documento: \\UNIVERSIDADE FEDERAL DE LAVRAS. Biblioteca Universitária. \textbf{Manual de normalização e estrutura de trabalhos acadêmicos: TCC, monografias, dissertações e teses}. 2. ed. rev., atual. e ampl. Lavras, 2015. Disponível em: \url{http://www.biblioteca.ufla.br/wordpress/wpcontent/uploads/bdtd/manual_normalizacao_UFLA.pdf}. Acesso em: data de acesso.}
 
@@ -257,13 +259,16 @@ Ao meu primo Júlio, por acreditar com entusiasmo no meu projeto e sempre me inc
 
 Aos professores Luiz Merschmann, Paulo Afonso e Mayron, cujos ensinamentos e contribuições foram fundamentais ao longo do mestrado.
 
+À Josiane, pela dedicação e apoio na resolução de questões burocráticas relacionadas à defesa.
+
 Por fim, agradeço aos colegas Danilo e João, pela companhia durante as aulas da pós-graduação.}         % Agradecimentos
 
 \epigrafe{“Quanto maior o artista, maior a dúvida; uma confiança perfeita é concedida aos menos talentosos como prêmio de consolação.”\\
 (Robert Hughes)}
 
 % palavras-chave
-\palchaves{Futebol. Aprendizado de Máquina. Elenco.}
+\palchaves{Futebol. Aprendizado de Máquina. Pesquisa Operacional. Otimização.\\
+Análise de Esportes. Montagem de Elenco.}
 \resumo{O futebol, o esporte mais popular do mundo, é marcado por sua alta imprevisibilidade, o que dificulta a montagem de elencos, 
 as escolhas táticas e a seleção de jogadores para cada partida. Este estudo explora o uso de técnicas de Aprendizado de Máquina (AM) 
 e Pesquisa Operacional (PO) como ferramentas de apoio à tomada de decisão no contexto esportivo. O objetivo é desenvolver um 
@@ -271,10 +276,10 @@ modelo preditivo capaz de estimar o desempenho dos clubes com base em dados esta
 previsões, são aplicados algoritmos de otimização para orientar estratégias de contratações, permitindo decisões mais eficientes e 
 fundamentadas em dados. Essa abordagem visa reduzir a subjetividade nos processos de gestão esportiva, promovendo maior assertividade 
 nas decisões de mercado por parte dos clubes.}
-\keywords{Football. Machine Learning. Squad.} % keywords
+\keywords{Football. Machine Learning. Operations Research. Optimization. Sports Analytics. Squad Building.} % keywords
 \abstract{Football, the most popular sport in the world, is marked by a high degree of unpredictability, which makes squad building, 
 tactical planning, and player selection particularly challenging. This study explores the use of Machine Learning (ML) and 
-Operations Research (OR) techniques as decision-support tools in the sports context. The objective is to develop predictive models 
+Operations Research (OR) techniques as decision-support tools in the sports context. The objective is to develop a predictive model 
 capable of estimating club performance based on individual player statistics. These predictions are then used as inputs for optimization 
 algorithms aimed at guiding player recruitment strategies, enabling more efficient and data-driven decisions. 
 This approach seeks to reduce subjectivity in sports management processes, promoting greater accuracy in market decisions and 
