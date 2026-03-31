@@ -39,20 +39,24 @@ execução de cada algoritmo, incluindo o tempo de execução,
 o número de iterações realizadas, o número de avaliações da função objetivo e a 
 pontuação final prevista para o elenco resultante.
 
-\begin{table}[H]
+\begin{table}[hbt]
 \centering
 \caption{Resultados do experimento preliminar (\textit{benchmark})}
 \label{tab:benchmark_inicial}
+
 \begin{tabular}{lccccc}
-\toprule
+\hline
 Algoritmo & Tempo (s) & Iterações & Avaliações & Melhoras & Score final \\
-\midrule
+\hline
 \makecell[l]{Guloso \\ First-Improvement} & 255,08 & 4 & 1571 & -- & 72,55 \\[4pt]
-\makecell[l]{Guloso \\ Best-Improvement} & 475,66 & 3 & 2809 & -- & 72,53 \\[10pt]
+\makecell[l]{Guloso \\ Best-Improvement} & 475,66 & 3 & 2809 & -- & 72,53 \\[6pt]
 \makecell[l]{Busca Local \\ First-Improvement} & 1989,71 & 14 & 10538 & 13 & 74,66 \\[4pt]
 \makecell[l]{Busca Local \\ Best-Improvement} & 1637,75 & 3 & 8334 & 2 & 74,66 \\
-\bottomrule
+\hline
 \end{tabular}
+
+\vspace{.3cm}
+\fonte{Elaboração própria.}
 \end{table}
 
 Observa-se que todos os algoritmos foram capazes de melhorar a pontuação prevista 
@@ -77,19 +81,23 @@ e Zlatan Ibrahimović.
 A Tabela~\ref{tab:jogadores_sugeridos} apresenta algumas estatísticas ofensivas desses jogadores, obtidas a partir dos dados utilizados neste trabalho. 
 Observa-se que todos apresentam forte produção ofensiva, com destaque para o elevado número de gols, assistências e valores de \textit{expected goals} (xG).
 
-\begin{table}[H]
+\begin{table}[hbt]
 \centering
 \caption{Estatísticas ofensivas dos jogadores sugeridos pelos algoritmos de otimização}
 \label{tab:jogadores_sugeridos}
+
 \begin{tabular}{lcccccc}
-\toprule
+\hline
 Jogador & Idade & Gols & Assistências & G+A & xG & xAG \\
-\midrule
+\hline
 Luis Muriel & 29 & 22 & 7 & 29 & 15,5 & 4,5 \\
 Romelu Lukaku & 27 & 24 & 11 & 35 & 23,0 & 7,0 \\
 Zlatan Ibrahimović & 38 & 15 & 2 & 17 & 16,2 & 1,8 \\
-\bottomrule
+\hline
 \end{tabular}
+
+\vspace{.3cm}
+\fonte{Elaboração própria.}
 \end{table}
 
 Observa-se que os três jogadores sugeridos pelo algoritmo atuam predominantemente 
@@ -125,20 +133,24 @@ A Tabela~\ref{tab:benchmark_multiplas_execucoes} apresenta um resumo estatístic
 dos resultados, incluindo média e desvio padrão das métricas analisadas 
 para cada algoritmo.
 
-\begin{table}[H]
+\begin{table}[hbt]
 \centering
 \caption{Resumo estatístico dos resultados após 6 execuções}
 \label{tab:benchmark_multiplas_execucoes}
+
 \begin{tabular}{lcccccc}
-\toprule
+\hline
 Algoritmo & Tempo (s) & $\sigma_T$ & Iterações & Avaliações & Score & $\sigma_S$ \\
-\midrule
+\hline
 \makecell[l]{Guloso \\ First-Improvement} & 257,48 & 6,35 & 4,0 & 1571,0 & 72,55 & 0,00 \\[4pt]
-\makecell[l]{Guloso \\ Best-Improvement} & 479,23 & 15,87 & 3,0 & 2809,0 & 72,53 & 0,000 \\[10pt]
+\makecell[l]{Guloso \\ Best-Improvement} & 479,23 & 15,87 & 3,0 & 2809,0 & 72,53 & 0,000 \\[6pt]
 \makecell[l]{Busca Local \\ First-Improvement} & 2016,45 & 46,79 & 14,0 & 10538,0 & 74,66 & 0,00 \\[4pt]
 \makecell[l]{Busca Local \\ Best-Improvement} & 1657,46 & 53,45 & 3,0 & 8334,0 & 74,66 & 0,00 \\
-\bottomrule
+\hline
 \end{tabular}
+
+\vspace{.3cm}
+\fonte{Elaboração própria.}
 \end{table}
 
 Na comparação entre as heurísticas gulosas, observa-se um \textit{trade-off} 
@@ -217,20 +229,24 @@ que maximizem essa pontuação prevista dentro da restrição orçamentária est
 A Tabela~\ref{tab:cagliari_orcamento} apresenta os resultados obtidos após uma 
 execução de cada algoritmo nesse cenário.
 
-\begin{table}[H]
+\begin{table}[hbt]
 \centering
 \caption{Resultados dos algoritmos para o Cagliari com orçamento de \EUR{60.000.000}}
 \label{tab:cagliari_orcamento}
+
 \begin{tabular}{lccccc}
-\toprule
+\hline
 Algoritmo & Tempo (s) & Iterações & Avaliações & Melhoras & Score final \\
-\midrule
+\hline
 \makecell[l]{Guloso \\ First-Improvement} & 3,11 & 5 & 21 & -- & 41,32 \\[4pt]
-\makecell[l]{Guloso \\ Best-Improvement} & 302,47 & 2 & 1838 & -- & 41,33 \\[10pt]
+\makecell[l]{Guloso \\ Best-Improvement} & 302,47 & 2 & 1838 & -- & 41,33 \\[6pt]
 \makecell[l]{Busca Local \\ First-Improvement} & 822,43 & 12 & 4876 & 11 & 41,98 \\[4pt]
 \makecell[l]{Busca Local \\ Best-Improvement} & 639,45 & 5 & 3741 & 4 & 42,05 \\
-\bottomrule
+\hline
 \end{tabular}
+
+\vspace{.3cm}
+\fonte{Elaboração própria.}
 \end{table}
 
 Observa-se que todos os algoritmos foram capazes de melhorar a pontuação prevista da 

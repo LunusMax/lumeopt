@@ -15,8 +15,8 @@ idade e desempenho estatístico agregado.
 A Equação~\ref{eq:valor_mercado} apresenta formalmente o cálculo adotado para essa métrica.
 
 \begin{equation}
-\label{eq:valor_mercado}
 V_i = 1000 \cdot \left( 1000 \cdot \max(0, 30 - I_i) + 10 \cdot \sum_{j=1}^{n} x_{ij} \right)
+\label{eq:valor_mercado}
 \end{equation}
 
 onde:
@@ -94,7 +94,7 @@ sequencialmente durante a varredura da base e a primeira contratação que resul
 Já na versão \textit{best-improvement}, todos os jogadores viáveis são avaliados em cada iteração e seleciona-se aquele cuja inclusão 
 produz o maior aumento na função objetivo.
 
-Os pseudocódigos dos algoritmos gulosos utilizados são apresentados a seguir.
+Os pseudocódigos dos algoritmos gulosos utilizados são apresentados nos Algoritmos~\ref{alg:guloso_first} e~\ref{alg:guloso_best}.
 
 \input{algoritmos/guloso_first}
 \input{algoritmos/guloso_best}
@@ -108,9 +108,6 @@ forma mais ampla o espaço de soluções possíveis para o problema de montagem 
 Enquanto os algoritmos gulosos constroem o conjunto de contratações de forma incremental, selecionando jogadores individualmente a cada iteração, 
 a estratégia de busca local parte de uma solução inicial completa e passa a realizar modificações estruturais nessa solução ao longo do processo de otimização.
 
-%Cada solução é representada por um conjunto de jogadores candidatos à contratação cuja cardinalidade é limitada por um parâmetro \(k\), que define 
-%o número máximo de contratações consideradas. A avaliação de cada solução é realizada por meio da mesma função objetivo utilizada nos algoritmos gulosos, 
-%isto é, o modelo de AM desenvolvido neste para estimar a pontuação esperada da equipe ao final da temporada.
 Assim como na abordagem gulosa, a inclusão de jogadores no elenco é simulada mantendo constante o tamanho da formação avaliada. Para isso, 
 sempre que um conjunto de contratações é considerado, remove-se da formação original a mesma quantidade de atletas com menor minutagem na temporada analisada.
 
@@ -144,7 +141,7 @@ sendo então aplicada a troca que produz o maior aumento na função objetivo.
 O processo iterativo é encerrado quando nenhuma substituição viável resulta em melhoria adicional na função objetivo, caracterizando a 
 convergência para um ótimo local no espaço de soluções explorado.
 
-Os pseudocódigos dos algoritmos de busca local utilizados são apresentados a seguir.
+Os pseudocódigos dos algoritmos de busca local utilizados são apresentados nos Algoritmos~\ref{alg:busca_local_first} e~\ref{alg:busca_local_best}.
 
 \input{algoritmos/busca_local_first}
 \input{algoritmos/busca_local_best}
