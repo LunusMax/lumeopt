@@ -1,0 +1,30 @@
+\begin{algorithm}[H]
+\caption{Busca local baseada em inversões para o TSP}
+\label{alg:one_opt_tsp}
+\begin{algorithmic}[1]
+\Require tour inicial $T$
+\Ensure tour melhorado $T^{*}$
+
+\State melhoria $\gets$ verdadeiro
+
+\While{melhoria}
+    \State melhoria $\gets$ falso
+
+    \For{$i = 1$ até $n-1$}
+        \For{$j = i+1$ até $n$}
+
+            \State $T' \gets$ tour obtido invertendo o segmento entre $i$ e $j$
+
+            \If{$dist(T') < dist(T)$}
+                \State $T \gets T'$
+                \State melhoria $\gets$ verdadeiro
+            \EndIf
+
+        \EndFor
+    \EndFor
+
+\EndWhile
+
+\State \Return $T$
+\end{algorithmic}
+\end{algorithm}

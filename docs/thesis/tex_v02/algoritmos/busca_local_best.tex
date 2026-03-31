@@ -1,0 +1,47 @@
+\begin{algorithm}[H]
+\caption{Busca Local com estratégia Best Improvement}
+\begin{algorithmic}
+
+\State Obter uma amostra aleatória de jogadores candidatos
+\State Obter o custo de cada jogador
+\State Gerar solução inicial usando o algoritmo guloso
+\State Armazenar conjunto atual de contratações, custo atual e pontuação atual
+
+\While{houver melhora}
+    \State Definir variável de melhora como falsa
+
+    \For{cada posição $i$ no conjunto atual de contratações}
+        \State Definir o jogador da posição $i$ como jogador de saída
+        \State Inicializar melhor substituição como vazia
+        \State Inicializar melhor pontuação como vazia
+
+        \For{cada jogador candidato $p$}
+            \If{$p$ não pertence ao conjunto atual e a troca cabe no orçamento}
+                \State Criar uma cópia da solução atual
+                \State Substituir o jogador da posição $i$ por $p$
+                \State Calcular a nova pontuação prevista
+
+                \If{não existir melhor substituição ou a nova pontuação for maior que a melhor pontuação}
+                    \State Armazenar a nova solução como melhor substituição
+                    \State Armazenar a nova pontuação como melhor pontuação
+                \EndIf
+            \EndIf
+        \EndFor
+
+        \If{existe melhor substituição e a melhor pontuação for maior que a pontuação atual}
+            \State Atualizar a solução atual
+            \State Atualizar a pontuação atual
+            \State Recalcular o custo atual
+            \State Definir variável de melhora como verdadeira
+        \EndIf
+
+        \If{uma melhora for encontrada}
+            \State \textbf{break}
+        \EndIf
+    \EndFor
+\EndWhile
+
+\State \Return conjunto de contratações, custo atual e pontuação prevista
+
+\end{algorithmic}
+\end{algorithm}

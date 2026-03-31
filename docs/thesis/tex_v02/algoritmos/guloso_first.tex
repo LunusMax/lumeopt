@@ -1,0 +1,35 @@
+\begin{algorithm}[H]
+\caption{Algoritmo Guloso com estratégia First Improvement}
+\begin{algorithmic}
+
+\State Obter lista de jogadores candidatos
+\State Inicializar conjunto de contratações como vazio
+\State Calcular pontuação atual com conjunto vazio
+\State Inicializar custo atual igual a zero
+
+\While{verdadeiro}
+    \State Definir variável de melhora como falsa
+
+    \For{cada jogador candidato $p$}
+        \If{$p$ ainda não foi selecionado e cabe no orçamento}
+            \State Calcular a nova pontuação prevista ao adicionar $p$
+
+            \If{a nova pontuação for maior que a pontuação atual}
+                \State Adicionar $p$ ao conjunto de contratações
+                \State Atualizar a pontuação atual
+                \State Atualizar o custo atual
+                \State Definir variável de melhora como verdadeira
+                \State \textbf{break} \Comment{first improvement}
+            \EndIf
+        \EndIf
+    \EndFor
+
+    \If{nenhuma melhora for encontrada}
+        \State \textbf{break}
+    \EndIf
+\EndWhile
+
+\State \Return conjunto de contratações, custo atual e pontuação prevista
+
+\end{algorithmic}
+\end{algorithm}

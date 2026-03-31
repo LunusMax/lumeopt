@@ -191,12 +191,14 @@ de forma independente, o \textit{boosting} constrói cada novo preditor de manei
 Esse processo pode ser interpretado como uma otimização por gradiente no espaço funcional, na qual cada novo modelo 
 aproxima a direção de maior redução da função de custo.
 
-Formalmente, a cada iteração \( m \), busca-se adicionar um novo modelo \( h_m(x) \) de forma que o modelo final seja dado por:
+Formalmente, a cada iteração $m$, busca-se adicionar um novo modelo $h_m(x)$ de forma que o modelo final seja definido conforme a Equação~\ref{eq:gradient_boosting}:
+
 \begin{equation}
 F_m(x) = F_{m-1}(x) + \gamma_m h_m(x)
 \label{eq:gradient_boosting}
 \end{equation}
-onde \( \gamma_m \) representa o passo ótimo na direção do novo preditor.
+
+em que $\gamma_m$ representa o passo ótimo na direção do novo preditor.
 
 O \textit{XGBoost} (\textit{Extreme Gradient Boosting}) constitui uma implementação otimizada do \textit{Gradient Boosting}, 
 incorporando técnicas de regularização, paralelização e controle eficiente de memória \cite{Geron2019}. 
@@ -205,20 +207,27 @@ tornando-o especialmente eficaz em problemas de alta dimensionalidade e grandes 
 
 \subsection{Multilayer Perceptron (MLP)}
 
-O \textit{Multilayer Perceptron} (MLP) é uma função matemática parametrizada que aprende a melhor forma de transformar um vetor de 
-entrada \( \mathbf{x} \) em uma saída \( \mathbf{y} \). Assim, o MLP pode ser entendido como uma composição de várias funções aplicadas em sequência, 
-formando um modelo de múltiplas camadas \cite{Goodfellow2016}.
+O \textit{Multilayer Perceptron} (MLP) é uma função matemática parametrizada que 
+aprende a melhor forma de transformar um vetor de entrada $\mathbf{x}$ em uma 
+saída $\mathbf{y}$. Assim, o MLP pode ser entendido como uma composição de várias 
+funções aplicadas em sequência, formando um modelo de múltiplas camadas \cite{Goodfellow2016}.
 
-A arquitetura do MLP segue uma lógica de entrada → camadas ocultas → saída, utilizando uma função de ativação \( g(\cdot) \) para 
-introduzir não linearidade em cada camada. Essa relação é expressa por:
+A arquitetura do MLP segue uma estrutura do tipo entrada → camadas ocultas → saída, 
+utilizando uma função de ativação $g(\cdot)$ para introduzir não linearidade em 
+cada camada. Essa relação pode ser expressa conforme a Equação~\ref{eq:mlp_camadas}:
+
 \begin{equation}
 h^{(l)} = g\!\left(W^{(l)}h^{(l-1)} + b^{(l)}\right)
 \label{eq:mlp_camadas}
 \end{equation}
-onde \( W^{(l)} \) e \( b^{(l)} \) representam, respectivamente, a matriz de pesos e o vetor de vieses da camada \( l \) \cite{Goodfellow2016}.
 
-A introdução da função não linear \( g(\cdot) \) é essencial, pois permite que o MLP aprenda relações complexas entre as variáveis de entrada e saída. 
-Sem ela, o modelo se reduziria a uma simples combinação linear, incapaz de representar funções não lineares \cite{Goodfellow2016}.
+em que $W^{(l)}$ e $b^{(l)}$ representam, respectivamente, a matriz de pesos 
+e o vetor de vieses da camada $l$ \cite{Goodfellow2016}.
+
+A introdução da função não linear $g(\cdot)$ é essencial, pois permite que 
+o MLP aprenda relações complexas entre as variáveis de entrada e saída. Na ausência 
+dessa não linearidade, o modelo se reduz a uma combinação linear das entradas, tornando-se 
+incapaz de representar funções não lineares \cite{Goodfellow2016}.
 
 De forma geral, um MLP é composto por uma camada de entrada, uma ou mais camadas ocultas e uma camada de saída, com conexões totalmente conectadas entre camadas consecutivas. 
 Nesse tipo de rede, o fluxo de informação ocorre em apenas uma direção, da entrada para a saída, caracterizando uma arquitetura do tipo \textit{feedforward} \cite{Geron2019}. 
@@ -266,13 +275,18 @@ Um dos exemplos mais conhecidos dessa classe de problemas é o Problema da Mochi
 
 \subsection{Problema da Mochila}
 
-Um dos problemas clássicos da otimização combinatória é o Problema da Mochila (\textit{Knapsack Problem}), amplamente utilizado como modelo
-abstrato para representar situações de seleção de recursos sob restrições limitadas \cite{Cormen2009}. Nesse problema, considera-se um conjunto
-de $n$ itens, no qual cada item $i$ possui um valor associado $v_i$ e um peso $w_i$. O objetivo consiste em selecionar um subconjunto desses itens
-de modo a maximizar o valor total transportado sem que o peso total ultrapasse a capacidade máxima $W$ da mochila.
+Um dos problemas clássicos da otimização combinatória é o Problema da 
+Mochila (\textit{Knapsack Problem}), amplamente utilizado como modelo abstrato 
+para representar situações de seleção de recursos sob restrições limitadas \cite{Cormen2009}. 
+Nesse problema, considera-se um conjunto de $n$ itens, no qual cada item $i$ possui um 
+valor associado $v_i$ e um peso $w_i$. O objetivo consiste em selecionar um subconjunto 
+desses itens de modo a maximizar o valor total transportado, sem que o peso total 
+ultrapasse a capacidade máxima $W$ da mochila.
 
-Na formulação conhecida como \textit{0-1 Knapsack Problem}, cada item pode ser selecionado integralmente ou não selecionado, caracterizando
-uma decisão binária para cada elemento do conjunto. Dessa forma, o problema pode ser formulado matematicamente como:
+Na formulação conhecida como \textit{0-1 Knapsack Problem}, cada item pode ser 
+selecionado integralmente ou não selecionado, caracterizando uma decisão binária para 
+cada elemento do conjunto. Dessa forma, o problema pode ser formulado matematicamente 
+conforme as Equações~\ref{eq:knapsack_obj}--\ref{eq:knapsack_binaria}:
 
 \begin{equation}
 \max \sum_{i=1}^{n} v_i x_i
@@ -291,7 +305,7 @@ x_i \in \{0,1\}, \quad i = 1,2,\dots,n
 \label{eq:knapsack_binaria}
 \end{equation}
 
-onde $x_i$ representa a decisão de selecionar ($x_i = 1$) ou não ($x_i = 0$) o item $i$.
+em que $x_i$ representa a decisão de selecionar ($x_i = 1$) ou não ($x_i = 0$) o item $i$.
 
 De acordo com \cite{Cormen2009}, o problema da mochila apresenta a propriedade de subestrutura ótima, característica comum em diversos problemas
 de otimização combinatória. No entanto, diferentemente da variante fracionária do problema, na qual é permitido selecionar frações de itens,

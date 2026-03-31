@@ -31,6 +31,13 @@
 \usepackage{latexsym}            % símbolos extras do LaTeX
 \usepackage{eurosym}
 
+% PSEUDOALGORITMOS
+\usepackage{algorithm}
+%\usepackage{pdfpages}
+\floatname{algorithm}{Algoritmo}
+\usepackage{algpseudocode}
+\usepackage{caption}
+
 % TABELAS
 \usepackage{longtable}           % para tabelas muito grandes
 \usepackage{array}               % para mais opções em tabelas
@@ -255,9 +262,7 @@ pdfkeywords={futebol; aprendizado de máquina; pesquisa operacional; otimizaçã
 \dedic{Aos meus pais, pelo apoio incondicional e por tornar cada jornada minha possível.}
 
 % Agradecimentos
-\thanks{
-Agradeço, em primeiro lugar, ao meu orientador, Prof. Dr. Dilson Lucas Pereira, pela excelente orientação, pela paciência ao longo de todo o processo e 
-pela confiança depositada no desenvolvimento deste trabalho.
+\thanks{\hspace*{\parindent}Agradeço, em primeiro lugar, ao meu orientador, Prof. Dr. Dilson Lucas Pereira, pela excelente orientação, pela paciência ao longo de todo o processo e pela confiança depositada no desenvolvimento deste trabalho.
 
 Ao Programa de Pós-Graduação em Ciência da Computação da Universidade Federal de Lavras (UFLA), bem como à própria UFLA, que desde a graduação 
 até o mestrado me proporcionou a estrutura acadêmica necessária para minha formação.
@@ -383,13 +388,13 @@ by fostering technological innovation and improving economic efficiency in the s
 % e incluídas no documento com o comando \include
 \include{secoes/introducao}
 \include{secoes/objetivo}
-%\include{capitulos/referencial_v02}
-%\include{capitulos/revisao_v02}
-%\include{capitulos/metodologia_am}
-%\include{capitulos/resultados_am}
-%\include{capitulos/metodologia_po}
-%\include{capitulos/resultados_po}
-%\include{capitulos/conclusao}
+\include{secoes/referencial_v02}
+%\include{secoes/revisao_v02}
+%\include{secoes/metodologia_am}
+%\include{secoes/resultados_am}
+%\include{secoes/metodologia_po}
+%\include{secoes/resultados_po}
+%\include{secoes/conclusao}
 
 %==============================================================================
 % Bibliografia
