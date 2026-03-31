@@ -1,0 +1,66 @@
+\chapter{OBJETIVOS}
+
+\section{Objetivo Geral}
+
+O presente estudo tem como objetivo principal desenvolver e validar um 
+modelo de AM capaz de prever o desempenho de 
+equipes de futebol a partir de dados estatísticos de desempenho individual 
+de jogadores. Neste trabalho, entende-se por desempenho a pontuação esperada 
+de uma equipe ao longo de uma temporada de uma competição esportiva.
+
+Entretanto, o objetivo central não se limita ao desenvolvimento 
+do modelo preditivo em si. Pretende-se que tal modelo seja utilizado 
+como componente de algoritmos de otimização voltados ao apoio à 
+tomada de decisão na montagem de elencos. Em particular, seja $f$ o 
+modelo de AM obtido e seja $X$ um arranjo contendo as \textit{features} 
+correspondentes ao elenco de um determinado time. Embora o modelo possa 
+ser utilizado para prever o desempenho de equipes existentes, uma vez 
+treinado ele também pode ser empregado para estimar o desempenho de 
+equipes hipotéticas.
+
+Dessa forma, considere $P$ o conjunto de todos os elencos $X'$ que 
+podem ser obtidos a partir do elenco atual $X$ por meio da contratação 
+de novos jogadores, respeitando um determinado orçamento disponível. 
+O objetivo passa então a ser identificar, dentre todas as combinações 
+possíveis de jogadores em $P$, aquela que maximiza o desempenho 
+previsto pelo modelo de AM. Formalmente, busca-se resolver o problema
+
+\[
+\max_{X' \in P} f(X').
+\]
+
+Observa-se, portanto, que o problema estudado configura um problema 
+de otimização combinatória, no qual o modelo de AM desempenha o papel 
+de função objetivo.
+
+\section{Objetivos Específicos}
+
+Com o intuito de atingir o objetivo geral, foram estabelecidos os 
+seguintes objetivos específicos:
+
+\begin{enumerate}
+    \item Coletar, estruturar e processar dados históricos de 
+    jogadores e partidas, abrangendo múltiplas temporadas, 
+    garantindo a qualidade e a integridade das informações utilizadas 
+    no desenvolvimento dos modelos preditivos.
+    \item Desenvolver uma metodologia para quantificar o impacto 
+    individual dos jogadores, combinando estatísticas históricas ao 
+    longo das temporadas por meio de um sistema de ponderação temporal, 
+    priorizando desempenhos mais recentes.
+    \item Construir modelos de AM para prever o desempenho agregado 
+    de uma equipe em uma determinada temporada, considerando a 
+    composição do elenco e os dados históricos dos jogadores.
+    \item Validar a eficácia dos modelos preditivos, comparando 
+    as estimativas com os resultados reais de temporadas subsequentes, 
+    utilizando métricas estatísticas como erro médio absoluto (MAE) e 
+    coeficiente de determinação ($R^2$).
+    \item Desenvolver modelos simples de otimização baseados no 
+    modelo de AM selecionado, visando a identificação de combinações 
+    de jogadores que maximizem o desempenho esperado da equipe 
+    sob restrições de mercado.
+\end{enumerate}
+
+Ao integrar técnicas de AM e otimização, este estudo busca 
+fornecer uma ferramenta analítica de apoio à decisão para a 
+montagem de elencos no futebol profissional, contribuindo para 
+práticas de gestão esportiva orientadas por dados.

@@ -1,15 +1,54 @@
 \chapter{\MakeUppercase{Introdução}}
 
-O objetivo deste documento é apresentar o uso básico da classe \texttt{templufla} para a elaboração de trabalhos acadêmicos da \glsxtrfull{ufla}, utilizando a linguagem de marcação \LaTeX\ \cite[ p.17]{Lamport1994}. A maioria dos comandos (macros) e ambientes das classes básicas da linguagem é válida também nessa classe, que é estendida com comandos para confecção da capa, páginas de rosto, dedicatórias, etc. A classe atual foi baseada na classe \texttt{uflamon}, disponível em CC-BY 4.0, no site Overleaf.
+Futebol é o esporte mais popular do mundo \cite{Almulla2023}. Nas últimas décadas, sua evolução tecnológica e analítica tem sido notável, 
+acompanhada por um crescimento expressivo nos lucros gerados pelas atividades esportivas \cite{Rodrigues2022}. 
+No entanto, o futebol é um esporte altamente imprevisível. Um exemplo notável dessa imprevisibilidade foi a surpreendente conquista da 
+English Premier League (EPL) pelo Leicester City em 2016, um feito que surpreendeu especialistas e torcedores em todo o mundo \cite{Baboota2019}.
 
-Inicialmente, a classe \texttt{uflamon} foi criada de acordo com as normas da PRPG/UFLA para produção de TCC \cite{PRPG2006}. Essas normas foram posteriormente atualizadas, de maneira geral pela UFLA, para a produção de monografias, dissertações e teses \cite{BIB2010}. A classe \texttt{uflamon} foi mantida até a 2ª edição da normalização da \gls{ufla} \cite{UFLA:2015}.
+Dada a relevância econômica e o impacto do futebol como forma de entretenimento, pesquisadores da academia e profissionais da indústria têm se dedicado ao 
+desafio de prever seus resultados \cite{Baboota2019}. O crescimento do mercado de apostas reflete essa busca, impulsionando também os lucros da indústria de 
+prognósticos esportivos \cite{Rodrigues2022}. Para se ter uma noção da magnitude econômica do futebol, entre 1º de junho e 1º de setembro de 2023, as transferências 
+de jogadores movimentaram R\$ 36,6 bilhões, conforme relatório divulgado pela Federação Internacional de Futebol (FIFA) \cite{Globo2023}. No Brasil, em 2025, 
+a janela de transferências da Série A brasileira bateu a marca de R\$ 1 bilhão em movimentações financeiras \cite{Globo2025}.
 
-Então, em 2025, com a publicação da 6ª edição da normalização \cite{UFLA:2025}, os atuais mantenedores criaram a classe \texttt{templufla} e o atual template, adaptando o antigo código para a nova norma, corrigindo inadequações, atualizando pacotes e ampliando o formato.
+No campo da Ciência da Computação, diversos estudos têm explorado técnicas de análise de dados e estatística com o objetivo de modelar padrões e realizar predições 
+em ambientes complexos. Um exemplo relevante é o estudo de Joseph, Fenton e Neil (2006), que investigou o uso de redes Bayesianas e outras técnicas de Aprendizado 
+de Máquinas (AM) para prever resultados do Tottenham Hotspur entre 1995 e 1997. Outro caso notável de aplicação de dados no futebol envolve o 
+Brighton \& Hove Albion, clube inglês que, sob a gestão de Tony Bloom, implementou uma estratégia fortemente orientada por análises estatísticas para 
+recrutamento e tomada de decisões. Essa filosofia refletiu-se diretamente na política de transferências do clube, 
+com a identificação sistemática de atletas subvalorizados no mercado. Entre os exemplos mais emblemáticos está
+Moisés Caicedo, contratado junto ao Independiente Del Valle em 2021 por cerca de \pounds4,5 milhões e negociado com o Chelsea em 2023 por valores próximos a 
+\EUR{115 milhões}, tornando-se uma das maiores vendas da história da EPL \cite{BBC2023Caicedo, CNN2023Caicedo}. O mesmo caso de altos lucros em revendas se aplica 
+a outros jogadores, como Alexis Mac Allister e Marc Cucurella, abordagem que permitiu que o Brighton se consolidasse como um dos clubes 
+mais eficientes do mercado de transferências da EPL, reinvestindo os recursos obtidos e mantendo a competitividade sustentável na elite do futebol inglês \cite{ESPN2023}.
 
-Este texto, com o objetivo de familiarizar o usuário da linguagem \LaTeX\ e demonstrar o uso da classe \texttt{templufla}, encontra-se organizado da seguinte maneira: 
+Na literatura acadêmica, observa-se que a maioria dos trabalhos envolvendo AM no futebol concentra-se na previsão de resultados de partidas, probabilidades de 
+vitória ou otimização de ganhos no contexto de apostas esportivas. Em contraste, menos estudos direcionam esforços à construção e otimização de elencos com foco 
+na avaliação e seleção de jogadores \cite{Abidin2021}. Essa lacuna é particularmente relevante, uma vez que a escolha de um atleta para compor um elenco envolve 
+a análise simultânea de múltiplos parâmetros técnicos, físicos e mentais, além de fatores contextuais como estilo de jogo da equipe, liga disputada e momento da 
+carreira do jogador \cite{Abidin2021}. A natureza não determinística inerente ao futebol torna esse processo ainda mais desafiador, pois mesmo contratações que 
+aparentam ser ideais sob múltiplos critérios podem não atingir o desempenho esperado.
 
-A \autoref{sec:latex} apresenta conceitos básicos da linguagem \LaTeX, servindo como um ponto de início para novos usuários. 
-A \autoref{sec:template} demonstra como utilizar os elementos da classe para a criação de trabalhos no formato da \gls{ufla}.
-A \autoref{sec:listasEGlossario} é um tutorial básico de como usar os pacotes \texttt{glossaries} e \texttt{imakeidx} para criar listas, glossário e índice. 
-A \autoref{sec:conclusao} apresenta comentários e observações finais.
-Por fim, os Anexos \ref{anex:lorem1} e \ref{anex:lorem2} demonstram o uso dos anexos e o \autoref{apen:apendice} mostra como elaborar um apêndice simples.
+Segundo Ian Graham (2024), uma transferência pode ser considerada um sucesso se o jogador iniciar 50\% das partidas nas primeiras duas temporadas ("The 50\% rule"). 
+Considerando todas as transferências de mais de € 10 milhões que ocorreram na EPL entre os anos de 1992 e 2021, perto da metade (46\%) não atingiram o critério 
+estabelecido e, portanto, podem ser classificadas como falhas \cite{Graham2024}. Entre os principais fatores associados a esses insucessos, destacam-se:
+
+\begin{enumerate}
+    \item O jogador atual é melhor que o novo jogador;
+    \item O jogador não é tão bom quanto se pensava inicialmente;
+    \item O jogador não se encaixa no estilo do time;
+    \item O jogador joga fora de posição;
+    \item O técnico não aprova o jogador;
+    \item O jogador tem problemas de condicionamento físico ou pessoais.
+\end{enumerate}
+
+Nos últimos anos, o AM tem ampliado significativamente a capacidade de análise de dados esportivos, permitindo a identificação de padrões antes 
+imperceptíveis em grandes volumes de informação. Técnicas avançadas vêm sendo aplicadas para estimar desde a probabilidade de vitória em uma partida até o impacto de 
+decisões táticas ao longo de uma temporada. Entretanto, tais modelos não eliminam a incerteza inerente ao futebol, atuando como ferramentas de apoio à tomada de 
+decisão humana, com o objetivo de reduzir riscos e embasar escolhas estratégicas.
+
+Neste contexto, o presente trabalho investiga o uso de modelos preditivos para converter estatísticas históricas de desempenho individual em estimativas de 
+desempenho esperado de jogadores quando inseridos em contextos específicos de equipe e temporada. Diferentemente de abordagens voltadas à previsão direta de 
+resultados de partidas ou à avaliação de talento de forma isolada, a proposta concentra-se na análise contextualizada do jogador como parte de um sistema coletivo. 
+As previsões geradas são utilizadas como subsídio em um processo de simulação e avaliação de cenários de contratação, visando apoiar decisões de mercado no futebol 
+profissional de forma orientada por dados e alinhada a critérios de eficiência esportiva e financeira.
