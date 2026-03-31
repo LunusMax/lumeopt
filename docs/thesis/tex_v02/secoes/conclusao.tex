@@ -1,23 +1,40 @@
-\chapter{\MakeUppercase{Conclusão}}\label{sec:conclusao}
+\chapter{Conclusões}
 
-O objetivo deste documento foi apresentar o uso básico da classe \texttt{templufla} para a elaboração de trabalhos acadêmicos da UFLA utilizando \LaTeX. Após edição em \LaTeX, o usuário pode gerar arquivos PDF \cite{PDF2004} ou PostScript \cite{PostScript1999} com grande facilidade.
+Este trabalho apresentou uma abordagem integrada de AM e Pesquisa Operacional PO para apoiar o processo de montagem de elencos no futebol profissional. 
+Inicialmente, foi desenvolvido um modelo preditivo capaz de estimar o desempenho esperado de equipes a partir das características individuais dos jogadores. 
+Os resultados obtidos indicam que o modelo proposto foi capaz de explicar aproximadamente 55\% da variabilidade da pontuação final dos clubes, evidenciando 
+sua capacidade de capturar padrões relevantes nos dados e produzir estimativas consistentes de desempenho coletivo.
 
-\vfill
-\begin{center}
-\noindent\fbox{%
-\hspace{0.2cm}%
-\parbox[c][4cm]{15cm}{%
-\vspace{0.2cm}
-\large
-\noindent
-\textbf{Em caso de correções ou dúvidas, favor informar.}
+A partir dessas previsões, o modelo foi utilizado como função objetivo em um problema de otimização voltado à seleção de jogadores sob restrições orçamentárias. 
+Para explorar o espaço de soluções, foram implementadas duas heurísticas: um algoritmo guloso baseado em substituições iterativas e um método de busca local.
 
-\vfill
-\textbf{Contato:}
+Do ponto de vista prático, os resultados obtidos indicam que a abordagem proposta pode contribuir para tornar o processo de tomada de decisão na montagem de 
+elencos mais estruturado e orientado por dados. No contexto do futebol brasileiro, onde decisões de contratação frequentemente são influenciadas por fatores 
+subjetivos ou avaliações intuitivas, ferramentas baseadas em análise quantitativa podem oferecer suporte adicional à identificação de jogadores que se encaixem 
+de forma mais eficiente em determinadas estruturas de equipe, respeitando restrições financeiras.
 
-\url{https://github.com/joaopaulo7/Template-Trabalhos-Academicos-UFLA}
+Assim, este trabalho demonstra que a integração entre técnicas de AM e métodos de PO representa um caminho promissor para apoiar processos de recrutamento e 
+planejamento esportivo. Ao transformar dados de desempenho em estimativas de impacto coletivo e utilizá-las em modelos de decisão, torna-se possível reduzir 
+a dependência exclusiva da intuição na escolha de atletas e avançar em direção a abordagens mais analíticas na gestão do futebol. Nesse sentido, 
+os resultados apresentados reforçam o potencial da integração entre Aprendizado de Máquina e Pesquisa Operacional como uma abordagem promissora para 
+transformar dados de desempenho esportivo em ferramentas quantitativas de apoio à tomada de decisão, contribuindo para o avanço de métodos analíticos 
+aplicados à gestão e ao planejamento no futebol profissional.
 
-joao.lima10@estudante.ufla.br\par
-\vspace{0.2cm}
-}}%
-\end{center}%
+\section{Trabalhos Futuros}
+
+Como continuidade desta pesquisa, algumas direções podem ser exploradas em trabalhos futuros. Uma possibilidade consiste no aprimoramento dos modelos de AM, 
+buscando capturar de forma ainda mais precisa a relação entre o desempenho individual dos jogadores e o desempenho coletivo das equipes. 
+A incorporação de novas variáveis explicativas, como características táticas das equipes, métricas de interação entre jogadores ou informações contextuais das partidas, 
+pode contribuir para aumentar a capacidade preditiva dos modelos.
+
+Outra linha de investigação envolve o desenvolvimento de métodos de otimização mais avançados para o problema de montagem de elencos, incluindo 
+metaheurísticas ou abordagens híbridas capazes de explorar o espaço de soluções de maneira mais eficiente. Além disso, futuras pesquisas podem considerar 
+restrições adicionais relevantes ao contexto real do futebol profissional, como limitações contratuais, regras de competições e requisitos específicos de 
+formação de elenco.
+
+Por fim, a ampliação da base de dados utilizada, incorporando informações de outras ligas e temporadas, pode contribuir para tornar os modelos mais 
+robustos e generalizáveis, ampliando o potencial de aplicação prática da abordagem proposta.
+
+
+
+
